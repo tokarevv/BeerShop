@@ -26,15 +26,15 @@ public class HiberTest {
     @Test
     public void testSomeMethod() {
         
-        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-        Session session = sessionFactory.openSession();
-        session.beginTransaction();
-        Supplier p1 = new Supplier("Chernigiv");
-//        p1.addPhone(new Phone("13455"));
-//        p1.addPhone(new Phone("53455"));
-//        p1.addAddress(new Adress("st.skjfjdf 16"));
-        session.save( p1 );
-        
-        session.getTransaction().commit();
+//        SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
+//        Session session = sessionFactory.openSession();
+//        session.beginTransaction();
+//        Supplier p1 = new Supplier("Chernigiv");
+////        p1.addPhone(new Phone("13455"));
+////        p1.addPhone(new Phone("53455"));
+////        p1.addAddress(new Adress("st.skjfjdf 16"));
+//        session.save( p1 );
+//        
+//        session.getTransaction().commit();
     }
 }
