@@ -3,7 +3,7 @@ package ss.bshop.web;
 import java.util.List;
 import java.util.Map;
 
-import ss.bshop.domain.Contact;
+import ss.bshop.domain.ContactSample;
 import ss.bshop.service.ContactService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class ContactController {
 	@RequestMapping("/index")
 	public String listContacts(Map<String, Object> map) {
 
-		map.put("contact", new Contact());
+		map.put("contact", new ContactSample());
 		map.put("contactList", contactService.listContact());
 
 		return "contact";
@@ -35,7 +35,7 @@ public class ContactController {
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addContact(@ModelAttribute("contact") Contact contact,
+	public String addContact(@ModelAttribute("contact") ContactSample contact,
 			BindingResult result) {
 
 		contactService.addContact(contact);
