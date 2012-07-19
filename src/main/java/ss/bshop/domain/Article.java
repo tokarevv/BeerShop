@@ -30,11 +30,13 @@ public class Article {
     @Column
     private String comment;
 
+    //constructors
+    public Article() {
+    }
+    
     public Article(String name) {
         this.name = name;
     }
-
-    //constructors
     
     //getters and setters
     public Long getId() {
