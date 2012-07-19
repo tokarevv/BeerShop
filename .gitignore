@@ -28,3 +28,6 @@ RCS
 RCSLOG
 SCCS
 _$*
+.settings
+.classpath
+.projecttarget
