@@ -1,15 +1,15 @@
 package ss.bshop.dao;
 
 import java.util.List;
-import ss.bshop.domain.ContactSample;
+import ss.bshop.domain.Contact;
 
 public interface ContactDAO {
 
-	public void addContact(ContactSample contact);
+	public void addContact(Contact contact);
 
-	public List<ContactSample> listContact();
+	public List<Contact> listContact();
 
 	public void removeContact(Integer id);
 
-	public ContactSample getContact(Integer contactId);
+	public Contact getContact(Integer contactId);
 }

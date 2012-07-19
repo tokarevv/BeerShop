@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
  
 import ss.bshop.dao.ContactDAO;
-import ss.bshop.domain.ContactSample;
+import ss.bshop.domain.Contact;
  
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -16,12 +16,12 @@ public class ContactServiceImpl implements ContactService {
     private ContactDAO contactDAO;
  
     @Transactional
-    public void addContact(ContactSample contact) {
+    public void addContact(Contact contact) {
         contactDAO.addContact(contact);
     }
  
     @Transactional
-    public List<ContactSample> listContact() {
+    public List<Contact> listContact() {
  
         return contactDAO.listContact();
     }
@@ -32,7 +32,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
 	@Override
-	public ContactSample getContact(Integer contactId) {
+	public Contact getContact(Integer contactId) {
 		return contactDAO.getContact(contactId);
 	}
 }

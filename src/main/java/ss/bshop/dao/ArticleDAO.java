@@ -6,7 +6,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ss.bshop.domain.Article;
-import ss.bshop.domain.ContactSample;
+import ss.bshop.domain.Contact;
 
 public class ArticleDAO implements IArticleDAO {
 
@@ -23,6 +23,7 @@ public class ArticleDAO implements IArticleDAO {
 		return (Article) sessionFactory.getCurrentSession().get(Article.class, articleId);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> getAll() {
 

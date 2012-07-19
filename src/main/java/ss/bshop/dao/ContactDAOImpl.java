@@ -2,7 +2,7 @@ package ss.bshop.dao;
 
 import java.util.List;
 
-import ss.bshop.domain.ContactSample;
+import ss.bshop.domain.Contact;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,20 +14,20 @@ public class ContactDAOImpl implements ContactDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
-	public void addContact(ContactSample contact) {
+	public void addContact(Contact contact) {
 		sessionFactory.getCurrentSession().save(contact);
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<ContactSample> listContact() {
+	public List<Contact> listContact() {
 
 		return sessionFactory.getCurrentSession().createQuery("from Contact")
 			.list();
 	}
 
 	public void removeContact(Integer id) {
-		ContactSample contact = (ContactSample) sessionFactory.getCurrentSession().load(
-				ContactSample.class, id);
+		Contact contact = (Contact) sessionFactory.getCurrentSession().load(
+				Contact.class, id);
 		if (null != contact) {
 			sessionFactory.getCurrentSession().delete(contact);
 		}
@@ -35,8 +35,8 @@ public class ContactDAOImpl implements ContactDAO {
 	}
 
 	@Override
-	public ContactSample getContact(Integer contactId) {
+	public Contact getContact(Integer contactId) {
 		
-		return (ContactSample) sessionFactory.getCurrentSession().get(ContactSample.class, contactId);
+		return (Contact) sessionFactory.getCurrentSession().get(Contact.class, contactId);
 	}
 }
