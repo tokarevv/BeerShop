@@ -8,7 +8,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "CONTACTS")
-public class Contact {
+public class ContactSample {
 
 	@Id
 	@Column(name = "ID")
