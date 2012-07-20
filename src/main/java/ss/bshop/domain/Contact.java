@@ -66,5 +66,16 @@ public class Contact {
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	@Override
+	public String toString() {
+		return "Contact [" + (id != null ? "id=" + id + ", " : "")
+				+ (firstname != null ? "firstname=" + firstname + ", " : "")
+				+ (lastname != null ? "lastname=" + lastname + ", " : "")
+				+ (email != null ? "email=" + email + ", " : "")
+				+ (telephone != null ? "telephone=" + telephone : "") + "]";
 	}	
+	
+	
 }
