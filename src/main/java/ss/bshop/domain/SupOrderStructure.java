@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class SupOrderStructure {
 
 @Id
+@Column(name = "ID")
 @GeneratedValue(strategy = GenerationType.IDENTITY)
 private Long id;
 

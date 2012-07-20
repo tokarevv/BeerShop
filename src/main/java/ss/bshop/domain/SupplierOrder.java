@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+
 import org.hibernate.annotations.GenerationTime;
 
 
@@ -13,6 +14,7 @@ public class SupplierOrder {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
 	private Long id;
 	
 	@Column
@@ -23,8 +25,7 @@ public class SupplierOrder {
 	
 	@Column
 	@Temporal( value = TemporalType.TIMESTAMP ) 
-    @org.hibernate.annotations.Generated(value=GenerationTime.INSERT)
-	private Date orderDate;
+    private Date orderDate;
 	
 	@Column
 	private String orderDoneDate;
