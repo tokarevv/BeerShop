@@ -4,9 +4,8 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import ss.bshop.domain.Article;
-import ss.bshop.domain.Contact;
+
 
 public class ArticleDAO implements IArticleDAO {
 
@@ -19,20 +18,19 @@ public class ArticleDAO implements IArticleDAO {
 	}
 
 	@Override
-	public Article getArticle(Integer articleId) {
+	public Article getArticle(Long articleId) {
 		return (Article) sessionFactory.getCurrentSession().get(Article.class, articleId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Article> getAll() {
-
 		return sessionFactory.getCurrentSession().createQuery("from Article")
 			.list();
 	}
 
 	@Override
-	public void removeArticle(Integer articleId) {
+	public void removeArticle(Long articleId) {
 		Article article = (Article) sessionFactory.getCurrentSession().load(
 				Article.class, articleId);
 		if (article != null) {
@@ -42,7 +40,7 @@ public class ArticleDAO implements IArticleDAO {
 	}
 
 	@Override
-	public void updateArticle(Integer articleId) {
+	public void updateArticle(Long articleId) {
 		Article article = (Article) sessionFactory.getCurrentSession().load(
 				Article.class, articleId);
 		if (article != null) {
