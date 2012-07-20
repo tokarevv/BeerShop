@@ -8,12 +8,12 @@ public interface IArticleDAO {
 
 	public void addArticle(Article article);
 
-	public Article getArticle(Integer articleId);
+	public Article getArticle(Long articleId);
 
 	public List<Article> getAll();
 
-	public void removeArticle(Integer id);
+	public void removeArticle(Long id);
 	
-	public void updateArticle(Integer id);
+	public void updateArticle(Long id);
 	
 }
