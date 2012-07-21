@@ -128,10 +128,5 @@ public class OutletOrderStructure {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+		
 }
