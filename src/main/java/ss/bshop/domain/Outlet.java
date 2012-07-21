@@ -1,19 +1,12 @@
 package ss.bshop.domain;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OrderBy;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import org.hibernate.annotations.GenerationTime;
 
 public class Outlet {
 	
@@ -52,7 +45,6 @@ public class Outlet {
 	private String contractNumber;
 
 	@Column
-	@Temporal(value = TemporalType.TIMESTAMP)
 	private Date registerDate;
 
 	@Column
