@@ -7,6 +7,7 @@ public class Article {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     @Column(nullable=false)
