@@ -21,7 +21,7 @@ public class Appointment {
 	private SalesRep salesRep;
 	
 	@Column
-	@Temporal( value = TemporalType.TIMESTAMP ) 
+	@Temporal( TemporalType.TIMESTAMP ) 
 	private List<Date> dateList;
 	
 	public Long getId() {

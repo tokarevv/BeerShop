@@ -1,6 +1,5 @@
 package ss.bshop.domain;
 
-import com.sun.istack.internal.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.*;
