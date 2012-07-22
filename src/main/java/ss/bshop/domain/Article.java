@@ -161,6 +161,20 @@ public class Article {
             result = prime * result + ((unit == null) ? 0 : unit.hashCode());
             return result;
     }
+
+	@Override
+	public String toString() {
+		return "Article [" + (id != null ? "id=" + id + ", " : "")
+				+ (name != null ? "name=" + name + ", " : "")
+				+ (type != null ? "type=" + type + ", " : "")
+				+ (price != null ? "price=" + price + ", " : "")
+				+ (supplier != null ? "supplier=" + supplier + ", " : "")
+				+ (unit != null ? "unit=" + unit + ", " : "")
+				+ (barcode != null ? "barcode=" + barcode + ", " : "")
+				+ (comment != null ? "comment=" + comment : "") + "]";
+	}
+    
+    
 	
         
 }

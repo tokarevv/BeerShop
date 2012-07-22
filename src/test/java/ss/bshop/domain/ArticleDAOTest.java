@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import ss.bshop.dao.ArticleDAO;
 import ss.bshop.dao.IArticleDAO;
 import ss.bshop.domain.Article;
 
@@ -22,25 +23,13 @@ import java.util.List;
  * @since <pre>��� 3, 2012</pre> 
  * @version 1.0
  */
-@ContextConfiguration("/root-context.xml")
+@ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
 public class ArticleDAOTest {
 
     @Autowired
-    private IArticleDAO daoI;
-    //@Autowired
-    //private IMedicineTypeDAO mtDAOI;
-
-    @Rollback(false)
-    @Before
-    public void before() throws Exception {
-
-    }
-
-    @After
-    public void after() throws Exception {
-    }
+    private ArticleDAO daoI;
 
     /**
      *
@@ -53,9 +42,18 @@ public class ArticleDAOTest {
        Article article = new Article();
        article.setName("Snicks");
        article.setBarcode("831418518");
+       
+       System.out.println(article);
+      //Assert.assertEquals("Name","Name");
        daoI.addArticle(article);
-        List<Article> medicineList = daoI.getAll();
-       Assert.assertEquals("Name",medicineList.get(medicineList.size()-1).getName());
+        List<Article> articleList = daoI.getAll();
+        
+        for(Article a : articleList){
+        	System.out.println(a);
+        }
+        
+        
+       Assert.assertEquals(article,articleList.get(articleList.size()-1));
     }
 //
 //    /**
