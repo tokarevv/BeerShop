@@ -1,3 +1,4 @@
+/*
 package ss.bshop.domain;
 
 import java.util.Collection;
@@ -37,5 +38,4 @@ public class AppointmentDAOTest {
 			Assert.assertTrue(result.contains(app));
 		}
 }
-
-
+*/
