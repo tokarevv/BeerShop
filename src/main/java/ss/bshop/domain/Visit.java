@@ -23,10 +23,10 @@ public class Visit {
 	@Column
 	private double lng;
 	
-	@Column
+	@OneToOne
 	private Outlet outlet;
 	
-	@Column
+	@OneToOne
 	private OutletOrder order;
 	
 	public Date getTime() {

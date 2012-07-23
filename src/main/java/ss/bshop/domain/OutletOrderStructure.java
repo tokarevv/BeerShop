@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class OutletOrderStructure {
@@ -13,13 +15,10 @@ public class OutletOrderStructure {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column
-	private Outlet outlet;
-
-	@Column
+	@ManyToOne
 	private OutletOrder outletOrder;
 
-	@Column
+	@ManyToOne
 	private Article article;	
 
 	@Column
@@ -34,14 +33,6 @@ public class OutletOrderStructure {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Outlet getOutlet() {
-		return outlet;
-	}
-
-	public void setOutlet(Outlet outlet) {
-		this.outlet = outlet;
 	}
 
 	public OutletOrder getOutletOrder() {
@@ -85,7 +76,6 @@ public class OutletOrderStructure {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((article == null) ? 0 : article.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((outlet == null) ? 0 : outlet.hashCode());
 		result = prime * result
 				+ ((outletOrder == null) ? 0 : outletOrder.hashCode());
 		temp = Double.doubleToLongBits(price);
@@ -114,11 +104,6 @@ public class OutletOrderStructure {
 			if (other.id != null)
 				return false;
 		} else if (!id.equals(other.id))
-			return false;
-		if (outlet == null) {
-			if (other.outlet != null)
-				return false;
-		} else if (!outlet.equals(other.outlet))
 			return false;
 		if (outletOrder == null) {
 			if (other.outletOrder != null)
