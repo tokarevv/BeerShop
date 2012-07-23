@@ -20,6 +20,7 @@ public class Article {
     private Double price;
 
     @ManyToOne
+    @JoinColumn(name = "Supplier_id")
     private Supplier supplier;
 
     @Column
