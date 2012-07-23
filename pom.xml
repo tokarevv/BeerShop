@@ -15,7 +15,8 @@
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
 		<junit.version>4.8.2</junit.version>
- 	</properties>
+	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
+	</properties>
 	<dependencies>
 	    
 		<!-- Spring -->
