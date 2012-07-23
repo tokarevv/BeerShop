@@ -11,7 +11,7 @@ public class SalesRep {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         
-        @Column(nullable=false)
+       // @Column(nullable=false)
         @OneToOne
         private User user;
         

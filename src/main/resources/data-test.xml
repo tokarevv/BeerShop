@@ -30,7 +30,7 @@
 	<!-- Настройки бина dataSource будем хранить в отдельном файле -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="/jdbc.properties" />
+		p:location="/jdbc-test.properties" />
 
 	<!-- Непосредственно бин dataSource -->
 	<bean id="dataSource"
@@ -45,7 +45,7 @@
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation">
-			<value>classpath:hibernate.cfg.xml</value>
+			<value>hibernate-test.cfg.xml</value>
 		</property>
 		<property name="configurationClass">
 			<value>org.hibernate.cfg.AnnotationConfiguration</value>

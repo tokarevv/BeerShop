@@ -10,7 +10,7 @@
 
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
-	<import resource="data.xml" />
+	<import resource="data-test.xml" />
 
 	<tx:annotation-driven />
 	<context:component-scan base-package="ss.bshop" />

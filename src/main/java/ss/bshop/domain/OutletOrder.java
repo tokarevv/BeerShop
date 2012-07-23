@@ -3,10 +3,13 @@ package ss.bshop.domain;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+@Entity
 public class OutletOrder {
 	
 	@Id
@@ -26,6 +29,7 @@ public class OutletOrder {
 	private Visit visit; // order-return
 	
 	@Column
+	@OneToMany
 	private List<OutletOrderStructure> structure; // order-return
 
 	
