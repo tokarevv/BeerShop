@@ -6,14 +6,14 @@ import ss.bshop.domain.Article;
 
 public interface IArticleDAO {
 
-	public void addArticle(Article article);
+	public void add(Article article);
 
-	public Article getArticle(Long articleId);
+	public Article get(Long articleId);
 
 	public List<Article> getAll();
 
-	public void removeArticle(Long id);
+	public void remove(Long id);
 	
-	public void updateArticle(Long id);
+	public void update(Article article);
 	
 }

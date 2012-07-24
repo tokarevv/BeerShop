@@ -20,7 +20,7 @@ public class SupplierOrder {
 	@Column
 	private String type; // order-return
 
-	@Column
+	@ManyToOne
 	private Manager manager;
 	
 	@Column
@@ -36,7 +36,7 @@ public class SupplierOrder {
 	@Column
 	private Boolean status; // dispatched/not-dispatched
 	
-	@Column
+	@OneToMany
 	private List<SupOrderStructure> orderstruct;
 	 	 		
 	//getters and setters

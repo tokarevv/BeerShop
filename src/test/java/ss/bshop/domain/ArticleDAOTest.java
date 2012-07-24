@@ -1,16 +1,12 @@
 package ss.bshop.domain;
 import junit.framework.Assert;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import ss.bshop.dao.ArticleDAO;
 import ss.bshop.dao.IArticleDAO;
 import ss.bshop.domain.Article;
 
@@ -18,6 +14,8 @@ import java.util.List;
 
 /**
  * ArticleDAO Tester. 
+ * 
+ * author: Victor
  */
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -28,16 +26,16 @@ public class ArticleDAOTest {
     private IArticleDAO daoI;
 
     /**
-     * Method: save(Article article)
+     * Method: add(Article article)
      */
     @Test
-	public void testSave() throws Exception {
+	public void testAdd() throws Exception {
 		Article article = new Article();
 		article.setName("Snicks");
 		article.setBarcode("831418518");
 
-		System.out.println(article);
-		daoI.addArticle(article);
+		//System.out.println(article);
+		daoI.add(article);
 		List<Article> articleList = daoI.getAll();
 
 		// for(Article a : articleList){
@@ -58,12 +56,12 @@ public class ArticleDAOTest {
 		Article article = new Article();
 		article.setName("S");
 
-		daoI.addArticle(article);
+		daoI.add(article);
 		List<Article> articleList = daoI.getAll();
 
 		Article loadedArticle = articleList.get(articleList.size() - 1);
 		Long loadedArticleId = loadedArticle.getId();
-		Assert.assertEquals(loadedArticle, daoI.getArticle(loadedArticleId));
+		Assert.assertEquals(loadedArticle, daoI.get(loadedArticleId));
 	}
     
 
