@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ss.bshop.domain.Visit;
 
+@Repository
 public class VisitDAO implements IVisitDAO {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 

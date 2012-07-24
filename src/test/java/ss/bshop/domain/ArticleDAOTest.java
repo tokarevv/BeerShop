@@ -25,7 +25,7 @@ import java.util.List;
 public class ArticleDAOTest {
 
     @Autowired
-    private ArticleDAO daoI;
+    private IArticleDAO daoI;
 
     /**
      * Method: save(Article article)
