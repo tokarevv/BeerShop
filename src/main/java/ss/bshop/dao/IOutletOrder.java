@@ -8,7 +8,7 @@ import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.OutletOrder;
 
-public interface IOutletOrder extends CRUDGeneral <OutletOrder, Long>{
+public interface IOutletOrder extends ICRUDGeneral <OutletOrder, Long>{
 	
 
 }

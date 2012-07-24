@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
 
-public interface IOutletDAO extends CRUDGeneral <Outlet, Long>{
+public interface IOutletDAO extends ICRUDGeneral <Outlet, Long>{
 	
 
 }
