@@ -1,9 +1,7 @@
 package ss.bshop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.Date;
+import javax.persistence.*;
 
 @Entity
 public class Manager {
@@ -11,5 +9,10 @@ public class Manager {
 	@Column(name = "ID")
 	@GeneratedValue
 	private Long id;
-
+        
+        @Column
+	@Temporal( value = TemporalType.TIMESTAMP ) 
+        private Date dateOfDirect;
+        
+        
 }
