@@ -6,8 +6,9 @@ import ss.bshop.domain.SupplierOrder;
 import org.springframework.data.repository.CrudRepository;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
+import ss.bshop.domain.OutletOrder;
 
-public interface IOutletDAO extends CRUDGeneral <Outlet, Long>{
+public interface IOutletStructure extends CRUDGeneral <OutletOrder, Long>{
 	
 
 }
