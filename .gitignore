@@ -33,4 +33,9 @@ _$*
 .projecttarget
 target
 /bin
+<<<<<<< HEAD
+test.db.properties
+=======
+/test.db.properties
+>>>>>>> 6c8606b7d5cdbdfb20f344924832b7499bacbac9
 test.db.properties
