@@ -18,5 +18,5 @@ public interface ICRUDGeneral <T, ID extends Serializable> {
 
 	public void remove(ID id);
 	
-	public void update(ID id);
+	public void update(T entety);
 }
