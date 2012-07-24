@@ -42,14 +42,8 @@ public class SupplierDAO implements ISupplierDAO{
 	}
 
 	@Override
-	public void update(Long id) {
-		Supplier supplier = (Supplier) sessionFactory.getCurrentSession().load(
-				Supplier.class, id);
-		if (supplier != null) {
-			sessionFactory.getCurrentSession().delete(supplier);
-		}
-		sessionFactory.getCurrentSession().save(supplier);
-		
+	public void update(Supplier supplier) {
+		sessionFactory.getCurrentSession().update(supplier);
 	}
 
 }

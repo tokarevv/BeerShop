@@ -43,13 +43,8 @@ public class PaymentDAO implements IPaymentDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		Payment payment = (Payment) sessionFactory.getCurrentSession().load(
-				Payment.class, id);
-		if (payment != null) {
-			sessionFactory.getCurrentSession().delete(payment);
-		}
-		sessionFactory.getCurrentSession().save(payment);
+	public void update(Payment payment) {
+		sessionFactory.getCurrentSession().update(payment);
 		
 	}
 

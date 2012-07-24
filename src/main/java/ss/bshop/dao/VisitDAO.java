@@ -44,13 +44,8 @@ public class VisitDAO implements IVisitDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		Visit visit = (Visit) sessionFactory.getCurrentSession().load(
-				Visit.class, id);
-		if (visit != null) {
-			sessionFactory.getCurrentSession().delete(visit);
-		}
-		sessionFactory.getCurrentSession().save(visit);
+	public void update(Visit visit) {
+		sessionFactory.getCurrentSession().delete(visit);
 		
 	}
 

@@ -13,6 +13,6 @@ public interface ISupplierDAO {
 
 	public void remove(Long id);
 	
-	public void update(Long id);
+	public void update(Supplier supplier);
 
 }

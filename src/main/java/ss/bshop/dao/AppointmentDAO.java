@@ -44,13 +44,8 @@ public class AppointmentDAO implements IAppointmentDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		Appointment app = (Appointment) sessionFactory.getCurrentSession().load(
-				Appointment.class, id);
-		if (app != null) {
-			sessionFactory.getCurrentSession().delete(app);
-		}
-		sessionFactory.getCurrentSession().save(app);
+	public void update(Appointment app) {
+		sessionFactory.getCurrentSession().update(app);
 		
 	}
 }

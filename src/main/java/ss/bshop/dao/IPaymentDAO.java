@@ -13,5 +13,5 @@ public interface IPaymentDAO {
 
 	public void remove(Long id);
 	
-	public void update(Long id);
+	public void update(Payment payment);
 }

@@ -14,6 +14,6 @@ public interface IAppointmentDAO {
 
 	public void remove(Long id);
 	
-	public void update(Long id);
+	public void update(Appointment app);
 
 }
