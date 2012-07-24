@@ -6,25 +6,26 @@ package ss.bshop.dao;
 
 import java.util.List;
 import ss.bshop.domain.Outlet;
+import ss.bshop.domain.OutletOrder;
 
 /**
  *
  * @author nick
  */
-public class OutletDAO implements IOutletDAO{
+public class OutletOrderDAO implements IOutletOrder{
 
     @Override
-    public void add(Outlet t) {
+    public void add(OutletOrder t) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Outlet get(Long id) {
+    public OutletOrder get(Long id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public List<Outlet> getAll() {
+    public List<OutletOrder> getAll() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -37,6 +38,8 @@ public class OutletDAO implements IOutletDAO{
     public void update(Long id) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
+    
     
 }
 

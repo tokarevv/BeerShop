@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import ss.bshop.domain.Article;
+import org.springframework.stereotype.Repository;
 import ss.bshop.domain.Supplier;
 
+@Repository
 public class SupplierDAO implements ISupplierDAO{
 	
 	@Autowired
@@ -42,14 +42,8 @@ public class SupplierDAO implements ISupplierDAO{
 	}
 
 	@Override
-	public void update(Long id) {
-		Supplier supplier = (Supplier) sessionFactory.getCurrentSession().load(
-				Supplier.class, id);
-		if (supplier != null) {
-			sessionFactory.getCurrentSession().delete(supplier);
-		}
-		sessionFactory.getCurrentSession().save(supplier);
-		
+	public void update(Supplier supplier) {
+		sessionFactory.getCurrentSession().update(supplier);
 	}
 
 }
