@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Appointment;
 
+@Repository
 public class AppointmentDAO implements IAppointmentDAO {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -41,13 +44,8 @@ public class AppointmentDAO implements IAppointmentDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		Appointment app = (Appointment) sessionFactory.getCurrentSession().load(
-				Appointment.class, id);
-		if (app != null) {
-			sessionFactory.getCurrentSession().delete(app);
-		}
-		sessionFactory.getCurrentSession().save(app);
+	public void update(Appointment app) {
+		sessionFactory.getCurrentSession().update(app);
 		
 	}
 }

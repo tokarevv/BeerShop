@@ -13,5 +13,5 @@ public interface IVisitDAO {
 
 	public void remove(Long id);
 	
-	public void update(Long id);
+	public void update(Visit visit);
 }

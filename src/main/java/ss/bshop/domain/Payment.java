@@ -16,11 +16,12 @@ public class Payment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column
     private Long id;
 
     //@
     @ManyToOne
-    private Outlet outlet;
+     private Outlet outlet;
     
     @Column(nullable=false)
     private double amount;

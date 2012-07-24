@@ -4,9 +4,13 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ss.bshop.domain.Visit;
 
+@Repository
 public class VisitDAO implements IVisitDAO {
+	
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -40,13 +44,8 @@ public class VisitDAO implements IVisitDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		Visit visit = (Visit) sessionFactory.getCurrentSession().load(
-				Visit.class, id);
-		if (visit != null) {
-			sessionFactory.getCurrentSession().delete(visit);
-		}
-		sessionFactory.getCurrentSession().save(visit);
+	public void update(Visit visit) {
+		sessionFactory.getCurrentSession().delete(visit);
 		
 	}
 
