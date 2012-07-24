@@ -18,8 +18,7 @@
 		<mapping class="ss.bshop.domain.OutletOrder" />
 		<mapping class="ss.bshop.domain.OutletOrderStructure" />
 		<mapping class="ss.bshop.domain.Appointment" />
-						
-									
-									
+		<mapping class="ss.bshop.domain.SupOrderStructure" />
+		<mapping class="ss.bshop.domain.SupplierOrder" />
 	</session-factory>
 </hibernate-configuration>

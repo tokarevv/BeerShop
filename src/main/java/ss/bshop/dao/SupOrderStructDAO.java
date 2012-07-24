@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import ss.bshop.domain.SupOrderStructure;
 
+@Repository
 public class SupOrderStructDAO implements ISupOrderStructDAO {
 
 	@Autowired
@@ -39,13 +42,10 @@ public class SupOrderStructDAO implements ISupOrderStructDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		SupOrderStructure structure = (SupOrderStructure) sessionFactory
-				.getCurrentSession().load(SupOrderStructure.class, id);
-		if (structure != null) {
-			sessionFactory.getCurrentSession().delete(structure);
-		}
-		sessionFactory.getCurrentSession().save(structure);
+	public void update(SupOrderStructure structure) {
+		sessionFactory.getCurrentSession().update(structure);
+		
 	}
+
 
 }

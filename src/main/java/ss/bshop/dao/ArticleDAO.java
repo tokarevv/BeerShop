@@ -15,12 +15,12 @@ public class ArticleDAO implements IArticleDAO {
 	private SessionFactory sessionFactory;
 
 	@Override
-	public void addArticle(Article article) {
-		sessionFactory.getCurrentSession().save(article);
+	public void add(Article article) {
+		sessionFactory.getCurrentSession().saveOrUpdate(article);
 	}
 
 	@Override
-	public Article getArticle(Long articleId) {
+	public Article get(Long articleId) {
 		return (Article) sessionFactory.getCurrentSession().get(Article.class, articleId);
 	}
 
@@ -32,24 +32,17 @@ public class ArticleDAO implements IArticleDAO {
 	}
 
 	@Override
-	public void removeArticle(Long articleId) {
+	public void remove(Long id) {
 		Article article = (Article) sessionFactory.getCurrentSession().load(
-				Article.class, articleId);
+				Article.class, id);
 		if (article != null) {
 			sessionFactory.getCurrentSession().delete(article);
 		}
-
 	}
 
 	@Override
-	public void updateArticle(Long articleId) {
-		Article article = (Article) sessionFactory.getCurrentSession().load(
-				Article.class, articleId);
-		if (article != null) {
-			sessionFactory.getCurrentSession().delete(article);
-		}
-		sessionFactory.getCurrentSession().save(article);
-
+	public void update(Article article) {
+		sessionFactory.getCurrentSession().update(article);
 	}
 
 }

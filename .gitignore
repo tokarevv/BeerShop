@@ -33,5 +33,12 @@ _$*
 .projecttarget
 target
 /bin
+<<<<<<< HEAD
+test.db.properties
+=======
 /test.db.properties
+<<<<<<< HEAD
+=======
+>>>>>>> 6c8606b7d5cdbdfb20f344924832b7499bacbac9
+>>>>>>> branch 'master' of https://github.com/tokarevv/BeerShop.git
 test.db.properties
