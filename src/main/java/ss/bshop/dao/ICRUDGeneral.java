@@ -9,7 +9,6 @@ import java.util.List;
 
 public interface ICRUDGeneral <T, ID extends Serializable> {
                         
-    
         public void add(T t);
 
 	public T get(ID id);

@@ -6,48 +6,44 @@ package ss.bshop.dao;
 
 import java.util.List;
 import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import ss.bshop.domain.Outlet;
-import ss.bshop.domain.OutletOrder;
-
+import ss.bshop.domain.OutletOrderStructure;
 /**
  *
  * @author nick
  */
-public class OutletOrderDAO implements IOutletOrder{
+public class OutletOrderStructureDAO implements IOutletOrderStructure{
 
     private SessionFactory sessionFactory;
     
     @Override
-    public void add(OutletOrder t) {
+    public void add(OutletOrderStructure t) {
         sessionFactory.getCurrentSession().save(t);
     }
 
     @Override
-    public OutletOrder get(Long id) {
-        return (OutletOrder) sessionFactory.getCurrentSession().get(OutletOrder.class, id);
+    public OutletOrderStructure get(Long id) {
+        return (OutletOrderStructure) sessionFactory.getCurrentSession().get(OutletOrderStructure.class, id);
     }
 
     @Override
-    public List<OutletOrder> getAll() {
-        return sessionFactory.getCurrentSession().createQuery("from OutletOrder")
+    public List<OutletOrderStructure> getAll() {
+        return sessionFactory.getCurrentSession().createQuery("from OutletOrderStructure")
 			.list();
     }
 
     @Override
     public void remove(Long id) {
-        OutletOrder t = get(id);
+        OutletOrderStructure t = get(id);
         if (t != null) {
             sessionFactory.getCurrentSession().delete(t);
         }
     }
 
     @Override
-    public void update(OutletOrder t) {
+    public void update(OutletOrderStructure t) {
         sessionFactory.getCurrentSession().update(t);
     }
 
-    
-    
+
 }
 
