@@ -23,7 +23,7 @@ import java.util.List;
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class ArticleDAOTest {
+public class OutletDAOTest {
 
     @Autowired
     private ArticleDAO daoI;
@@ -39,33 +39,33 @@ public class ArticleDAOTest {
 
 		System.out.println(article);
 		daoI.addArticle(article);
-		List<Article> articleList = daoI.getAll();
-
-		// for(Article a : articleList){
-		// System.out.println(a);
-		// }
-
-		Assert.assertEquals(article, articleList.get(articleList.size() - 1));
-		Assert.assertEquals(article.getName(),
-				articleList.get(articleList.size() - 1).getName());
+//		List<Article> articleList = daoI.getAll();
+//
+//		// for(Article a : articleList){
+//		// System.out.println(a);
+//		// }
+//
+//		Assert.assertEquals(article, articleList.get(articleList.size() - 1));
+//		Assert.assertEquals(article.getName(),
+//				articleList.get(articleList.size() - 1).getName());
 	}
     
     /**
      * Method: getArticle(Integer articleId)
      */
-    @Test
-	public void testGetArticle() throws Exception {
-
-		Article article = new Article();
-		article.setName("S");
-
-		daoI.addArticle(article);
-		List<Article> articleList = daoI.getAll();
-
-		Article loadedArticle = articleList.get(articleList.size() - 1);
-		Long loadedArticleId = loadedArticle.getId();
-		Assert.assertEquals(loadedArticle, daoI.getArticle(loadedArticleId));
-	}
+//    @Test
+//	public void testGetArticle() throws Exception {
+//
+//		Article article = new Article();
+//		article.setName("S");
+//
+//		daoI.addArticle(article);
+//		List<Article> articleList = daoI.getAll();
+//
+//		Article loadedArticle = articleList.get(articleList.size() - 1);
+//		Long loadedArticleId = loadedArticle.getId();
+//		Assert.assertEquals(loadedArticle, daoI.getArticle(loadedArticleId));
+//	}
     
 
 }  

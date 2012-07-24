@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import ss.bshop.domain.Outlet;
 
 public interface IOutletDAO extends CrudRepository<Outlet, Long>{
-	List<Outlet> findByName(String name);
+	
+    List<Outlet> findByName(String name);
 
 }
