@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.User;
 
-@Repository("userDao")
+
 public class UserDAO implements IUserDAO {
 
 	@Autowired

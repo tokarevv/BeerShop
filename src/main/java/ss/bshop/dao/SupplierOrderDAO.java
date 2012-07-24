@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.SupplierOrder;
 
-@Repository
+
 public class SupplierOrderDAO implements ISupplierOrderDAO {
 
 	@Autowired

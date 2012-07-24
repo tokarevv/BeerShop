@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import ss.bshop.domain.Article;
 
 
-@Repository
 public class ArticleDAO implements IArticleDAO {
 
 	@Autowired

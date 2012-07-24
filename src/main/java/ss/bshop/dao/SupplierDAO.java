@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import ss.bshop.domain.Supplier;
 
-@Repository
+
 public class SupplierDAO implements ISupplierDAO{
 	
 	@Autowired

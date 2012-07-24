@@ -23,47 +23,47 @@ public class SupOrderStructure {
 	@Column
 	private double amount;
 
-	// getters and setters
-	public double getAmount() {
-		return amount;
-	}
+    public double getAmount() {
+        return amount;
+    }
 
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
-	public double getPrice() {
-		return price;
-	}
+    public Article getArticle() {
+        return article;
+    }
 
-	public void setPrice(double price) {
-		this.price = price;
-	}
+    public void setArticle(Article article) {
+        this.article = article;
+    }
 
-	public Article getArticle() {
-		return article;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setArticle(Article article) {
-		this.article = article;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public double getPrice() {
+        return price;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
-	public SupplierOrder getSupplierOrder() {
-		return supplierOrder;
-	}
+    public SupplierOrder getSupplierOrder() {
+        return supplierOrder;
+    }
 
-	public void setSupplierOrder(SupplierOrder supplierOrder) {
-		this.supplierOrder = supplierOrder;
-	}
+    public void setSupplierOrder(SupplierOrder supplierOrder) {
+        this.supplierOrder = supplierOrder;
+    }
 
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

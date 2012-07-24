@@ -5,7 +5,6 @@
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
 	xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:util="http://www.springframework.org/schema/util"
-        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	
         xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
             http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
@@ -13,9 +12,7 @@
             http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
             http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-            http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
- 
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 	<!-- Root Context: определяет ресурсы, доступные всему приложению, всем сервлетам -->
 	
@@ -25,9 +22,6 @@
 	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
 	<context:component-scan base-package="ss.bshop.dao" />
 	<context:component-scan base-package="ss.bshop.service" />
-        
-        <!-- JPA -->
-        <jpa:repositories base-package="com.blogspot.nikcode.spring.jpa.repositories"/>
 	
 	<!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
 	<import resource="data.xml" />
