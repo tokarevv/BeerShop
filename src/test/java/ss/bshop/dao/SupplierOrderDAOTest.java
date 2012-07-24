@@ -1,4 +1,4 @@
-package ss.bshop.domain;
+package ss.bshop.dao;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ss.bshop.dao.ISupplierOrderDAO;
 import java.util.List;
+import ss.bshop.domain.SupplierOrder;
 
 /**
  * ArticleDAO Tester. 

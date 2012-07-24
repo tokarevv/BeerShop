@@ -1,4 +1,4 @@
-package ss.bshop.domain;
+package ss.bshop.dao;
 
 import java.util.List;
 import junit.framework.Assert;
@@ -10,6 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import ss.bshop.dao.IVisitDAO;
+import ss.bshop.domain.Visit;
 
 /**
  * VisitDAO Tester. 

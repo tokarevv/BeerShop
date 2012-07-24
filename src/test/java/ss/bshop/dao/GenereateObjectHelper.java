@@ -1,6 +1,9 @@
-package ss.bshop.domain;
+package ss.bshop.dao;
 
 import java.util.Date;
+import ss.bshop.domain.Article;
+import ss.bshop.domain.SupOrderStructure;
+import ss.bshop.domain.SupplierOrder;
 
 public class GenereateObjectHelper {
 	
