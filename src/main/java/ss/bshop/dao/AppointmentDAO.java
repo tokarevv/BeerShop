@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Appointment;
 
-
+@Repository
 public class AppointmentDAO implements IAppointmentDAO {
 	
 	@Autowired

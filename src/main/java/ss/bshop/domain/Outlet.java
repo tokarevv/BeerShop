@@ -1,12 +1,7 @@
 package ss.bshop.domain;
 
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Entity
 public class Outlet {
@@ -46,13 +41,14 @@ public class Outlet {
 	private String contractNumber;
 
 	@Column
+        @Temporal(javax.persistence.TemporalType.DATE)
 	private Date registerDate;
 
 	@OneToOne
 	private SalesRep salesRep;
 	
 	@Column
-	private String group;
+	private String groupp;
 	
 	@Column
 	private byte discount;
@@ -162,11 +158,11 @@ public class Outlet {
 	}
 
 	public String getGroup() {
-		return group;
+		return groupp;
 	}
 
 	public void setGroup(String group) {
-		this.group = group;
+		this.groupp = group;
 	}
 
 	public byte getDiscount() {
@@ -189,7 +185,7 @@ public class Outlet {
 				+ ((contractNumber == null) ? 0 : contractNumber.hashCode());
 		result = prime * result + discount;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((group == null) ? 0 : group.hashCode());
+		result = prime * result + ((groupp == null) ? 0 : groupp.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
@@ -247,10 +243,10 @@ public class Outlet {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (group == null) {
-			if (other.group != null)
+		if (groupp == null) {
+			if (other.groupp != null)
 				return false;
-		} else if (!group.equals(other.group))
+		} else if (!groupp.equals(other.groupp))
 			return false;
 		if (id == null) {
 			if (other.id != null)
