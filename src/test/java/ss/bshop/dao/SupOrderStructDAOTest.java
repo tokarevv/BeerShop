@@ -15,6 +15,7 @@ import ss.bshop.domain.Article;
 
 import java.util.Date;
 import java.util.List;
+import org.junit.Ignore;
 import ss.bshop.domain.SupOrderStructure;
 
 /**
@@ -33,6 +34,7 @@ public class SupOrderStructDAOTest {
     /**
      * Method: add(Article article)
      */
+@Ignore
     @Test
 	public void testAdd() throws Exception {
     	SupOrderStructure order = GenereateObjectHelper.getNewSupOrderStructure();
@@ -46,6 +48,7 @@ public class SupOrderStructDAOTest {
 	/**
      * Method: getArticle(Integer articleId)
      */
+@Ignore
     @Test
 	public void testGetOrder() throws Exception {
 
