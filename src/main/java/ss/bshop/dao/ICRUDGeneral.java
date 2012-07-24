@@ -7,7 +7,7 @@ package ss.bshop.dao;
 import java.io.Serializable;
 import java.util.List;
 
-public interface CRUDGeneral <T, ID extends Serializable> {
+public interface ICRUDGeneral <T, ID extends Serializable> {
                         
     
         public void add(T t);
@@ -18,5 +18,5 @@ public interface CRUDGeneral <T, ID extends Serializable> {
 
 	public void remove(ID id);
 	
-	public void update(ID id);
+	public void update(T entety);
 }

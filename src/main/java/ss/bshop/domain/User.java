@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @Column
-    private String position;
+    private String post;
 
     public String getFullname() {
         return fullname;
@@ -53,12 +53,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPosition() {
-        return position;
+    public String getPost() {
+        return post;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setPost(String post) {
+        this.post = post;
     }
     
     
