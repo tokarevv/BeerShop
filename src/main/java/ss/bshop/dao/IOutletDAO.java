@@ -13,10 +13,10 @@ public interface IOutletDAO extends CrudRepository<Outlet, Long>{
 
 	public Outlet getOutlet(Long articleId);
 
-	public List<Article> getOutlet();
+	public List<Outlet> getAll();
 
 	public void removeOutlet(Long id);
 	
-	public void updateArticle(Long id);
+	public void updateOutlet(Long id);
 
 }

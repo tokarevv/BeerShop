@@ -5,14 +5,23 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd	
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+                http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
-	default-autowire="byName">
+	default-autowire="byName" >
+            
+         <!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
+	<context:annotation-config />
+
+	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
+	<context:component-scan base-package="ss.bshop.dao" />
+	<context:component-scan base-package="ss.bshop.service" />
+        
+        <!-- JPA -->
+        <jpa:repositories base-package="com.blogspot.nikcode.spring.jpa.repositories"/>
 
 	<!-- Scans within the base package of the application for @Components to 
 		configure as beans -->
 	<import resource="data-test.xml" />
 
-	<tx:annotation-driven />
-	<context:component-scan base-package="ss.bshop" />
 
 </beans>
