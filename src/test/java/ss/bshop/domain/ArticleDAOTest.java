@@ -30,9 +30,7 @@ public class ArticleDAOTest {
      */
     @Test
 	public void testAdd() throws Exception {
-		Article article = new Article();
-		article.setName("Snicks");
-		article.setBarcode("831418518");
+		Article article = GenereateObjectHelper.getNewArticle();
 
 		//System.out.println(article);
 		daoI.add(article);
@@ -53,8 +51,7 @@ public class ArticleDAOTest {
     @Test
 	public void testGetArticle() throws Exception {
 
-		Article article = new Article();
-		article.setName("S");
+		Article article = GenereateObjectHelper.getNewArticle();
 
 		daoI.add(article);
 		List<Article> articleList = daoI.getAll();
