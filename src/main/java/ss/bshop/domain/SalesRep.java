@@ -16,31 +16,31 @@ public class SalesRep {
         private User user;
         
         @ManyToOne
-        @JoinColumn(name="id")
+        @JoinColumn(name="supervisor_id")
         private SuperVisor supervisor;
               
-	@Column(nullable=false)
-        @OneToMany(mappedBy="salesrep")
-        private Set<Payment> payments = new HashSet<Payment>();
+		@Column(nullable=false)
+	    @OneToMany
+	    private Set<Payment> payments = new HashSet<Payment>();
         
         @Column(nullable=false)
-        @OneToMany(mappedBy="salesrep")
+        @OneToMany
         private Set<Visit> visits = new HashSet<Visit>();
         
-        @Column(nullable=false)
-        @OneToMany(mappedBy="salesrep")
-        private Set<Appointment> appointments = new HashSet<Appointment>();
+//        @Column(nullable=false)
+//        @OneToMany(mappedBy="salesrep")
+//        private Set<Appointment> appointments = new HashSet<Appointment>();
 	
         @Column
         private String phone;
 
-    public Set<Appointment> getAppointments() {
-        return appointments;
-    }
-
-    public void setAppointments(Set<Appointment> appointments) {
-        this.appointments = appointments;
-    }
+//    public Set<Appointment> getAppointments() {
+//        return appointments;
+//    }
+//
+//    public void setAppointments(Set<Appointment> appointments) {
+//        this.appointments = appointments;
+//    }
 
     public Long getId() {
         return id;

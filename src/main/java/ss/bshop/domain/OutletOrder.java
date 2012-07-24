@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class OutletOrder {
@@ -17,20 +18,20 @@ public class OutletOrder {
 	private Long id;
 	
 	@Column
-	private String type; // order-return
+	private String type; 
 	
 	@Column
-	private byte discount; // order-return
+	private byte discount; 
 	
 	@Column
-	private double payment; // order-return
+	private double payment;
 	
-	@Column
-	private Visit visit; // order-return
+	@OneToOne
+	private Visit visit; 
 	
 	@Column
 	@OneToMany
-	private List<OutletOrderStructure> structure; // order-return
+	private List<OutletOrderStructure> structure; 
 
 	
 	//getters and setters

@@ -9,5 +9,17 @@
 		<mapping class="ss.bshop.domain.Article" />
 		<mapping class="ss.bshop.domain.Supplier" />
 		<mapping class="ss.bshop.domain.User" />
+		<mapping class="ss.bshop.domain.Manager" />
+		<mapping class="ss.bshop.domain.SuperVisor" />
+		<mapping class="ss.bshop.domain.SalesRep" />
+		<mapping class="ss.bshop.domain.Payment" />
+		<mapping class="ss.bshop.domain.Outlet" />
+		<mapping class="ss.bshop.domain.Visit" />
+		<mapping class="ss.bshop.domain.OutletOrder" />
+		<mapping class="ss.bshop.domain.OutletOrderStructure" />
+		<mapping class="ss.bshop.domain.Appointment" />
+						
+									
+									
 	</session-factory>
 </hibernate-configuration>
