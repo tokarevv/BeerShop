@@ -60,7 +60,7 @@
         <!-- Настройки бина dataSource будем хранить в отдельном файле -->
         <bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="jdbc-test_MySQL.properties" />
+		p:location="jdbc_HSQL.properties" />
         <!--
         <jdbc:embedded-database id="dataSource" type="HSQL" /> 
         -->
