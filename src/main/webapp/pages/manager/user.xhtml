@@ -41,27 +41,27 @@
                         </f:facet>
                         <h:outputText value="#{user.id}"/>
                     </p:column>
-                    <p:column sortBy="#{user.name}"
+                    <p:column sortBy="#{user.fullname}"
                               headerText=" Name "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.name}"/>
+                                <h:outputText value="#{user.fullname}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.name}"/>
+                                <h:inputText value="#{user.fullname}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column sortBy="#{user.surname}"
+                    <p:column sortBy="#{user.post}"
                               headerText=" Surname "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.surname}"/>
+                                <h:outputText value="#{user.post}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.surname}"/>
+                                <h:inputText value="#{user.post}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>

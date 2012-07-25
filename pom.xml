@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>ss</groupId>
     <artifactId>bshop</artifactId>
-    <name>BeerShop</name>
+    <name>BeerShopMaSter</name>
     <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
      
@@ -232,7 +232,7 @@
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
                         <configuration>
-                                <warName>BShop</warName>
+                                <warName>BShopMaster</warName>
                         </configuration>
                 </plugin>
                 <plugin>
