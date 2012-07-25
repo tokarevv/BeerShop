@@ -15,17 +15,6 @@
 
     <!-- configuration of navigation rules -->
     <navigation-rule>
-        <from-view-id>/pages/index.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/pages/success.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>error</from-outcome>
-            <to-view-id>/pages/error.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
         <from-view-id>*</from-view-id>
         <navigation-case>
             <from-outcome>order</from-outcome>
