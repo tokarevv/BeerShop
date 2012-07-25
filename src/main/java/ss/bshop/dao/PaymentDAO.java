@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Payment;
 
-
+@Repository
 public class PaymentDAO implements IPaymentDAO {
 
 	@Autowired

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Visit;
 
-
+@Repository
 public class VisitDAO implements IVisitDAO {
 	
 	@Autowired

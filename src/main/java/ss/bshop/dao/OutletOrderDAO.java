@@ -7,6 +7,7 @@ package ss.bshop.dao;
 import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.OutletOrder;
 
@@ -14,6 +15,7 @@ import ss.bshop.domain.OutletOrder;
  *
  * @author nick
  */
+@Repository
 public class OutletOrderDAO implements IOutletOrder{
 
     private SessionFactory sessionFactory;

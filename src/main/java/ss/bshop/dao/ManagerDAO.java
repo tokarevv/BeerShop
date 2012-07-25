@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Manager;
 
+@Repository
 public class ManagerDAO implements IManagerDAO {
 
 	@Autowired
