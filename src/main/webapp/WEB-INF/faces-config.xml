@@ -43,6 +43,21 @@
             <from-outcome>removal</from-outcome>
             <to-view-id>/pages/manager/removal.xhtml</to-view-id>
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>startAdmin</from-outcome>
+            <to-view-id>/pages/admin/removal.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>startManager</from-outcome>
+            <to-view-id>/pages/manager/removal.xhtml</to-view-id>
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>startSupervisor</from-outcome>
+            <to-view-id>/pages/supervisor/removal.xhtml</to-view-id>
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>

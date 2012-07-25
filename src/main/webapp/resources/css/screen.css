@@ -1,0 +1,24 @@
+.pageHeaderText {
+	padding: 1px;	
+	display:inline-block;
+	float: left;
+	display:inline-block;
+}
+
+.pageHeaderForm {
+
+	display:inline-block;
+	float: center;	
+	display:inline-block;
+}
+
+.pageHeaderMenue {
+	display:inline-block;
+	
+}
+
+.pageHeaderForm td {
+	border: none;
+}
+
+.ui-menu {width:100%}

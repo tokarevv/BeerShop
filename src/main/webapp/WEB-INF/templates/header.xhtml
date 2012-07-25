@@ -12,12 +12,30 @@
     <h:form id="commonHeaderForm" styleClass="pageHeaderForm">
    
    		 <h:outputText value="BShop" styleClass="pageHeaderText"/>
+   		 
+   		 <h:form id="commonHeaderForm" styleClass="pageHeaderForm">
+   	 	 <p:menubar styleClass="pageHeaderMenue">
+   		
+   		 <p:menuitem action="startAdmin"  value="Admin"/>
+         <p:menuitem  action="startSupervisor"  value="Supervisor"/>
+         <p:menuitem action="startManager"  value="Manager"/>
+     
+    </p:menubar>
+
+    </h:form>
     
-       <p:panelGrid columns="4" styleClass="headerMenu">
+    <!--   <p:panelGrid columns="4" styleClass="headerMenu">
+       		
+       		<p:commandButton action="startAdmin"  value="Admin" ajax="false"/>
+            <p:commandButton action="startSupervisor"  value="Supervisor"  ajax="false"/>            
+            <p:commandButton action="startManager"  value="Manager"  ajax="false"/>
            <p:commandButton action="users"  value="Users" ajax="false"/>
            <p:commandButton action="order"  value="Order" ajax="false"/>
             <p:commandButton action="recept"  value="Recept"  ajax="false"/>            
-            <p:commandButton action="removal"  value="Removal"  ajax="false"/>
+            <p:commandButton action="removal"  value="Removal"  ajax="false"/> 
+           
+            
+        
         </p:panelGrid>
         <p:panelGrid columns="2" styleClass="headerForm">
             <h:outputText value="User: Petya"/>
@@ -26,7 +44,7 @@
                              action="empty.xhtml"
                              ajax="false"
                              value="logout"/>
-        </p:panelGrid>
+        </p:panelGrid>-->
 
     </h:form>
 </ui:composition>
