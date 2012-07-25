@@ -23,6 +23,7 @@ public class UserDAOTest {
 
 	@Autowired
 	private IUserDAO userDao;
+        
 	@Test
 	public void testSaveAndLoad() {
 		User user = createUser("TestLogin");
