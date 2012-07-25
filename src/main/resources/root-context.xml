@@ -20,15 +20,15 @@
 	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
 	<context:annotation-config />
 	<!-- Beans Declaration -->
-	<bean id="User" class="com.otv.model.User"/>
+	<bean id="User" class="ss.bshop.domain.User"/>
 	
-	<!-- User Service Declaration -->
-	<bean id="UserService" class="com.otv.user.service.UserService">
+	<!-- User Service Declaration 
+	<bean id="UserService" class="ss.bshop.service.UserService">
 		<property name="userDAO" ref="UserDAO" />
-	</bean>
+	</bean>-->
 	
 	<!-- User DAO Declaration -->
-	<bean id="UserDAO" class="com.otv.user.dao.UserDAO">
+	<bean id="UserDAO" class="ss.bshop.dao.UserDAO">
 		<property name="sessionFactory" ref="SessionFactory" />
 	</bean>
 	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
