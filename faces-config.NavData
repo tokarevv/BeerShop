@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Project" version="2">
     <Scope Scope="Faces Configuration Only"/>
-    <Scope Scope="Project"/>
+    <Scope Scope="Project">
+        <Node id="pages/manager/user.xhtml" x="682" y="231" zoom="true"/>
+        <Node id="error403.jsp" x="400" y="150" zoom="true"/>
+        <Node id="pages/manager/removal.xhtml" x="338" y="233" zoom="true"/>
+        <Node id="empty.xhtml" x="660" y="143" zoom="true"/>
+        <Node id="*" x="594" y="497" zoom="false"/>
+        <Node id="pages/error.xhtml" x="160" y="393" zoom="true"/>
+        <Node id="pages/manager/recept.xhtml" x="874" y="329" zoom="true"/>
+        <Node id="pages/success.xhtml" x="150" y="600" zoom="true"/>
+        <Node id="pages/manager/order.xhtml" x="90" y="301" zoom="true"/>
+        <Node id="pages/index.xhtml" x="156" y="486" zoom="true"/>
+    </Scope>
     <Scope Scope="All Faces Configurations"/>
 </Scene>
