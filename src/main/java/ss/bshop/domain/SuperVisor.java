@@ -14,13 +14,13 @@ public class SuperVisor implements Serializable {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         
-        @OneToOne
+        @OneToOne(optional=false, cascade=CascadeType.ALL)
         private User user;
                 
 	@OneToMany(mappedBy="supervisor")
         private Set<SalesRep> salesrep = new HashSet<SalesRep>();
 	
-        @Column
+    @Column
         private String comment;
 
     public String getComment() {
@@ -54,8 +54,4 @@ public class SuperVisor implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-
-        
-
-
 }

@@ -12,7 +12,7 @@ public class SalesRep {
         private Long id;
         
        // @Column(nullable=false)
-        @OneToOne
+        @OneToOne(optional=false, cascade=CascadeType.ALL)
         private User user;
         
         @ManyToOne
