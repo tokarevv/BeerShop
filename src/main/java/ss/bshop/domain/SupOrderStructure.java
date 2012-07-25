@@ -3,7 +3,6 @@ package ss.bshop.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "SupOrderStructures")
 public class SupOrderStructure {
 
 	@Id

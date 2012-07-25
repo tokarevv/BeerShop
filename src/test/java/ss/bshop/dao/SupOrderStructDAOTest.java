@@ -28,7 +28,7 @@ import ss.bshop.domain.SupOrderStructure;
 @Transactional
 public class SupOrderStructDAOTest {
 
-    @Autowired
+  //@Autowired
     private ISupOrderStructDAO dao;
 
     /**
