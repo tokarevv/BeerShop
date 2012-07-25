@@ -33,11 +33,7 @@
 	    <param-value>Development</param-value>
 	  </context-param>
 	  
-	  <!-- Welcome Page -->
-	  <welcome-file-list>
-	    <welcome-file>/pages/index.xhtml</welcome-file>
-	  </welcome-file-list>
-	  
+ 
 	  <!-- JSF Servlet is defined to container -->
 	  <servlet>
 	    <servlet-name>Faces Servlet</servlet-name>
