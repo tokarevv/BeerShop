@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+			xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+		  http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>ss</groupId>
 	<artifactId>bshop</artifactId>
@@ -8,7 +9,6 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<jetty.version>6.1.4</jetty.version>
 	    <java-version>1.6</java-version>
 		<org.springframework-version>3.0.5.RELEASE</org.springframework-version>
 		<org.springframework.roo-version>1.0.2.RELEASE</org.springframework.roo-version>
@@ -17,7 +17,37 @@
 		<junit.version>4.8.2</junit.version>
 	 <netbeans.hint.deploy.server>Tomcat</netbeans.hint.deploy.server>
 	</properties>
+	
+	
+	
+	
 	<dependencies>
+	    
+		<!-- JSF library -->
+		<dependency>
+		  <groupId>com.sun.faces</groupId>
+		  <artifactId>jsf-api</artifactId>
+		  <version>2.1.6</version>
+		</dependency>
+		
+		<dependency>
+		  <groupId>com.sun.faces</groupId>
+		  <artifactId>jsf-impl</artifactId>
+		  <version>2.1.6</version>
+		</dependency>
+			
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
+		<!-- Primefaces library -->
+ 		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>3.3.1</version>
+		</dependency>	    
 	    
 		<!-- Spring -->
 		<dependency>
@@ -224,6 +254,13 @@
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
+		</repository>
+		
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
 		</repository>
 	</repositories>
 	<build>

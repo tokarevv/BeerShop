@@ -15,6 +15,13 @@
 
 	<!-- Root Context: определяет ресурсы, доступные всему приложению, всем сервлетам -->
 	
+	<!-- Beans Declaration -->
+	<bean id="User" class="com.otv.model.User"/>
+	
+	<!-- User Service Declaration -->
+	<bean id="UserService" class="com.otv.user.service.UserService">
+		<property name="userDAO" ref="UserDAO" />
+	</bean>	
 	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
 	<context:annotation-config />
 
