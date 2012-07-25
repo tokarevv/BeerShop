@@ -33,10 +33,11 @@ public class UserManagedBean implements Serializable {
     private static final String ERROR = "error";
 
     //Spring User Service is injected...
-    @ManagedProperty(value = "#{UserService}")
+    @ManagedProperty(value = "#{userService}")
     IUserService userService;
 
     List<User> userList;
+    @ManagedProperty(value = "#{UserDataModel}")
     private UserDataModel model;
     User selected;
     @PostConstruct

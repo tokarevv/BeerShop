@@ -20,18 +20,17 @@
 	<!-- Включаем опцию использования конфигурационных аннотаций (@Annotation-based configuration)-->
 	<context:annotation-config />
 	<!-- Beans Declaration -->
-	<bean id="User" class="ss.bshop.domain.User"/>
-	<bean id="UserDataModel" class="ss.bshop.mbeans.UserDataModel"/>
-		
-	<!-- User Service Declaration 
-	<bean id="UserService" class="ss.bshop.service.UserService">
-		<property name="userDAO" ref="UserDAO" />
-	</bean>-->
+	<bean id="User" class="com.otv.model.User"/>
 	
-	<!-- User DAO Declaration 
-	<bean id="UserDAO" class="ss.bshop.dao.UserDAO">
+	<!-- User Service Declaration -->
+	<bean id="UserService" class="com.otv.user.service.UserService">
+		<property name="userDAO" ref="UserDAO" />
+	</bean>
+	
+	<!-- User DAO Declaration -->
+	<bean id="UserDAO" class="com.otv.user.dao.UserDAO">
 		<property name="sessionFactory" ref="SessionFactory" />
-	</bean>-->
+	</bean>
 	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
 	<context:component-scan base-package="ss.bshop.dao" />
 	<context:component-scan base-package="ss.bshop.service" />

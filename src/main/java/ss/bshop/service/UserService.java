@@ -2,6 +2,8 @@ package ss.bshop.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ss.bshop.dao.IUserDAO;
@@ -17,10 +19,12 @@ import ss.bshop.domain.User;
  * @version 1.0.0
  *
  */
+@Service
 @Transactional(readOnly = true)
 public class UserService implements IUserService {
 
 	// UserDAO is injected...
+	@Autowired
 	IUserDAO userDAO;
 	
 	/**
