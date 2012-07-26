@@ -40,4 +40,7 @@ public class ArticleManagedBean implements Serializable{
         return model;
     }
 
+    public void setModel(ArticleDataModel model) {
+        this.model = model;
+    }
 }

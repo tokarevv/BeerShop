@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html xmlns:e="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:p="http://primefaces.org/ui"
@@ -10,14 +10,13 @@
 <ui:composition>
     
    		 
-   <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
-        <h:outputText value="BShop" styleClass="pageHeaderText"/>
- 	 
+    <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
+       <a href="/empty.xhtml">BShop</a> 
        <p:menubar styleClass="pageHeaderMenue" >
    		
-   		 <p:menuitem  value="Продукты" url="/pages/admin/startadmin.xhtml"/>
-                 <p:menuitem  value="Торговые точки" url="/pages/supervisor/removal.xhtml"/>
-                 <p:menuitem  value="Торговые представители" url="/pages/manager/removal.xhtml"/>
+   		 <p:menuitem  value="Articles" url="/pages/admin/startadmin.xhtml"/>
+                 <p:menuitem  value="Outlet" url="/pages/supervisor/removal.xhtml"/>
+                 <p:menuitem  value="Salesreps" url="/pages/manager/removal.xhtml"/>
      
        </p:menubar>
     </h:form>
