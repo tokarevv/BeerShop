@@ -17,7 +17,6 @@
 	<!-- Определяем папки, в которых будем автоматически искать бины-компоненты (@Component, @Service)  -->
 	<context:component-scan base-package="ss.bshop.dao" />
 	<context:component-scan base-package="ss.bshop.service" />
-        <context:component-scan base-package="ss.bshop.mbeans" />
 	
 	<!-- Файл с настройками ресурсов для работы с данными (Data Access Resources) -->
 	<import resource="data.xml" />
