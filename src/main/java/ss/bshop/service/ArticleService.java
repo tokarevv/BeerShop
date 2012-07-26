@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ss.bshop.dao.IArticleDAO;
 
 import ss.bshop.domain.Article;
 
@@ -19,11 +20,11 @@ import ss.bshop.domain.Article;
 public class ArticleService implements IArticleService {
 
 	@Autowired
-	IArticleService articleDAO;
+	IArticleDAO articleDAO;
 
         @Override
         public List<Article> getArticles() {
-            return articleDAO.getArticles();
+            return articleDAO.getAll();
         }
 
 }

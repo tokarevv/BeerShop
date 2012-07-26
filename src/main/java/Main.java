@@ -16,7 +16,7 @@ public class Main {
 		//File f = new File("s");
 		//System.out.println(f.getCanonicalPath());
 		
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test-context.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("root-context.xml");
         String[] beanNames = context.getBeanDefinitionNames();
         
         for (String s : beanNames){
