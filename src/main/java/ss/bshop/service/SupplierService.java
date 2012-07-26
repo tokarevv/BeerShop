@@ -1,4 +1,4 @@
-package ss.bshop.dao;
+package ss.bshop.service;
 
 import java.util.List;
 
@@ -8,48 +8,53 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import ss.bshop.dao.ISupplierDAO;
 import ss.bshop.domain.Supplier;
 
-@Repository
-public class SupplierDAO implements ISupplierDAO{
+@Service
+@Transactional(readOnly = true)
+public class SupplierService implements ISupplierService{
 	
 	@Autowired
-	private SessionFactory sessionFactory;
+	private ISupplierDAO supplierDAO;
 	
+	public ISupplierDAO getSupplierDAO() {
+		return supplierDAO;
+	}
+
+	public void setSupplierDAO(ISupplierDAO supplierDAO) {
+		this.supplierDAO = supplierDAO;
+	}
+
 	@Transactional(readOnly = false)
 	@Override
 	public void add(Supplier supplier) {
-		sessionFactory.getCurrentSession().save(supplier);
+		supplierDAO.add(supplier);
 		
 	}
 
 	@Override
 	public Supplier get(Long id) {
-		return (Supplier) sessionFactory.getCurrentSession().get(Supplier.class, id);
+		return (Supplier) supplierDAO.get(id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Supplier> getAll() {
-		return sessionFactory.getCurrentSession().createQuery("from Supplier")
-				.list();
+		return supplierDAO.getAll();
 	}
 
 	@Transactional(readOnly = false)
 	@Override
 	public void remove(Long id) {
-		Supplier supplier = (Supplier) sessionFactory.getCurrentSession().load(
-				Supplier.class, id);
-		if (supplier != null) {
-			sessionFactory.getCurrentSession().delete(supplier);
-		}
+		supplierDAO.remove(id);
 		
 	}
 	
 	@Transactional(readOnly = false)
 	@Override
 	public void update(Supplier supplier) {
-		sessionFactory.getCurrentSession().update(supplier);
+		supplierDAO.update(supplier);
 	}
 
 }
