@@ -32,6 +32,6 @@
             <from-outcome>removal</from-outcome>
             <to-view-id>/pages/manager/removal.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule>
-
+    </navigation-rule>  
+    
 </faces-config>
