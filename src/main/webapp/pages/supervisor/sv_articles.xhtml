@@ -28,7 +28,61 @@
             </p:layoutUnit>  
 
             <p:layoutUnit position="center">  
-                
+                <p:dataTable id="users" var="user"
+                             value="#{userMB.model}"
+                             paginator="true"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50"
+                             emptyMessage="No data "
+                             editable="true"
+                             selection="#{userMB.selected}"
+                             selectionMode="single"
+                             scrollable="true"
+                             liveScroll="true"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                        >
+
+                    <p:ajax event="rowEdit"
+                            update="@all"
+                            listener="#{userMB.editRow}"/>
+
+                    <p:column width="80">
+                        <p:rowEditor/>
+                    </p:column>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="ID"/>
+                        </f:facet>
+                        <h:outputText value="#{user.id}"/>
+                    </p:column>
+                    <p:column sortBy="#{user.fullname}"
+                              headerText=" Name "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{user.fullname}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{user.fullname}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column sortBy="#{user.post}"
+                              headerText=" Surname "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{user.post}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{user.post}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                </p:dataTable>
             </p:layoutUnit>  
 
         </p:layout>  

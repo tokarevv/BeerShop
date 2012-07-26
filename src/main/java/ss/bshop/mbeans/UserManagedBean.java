@@ -85,6 +85,7 @@ public class UserManagedBean implements Serializable {
         return userList;
     }
 
+    // 
     public UserDataModel getModel() {
         userList = new ArrayList<User>();
         userList.addAll(getUserService().getUsers());

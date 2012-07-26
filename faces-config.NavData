@@ -3,10 +3,10 @@
     <Scope Scope="Faces Configuration Only"/>
     <Scope Scope="Project">
         <Node id="pages/templates/base.xhtml" x="400" y="300" zoom="true"/>
-        <Node id="pages/admin/templates/content.xhtml" x="900" y="150" zoom="true"/>
         <Node id="pages/admin/templates/header.xhtml" x="150" y="450" zoom="true"/>
-        <Node id="pages/admin/startadmin.xhtml" x="150" y="300" zoom="true"/>
+        <Node id="pages/admin/templates/content.xhtml" x="900" y="150" zoom="true"/>
         <Node id="empty.xhtml" x="660" y="143" zoom="true"/>
+        <Node id="pages/admin/startadmin.xhtml" x="150" y="300" zoom="true"/>
         <Node id="*" x="594" y="497" zoom="false"/>
         <Node id="pages/admin/templates/base.xhtml" x="400" y="450" zoom="true"/>
         <Node id="pages/supervisor/removal.xhtml" x="150" y="600" zoom="true"/>
