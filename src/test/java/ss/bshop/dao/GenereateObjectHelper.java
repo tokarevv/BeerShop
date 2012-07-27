@@ -3,6 +3,7 @@ package ss.bshop.dao;
 import java.util.Date;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.SupOrderStructure;
+import ss.bshop.domain.Supplier;
 import ss.bshop.domain.SupplierOrder;
 
 public class GenereateObjectHelper {
@@ -34,6 +35,12 @@ public class GenereateObjectHelper {
 
 	private static int getRandomInt() {
 		return (int) (Math.random()*99999999);
+	}
+
+	public static Supplier getNewSupplier() {
+		Supplier res = new Supplier();
+		res.setName("Supplier"+getRandomInt());
+		return res;
 	}
 
 }

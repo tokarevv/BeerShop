@@ -9,8 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ss.bshop.dao.IArticleDAO;
 import ss.bshop.domain.Article;
+import ss.bshop.domain.Supplier;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javassist.expr.NewArray;
 import ss.bshop.domain.Article;
 
 /**
@@ -25,6 +29,9 @@ public class ArticleDAOTest {
 
     @Autowired
     private IArticleDAO daoI;
+
+    @Autowired
+    private ISupplierDAO daoSup;
 
     /**
      * Method: add(Article article)
@@ -60,6 +67,31 @@ public class ArticleDAOTest {
 		Article loadedArticle = articleList.get(articleList.size() - 1);
 		Long loadedArticleId = loadedArticle.getId();
 		Assert.assertEquals(loadedArticle, daoI.get(loadedArticleId));
+	}
+    
+    /**
+     * Method: getArticle(Integer articleId)
+     */
+    @Test
+	public void testGetArticlesBySupplier() throws Exception {
+
+    	Supplier sup = GenereateObjectHelper.getNewSupplier();
+    	daoSup.add(sup);
+   	
+		Article article1 = GenereateObjectHelper.getNewArticle();
+		article1.setSupplier(sup);
+		Article article2 = GenereateObjectHelper.getNewArticle();
+		article2.setSupplier(sup);
+
+		daoI.add(article1);
+		daoI.add(article2);
+		List<Article> listBefore = new ArrayList<Article>();
+		listBefore.add(article1);
+		listBefore.add(article2);
+		List<Article> articleList = daoI.getBySupplier(sup);
+
+		Assert.assertEquals(2, articleList.size());
+		Assert.assertEquals(listBefore, articleList);
 	}
     
 
