@@ -43,3 +43,36 @@ test.db.properties
 >>>>>>> branch 'master' of https://github.com/tokarevv/BeerShop.git
 test.db.properties
 /test.db.script
+<<<<<<< HEAD
+#*
+*$
+*.BAK
+*.Z
+*.bak
+*.class
+*.elc
+*.ln
+*.log
+*.o
+*.obj
+*.olb
+*.old
+*.orig
+*.pyc
+*.pyo
+*.rej
+*~
+,*
+.#*
+.DS_Store
+.del-*
+.deployables
+.make.state
+.nse_depinfo
+CVS.adm
+RCS
+RCSLOG
+SCCS
+_$*
+=======
+>>>>>>> dc90f40f9eff9e37839e7b06f75e0032e29212db

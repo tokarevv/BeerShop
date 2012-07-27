@@ -12,6 +12,9 @@ import org.hibernate.annotations.GenerationTime;
 @Table(name = "SupplierOrders")
 public class SupplierOrder {
 	
+	public static final String ORDER = "order";
+	public static final String RETURN = "return";
+	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
