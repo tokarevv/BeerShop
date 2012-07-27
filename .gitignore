@@ -43,6 +43,7 @@ test.db.properties
 >>>>>>> branch 'master' of https://github.com/tokarevv/BeerShop.git
 test.db.properties
 /test.db.script
+<<<<<<< HEAD
 #*
 *$
 *.BAK
@@ -73,3 +74,5 @@ RCS
 RCSLOG
 SCCS
 _$*
+=======
+>>>>>>> dc90f40f9eff9e37839e7b06f75e0032e29212db
