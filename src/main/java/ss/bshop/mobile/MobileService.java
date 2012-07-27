@@ -49,6 +49,5 @@ public class MobileService {
 		return forToday;
 	}
 
-	@RequestMapping(value = "/mobile/getgoods", produces = "application/json")
-	public @ResponseBody List<Article>
+	
 }

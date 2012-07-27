@@ -18,7 +18,7 @@ public class Article {
     @Column
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Supplier_id")
     private Supplier supplier;
 
