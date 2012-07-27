@@ -67,6 +67,7 @@ public class UserManagedBean implements Serializable {
         return userList;
     }
 
+    // 
     public UserDataModel getModel() {
         return model;
     }

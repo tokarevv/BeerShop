@@ -18,6 +18,7 @@ import ss.bshop.domain.OutletOrder;
 @Repository
 public class OutletOrderDAO implements IOutletOrder{
 
+	@Autowired
     private SessionFactory sessionFactory;
     
     @Override
