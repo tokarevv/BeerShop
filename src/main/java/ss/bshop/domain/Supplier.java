@@ -36,9 +36,9 @@ public class Supplier implements Serializable {
         @Column
 	private String svidNumber;
         
-	@OneToMany(mappedBy="supplier", fetch = FetchType.EAGER)
-        //@OrderBy("name")
-        private Set<Article> goods = new HashSet<Article>();
+//	@OneToMany(mappedBy="supplier", fetch = FetchType.EAGER)
+//        //@OrderBy("name")
+//        private Set<Article> goods = new HashSet<Article>();
 	
         @Column
         private String comment;
@@ -118,13 +118,13 @@ public class Supplier implements Serializable {
 		this.svidNumber = svidNumber;
 	}
 
-	public Set<Article> getGoods() {
-		return goods;
-	}
-
-	public void setGoods(Set<Article> goods) {
-		this.goods = goods;
-	}
+//	public Set<Article> getGoods() {
+//		return goods;
+//	}
+//
+//	public void setGoods(Set<Article> goods) {
+//		this.goods = goods;
+//	}
 
 	public String getComment() {
 		return comment;
@@ -134,7 +134,6 @@ public class Supplier implements Serializable {
 		this.comment = comment;
 	}
 
-	//equals and hash
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -144,7 +143,6 @@ public class Supplier implements Serializable {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
@@ -187,12 +185,10 @@ public class Supplier implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (goods == null) {
-			if (other.goods != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!goods.equals(other.goods))
-			return false;
-		if (id != other.id)
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)

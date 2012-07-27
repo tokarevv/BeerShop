@@ -11,9 +11,7 @@ import javax.faces.bean.RequestScoped;
 
 import org.primefaces.event.RowEditEvent;
 
-import ss.bshop.dao.ISupplierDAO;
 import ss.bshop.domain.Supplier;
-import ss.bshop.domain.User;
 import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierMB")
