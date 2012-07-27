@@ -23,7 +23,7 @@ public class Article {
     private Supplier supplier;
 
     @Column
-    private int qty;
+    private int quantity;
     
     @Column
     private String unit;
@@ -182,11 +182,11 @@ public class Article {
 	}
 
 	public int getQty() {
-		return qty;
+		return quantity;
 	}
 
 	public void setQty(int qty) {
-		this.qty = qty;
+		this.quantity = qty;
 	}
     
     
