@@ -52,7 +52,7 @@ public class ArticleMobile {
 		am.setName(article.getName());
 		am.setType(article.getType());
 		am.setPrice(article.getPrice());
-		am.setQty(article.getQty());
+		am.setQty(article.getQuantity());
 		am.setUnit(article.getUnit());
 		return am;
 	}

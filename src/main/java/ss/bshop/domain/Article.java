@@ -102,13 +102,15 @@ public class Article {
             this.comment = comment;
     }
 
-    public Integer getQty() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQty(Integer quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+
+
     
     public Integer getPercent() {
         return percent;
