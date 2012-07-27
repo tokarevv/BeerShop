@@ -101,29 +101,19 @@ public class Article {
     public void setComment(String comment) {
             this.comment = comment;
     }
-
     public Integer getQuantity() {
         return quantity;
     }
-
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
-
-
-    
     public Integer getPercent() {
         return percent;
     }
-
     public void setPercent(Integer percent) {
         this.percent = percent;
     }
 
-
-
-    
-    
     @Override
     public boolean equals(Object obj) {
             if (this == obj)
