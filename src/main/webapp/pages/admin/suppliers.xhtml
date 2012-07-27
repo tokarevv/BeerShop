@@ -10,21 +10,137 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-               <h:outputText value="Suppliers : "></h:outputText>
-		<p:dataTable id="supplier" var="supplier" value="#{supplierMB.supplierList}" style="width: 10%">
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="ID" />
-				</f:facet>
-				<h:outputText value="#{supplier.id}" />
-			</p:column>
-			<p:column>
-				<f:facet name="header">
-					<h:outputText value="Name" />
-				</f:facet>
-				<h:outputText value="#{supplier.name}" />
-			</p:column>
-		</p:dataTable>
+                <h:outputText value="Suppliers : "></h:outputText>
+                <p:dataTable id="supplier" var="supplier"
+                             value="#{supplierMB.model}"
+                             paginator="true"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50"
+                             emptyMessage="No data "
+                             editable="true"
+                             selection="#{supplierMB.selected}"
+                             selectionMode="single"
+                             scrollable="true"
+                             liveScroll="true"
+                             paginatorAlwaysVisible="true"
+                             paginatorPosition="bottom"
+                        >
+
+                    <p:ajax event="rowEdit"
+                            update="@all"
+                            listener="#{supplierMB.editRow}"/>
+
+                    <p:column width="80">
+                        <p:rowEditor/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{supplier.name}"
+                              headerText=" Name "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.name}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                     </p:column>
+                     
+                    <p:column sortBy="#{supplier.address}"
+                              headerText=" Adress "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.address}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.address}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{supplier.phone}"
+                              headerText=" Phone "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.phone}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.phone}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{supplier.email}"
+                              headerText=" Email "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.email}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.email}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{supplier.OKPO}"
+                              headerText=" OKPO "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.OKPO}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.OKPO}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{supplier.INN}"
+                              headerText=" INN "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.INN}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.INN}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{supplier.svidNumber}"
+                              headerText=" svidNumber "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{supplier.svidNumber}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{supplier.svidNumber}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+            
+                   
+                </p:dataTable>
+                <br/>
+                <div class="buttonLeft" style="float: left;">
+                    <p:commandButton value="New"
+                                     actionListener="#{supplierMB.createNew}"
+                                     ajax="false"
+                                     update="@all" />
+                     <p:commandButton value="Delete"
+                                     actionListener="#{supplierMB.delete}"
+                                     ajax="false"
+                                     update="@all"/>
+
+                 </div>
 
             </h:form>
         </ui:define>

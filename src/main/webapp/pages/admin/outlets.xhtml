@@ -10,16 +10,16 @@
     <ui:composition template="/WEB-INF/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-                <h:outputText value="USERs : "></h:outputText>
-                <p:dataTable id="users" var="user"
-                             value="#{userMB.model}"
+                <h:outputText value="Outlets : "></h:outputText>
+                <p:dataTable id="outlet" var="outlet"
+                             value="#{outletMB.model}"
                              paginator="true"
                              rows="10"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,20,50"
                              emptyMessage="No data "
                              editable="true"
-                             selection="#{userMB.selected}"
+                             selection="#{outletMB.selected}"
                              selectionMode="single"
                              scrollable="true"
                              liveScroll="true"
@@ -29,7 +29,7 @@
 
                     <p:ajax event="rowEdit"
                             update="@all"
-                            listener="#{userMB.editRow}"/>
+                            listener="#{outletMB.editRow}"/>
 
                     <p:column width="80">
                         <p:rowEditor/>
@@ -37,44 +37,150 @@
 
                     <p:column>
                         <f:facet name="header">
-                            <h:outputText value="ID"/>
+                            <h:outputText value="Name"/>
                         </f:facet>
-                        <h:outputText value="#{user.id}"/>
+                        <h:outputText value="#{outlet.name}"/>
                     </p:column>
-                    <p:column sortBy="#{user.fullname}"
+                    <p:column sortBy="#{outlet.name}"
                               headerText=" Name "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.fullname}"/>
+                                <h:outputText value="#{outlet.name}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.fullname}"/>
+                                <h:inputText value="#{outlet.name}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column sortBy="#{user.post}"
-                              headerText=" Surname "
+                    
+                    <p:column sortBy="#{outlet.address}"
+                              headerText=" Adress "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.post}"/>
+                                <h:outputText value="#{outlet.address}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.post}"/>
+                                <h:inputText value="#{outlet.address}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
+                    
+                    <p:column sortBy="#{outlet.address}"
+                              headerText=" Adress "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.address}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.address}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column sortBy="#{outlet.email}"
+                              headerText=" Email "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.email}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.email}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{outlet.OKPO}"
+                              headerText=" OKPO "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.OKPO}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.OKPO}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{outlet.INN}"
+                              headerText=" INN "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.INN}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.INN}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{outlet.svidNumber}"
+                              headerText=" svidNumber "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.svidNumber}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.svidNumber}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                                         
+                       <p:column sortBy="#{outlet.sertificateNumber}"
+                              headerText=" sertificateNumber "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.sertificateNumber}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.sertificateNumber}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                     
+ 					<p:column sortBy="#{outlet.contractNumber}"
+                              headerText=" contractNumber "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.contractNumber}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.contractNumber}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column sortBy="#{outlet.comment}"
+                              headerText=" comment "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.comment}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.comment}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
                 </p:dataTable>
                 <br/>
                 <div class="buttonLeft" style="float: left;">
                     <p:commandButton value="New"
-                                     actionListener="#{userMB.createNew}"
+                                     actionListener="#{outletMB.createNew}"
                                      ajax="false"
                                      update="@all" />
                      <p:commandButton value="Delete"
-                                     actionListener="#{userMB.delete}"
-                                     disabled="#{userMB.enableDelete}"
+                                     actionListener="#{outletMB.delete}"
                                      update="@all"/>
 
                  </div>
