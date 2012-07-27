@@ -54,7 +54,7 @@ public class Converters {
 		visit.setLat(mobileVisit.getLat());
 		visit.setLng(mobileVisit.getLng());
 		Long outletId = mobileVisit.getOutlet().getId();
-		visit.setOutlet(outletService.getForId(outletId));
+		visit.setOutlet(outletService.get(outletId));
 		visit.setTime(mobileVisit.getTime());
 		return visit;
 	}
