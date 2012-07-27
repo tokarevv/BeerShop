@@ -16,7 +16,6 @@ public class UserDataModel extends ListDataModel<User> implements SelectableData
         super(data);  
     }  
 
-    @Override
     public User getRowData(String rowKey) {  
         //In a real app, a more efficient way like a query by rowKey should be implemented to deal with huge data  
         int key = Integer.parseInt(rowKey);
@@ -30,7 +29,7 @@ public class UserDataModel extends ListDataModel<User> implements SelectableData
         return null;  
     }  
     
-    @Override
+    
     public Object getRowKey(User User) {
         return String.valueOf(User.getId());  
     }  

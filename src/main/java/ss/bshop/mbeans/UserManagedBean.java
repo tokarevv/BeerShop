@@ -3,16 +3,11 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.SelectableDataModel;
 import org.springframework.dao.DataAccessException;
-
 import ss.bshop.domain.User;
 import ss.bshop.service.IUserService;
 
@@ -27,45 +22,51 @@ import ss.bshop.service.IUserService;
 @ManagedBean(name = "userMB")
 @RequestScoped
 public class UserManagedBean implements Serializable {
+	
+	 public UserManagedBean() {
+	
+	}
 
-    private static final long serialVersionUID = 1L;
-    private static final String SUCCESS = "success";
+	private static final long serialVersionUID = 1L;
     private static final String ERROR = "error";
 
     //Spring User Service is injected...
     @ManagedProperty(value = "#{userService}")
     IUserService userService;
 
-    List<User> userList;
+    List<User> userList = new ArrayList<User>();
     @ManagedProperty(value = "#{UserDataModel}")
     private UserDataModel model;
     User selected;
-    @PostConstruct
+
+ 
+    //   @PostConstruct
 //   @RolesAllowed({"ADMIN"})
-   protected void postConstruct() {}  //
-    /**
-     * Add User
-     *
-     * @return String - Response Message
-     */
+ //  protected void postConstruct() {}  //
+    
     public String addUser() {
         try {
-            //         User user = new User();
-            //        user.setId(getId());
-            //         user.setName(getName());
-            //         user.setSurname(getSurname());
-            getUserService().addUser(selected);
-            return SUCCESS;
+                     User user = new User();
+                     user.setFullname("");
+                     user.setLogin("default"+user.getId());
+                     user.setPost("");
+            getUserService().addUser(user);
+         //            userList.add(user)   ;
+           // getModel();
+          //           model=new UserDataModel(userList);  
+            return "user";
         } catch (DataAccessException e) {
             e.printStackTrace();
         }
-
         return ERROR;
     }
+    
+    
 
     public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        getUserService().updateUser(rowItem);        //endEditItem(rowItem);
+        getUserService().updateUser(rowItem);        
+//        endEditItem(rowItem);
         //saveSelected();
         //endSelect();
     }
@@ -87,8 +88,7 @@ public class UserManagedBean implements Serializable {
 
     // 
     public UserDataModel getModel() {
-        userList = new ArrayList<User>();
-        userList.addAll(getUserService().getUsers());
+    	userList.addAll(getUserService().getUsers());
         model = new UserDataModel(userList);
         return model;
     }
@@ -125,13 +125,20 @@ public class UserManagedBean implements Serializable {
         this.selected = selected;
     }
 
-    public String createNew() {
-        return "recept";
-    }
+//    public String createNew() {
+//    	
+//        return "recept";
+//    }
 
     public String delete() {
-        return "removal";
+    	if(selected!=null){ getUserService().deleteUser(selected);
+       	getModel();
+    	}
+    	return "";
+    	   	
+       
     }
+    
     public boolean isEnableDelete() {
         return !(selected==null);
     }
