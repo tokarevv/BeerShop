@@ -51,14 +51,10 @@ public class ArticleDAO implements IArticleDAO {
 	@Override
 	public List<Article> getBySupplier(Supplier supplier) {
 		List<Article> res = new ArrayList<Article>();	
-		try {
-			Query q = sessionFactory.getCurrentSession().createQuery("from Article where supplier : supplier");
-			q.setParameter("supplier", supplier);
+			Query q = sessionFactory.getCurrentSession().createQuery("from Article where Supplier_id = :Supplier_id");
+			q.setParameter("Supplier_id", supplier.getId());
 			res = q.list();	
 			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		return res;
 	}
 
