@@ -7,6 +7,7 @@
             </goals>
             <properties>
                 <netbeans.deploy>true</netbeans.deploy>
+                <netbeans.deploy.clientUrlPart>pages/supervisor/sv_articles.xhtml</netbeans.deploy.clientUrlPart>
             </properties>
         </action>
         <action>
@@ -17,6 +18,7 @@
             <properties>
                 <netbeans.deploy.debugmode>true</netbeans.deploy.debugmode>
                 <netbeans.deploy>true</netbeans.deploy>
+                <netbeans.deploy.clientUrlPart>pages/supervisor/sv_articles.xhtml</netbeans.deploy.clientUrlPart>
             </properties>
         </action>
         <action>
@@ -27,6 +29,7 @@
             <properties>
                 <netbeans.deploy>true</netbeans.deploy>
                 <netbeans.deploy.profilemode>true</netbeans.deploy.profilemode>
+                <netbeans.deploy.clientUrlPart>pages/supervisor/sv_articles.xhtml</netbeans.deploy.clientUrlPart>
             </properties>
         </action>
     </actions>

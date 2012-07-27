@@ -37,7 +37,7 @@ public class Supplier implements Serializable {
 	private String svidNumber;
         
 	@OneToMany(mappedBy="supplier")
-        @OrderBy("name")
+        //@OrderBy("name")
         private Set<Article> goods = new HashSet<Article>();
 	
         @Column
