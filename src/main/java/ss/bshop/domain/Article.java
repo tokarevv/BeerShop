@@ -17,13 +17,17 @@ public class Article {
 
     @Column
     private Double price;
+    
+    @Column
+    private Integer percent;
+    
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Supplier_id")
     private Supplier supplier;
 
     @Column
-    private int quantity;
+    private Integer quantity;
     
     @Column
     private String unit;
@@ -97,6 +101,23 @@ public class Article {
     public void setComment(String comment) {
             this.comment = comment;
     }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+    
+    public Integer getPercent() {
+        return percent;
+    }
+
+    public void setPercent(Integer percent) {
+        this.percent = percent;
+    }
+
 
 
     
@@ -181,13 +202,7 @@ public class Article {
 				+ (comment != null ? "comment=" + comment : "") + "]";
 	}
 
-	public int getQty() {
-		return quantity;
-	}
-
-	public void setQty(int qty) {
-		this.quantity = qty;
-	}
+	
     
     
 	
