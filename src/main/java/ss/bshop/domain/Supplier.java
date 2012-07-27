@@ -36,7 +36,7 @@ public class Supplier implements Serializable {
         @Column
 	private String svidNumber;
         
-	@OneToMany(mappedBy="supplier")
+	@OneToMany(mappedBy="supplier", fetch = FetchType.EAGER)
         //@OrderBy("name")
         private Set<Article> goods = new HashSet<Article>();
 	

@@ -3,6 +3,7 @@ package ss.bshop.service;
 
 import java.util.List;
 import ss.bshop.domain.Article;
+import ss.bshop.domain.Supplier;
 import ss.bshop.domain.User;
 
 /**
@@ -12,4 +13,6 @@ import ss.bshop.domain.User;
 public interface IArticleService {
     
     public List<Article> getArticles();
+
+	public List<Article> getArticlesBySupplier(Supplier selectedSupplier);
 }

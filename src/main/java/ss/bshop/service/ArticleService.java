@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ss.bshop.dao.IArticleDAO;
 
 import ss.bshop.domain.Article;
+import ss.bshop.domain.Supplier;
 
 
 /**
@@ -26,5 +27,10 @@ public class ArticleService implements IArticleService {
         public List<Article> getArticles() {
             return articleDAO.getAll();
         }
+
+		@Override
+		public List<Article> getArticlesBySupplier(Supplier supplier) {
+			return articleDAO.getBySupplier(supplier);
+		}
 
 }
