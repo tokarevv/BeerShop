@@ -7,10 +7,37 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:body>
-<ui:composition template="/WEB-INF/templates/base.xhtml">
+<ui:composition template="base.xhtml">
 <ui:define name="content">
 <h:form>
-		<h:outputText value="Suppliers : "></h:outputText>
+        <h:outputText value="Type: " />  
+        <p:selectOneMenu value="#{supplierMB.orderType}">  
+            <f:selectItem itemLabel="order" itemValue="order" />  
+            <f:selectItem itemLabel="return" itemValue="return" />  
+        </p:selectOneMenu> 
+        
+        <br></br>
+        <br></br>
+        
+		<h:outputText value="Supplier : "></h:outputText>
+		<p:dataTable id="supplier" var="supplier" value="#{supplierMB.supplierList}" style="width: 10%">
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="ID" />
+				</f:facet>
+				<h:outputText value="#{supplier.id}" />
+			</p:column>
+			<p:column>
+				<f:facet name="header">
+					<h:outputText value="Name" />
+				</f:facet>
+				<h:outputText value="#{supplier.name}" />
+			</p:column>
+		</p:dataTable>
+		
+        <br></br>
+        
+		<h:outputText value="Articles: "></h:outputText>
 		<p:dataTable id="supplier" var="supplier" value="#{supplierMB.supplierList}" style="width: 10%">
 			<p:column>
 				<f:facet name="header">
