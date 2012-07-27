@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ss.bshop.dao.IOutletOrder;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
-import ss.bshop.domain.OutletOrder;
-import ss.bshop.domain.OutletOrderStructure;
-import ss.bshop.mobile.entities.OutletOrderMobile;
-import ss.bshop.mobile.entities.OutletOrderStructureMobile;
+import ss.bshop.domain.Visit;
+import ss.bshop.mobile.entities.ArticleMobile;
+import ss.bshop.mobile.entities.OutletMobile;
 import ss.bshop.mobile.entities.VisitMobile;
 import ss.bshop.service.IArticleService;
 import ss.bshop.service.IOutletService;
+import ss.bshop.service.IVisitService;
 
 @Controller
 @RequestMapping("/mobile/*")
@@ -35,6 +35,8 @@ public class MobileService {
 	private IOutletService outletService;
 	@Autowired
 	private IArticleService articleService;
+	@Autowired
+	private IVisitService visitService;
 
 	@RequestMapping(value = "/mobile/helloservice", method = RequestMethod.POST,
 			consumes = "text/plain")
@@ -46,38 +48,30 @@ public class MobileService {
 	@RequestMapping(value = "/mobile/addvisit", method = RequestMethod.POST, 
 			consumes = "application/json") 
 	public void addOrder(@RequestBody VisitMobile mobileVisit) {
-		OutletOrderMobile mobileOO = mobileVisit.getOutletOrder();
-		Long outletId = mobileVisit.getOutlet().getId();
-		List<OutletOrderStructureMobile> mobileStructure = mobileOO
-				.getStructure();
-		List<OutletOrderStructure> structure = 
-				new ArrayList<OutletOrderStructure>();
-		OutletOrder outletOrder = new OutletOrder();
-		for (OutletOrderStructureMobile oosm : mobileStructure) {
-			OutletOrderStructure oos = new OutletOrderStructure();
-			oos.setAmount(oosm.getAmount());
-			// getting correct article from db
-			Long articleId = oosm.getArticle().getId();
-			Article article = articleService.getById(articleId);
-			oos.setArticle(article);
-			// done with article
-			oos.setPrice(oosm.getPrice());
-			// now the Out
-			oos.setOutletOrder(outletOrder);
-		}
+		Visit visit = Converters.convertMobileVisitToVisit(mobileVisit);
+		visitService.add(visit);
 	}
 
 	@RequestMapping(value = "/mobile/getoutlets/(salesRepLogin)",
 			method = RequestMethod.GET, produces = "application/json")
-	public @ResponseBody List<Outlet> getOutlets(
+	public @ResponseBody List<OutletMobile> getOutlets(
 			@PathVariable String salesRepLogin) {
 		List<Outlet> forToday = outletService
 				.getForSalesRepToday(salesRepLogin);
-		return forToday;
+		List<OutletMobile> mobileForToday = new ArrayList<OutletMobile>();
+		for (Outlet outlet : forToday) {
+			mobileForToday.add(OutletMobile.fromOutlet(outlet));
+		}
+		return mobileForToday;
 	}
 
 	@RequestMapping(value = "/mobile/getgoods", produces = "application/json")
-	public @ResponseBody List<Article> getGoods() {
-		return articleService.getArticles();
+	public @ResponseBody List<ArticleMobile> getGoods() {
+		List<Article> articles = articleService.getArticles();
+		List<ArticleMobile> mobileArticles = new ArrayList<ArticleMobile>();
+		for(Article article : articles) {
+			mobileArticles.add(ArticleMobile.fromArticle(article));
+		}
+		return mobileArticles;
 	}
 }

@@ -38,7 +38,6 @@ public class SupplierService implements ISupplierService{
 		return (Supplier) supplierDAO.get(id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<Supplier> getAll() {
 		return supplierDAO.getAll();

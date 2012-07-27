@@ -9,7 +9,7 @@ public class User {
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id=(long) 0;
 
     @Column(nullable=false)
     private String login;
@@ -69,7 +69,7 @@ public class User {
 		int result = 1;
 		result = prime * result
 				+ ((fullname == null) ? 0 : fullname.hashCode());
-		result = prime * result + (int) (id ^ (id >>> 32));
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((login == null) ? 0 : login.hashCode());
 		result = prime * result
 				+ ((password == null) ? 0 : password.hashCode());
@@ -91,7 +91,10 @@ public class User {
 				return false;
 		} else if (!fullname.equals(other.fullname))
 			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (login == null) {
 			if (other.login != null)

@@ -48,12 +48,12 @@ public class ArticleMobile {
 	}
 	public static ArticleMobile fromArticle(Article article) {
 		ArticleMobile am = new ArticleMobile();
-		am.id = article.getId();
-		am.name = article.getName();
-		am.type = article.getType();
-		am.price = article.getPrice();
-		am.qty = article.getQty();
-		am.unit = article.getUnit();
+		am.setId(article.getId());
+		am.setName(article.getName());
+		am.setType(article.getType());
+		am.setPrice(article.getPrice());
+		am.setQty(article.getQuantity());
+		am.setUnit(article.getUnit());
 		return am;
 	}
 }
