@@ -102,11 +102,11 @@ public class Article {
             this.comment = comment;
     }
 
-    public Integer getQuantity() {
+    public Integer getQty() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQty(Integer quantity) {
         this.quantity = quantity;
     }
     
