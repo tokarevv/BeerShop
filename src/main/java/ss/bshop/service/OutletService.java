@@ -85,5 +85,8 @@ public class OutletService implements IOutletService {
 		
 	}
 
-
+	@Override
+	public Outlet getForId(Long id) {
+		return outletDAO.get(id);
+	}
 }
