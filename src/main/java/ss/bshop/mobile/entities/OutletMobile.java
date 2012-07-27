@@ -41,11 +41,11 @@ public class OutletMobile {
 	}
 	public static OutletMobile fromOutlet(Outlet outlet) {
 		OutletMobile om = new OutletMobile();
-		om.id = outlet.getId();
-		om.name = outlet.getName();
-		om.address = outlet.getAddress();
-		om.phone = outlet.getPhone();
-		om.discount = outlet.getDiscount();
+		om.setId(outlet.getId());
+		om.setName(outlet.getName());
+		om.setAddress(outlet.getAddress());
+		om.setPhone(outlet.getPhone());
+		om.setDiscount(outlet.getDiscount());
 		return om;
 	}
 }
