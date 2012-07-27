@@ -23,6 +23,9 @@ public class Article {
     private Supplier supplier;
 
     @Column
+    private int count;
+    
+    @Column
     private String unit;
 
     @Column
@@ -94,6 +97,16 @@ public class Article {
     public void setComment(String comment) {
             this.comment = comment;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    
     
     @Override
     public boolean equals(Object obj) {
