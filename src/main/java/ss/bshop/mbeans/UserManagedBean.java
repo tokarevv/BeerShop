@@ -3,11 +3,14 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+
 import org.primefaces.event.RowEditEvent;
-import org.springframework.dao.DataAccessException;
+
 import ss.bshop.domain.User;
 import ss.bshop.service.IUserService;
 
@@ -23,12 +26,7 @@ import ss.bshop.service.IUserService;
 @RequestScoped
 public class UserManagedBean implements Serializable {
 	
-	 public UserManagedBean() {
-	
-	}
-
 	private static final long serialVersionUID = 1L;
-    private static final String ERROR = "error";
 
     //Spring User Service is injected...
     @ManagedProperty(value = "#{userService}")
@@ -40,67 +38,43 @@ public class UserManagedBean implements Serializable {
     User selected;
 
  
-    //   @PostConstruct
-//   @RolesAllowed({"ADMIN"})
- //  protected void postConstruct() {}  //
+    @PostConstruct
+    protected void postConstruct() {
+        getData();
+        updateModel();
+    }  
     
-    public String addUser() {
-        try {
-                     User user = new User();
-                     user.setFullname("");
-                     user.setLogin("default"+user.getId());
-                     user.setPost("");
-            getUserService().addUser(user);
-         //            userList.add(user)   ;
-           // getModel();
-          //           model=new UserDataModel(userList);  
-            return "user";
-        } catch (DataAccessException e) {
-            e.printStackTrace();
-        }
-        return ERROR;
+    private void getData() {
+        userList = new ArrayList<User>();
+        userList.addAll(getUserService().getUsers()); 
     }
     
+    private void updateModel() {
+        model = new UserDataModel(userList);
+        selected=null;
+    }
     
-
-    public void editRow(RowEditEvent event) {
+     public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        getUserService().updateUser(rowItem);        
-//        endEditItem(rowItem);
-        //saveSelected();
-        //endSelect();
+        System.out.println("¿…ƒ»ÿÕ»  œ–» ƒŒ¡¿¬À≈Õ»»"+rowItem.getId());
+        if(rowItem.getId()==0) {getUserService().addUser(rowItem);}
+        {getUserService().updateUser(rowItem); }
+        getData();
+        updateModel();
     }
 
-    /**
-     * Reset Fields
-     */
-    public void reset() {
-    }
-
-    /**
-     * Get User List
-     *
-     * @return List - User List
-     */
     public List<User> getUserList() {
         return userList;
     }
 
     public UserDataModel getModel() {
-    	userList.addAll(getUserService().getUsers());
-        model = new UserDataModel(userList);
         return model;
     }
-
+    
     public void setModel(UserDataModel model) {
         this.model = model;
     }
 
-    /**
-     * Get User Service
-     *
-     * @return IUserService - User Service
-     */
     public IUserService getUserService() {
         return userService;
     }
@@ -124,18 +98,19 @@ public class UserManagedBean implements Serializable {
         this.selected = selected;
     }
 
-//    public String createNew() {
-//    	
-//        return "recept";
-//    }
+   public String createNew() {
+       userList.add(new User());
+       updateModel();
+       return "";
+   }
 
     public String delete() {
-    	if(selected!=null){ getUserService().deleteUser(selected);
-       	getModel();
+    	if(selected!=null){
+            getUserService().deleteUser(selected);
+       	    getData();
+            updateModel();
     	}
     	return "";
-    	   	
-       
     }
     
     public boolean isEnableDelete() {
