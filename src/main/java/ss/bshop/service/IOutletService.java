@@ -18,5 +18,8 @@ public interface IOutletService {
 	public Outlet get(Long id);
 	public void remove(Long id);
 	public void update(Outlet outlet);
+	public Outlet getForId(Long id);
+
 	
 }
+
