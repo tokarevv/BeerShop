@@ -15,4 +15,7 @@ public interface IArticleService {
     public List<Article> getArticles();
 
 	public List<Article> getArticlesBySupplier(Supplier selectedSupplier);
+
+	public Article getById(Long id);
+    
 }

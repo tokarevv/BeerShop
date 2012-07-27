@@ -54,4 +54,9 @@ public class OutletService implements IOutletService {
 		return forToday;
 	}
 
+	@Override
+	public Outlet getForId(Long id) {
+		return outletDAO.get(id);
+	}
+
 }

@@ -32,5 +32,9 @@ public class ArticleService implements IArticleService {
 		public List<Article> getArticlesBySupplier(Supplier supplier) {
 			return articleDAO.getBySupplier(supplier);
 		}
+		
+		public Article getById(Long id) {
+			return articleDAO.get(id);
+		}
 
 }
