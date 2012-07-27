@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import ss.bshop.domain.Article;
 import ss.bshop.domain.OutletOrder;
@@ -15,14 +16,15 @@ import ss.bshop.mobile.entities.VisitMobile;
 import ss.bshop.service.IArticleService;
 import ss.bshop.service.IOutletService;
 
+@Component
 public class Converters {
 
 	@Autowired
-	private static IArticleService articleService;
+	private IArticleService articleService;
 	@Autowired
-	private static IOutletService outletService;
+	private IOutletService outletService;
 
-	public static Visit convertMobileVisitToVisit(VisitMobile mobileVisit) {
+	public Visit convertMobileVisitToVisit(VisitMobile mobileVisit) {
 		Visit visit = new Visit();
 		OutletOrderMobile mobileOO = mobileVisit.getOutletOrder();
 		if (mobileOO != null) {
