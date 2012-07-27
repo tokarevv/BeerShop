@@ -100,6 +100,7 @@ public class UserManagedBean implements Serializable {
 
    public String createNew() {
        userList.add(new User());
+       getData();
        updateModel();
        return "";
    }
@@ -113,7 +114,4 @@ public class UserManagedBean implements Serializable {
     	return "";
     }
     
-    public boolean isEnableDelete() {
-        return !(selected==null);
-    }
-}
+ }
