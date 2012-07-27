@@ -25,7 +25,7 @@ public class OutletOrderStructure {
 	private double price;
 
 	@Column
-	private double amount;
+	private int amount;
 
 	public Long getId() {
 		return id;
@@ -59,11 +59,11 @@ public class OutletOrderStructure {
 		this.price = price;
 	}
 
-	public double getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
@@ -92,8 +92,7 @@ public class OutletOrderStructure {
 		if (getClass() != obj.getClass())
 			return false;
 		OutletOrderStructure other = (OutletOrderStructure) obj;
-		if (Double.doubleToLongBits(amount) != Double
-				.doubleToLongBits(other.amount))
+		if (amount != other.amount)
 			return false;
 		if (article == null) {
 			if (other.article != null)

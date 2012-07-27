@@ -1,11 +1,15 @@
 package ss.bshop.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ss.bshop.domain.Article;
+import ss.bshop.domain.Supplier;
 
 @Repository
 public class ArticleDAO implements IArticleDAO {
@@ -42,6 +46,16 @@ public class ArticleDAO implements IArticleDAO {
 	@Override
 	public void update(Article article) {
 		sessionFactory.getCurrentSession().update(article);
+	}
+
+	@Override
+	public List<Article> getBySupplier(Supplier supplier) {
+		List<Article> res = new ArrayList<Article>();	
+			Query q = sessionFactory.getCurrentSession().createQuery("from Article where Supplier_id = :Supplier_id");
+			q.setParameter("Supplier_id", supplier.getId());
+			res = q.list();	
+			
+		return res;
 	}
 
 }

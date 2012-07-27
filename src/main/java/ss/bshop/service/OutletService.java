@@ -23,6 +23,7 @@ public class OutletService implements IOutletService {
 	private IOutletDAO outletDAO;
 	@Autowired
 	private ISalesRepService salesRepService;
+	
 	@Autowired
 	private IAppointmentService appointmentService;
 

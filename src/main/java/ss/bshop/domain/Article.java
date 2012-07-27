@@ -23,6 +23,9 @@ public class Article {
     private Supplier supplier;
 
     @Column
+    private int quantity;
+    
+    @Column
     private String unit;
 
     @Column
@@ -94,6 +97,9 @@ public class Article {
     public void setComment(String comment) {
             this.comment = comment;
     }
+
+
+    
     
     @Override
     public boolean equals(Object obj) {
@@ -173,6 +179,14 @@ public class Article {
 				+ (unit != null ? "unit=" + unit + ", " : "")
 				+ (barcode != null ? "barcode=" + barcode + ", " : "")
 				+ (comment != null ? "comment=" + comment : "") + "]";
+	}
+
+	public int getQty() {
+		return quantity;
+	}
+
+	public void setQty(int qty) {
+		this.quantity = qty;
 	}
     
     
