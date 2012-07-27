@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import ss.bshop.dao.IOutletOrder;
+import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.OutletOrder;
+import ss.bshop.service.IArticleService;
 import ss.bshop.service.IOutletService;
 
 @Controller
@@ -26,6 +28,8 @@ public class MobileService {
 	private IOutletOrder outletOrderDAO;
 	@Autowired
 	private IOutletService outletService;
+	@Autowired
+	private IArticleService articleService;
 
 	@RequestMapping(value = "/mobile/helloservice", method = RequestMethod.POST,
 			consumes = "text/plain")
@@ -50,5 +54,7 @@ public class MobileService {
 	}
 
 	@RequestMapping(value = "/mobile/getgoods", produces = "application/json")
-	public @ResponseBody List<Article>
+	public @ResponseBody List<Article> getGoods() {
+		return articleService.getArticles();
+	}
 }
