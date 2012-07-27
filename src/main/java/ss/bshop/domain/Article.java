@@ -23,7 +23,7 @@ public class Article {
     private Supplier supplier;
 
     @Column
-    private int count;
+    private int qty;
     
     @Column
     private String unit;
@@ -98,13 +98,6 @@ public class Article {
             this.comment = comment;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
 
     
     
@@ -186,6 +179,14 @@ public class Article {
 				+ (unit != null ? "unit=" + unit + ", " : "")
 				+ (barcode != null ? "barcode=" + barcode + ", " : "")
 				+ (comment != null ? "comment=" + comment : "") + "]";
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
     
     
