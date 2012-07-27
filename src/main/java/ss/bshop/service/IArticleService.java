@@ -12,4 +12,6 @@ import ss.bshop.domain.User;
 public interface IArticleService {
     
     public List<Article> getArticles();
+    public Article getById(Long id);
+    
 }
