@@ -56,7 +56,6 @@ public class UserManagedBean implements Serializable {
     
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        System.out.println("юидхьмхй опх днаюбкемхх"+rowItem.getId());
         if(rowItem.getId()==0) {getUserService().addUser(rowItem);}
         {getUserService().updateUser(rowItem); }
         getData();
