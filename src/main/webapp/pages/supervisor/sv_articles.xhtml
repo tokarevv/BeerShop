@@ -49,7 +49,7 @@
                     Articles 
                 </f:facet> 
 
-                <p:ajax event="rowEdit" listener="#{articleMB.editRow}" 
+                <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 
                         update=":form:messages" /> 
                  
 
@@ -78,24 +78,24 @@
                     <h:outputText value="#{article.price}"/>
                 </p:column>
 
-                <p:column headerText="Article" style="width:125px">  
+                <p:column headerText="%" style="width:40px">  
                     <p:cellEditor>  
                         <f:facet name="output">  
                             <h:outputText value="#{article.percent}" />  
                         </f:facet>  
                         <f:facet name="input">  
-                            <p:inputText value="#{article.percent}" style="width:100%"/>  
+                            <p:inputText value="#{article.percent}" style="width:15 0%"/>  
                         </f:facet>  
                     </p:cellEditor>  
-                </p:column>  
+                </p:column>
+                
+                <p:column  style="width:20px">  
+                    <p:rowEditor />  
+                </p:column>
 
                 <p:column  headerText="SalePrice"  width="30">
                     <h:outputText value="#{article.price*1.3}"/>
                 </p:column>
-
-                <p:column  style="width:60px">  
-                    <p:rowEditor />  
-                </p:column>  
 
             </p:dataTable>
           </h:form>  
