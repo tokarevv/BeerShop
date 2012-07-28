@@ -2,6 +2,7 @@ package ss.bshop.domain;
 
 import javax.persistence.*;
 
+
 @Entity
 public class Article {
     

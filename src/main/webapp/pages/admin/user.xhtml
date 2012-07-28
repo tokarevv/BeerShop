@@ -34,14 +34,6 @@
                     <p:column width="80">
                         <p:rowEditor/>
                     </p:column>
-
-<!--                <p:column headerText=" lOGIN "
-                              width="150">
-                        <f:facet name="output">
-                          <h:outputText value="#{user.login}"/>
-                        </f:facet>
-                        
-                    </p:column> -->     
                     
                     <p:column sortBy="#{user.login}"
                               headerText=" Login "
@@ -68,27 +60,26 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    <p:column sortBy="#{user.post}"
-                              headerText=" Surname "
-                              width="150">
-                        <p:cellEditor>
-           
-         <!--    <p:selectOneMenu id="suburbs" value="#{userMB.post}" required="true">  
-                <f:selectItem itemLabel="Select position" itemValue="" />  
-                <f:selectItems value="#{userMB.posts}" />  
-            </p:selectOneMenu> -->
-                 
-                             <f:facet name="output">
-                                <h:outputText value="#{user.post}"/>
-                            </f:facet>
-                            <f:facet name="input">
-                                <h:inputText value="#{user.post}"/>
-                            </f:facet>
-                        </p:cellEditor>
-                        
-             
-            
-                    </p:column>
+                
+                  <p:column sortBy="#{user.post}"
+          headerText="Post"
+          width="150"
+          id="post">
+    <p:cellEditor>
+        <f:facet name="output">
+            <h:outputText value="#{user.post}" disabled="true"/>
+        </f:facet>
+        <f:facet name="input">
+            <h:selectOneMenu value="#{user.post}" >
+                <f:selectItems value="#{userMB.posts}"
+                               var="post"
+                                itemLabel="#{post}"
+                               itemValue="#{post}"/>
+            </h:selectOneMenu>
+        </f:facet>
+    </p:cellEditor>
+</p:column>
+
                 </p:dataTable>
                 <br/>
                 <div class="buttonLeft" style="float: left;">
