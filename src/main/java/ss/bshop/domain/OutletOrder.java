@@ -11,6 +11,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 
+	
+	
+	
+	
+
 @Entity
 public class OutletOrder {
 	
@@ -86,8 +91,7 @@ public class OutletOrder {
 	}
 
 	@Override
-	@Override
-	public int hashCode() {
+        public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + discount;
@@ -101,43 +105,33 @@ public class OutletOrder {
 		//result = prime * result + ((visit == null) ? 0 : visit.hashCode());
 		return result;
 	}
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		OutletOrder other = (OutletOrder) obj;
-		if (discount != other.discount)
-			return false;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		if (Double.doubleToLongBits(payment) != Double
-				.doubleToLongBits(other.payment))
-			return false;
-		if (structure == null) {
-			if (other.structure != null)
-				return false;
-		} else if (!structure.equals(other.structure))
-			return false;
-		if (type == null) {
-			if (other.type != null)
-				return false;
-		} else if (!type.equals(other.type))
-			return false;
-		if (visit == null) {
-			if (other.visit != null)
-				return false;
-		} else if (!visit.equals(other.visit))
-			return false;
-		return true;
-	}
-	
-	
-	
-	
 
+        @Override
+        public boolean equals(Object obj) {
+            if (obj == null) {
+                return false;
+            }
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final OutletOrder other = (OutletOrder) obj;
+            if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+                return false;
+            }
+            if ((this.type == null) ? (other.type != null) : !this.type.equals(other.type)) {
+                return false;
+            }
+            if (this.discount != other.discount) {
+                return false;
+            }
+            if (Double.doubleToLongBits(this.payment) != Double.doubleToLongBits(other.payment)) {
+                return false;
+            }
+            if (this.structure != other.structure && (this.structure == null || !this.structure.equals(other.structure))) {
+                return false;
+            }
+            return true;
+        }
+        
+		
 }
