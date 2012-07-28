@@ -8,14 +8,16 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
+
 import ss.bshop.domain.Article;
-import ss.bshop.domain.User;
 import ss.bshop.service.IArticleService;
-import ss.bshop.service.IUserService;
 
 
 @ManagedBean(name="articleMB")
@@ -30,10 +32,28 @@ public class ArticleManagedBean implements Serializable{
     private ArticleDataModel model;
    
     private List<Article> articleList;
-    
+
     public List<Article> getArticleList() {
         return articleList;
     }
+    
+    public void onEdit(RowEditEvent event) {  
+        
+        Article rowItem = (Article) event.getObject();
+        getArticleService().updateArticle(rowItem);
+        
+        FacesMessage msg = new FacesMessage("Percent Edited", 
+                ((Article) event.getObject()).getPercent().toString());  
+  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+      
+    public void onCancel(RowEditEvent event) {  
+        FacesMessage msg = new FacesMessage("Edit percent Cancelled", 
+                ((Article) event.getObject()).getPercent().toString());  
+  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
     
     public ArticleDataModel getModel() {
         articleList = new ArrayList<Article>();
@@ -52,7 +72,6 @@ public class ArticleManagedBean implements Serializable{
 
     public void setArticleService(IArticleService articleService) {
         this.articleService = articleService;
-    }
-    
+    }   
     
 }

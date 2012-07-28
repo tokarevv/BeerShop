@@ -40,9 +40,11 @@ public class Article {
 
     //constructors
     public Article() {
+        percent = 100;
     }
     
     public Article(String name) {
+        this();
         this.name = name;
     }
     

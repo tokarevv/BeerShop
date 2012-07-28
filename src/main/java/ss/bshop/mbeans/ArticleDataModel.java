@@ -20,7 +20,7 @@ public class ArticleDataModel extends ListDataModel<Article> implements Selectab
     @Override
     public Article getRowData(String rowKey) {  
 
-        int key = Integer.parseInt(rowKey);
+        Long key = Long.parseLong(rowKey);
         List<Article> articles = (List<Article>) getWrappedData();  
           
         for(Article article : articles) {  

@@ -28,13 +28,18 @@ public class ArticleService implements IArticleService {
             return articleDAO.getAll();
         }
 
-		@Override
-		public List<Article> getArticlesBySupplier(Supplier supplier) {
-			return articleDAO.getBySupplier(supplier);
-		}
-		
-		public Article getById(Long id) {
-			return articleDAO.get(id);
-		}
+        @Override
+        public List<Article> getArticlesBySupplier(Supplier supplier) {
+                return articleDAO.getBySupplier(supplier);
+        }
+
+        public Article getById(Long id) {
+                return articleDAO.get(id);
+        }
+
+        @Override
+        public void updateArticle(Article article) {
+                articleDAO.update(article);
+        }
 
 }
