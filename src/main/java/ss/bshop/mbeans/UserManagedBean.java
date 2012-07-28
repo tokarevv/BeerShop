@@ -11,16 +11,20 @@ import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
 
+import ss.bshop.domain.Manager;
+import ss.bshop.domain.SalesRep;
+import ss.bshop.domain.SuperVisor;
 import ss.bshop.domain.User;
+import ss.bshop.service.IManagerService;
+import ss.bshop.service.ISalesRepService;
+import ss.bshop.service.ISuperVisorService;
 import ss.bshop.service.IUserService;
 
 
 /**
  * User Managed Bean
  *
- * @author onlinetechvision.com
- * @version 1.0.0
- * @since 25 Mar 2012
+ * @Vera
  */
 @ManagedBean(name = "userMB")
 @SessionScoped
@@ -31,7 +35,16 @@ public class UserManagedBean implements Serializable {
     //Spring User Service is injected...
     @ManagedProperty(value = "#{userService}")
     IUserService userService;
-
+    
+    @ManagedProperty(value = "#{suppervisorService}")
+    ISuperVisorService suppervisorService;
+    
+    @ManagedProperty(value = "#{managerService}")
+    IManagerService managerService;
+    
+    @ManagedProperty(value = "#{salesRepService}")
+    ISalesRepService salesRepService;
+    
     List<User> userList = new ArrayList<User>();
     @ManagedProperty(value = "#{UserDataModel}")
     private UserDataModel model;
@@ -43,32 +56,67 @@ public class UserManagedBean implements Serializable {
     	userList = new ArrayList<User>();
         userList.addAll(getUserService().getUsers());
         model = new UserDataModel(userList);
-//        getData();
-//        updateModel();
     }  
-    
-//    private void getData() {
-//        userList = new ArrayList<User>();
-//        userList.addAll(getUserService().getUsers()); 
-//    }
-//    
-//    private void updateModel() {
-//        model = new UserDataModel(userList);
-//        selected=null;
-//    }
-    
+        
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
         if(rowItem.getId()==null) {
         	getUserService().addUser(rowItem);
-        	userList.add(rowItem);}
+        	userList.add(rowItem);
+        	}
         else{
-        	getUserService().updateUser(rowItem); }
-//        getData();
-//        updateModel();
+        	getUserService().updateUser(rowItem); 
+        	}
+        
+        addRoles(rowItem);
+       
     }
+     
+     private void addRoles(User rowItem){
+    	 if(rowItem.getPost().equals("supervisor")) {
+      	   SuperVisor supervisor=new SuperVisor();
+      	   supervisor.setUser(rowItem);
+      		 getSuppervisorService().add(supervisor);
+      		 }
+         else if (rowItem.getPost().equals("manager")){ 
+      	   Manager manager=new Manager();
+      	   manager.setUser(rowItem);
+      	   getManagerService().add(manager);
+      	   }
+         else if (rowItem.getPost().equals("sales rep")){ 
+      	   SalesRep salesRep=new SalesRep();
+      	   salesRep.setUser(rowItem);
+      	   getSalesRepService().add(salesRep);
+      	   } 
+     }
 
-    public List<User> getUserList() {
+    public ISuperVisorService getSuppervisorService() {
+		return suppervisorService;
+	}
+
+	public void setSuppervisorService(ISuperVisorService suppervisorService) {
+		this.suppervisorService = suppervisorService;
+	}
+
+	
+
+	public IManagerService getManagerService() {
+		return managerService;
+	}
+
+	public void setManagerService(IManagerService managerService) {
+		this.managerService = managerService;
+	}
+
+	public ISalesRepService getSalesRepService() {
+		return salesRepService;
+	}
+
+	public void setSalesRepService(ISalesRepService salesRepService) {
+		this.salesRepService = salesRepService;
+	}
+
+	public List<User> getUserList() {
         return userList;
     }
 
@@ -105,6 +153,7 @@ public class UserManagedBean implements Serializable {
 
    public String createNew() {
 	   User user=new User();
+	   user.setLogin("default");
 	   getUserService().addUser(user);
        userList.add(user);
        return "";

@@ -4,9 +4,7 @@ import javax.persistence.*;
 
 @Entity
 public class User {
-    
-    
-
+  
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,7 +21,11 @@ public class User {
     @Column
     private String post="none";
 
-    public String getFullname() {
+    public User() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public String getFullname() {
         return fullname;
     }
 
@@ -62,6 +64,7 @@ public class User {
     public void setPost(String post) {
         this.post = post;
     }
+    
     
     @Override
 	public int hashCode() {

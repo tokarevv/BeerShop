@@ -3,11 +3,12 @@
  */
 package ss.bshop.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ss.bshop.domain.SalesRep;
 
-public interface ISalesRepService {
+public interface ISalesRepService extends Serializable{
 
 	public SalesRep getSalesRepForLogin(String salesRepLogin);
 	
