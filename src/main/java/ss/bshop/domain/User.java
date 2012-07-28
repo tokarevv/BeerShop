@@ -56,6 +56,7 @@ public class User {
     }
 
     public String getPost() {
+    	if(post==null) return "supervisor";
         return post;
     }
 

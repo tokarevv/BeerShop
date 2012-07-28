@@ -7,7 +7,6 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
@@ -115,6 +114,12 @@ public class UserManagedBean implements Serializable {
             updateModel();
     	}
     	return "";
+    }
+    
+   
+	public String[] getPosts() {
+        String[] posts = {"admin","supervisor","manager","sales rep"};
+        return posts;
     }
     
  }
