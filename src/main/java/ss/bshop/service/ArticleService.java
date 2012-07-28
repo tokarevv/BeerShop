@@ -42,4 +42,24 @@ public class ArticleService implements IArticleService {
                 articleDAO.update(article);
         }
 
+		@Transactional(readOnly = false)
+		@Override
+		public void add(Article article) {
+			articleDAO.add(article);
+			
+		}
+
+		@Transactional(readOnly = false)
+		@Override
+		public void remove(Long id) {
+			articleDAO.remove(id);
+		}
+		
+		@Transactional(readOnly = false)
+		@Override
+		public void update(Article article) {
+			articleDAO.update(article);
+			
+		}
+
 }
