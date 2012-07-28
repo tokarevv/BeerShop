@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Supplier;
@@ -41,11 +43,16 @@ public class SupplierOrderManagedBean implements Serializable{
     private String firstname1;  
     
     public String getFirstname() {  
+        FacesMessage msg = new FacesMessage("getFirstname");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
         return firstname;  
     }  
   
     public void setFirstname(String firstname) {  
-        this.firstname = firstname;  
+        FacesMessage msg = new FacesMessage("setFirstname");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+        
+       this.firstname = firstname;  
     }  
     
     public IArticleService getArticleService() {
@@ -90,6 +97,8 @@ public class SupplierOrderManagedBean implements Serializable{
 	}
 
 	public List<Article> getArticleList() {
+
+		String supName = "";
 		if (selectedSupplier == null) {
 			//articleList.clear();
 			Article newOne = new Article();
@@ -97,8 +106,12 @@ public class SupplierOrderManagedBean implements Serializable{
 			articleList.add(newOne);
 		}
 		else {
+			supName = selectedSupplier.getName();
 			articleList = articleService.getArticlesBySupplier(selectedSupplier);
 		}
+        FacesMessage msg = new FacesMessage("get Article list"+supName);  
+        
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
 		return articleList;
 	}
 
