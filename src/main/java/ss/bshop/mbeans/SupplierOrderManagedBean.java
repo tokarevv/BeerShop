@@ -93,7 +93,7 @@ public class SupplierOrderManagedBean implements Serializable{
 		if (selectedSupplier == null) {
 			//articleList.clear();
 			Article newOne = new Article();
-			newOne.setName("Supplier is not selected");
+			newOne.setName("Supplier is not selected1"+articleList.size());
 			articleList.add(newOne);
 		}
 		else {
