@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
+import javax.annotation.PostConstruct;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -24,26 +27,34 @@ import ss.bshop.service.IArticleService;
 @RequestScoped
 public class ArticleManagedBean implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
-	//Spring User Service is injected...
+    private static final long serialVersionUID = 1L;
+
     @ManagedProperty(value = "#{articleService}")
     IArticleService articleService;
     
     Article selected;
 
-	@ManagedProperty(value = "#{ArticleDataModel}")
+    @ManagedProperty(value = "#{ArticleDataModel}")
     private ArticleDataModel model;
    
     private List<Article> articleList;
-    
+
     public List<Article> getArticleList() {
         return articleList;
     }
     
+    public void onEdit(RowEditEvent event) {  
+        
+        Article rowItem = (Article) event.getObject();
+        getArticleService().update(rowItem);
+        
+        FacesMessage msg = new FacesMessage("Percent Edited", 
+                ((Article) event.getObject()).getPercent().toString());  
+  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+ 
     public ArticleDataModel getModel() {
         return model;
     }
@@ -62,11 +73,12 @@ public class ArticleManagedBean implements Serializable{
     
     public Article getSelected() {
 		return selected;
-	}
+    }
 
-	public void setSelected(Article selected) {
-		this.selected = selected;
-	}
+    public void setSelected(Article selected) {
+            this.selected = selected;
+    }
+    
     @PostConstruct
     protected void postConstruct() {
         getData();
@@ -85,7 +97,9 @@ public class ArticleManagedBean implements Serializable{
     
     public void editRow(RowEditEvent event) {
     	Article rowItem = (Article) event.getObject();
-        if(rowItem.getId()==0) {getArticleService().add(rowItem);}
+        if(rowItem.getId()==0) {
+            getArticleService().add(rowItem);
+        }
         {getArticleService().update(rowItem); }
         getData();
         updateModel();
@@ -106,6 +120,5 @@ public class ArticleManagedBean implements Serializable{
      	}
      	return "";
      }
-    
-    
+      
 }
