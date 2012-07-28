@@ -37,7 +37,7 @@ public class Supplier implements Serializable {
 	private String svidNumber;
         
 //	@OneToMany(mappedBy="supplier", fetch = FetchType.EAGER)
-        //@OrderBy("name")
+//        //@OrderBy("name")
 //        private Set<Article> goods = new HashSet<Article>();
 	
         @Column
@@ -134,7 +134,6 @@ public class Supplier implements Serializable {
 		this.comment = comment;
 	}
 
-	//equals and hash
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -192,7 +191,10 @@ public class Supplier implements Serializable {
 //				return false;
 //		} else if (!goods.equals(other.goods))
 //			return false;
-		if (id != other.id)
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
 			return false;
 		if (name == null) {
 			if (other.name != null)

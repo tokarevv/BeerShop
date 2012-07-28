@@ -7,19 +7,19 @@
       xmlns:f="http://java.sun.com/jsf/core">
 
 <h:body>
-    <ui:composition template="/WEB-INF/templates/base.xhtml">
+    <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-                <h:outputText value="USERs : "></h:outputText>
-                <p:dataTable id="users" var="user"
-                             value="#{userMB.model}"
+                <h:outputText value="Articles : "></h:outputText>
+                <p:dataTable id="article" var="article"
+                             value="#{articleMB.model}"
                              paginator="true"
                              rows="10"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,20,50"
                              emptyMessage="No data "
                              editable="true"
-                             selection="#{userMB.selected}"
+                             selection="#{articleMB.selected}"
                              selectionMode="single"
                              scrollable="true"
                              liveScroll="true"
@@ -29,52 +29,128 @@
 
                     <p:ajax event="rowEdit"
                             update="@all"
-                            listener="#{userMB.editRow}"/>
+                            listener="#{articleMB.editRow}"/>
 
                     <p:column width="80">
                         <p:rowEditor/>
                     </p:column>
-
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="ID"/>
-                        </f:facet>
-                        <h:outputText value="#{user.id}"/>
-                    </p:column>
-                    <p:column sortBy="#{user.fullname}"
+                    
+                    <p:column sortBy="#{article.name}"
                               headerText=" Name "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.fullname}"/>
+                                <h:outputText value="#{article.name}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.fullname}"/>
+                                <h:inputText value="#{article.name}"/>
                             </f:facet>
                         </p:cellEditor>
-                    </p:column>
-                    <p:column sortBy="#{user.post}"
-                              headerText=" Surname "
+                     </p:column>
+                     
+                    <p:column sortBy="#{article.type}"
+                              headerText=" type "
                               width="150">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{user.post}"/>
+                                <h:outputText value="#{article.type}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{user.post}"/>
+                                <h:inputText value="#{article.type}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
+                    
+                     <p:column sortBy="#{article.price}"
+                              headerText=" price "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.price}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.price}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.percent}"
+                              headerText=" percent "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.percent}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.percent}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.quantity}"
+                              headerText=" quantity "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.quantity}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.quantity}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.unit}"
+                              headerText=" unit "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.unit}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.unit}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.barcode}"
+                              headerText=" barcode "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.barcode}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.barcode}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column sortBy="#{article.comment}"
+                              headerText=" comment "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.comment}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.comment}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+            
+                   
                 </p:dataTable>
                 <br/>
                 <div class="buttonLeft" style="float: left;">
                     <p:commandButton value="New"
-                                     actionListener="#{userMB.createNew}"
+                                     actionListener="#{articleMB.createNew}"
                                      ajax="false"
                                      update="@all" />
                      <p:commandButton value="Delete"
-                                     actionListener="#{userMB.delete}"
-                                     disabled="#{userMB.enableDelete}"
+                                     actionListener="#{articleMB.delete}"
+                                     ajax="false"
                                      update="@all"/>
 
                  </div>
