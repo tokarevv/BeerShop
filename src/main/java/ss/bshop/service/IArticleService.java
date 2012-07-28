@@ -13,14 +13,14 @@ public interface IArticleService {
     
     public List<Article> getArticles();
 
-	public List<Article> getArticlesBySupplier(Supplier selectedSupplier);
+    public List<Article> getArticlesBySupplier(Supplier selectedSupplier);
 
-	public Article getById(Long id);
-	
-	public void add(Article article);
+    public Article getById(Long id);
 
-	public void remove(Long id);
-	
-	public void update(Article article);
+    public void add(Article article);
+
+    public void remove(Long id);
+
+    public void update(Article article);
     
 }

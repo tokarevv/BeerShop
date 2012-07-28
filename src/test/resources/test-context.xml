@@ -23,6 +23,7 @@
 	<context:annotation-config />
 	<context:component-scan base-package="ss.bshop.dao" />
 	<context:component-scan base-package="ss.bshop.service" />
+	<context:component-scan base-package="ss.bshop.mobile" />
 	
 	<!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
 	<tx:annotation-driven transaction-manager="transactionManager" />
