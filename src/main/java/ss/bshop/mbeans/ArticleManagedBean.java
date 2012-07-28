@@ -9,10 +9,13 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+
+import javax.annotation.PostConstruct;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -24,33 +27,77 @@ import ss.bshop.service.IArticleService;
 @RequestScoped
 public class ArticleManagedBean implements Serializable{
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
-	//Spring User Service is injected...
+    private static final long serialVersionUID = 1L;
+    private List<Article> articleList;
+    private Article selected;
+    private FacesMessage msg;
+   
     @ManagedProperty(value = "#{articleService}")
-    IArticleService articleService;
-    
-    Article selected;
+    private IArticleService articleService;
 
-	@ManagedProperty(value = "#{ArticleDataModel}")
+    @ManagedProperty(value = "#{ArticleDataModel}")
     private ArticleDataModel model;
    
-    private List<Article> articleList;
+
+    @PostConstruct
+    protected void postConstruct() {
+        
+        articleList = new ArrayList<Article>();
+        
+        // InitList By articles
+        articleList.addAll(getArticleService().getArticles()); 
+        
+        //Wired List With Data Model Table
+        model = new ArticleDataModel(articleList);
+    }  
     
-    public List<Article> getArticleList() {
-        return articleList;
+    public String createNew() {
+    	Article tmp = new Article("<edit>");
+        getArticleService().add(tmp);
+        articleList.add(tmp);
+        
+        msg = new FacesMessage("Article Added", "Edit, please");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+
+        return "";
     }
     
-    public ArticleDataModel getModel() {
+    public void onEdit(RowEditEvent event) {  
+        
+        Article rowItem = (Article) event.getObject();
+        getArticleService().update(rowItem);
+        
+        msg = new FacesMessage("Article Edited", rowItem.getName());   
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }  
+
+     public String delete() {
+     	if(selected!=null){
+            
+            getArticleService().remove(selected.getId());
+            articleList.remove(selected);
+            selected = null;
+
+            msg = new FacesMessage("Article Deleted","");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+     	}
+     	return "";
+     }
+
+     // ****************************  Getters and setters
+     
+     public ArticleDataModel getModel() {
         return model;
     }
 
     public void setModel(ArticleDataModel model) {
         this.model = model;
     }
+    
+    public List<Article> getArticleList() {
+        return articleList;
+    }
+    
 
     public IArticleService getArticleService() {
         return articleService;
@@ -62,50 +109,9 @@ public class ArticleManagedBean implements Serializable{
     
     public Article getSelected() {
 		return selected;
-	}
-
-	public void setSelected(Article selected) {
-		this.selected = selected;
-	}
-    @PostConstruct
-    protected void postConstruct() {
-        getData();
-        updateModel();
-    }  
-    
-    private void getData() {
-    	articleList = new ArrayList<Article>();
-    	articleList.addAll(getArticleService().getArticles()); 
-    }
-    
-    private void updateModel() {
-        model = new ArticleDataModel(articleList);
-        selected=null;
-    }
-    
-    public void editRow(RowEditEvent event) {
-    	Article rowItem = (Article) event.getObject();
-        if(rowItem.getId()==0) {getArticleService().add(rowItem);}
-        {getArticleService().update(rowItem); }
-        getData();
-        updateModel();
-    }
-    
-    public String createNew() {
-    	articleList.add(new Article());
-    	getData();
-        updateModel();
-        return "";
     }
 
-     public String delete() {
-     	if(selected!=null){
-     		getArticleService().remove(selected.getId());
-        	 getData();
-             updateModel();
-     	}
-     	return "";
-     }
-    
-    
+    public void setSelected(Article selected) {
+            this.selected = selected;
+    } 
 }

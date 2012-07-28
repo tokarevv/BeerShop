@@ -10,6 +10,8 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
+                <p:growl id="messages" showDetail="true"/>  
+                
                 <h:outputText value="Articles : "></h:outputText>
                 <p:dataTable id="article" var="article"
                              value="#{articleMB.model}"
@@ -29,7 +31,7 @@
 
                     <p:ajax event="rowEdit"
                             update="@all"
-                            listener="#{articleMB.editRow}"/>
+                            listener="#{articleMB.onEdit}"/>
 
                     <p:column width="80">
                         <p:rowEditor/>
