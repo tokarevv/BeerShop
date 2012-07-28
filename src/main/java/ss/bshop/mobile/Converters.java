@@ -28,25 +28,27 @@ public class Converters {
 		Visit visit = new Visit();
 		OutletOrderMobile mobileOO = mobileVisit.getOutletOrder();
 		if (mobileOO != null) {
+			OutletOrder outletOrder = new OutletOrder();
 			List<OutletOrderStructureMobile> mobileStructure = mobileOO
 					.getStructure();
-			List<OutletOrderStructure> structure = 
-					new ArrayList<OutletOrderStructure>();
-			OutletOrder outletOrder = new OutletOrder();
-			for (OutletOrderStructureMobile oosm : mobileStructure) {
-				OutletOrderStructure oos = new OutletOrderStructure();
-				oos.setAmount(oosm.getAmount());
-				// getting correct article from db
-				Long articleId = oosm.getArticle().getId();
-				Article article = articleService.getById(articleId);
-				oos.setArticle(article);
-				// done with article
-				oos.setPrice(oosm.getPrice());
-				// now the OutletOrder
-				oos.setOutletOrder(outletOrder);
-				structure.add(oos);
+			if (mobileStructure != null) {
+				List<OutletOrderStructure> structure = 
+						new ArrayList<OutletOrderStructure>();
+				for (OutletOrderStructureMobile oosm : mobileStructure) {
+					OutletOrderStructure oos = new OutletOrderStructure();
+					oos.setAmount(oosm.getAmount());
+					// getting correct article from db
+					Long articleId = oosm.getArticle().getId();
+					Article article = articleService.getById(articleId);
+					oos.setArticle(article);
+					// done with article
+					oos.setPrice(oosm.getPrice());
+					// now the OutletOrder
+					oos.setOutletOrder(outletOrder);
+					structure.add(oos);
+				}
+				outletOrder.setStructure(structure);
 			}
-			outletOrder.setStructure(structure);
 			outletOrder.setPayment(mobileOO.getPayment());
 			outletOrder.setDiscount(mobileOO.getDiscount());
 			outletOrder.setType(mobileOO.getType());
