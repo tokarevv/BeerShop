@@ -16,63 +16,90 @@
     <h:body>
 
         <p:layout fullPage="true">  
-
+<!--****************************** North content *********************************-->
             <p:layoutUnit id="north" position="north" size="95">  
-                <ui:insert name="header">
-                    <ui:include src="templates/header_sv.xhtml"/>
-                </ui:insert>
-            </p:layoutUnit>  
+                <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
+                    <a href="/empty.xhtml">BShop</a> 
+                    <p:menubar styleClass="pageHeaderMenue" >
 
+                                <p:menuitem  value="Articles" url="/pages/admin/startadmin.xhtml"/>
+                                <p:menuitem  value="Outlet" url="/pages/supervisor/removal.xhtml"/>
+                                <p:menuitem  value="Salesreps" url="/pages/manager/removal.xhtml"/>
+
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>  
+<!--****************************** West content *********************************-->
             <p:layoutUnit position="west" size="200" header="Фильтр" resizable="true" collapsible="true">  
                 
             </p:layoutUnit>  
+            
+<!--****************************** Centr content *********************************-->
+        <p:layoutUnit position="center">  
+          <h:form id="form">  
 
-            <p:layoutUnit position="center">  
-                <p:dataTable id="articles" var="article"
-                             value="#{articleMB.model}"
-                             paginator="true"
-                             rows="10"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="10,20,50"
-                             emptyMessage="No data "
-                             editable="true"
-                             scrollable="true"
-                             liveScroll="true"
-                             paginatorAlwaysVisible="true"
-                             paginatorPosition="bottom"
-                        >
-                    <p:column headerText=" ID " width="25">
-                        <h:outputText value="#{article.id}"/>
-                    </p:column>
-                    
-                    <p:column  headerText=" Name "  width="150"
-                               sortBy="#{article.name}">
-                        <h:outputText value="#{article.name}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Supplier"  width="150">
-                        <h:outputText value="#{article.supplier.getName()}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Quantity"  width="30">
-                        <h:outputText value="#{article.quantity}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Unit"  width="20">
-                        <h:outputText value="#{article.unit}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Price"  width="20">
-                        <h:outputText value="#{article.price}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="SalePrice"  width="30">
-                        <h:outputText value="#{article.price*1.3}"/>
-                    </p:column>
-                    
-                    
-                </p:dataTable>
-            </p:layoutUnit>  
+            <p:growl id="messages" showDetail="true"/>  
+            <p:dataTable id="articles" var="article"
+                            value="#{articleMB.model}"
+                            editable="true"
+                            emptyMessage="No data "
+                    >
+
+                <f:facet name="header">  
+                    Articles 
+                </f:facet> 
+
+                <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 
+                        update=":form:messages" /> 
+                 
+
+                <p:column headerText=" ID " width="20">
+                    <h:outputText value="#{article.id}"/>
+                </p:column>
+
+                <p:column  headerText=" Name "  width="120"
+                            sortBy="#{article.name}">
+                    <h:outputText value="#{article.name}"/>
+                </p:column>
+
+                <p:column  headerText="Supplier"  width="120">
+                    <h:outputText value="#{article.supplier.getName()}"/>
+                </p:column>
+
+                <p:column  headerText="Qnty"  width="40">
+                    <h:outputText value="#{article.quantity}"/>
+                </p:column>
+
+                <p:column  headerText="Unit"  width="30">
+                    <h:outputText value="#{article.unit}"/>
+                </p:column>
+
+                <p:column  headerText="Price"  style="width:40px">
+                    <h:outputText value="#{article.price}"/>
+                </p:column>
+
+                <p:column headerText="%" style="width:40px">  
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{article.percent}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{article.percent}" style="width:15 0%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>
+                
+                <p:column  headerText="*" style="width:20px">  
+                    <p:rowEditor />  
+                </p:column>
+
+                <p:column  headerText="SalePrice"  width="40">
+                    <h:outputText value="#{article.price*1.3*article.percent/100}"/>
+                </p:column>
+
+            </p:dataTable>
+          </h:form>  
+        </p:layoutUnit>  
 
         </p:layout>  
     </h:body>

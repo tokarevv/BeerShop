@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+
 @Entity
 public class OutletOrder {
 	
@@ -85,6 +86,7 @@ public class OutletOrder {
 	}
 
 	@Override
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
@@ -96,12 +98,9 @@ public class OutletOrder {
 		result = prime * result
 				+ ((structure == null) ? 0 : structure.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((visit == null) ? 0 : visit.hashCode());
+		//result = prime * result + ((visit == null) ? 0 : visit.hashCode());
 		return result;
 	}
-
-	@Override
-	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
 		if (obj == null)

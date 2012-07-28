@@ -26,7 +26,7 @@ import ss.bshop.service.IUserService;
 @SessionScoped
 public class UserManagedBean implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     //Spring User Service is injected...
     @ManagedProperty(value = "#{userService}")
