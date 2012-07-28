@@ -27,7 +27,6 @@ import ss.bshop.service.IArticleService;
 @RequestScoped
 public class ArticleManagedBean implements Serializable{
 
-
     private static final long serialVersionUID = 1L;
 
     @ManagedProperty(value = "#{articleService}")
@@ -40,9 +39,17 @@ public class ArticleManagedBean implements Serializable{
    
     private List<Article> articleList;
 
-    public List<Article> getArticleList() {
-        return articleList;
-    }
+    @PostConstruct
+    protected void postConstruct() {
+        
+        articleList = new ArrayList<Article>();
+        
+        // InitList By articles
+        articleList.addAll(getArticleService().getArticles()); 
+        
+        //Wired List With Data Model Table
+        model = new ArticleDataModel(articleList);
+    }  
     
     public void onEdit(RowEditEvent event) {  
         
@@ -54,14 +61,47 @@ public class ArticleManagedBean implements Serializable{
   
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
- 
-    public ArticleDataModel getModel() {
+    
+    
+    public String createNew() {
+    	Article tmp = new Article("Input Name");
+        getArticleService().add(tmp);
+        articleList.add(tmp);
+        
+        FacesMessage msg = new FacesMessage("Article Added");  
+  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+
+        return "";
+    }
+
+     public String delete() {
+     	if(selected!=null){
+                
+            getArticleService().remove(selected.getId());
+            articleList.remove(selected);
+            selected = null;
+
+            FacesMessage msg = new FacesMessage("Article Deleted");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+     	}
+     	return "";
+     }
+
+     // ****************************  Getters and setters
+     
+     public ArticleDataModel getModel() {
         return model;
     }
 
     public void setModel(ArticleDataModel model) {
         this.model = model;
     }
+    
+    public List<Article> getArticleList() {
+        return articleList;
+    }
+    
 
     public IArticleService getArticleService() {
         return articleService;
@@ -77,48 +117,5 @@ public class ArticleManagedBean implements Serializable{
 
     public void setSelected(Article selected) {
             this.selected = selected;
-    }
-    
-    @PostConstruct
-    protected void postConstruct() {
-        getData();
-        updateModel();
-    }  
-    
-    private void getData() {
-    	articleList = new ArrayList<Article>();
-    	articleList.addAll(getArticleService().getArticles()); 
-    }
-    
-    private void updateModel() {
-        model = new ArticleDataModel(articleList);
-        selected=null;
-    }
-    
-    public void editRow(RowEditEvent event) {
-    	Article rowItem = (Article) event.getObject();
-        if(rowItem.getId()==0) {
-            getArticleService().add(rowItem);
-        }
-        {getArticleService().update(rowItem); }
-        getData();
-        updateModel();
-    }
-    
-    public String createNew() {
-    	articleList.add(new Article());
-    	getData();
-        updateModel();
-        return "";
-    }
-
-     public String delete() {
-     	if(selected!=null){
-     		getArticleService().remove(selected.getId());
-        	 getData();
-             updateModel();
-     	}
-     	return "";
-     }
-      
+    } 
 }
