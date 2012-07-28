@@ -16,6 +16,7 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -24,7 +25,7 @@ import ss.bshop.service.IArticleService;
 
 
 @ManagedBean(name="articleMB")
-@RequestScoped
+@SessionScoped
 public class ArticleManagedBean implements Serializable{
 
     private static final long serialVersionUID = 1L;
