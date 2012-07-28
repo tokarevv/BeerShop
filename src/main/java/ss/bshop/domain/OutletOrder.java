@@ -96,7 +96,7 @@ public class OutletOrder {
 		result = prime * result
 				+ ((structure == null) ? 0 : structure.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
-		result = prime * result + ((visit == null) ? 0 : visit.hashCode());
+		//result = prime * result + ((visit == null) ? 0 : visit.hashCode());
 		return result;
 	}
 

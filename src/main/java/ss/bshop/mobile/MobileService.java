@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +25,7 @@ import ss.bshop.service.IArticleService;
 import ss.bshop.service.IOutletService;
 import ss.bshop.service.IVisitService;
 
-@Controller
+@Service
 @RequestMapping("/mobile/*")
 public class MobileService {
 
@@ -37,6 +37,8 @@ public class MobileService {
 	private IArticleService articleService;
 	@Autowired
 	private IVisitService visitService;
+	@Autowired
+	private Converters converters;
 
 	@RequestMapping(value = "/mobile/helloservice", method = RequestMethod.POST,
 			consumes = "text/plain")
@@ -48,7 +50,7 @@ public class MobileService {
 	@RequestMapping(value = "/mobile/addvisit", method = RequestMethod.POST, 
 			consumes = "application/json") 
 	public void addOrder(@RequestBody VisitMobile mobileVisit) {
-		Visit visit = Converters.convertMobileVisitToVisit(mobileVisit);
+		Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
 		visitService.add(visit);
 	}
 
