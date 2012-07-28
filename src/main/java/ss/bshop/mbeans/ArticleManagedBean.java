@@ -63,6 +63,9 @@ public class ArticleManagedBean implements Serializable{
     }  
     
     public ArticleDataModel getModel() {
+        articleList = new ArrayList<Article>();
+        articleList.addAll(getArticleService().getArticles());
+        model = new ArticleDataModel(articleList);
         return model;
     }
 
