@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -23,7 +24,7 @@ import ss.bshop.service.IUserService;
  * @since 25 Mar 2012
  */
 @ManagedBean(name = "userMB")
-@RequestScoped
+@SessionScoped
 public class UserManagedBean implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -56,8 +57,10 @@ public class UserManagedBean implements Serializable {
     
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        if(rowItem.getId()==0) {getUserService().addUser(rowItem);}
-        {getUserService().updateUser(rowItem); }
+        if(rowItem.getId()==null) {
+        	getUserService().addUser(rowItem);}
+        else{
+        	getUserService().updateUser(rowItem); }
         getData();
         updateModel();
     }
@@ -100,7 +103,7 @@ public class UserManagedBean implements Serializable {
 
    public String createNew() {
        userList.add(new User());
-       getData();
+      // getData();
        updateModel();
        return "";
    }
