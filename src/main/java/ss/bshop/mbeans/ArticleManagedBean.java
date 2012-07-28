@@ -28,16 +28,16 @@ import ss.bshop.service.IArticleService;
 public class ArticleManagedBean implements Serializable{
 
     private static final long serialVersionUID = 1L;
-
+    private List<Article> articleList;
+    private Article selected;
+    private FacesMessage msg;
+   
     @ManagedProperty(value = "#{articleService}")
-    IArticleService articleService;
-    
-    Article selected;
+    private IArticleService articleService;
 
     @ManagedProperty(value = "#{ArticleDataModel}")
     private ArticleDataModel model;
    
-    private List<Article> articleList;
 
     @PostConstruct
     protected void postConstruct() {
@@ -51,38 +51,34 @@ public class ArticleManagedBean implements Serializable{
         model = new ArticleDataModel(articleList);
     }  
     
+    public String createNew() {
+    	Article tmp = new Article("<edit>");
+        getArticleService().add(tmp);
+        articleList.add(tmp);
+        
+        msg = new FacesMessage("Article Added", "Edit, please");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+
+        return "";
+    }
+    
     public void onEdit(RowEditEvent event) {  
         
         Article rowItem = (Article) event.getObject();
         getArticleService().update(rowItem);
         
-        FacesMessage msg = new FacesMessage("Percent Edited", 
-                ((Article) event.getObject()).getPercent().toString());  
-  
+        msg = new FacesMessage("Article Edited", rowItem.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg);  
     }  
-    
-    
-    public String createNew() {
-    	Article tmp = new Article("Input Name");
-        getArticleService().add(tmp);
-        articleList.add(tmp);
-        
-        FacesMessage msg = new FacesMessage("Article Added");  
-  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-
-        return "";
-    }
 
      public String delete() {
      	if(selected!=null){
-                
+            
             getArticleService().remove(selected.getId());
             articleList.remove(selected);
             selected = null;
 
-            FacesMessage msg = new FacesMessage("Article Deleted");   
+            msg = new FacesMessage("Article Deleted","");   
             FacesContext.getCurrentInstance().addMessage(null, msg);
      	}
      	return "";
