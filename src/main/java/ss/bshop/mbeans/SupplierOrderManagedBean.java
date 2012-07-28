@@ -1,5 +1,6 @@
 package ss.bshop.mbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,12 @@ import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierOrderMB")
 @RequestScoped
-public class SupplierOrderManagedBean{
+public class SupplierOrderManagedBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value="#{supplierService}")
 	ISupplierService supplierService;
@@ -24,13 +30,23 @@ public class SupplierOrderManagedBean{
 	
 	private Supplier selectedSupplier;
 	
-	private List<Supplier> suppliers;
+	private List<Supplier> suppliers = new ArrayList<Supplier>();
 	
 	private String orderType;
 	
     private List<Article> articleList = new ArrayList<Article>();
 
-	public IArticleService getArticleService() {
+    private String firstname;  
+    
+    public String getFirstname() {  
+        return firstname;  
+    }  
+  
+    public void setFirstname(String firstname) {  
+        this.firstname = firstname;  
+    }  
+    
+    public IArticleService getArticleService() {
 		return articleService;
 	}
 
@@ -55,7 +71,8 @@ public class SupplierOrderManagedBean{
 	}
 
 	public List<Supplier> getSuppliers() {
-		return supplierService.getAll();
+		suppliers = supplierService.getAll();
+		return suppliers;
 	}
 
 	public void setSuppliers(List<Supplier> suppliers) {
@@ -63,7 +80,7 @@ public class SupplierOrderManagedBean{
 	}
 
 	public Supplier getSelectedSupplier() {
-		return selectedSupplier;
+		return new Supplier("Some test supplier");//selectedSupplier;
 	}
 
 	public void setSelectedSupplier(Supplier selectedSupplier) {
@@ -72,7 +89,10 @@ public class SupplierOrderManagedBean{
 
 	public List<Article> getArticleList() {
 		if (selectedSupplier == null) {
-			articleList.clear();
+			//articleList.clear();
+			Article newOne = new Article();
+			newOne.setName("Supplier is not selected");
+			articleList.add(newOne);
 		}
 		else {
 			articleList = articleService.getArticlesBySupplier(selectedSupplier);
