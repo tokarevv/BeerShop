@@ -40,36 +40,39 @@ public class UserManagedBean implements Serializable {
  
     @PostConstruct
     protected void postConstruct() {
-        getData();
-        updateModel();
+    	userList = new ArrayList<User>();
+        userList.addAll(getUserService().getUsers());
+        model = new UserDataModel(userList);
+//        getData();
+//        updateModel();
     }  
     
-    private void getData() {
-        userList = new ArrayList<User>();
-        userList.addAll(getUserService().getUsers()); 
-    }
-    
-    private void updateModel() {
-        model = new UserDataModel(userList);
-        selected=null;
-    }
+//    private void getData() {
+//        userList = new ArrayList<User>();
+//        userList.addAll(getUserService().getUsers()); 
+//    }
+//    
+//    private void updateModel() {
+//        model = new UserDataModel(userList);
+//        selected=null;
+//    }
     
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
         if(rowItem.getId()==null) {
-        	getUserService().addUser(rowItem);}
+        	getUserService().addUser(rowItem);
+        	userList.add(rowItem);}
         else{
         	getUserService().updateUser(rowItem); }
-        getData();
-        updateModel();
+//        getData();
+//        updateModel();
     }
 
     public List<User> getUserList() {
         return userList;
     }
 
-    // 
-    public UserDataModel getModel() {
+     public UserDataModel getModel() {
         return model;
     }
     
@@ -101,24 +104,24 @@ public class UserManagedBean implements Serializable {
     }
 
    public String createNew() {
-       userList.add(new User());
-      // getData();
-       updateModel();
+	   User user=new User();
+	   getUserService().addUser(user);
+       userList.add(user);
        return "";
    }
 
     public String delete() {
     	if(selected!=null){
             getUserService().deleteUser(selected);
-       	    getData();
-            updateModel();
+            userList.remove(selected);
+            selected = null;
     	}
     	return "";
     }
     
    
 	public String[] getPosts() {
-        String[] posts = {"admin","supervisor","manager","sales rep"};
+        String[] posts = {"none","admin","supervisor","manager","sales rep"};
         return posts;
     }
     
