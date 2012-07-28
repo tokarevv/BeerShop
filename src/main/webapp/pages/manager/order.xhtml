@@ -21,6 +21,16 @@
 				<br></br>
 				<br></br>
 			
+       <h:outputLabel for="name1" value="Name:" style="font-weight:bold"/>  
+          
+        <p:inputText id="name1" value="#{supplierOrderMB.firstname1}" />  
+          
+        <p:commandButton value="Submit" update="display2"/>  
+  
+        <h:outputText value="#{supplierOrderMB.firstname1}" id="display2" />  			
+				<br></br>
+				<br></br>
+			
 				<h:outputText value="Type: " />
 				  
 				<p:selectOneMenu value="#{supplierOrderMB.orderType}">
@@ -32,7 +42,7 @@
 				<br></br>
 
 				<h:outputText value="Supplier:" />
-				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
+				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"  converter="supplierConverter"
 					effect="fade" var="s" style="width:160px">
 					<f:selectItem itemLabel="Select One" itemValue="" />
 					<f:selectItems value="#{supplierOrderMB.suppliers}" var="supplier"
@@ -51,7 +61,7 @@
 
 				<h:outputText value="Articles: "></h:outputText>
                 <p:dataTable id="articles" var="article"
-                             value="#{supplierOrderMB.orderType}"
+                             value="#{supplierOrderMB.articleList}"
                              paginator="true"
                              rows="10"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"

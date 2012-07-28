@@ -37,6 +37,8 @@ public class SupplierOrderManagedBean implements Serializable{
     private List<Article> articleList = new ArrayList<Article>();
 
     private String firstname;  
+
+    private String firstname1;  
     
     public String getFirstname() {  
         return firstname;  
@@ -80,7 +82,7 @@ public class SupplierOrderManagedBean implements Serializable{
 	}
 
 	public Supplier getSelectedSupplier() {
-		return new Supplier("Some test supplier");//selectedSupplier;
+		return selectedSupplier;//new Supplier("Some test supplier");//
 	}
 
 	public void setSelectedSupplier(Supplier selectedSupplier) {
@@ -102,5 +104,13 @@ public class SupplierOrderManagedBean implements Serializable{
 
 	public void setArticleList(List<Article> articleList) {
 		this.articleList = articleList;
+	}
+
+	public String getFirstname1() {
+		return firstname1;
+	}
+
+	public void setFirstname1(String firstname1) {
+		this.firstname1 = firstname1;
 	}
 }
