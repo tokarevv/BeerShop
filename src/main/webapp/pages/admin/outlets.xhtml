@@ -9,7 +9,7 @@
 <h:body>
     <ui:composition  template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
-            <h:form>
+            <h:form  styleClass="Table">
                 <h:outputText value="Outlets : "></h:outputText>
                 <p:dataTable id="outlet" var="outlet"
                              value="#{outletMB.model}"
@@ -35,12 +35,6 @@
                         <p:rowEditor/>
                     </p:column>
 
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Name"/>
-                        </f:facet>
-                        <h:outputText value="#{outlet.name}"/>
-                    </p:column>
                     <p:column sortBy="#{outlet.name}"
                               headerText=" Name "
                               width="150">
@@ -53,20 +47,7 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    
-                    <p:column sortBy="#{outlet.address}"
-                              headerText=" Adress "
-                              width="150">
-                        <p:cellEditor>
-                            <f:facet name="output">
-                                <h:outputText value="#{outlet.address}"/>
-                            </f:facet>
-                            <f:facet name="input">
-                                <h:inputText value="#{outlet.address}"/>
-                            </f:facet>
-                        </p:cellEditor>
-                    </p:column>
-                    
+                                 
                     <p:column sortBy="#{outlet.address}"
                               headerText=" Adress "
                               width="150">

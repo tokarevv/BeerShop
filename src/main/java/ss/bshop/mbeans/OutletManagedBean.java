@@ -38,20 +38,12 @@ public class OutletManagedBean implements Serializable {
  
     @PostConstruct
     protected void postConstruct() {
-        getData();
-        updateModel();
+    	outletList = new ArrayList<Outlet>();
+        outletList.addAll(getOutletService().getAll());
+        model = new OutletDataModel(outletList);
     }  
     
-    private void getData() {
-        outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll()); 
-    }
-    
-    private void updateModel() {
-        model = new OutletDataModel(outletList);
-        selected=null;
-    }
-    
+        
      public void editRow(RowEditEvent event) {
     	Outlet rowItem = (Outlet) event.getObject();
         getOutletService().update(rowItem);
@@ -64,7 +56,6 @@ public class OutletManagedBean implements Serializable {
         return outletList;
     }
 
-    // 
     public OutletDataModel getModel() {
         return model;
     }
@@ -95,17 +86,17 @@ public class OutletManagedBean implements Serializable {
     }
 
    public String createNew() {
-       outletList.add(new Outlet());
-       getData();
-       updateModel();
+	   Outlet outlet=new Outlet();
+	   outlet.setName("default");
+       outletList.add(outlet);
+       getOutletService().add(outlet);
        return "";
    }
 
     public String delete() {
     	if(selected!=null){
             getOutletService().remove(selected.getId());
-       	    getData();
-            updateModel();
+            outletList.remove(selected);
     	}
     	return "";
     }
