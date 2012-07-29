@@ -2,21 +2,26 @@ package ss.bshop.mbeans;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.SessionScoped;
+import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Article;
+import ss.bshop.domain.SupOrderStructure;
 import ss.bshop.domain.Supplier;
+import ss.bshop.domain.SupplierOrder;
 import ss.bshop.service.IArticleService;
+import ss.bshop.service.ISupplierOrderService;
+import ss.bshop.service.ISupplierOrderStructureService;
 import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierOrderMB")
-@RequestScoped
+@SessionScoped
 public class SupplierOrderManagedBean implements Serializable{
 
 	/**
@@ -25,6 +30,13 @@ public class SupplierOrderManagedBean implements Serializable{
 	private static final long serialVersionUID = 1L;
     private FacesMessage msg;
 
+    //fields
+	@ManagedProperty(value="#{supplierOrderService}")
+	ISupplierOrderService supplierOrderService;
+	
+	@ManagedProperty(value="#{supplierOrderStructureService}")
+	ISupplierOrderStructureService supplierOrderStructureService;
+	
 	@ManagedProperty(value="#{supplierService}")
 	ISupplierService supplierService;
 	
@@ -37,33 +49,90 @@ public class SupplierOrderManagedBean implements Serializable{
 	
 	private String orderType = "Type is not selected";
 	
-    private List<Article> articleList = new ArrayList<Article>();
+    private List<SupOrderStructure> orderLineList = new ArrayList<SupOrderStructure>();
+    
+    private SupOrderStructure orderLine;
+    
+    private String comment;
+    
+    public String placeOrder(){
+    	SupplierOrder order = new SupplierOrder();
+    	order.setComment(comment);
+    	//order.setManager(manager); ???????????????
+    	order.setOrderDate(new Date());
+    	order.setType(orderType);
+    	order.setStatus(false);
+    	supplierOrderService.add(order);
+    	
+    	for (SupOrderStructure row : orderLineList){
+    		if (row.getAmount() > 0){
+    			row.setSupplierOrder(order);
+    			supplierOrderStructureService.add(row);
+    		}
+    	}
+		return "removal";
+    	
+    }
+    
+	public ISupplierOrderService getSupplierOrderService() {
+		return supplierOrderService;
+	}
 
-    public void handleOrderTypeChange(){
-        msg = new FacesMessage("order type is changed");  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-    }
-    
-    public void handleSupplierChange(){
-    	String supName = "";
-    	if (selectedSupplier == null){
-    		supName = "null";
-    	}
-    	else{
-    		supName = selectedSupplier.getName();
-    	}
-        FacesMessage msg = new FacesMessage("supplier is "+supName);  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
-       if(selectedSupplier !=null)  
-            articleList = articleService.getArticlesBySupplier(selectedSupplier);  
-        else  
-			articleList.clear();
-			Article newOne = new Article();
-			newOne.setName("Supplier is STILL not selected"+articleList.size());
-			articleList.add(newOne);
-    }
-    
-    public IArticleService getArticleService() {
+	public void setSupplierOrderService(ISupplierOrderService supplierOrderService) {
+		this.supplierOrderService = supplierOrderService;
+	}
+
+	public ISupplierOrderStructureService getSupplierOrderStructureService() {
+		return supplierOrderStructureService;
+	}
+
+	public void setSupplierOrderStructureService(
+			ISupplierOrderStructureService supplierOrderStructureService) {
+		this.supplierOrderStructureService = supplierOrderStructureService;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public void editRow(RowEditEvent event){
+//		SupOrderStructure row = (SupOrderStructure) event.getObject();
+//		orderLineList.add(row);
+
+	}
+	
+	public void handleSupplierChange() {
+		orderLineList.clear();
+		if (selectedSupplier != null) {
+			List<Article> articleList = articleService.getArticlesBySupplier(selectedSupplier);
+			for (Article a : articleList){
+				orderLineList.add(getNewOrderLine(a));
+			}
+		}
+	}
+
+	//getters and setters
+	public List<SupOrderStructure> getOrderLineList() {
+		return orderLineList;
+	}
+
+	public void setOrderLineList(List<SupOrderStructure> orderLineList) {
+		this.orderLineList = orderLineList;
+	}
+
+    private SupOrderStructure getNewOrderLine(Article a) {
+    	SupOrderStructure orderLine = new SupOrderStructure();
+    	orderLine.setArticle(a);
+    	orderLine.setPrice(a.getPrice());
+    	orderLine.setAmount(0);
+		return orderLine;
+	}
+
+	public IArticleService getArticleService() {
 		return articleService;
 	}
 
@@ -104,27 +173,13 @@ public class SupplierOrderManagedBean implements Serializable{
 		this.selectedSupplier = selectedSupplier;
 	}
 
-	public List<Article> getArticleList() {
-
-//		String supName = "";
-//		if (selectedSupplier == null) {
-//			//articleList.clear();
-//			Article newOne = new Article();
-//			newOne.setName("Supplier is not selected1"+articleList.size());
-//			articleList.add(newOne);
-//		}
-//		else {
-//			supName = selectedSupplier.getName();
-//			articleList = articleService.getArticlesBySupplier(selectedSupplier);
-//		}
-//        FacesMessage msg = new FacesMessage("get Article list"+supName);  
-//        
-//        FacesContext.getCurrentInstance().addMessage(null, msg);  
-		return articleList;
+	public SupOrderStructure getOrderLine() {
+		return orderLine;
 	}
 
-	public void setArticleList(List<Article> articleList) {
-		this.articleList = articleList;
+	public void setOrderLine(SupOrderStructure orderLine) {
+		this.orderLine = orderLine;
 	}
+
 
 }

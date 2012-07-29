@@ -13,5 +13,5 @@ public interface ISupplierOrderDAO {
 
 	public void remove(Long id);
 	
-	public void update(Long id);
+	public void update(SupplierOrder order);
 }

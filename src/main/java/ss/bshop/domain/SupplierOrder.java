@@ -39,8 +39,8 @@ public class SupplierOrder {
 	@Column
 	private Boolean status; // dispatched/not-dispatched
 	
-	@OneToMany
-	private List<SupOrderStructure> orderstruct;
+//	@OneToMany
+//	private List<SupOrderStructure> orderstruct;
 	 	 		
 	//getters and setters
 	public String getType() {
@@ -57,12 +57,12 @@ public class SupplierOrder {
 		this.id = id;
 	}
 	
-	public List<SupOrderStructure> getOrderstruct() {
-		return orderstruct;
-	}
-	public void setOrderstruct(List<SupOrderStructure> orderstruct) {
-		this.orderstruct = orderstruct;
-	}
+//	public List<SupOrderStructure> getOrderstruct() {
+//		return orderstruct;
+//	}
+//	public void setOrderstruct(List<SupOrderStructure> orderstruct) {
+//		this.orderstruct = orderstruct;
+//	}
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -106,8 +106,8 @@ public class SupplierOrder {
 				+ ((orderDate == null) ? 0 : orderDate.hashCode());
 		result = prime * result
 				+ ((orderDoneDate == null) ? 0 : orderDoneDate.hashCode());
-		result = prime * result
-				+ ((orderstruct == null) ? 0 : orderstruct.hashCode());
+//		result = prime * result
+//				+ ((orderstruct == null) ? 0 : orderstruct.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
@@ -146,11 +146,11 @@ public class SupplierOrder {
 				return false;
 		} else if (!orderDoneDate.equals(other.orderDoneDate))
 			return false;
-		if (orderstruct == null) {
-			if (other.orderstruct != null)
-				return false;
-		} else if (!orderstruct.equals(other.orderstruct))
-			return false;
+//		if (orderstruct == null) {
+//			if (other.orderstruct != null)
+//				return false;
+//		} else if (!orderstruct.equals(other.orderstruct))
+//			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;

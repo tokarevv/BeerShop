@@ -44,14 +44,8 @@ public class SupplierOrderDAO implements ISupplierOrderDAO {
 	}
 
 	@Override
-	public void update(Long id) {
-		SupplierOrder order = (SupplierOrder) sessionFactory.getCurrentSession().load(
-				SupplierOrder.class, id);
-		if (order != null) {
-			sessionFactory.getCurrentSession().delete(order);
-		}
-		sessionFactory.getCurrentSession().save(order);
-		
+	public void update(SupplierOrder order) {
+		sessionFactory.getCurrentSession().update(order);
 	}
 
 }
