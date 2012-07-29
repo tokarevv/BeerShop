@@ -10,8 +10,7 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-                <p:growl id="messages" showDetail="true"/>  
-             
+                            
                 <p:dataTable id="article" var="article"
                              value="#{articleMB.model}"
                              paginator="true"
@@ -21,12 +20,9 @@
                              emptyMessage="No data "
                              editable="true"
                              selection="#{articleMB.selected}"
-                             selectionMode="single"
-                             scrollable="true"
-                             liveScroll="true"
-                             paginatorAlwaysVisible="false"
-                             paginatorPosition="bottom"
-                             style="display:inline-block"
+                             selectionMode="single" 
+                           	 paginatorAlwaysVisible="false" 
+							paginatorPosition="bottom"
                         >
  	<f:facet name="header">  
                     Articles 
