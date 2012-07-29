@@ -10,7 +10,7 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-                <h:outputText value="Suppliers : "></h:outputText>
+               
                 <p:dataTable id="supplier" var="supplier"
                              value="#{supplierMB.model}"
                              paginator="true"
@@ -26,12 +26,14 @@
                              paginatorAlwaysVisible="false"
                              paginatorPosition="bottom"
                         >
-
+ <f:facet name="header">  
+                    Suppliers 
+                </f:facet> 
                     <p:ajax event="rowEdit"
                             update="@all"
                             listener="#{supplierMB.editRow}"/>
 
-                    <p:column width="80">
+                    <p:column width="40">
                         <p:rowEditor/>
                     </p:column>
                     
