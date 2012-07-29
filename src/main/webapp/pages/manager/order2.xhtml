@@ -11,7 +11,7 @@
 		<ui:define name="content">
 			<h:form>
 				<h:outputText value="Type: " />
-				  
+				
 				<p:selectOneMenu value="#{supplierOrderMB.orderType}">
 					<f:selectItem itemLabel="order" itemValue="order" />
 					<f:selectItem itemLabel="return" itemValue="return" />
@@ -19,7 +19,6 @@
 
 				<br></br>
 				<br></br>
-
 				<h:outputText value="Supplier:" />
 				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
 					effect="fade" var="s" style="width:160px">
@@ -32,26 +31,10 @@
           			</p:column>
 				</p:selectOneMenu>
 				
-        		<p:commandButton value="Submit" update="article"/>  
- 
+
 				<br></br>
 
-				<h:outputText value="Articles: "></h:outputText>
-				<p:dataTable id="article" var="article"
-					value="#{supplierOrderMB.articleList}" style="width: 10%">
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="ID" />
-						</f:facet>
-						<h:outputText value="#{articleList.id}" />
-					</p:column>
-					<p:column>
-						<f:facet name="header">
-							<h:outputText value="Name" />
-						</f:facet>
-						<h:outputText value="#{articleList.name}" />
-					</p:column>
-				</p:dataTable>
+
 			</h:form>
 		</ui:define>
 	</ui:composition>

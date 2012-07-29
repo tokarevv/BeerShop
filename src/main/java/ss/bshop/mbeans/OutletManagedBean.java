@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -31,6 +33,7 @@ public class OutletManagedBean implements Serializable {
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
     Outlet selected;
+    private FacesMessage msg;
 
  
     @PostConstruct
@@ -50,11 +53,11 @@ public class OutletManagedBean implements Serializable {
     }
     
      public void editRow(RowEditEvent event) {
-    	 Outlet rowItem = (Outlet) event.getObject();
-        if(rowItem.getId()==0) {getOutletService().add(rowItem);}
-        {getOutletService().update(rowItem); }
-        getData();
-        updateModel();
+    	Outlet rowItem = (Outlet) event.getObject();
+        getOutletService().update(rowItem);
+        
+        msg = new FacesMessage("Article Edited", rowItem.getName());   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
     }
 
     public List<Outlet> getoutletList() {

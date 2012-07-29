@@ -8,7 +8,7 @@ public class OutletMobile {
 	private String name;
 	private String address;
 	private String phone;
-	private byte discount;
+	private Integer discount;
 	public Long getId() {
 		return id;
 	}
@@ -33,10 +33,10 @@ public class OutletMobile {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public byte getDiscount() {
+	public Integer getDiscount() {
 		return discount;
 	}
-	public void setDiscount(byte discount) {
+	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
 	public static OutletMobile fromOutlet(Outlet outlet) {

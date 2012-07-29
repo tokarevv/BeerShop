@@ -1,11 +1,14 @@
 package ss.bshop.mbeans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Supplier;
@@ -14,7 +17,13 @@ import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierOrderMB")
 @RequestScoped
-public class SupplierOrderManagedBean{
+public class SupplierOrderManagedBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+    private FacesMessage msg;
 
 	@ManagedProperty(value="#{supplierService}")
 	ISupplierService supplierService;
@@ -24,13 +33,37 @@ public class SupplierOrderManagedBean{
 	
 	private Supplier selectedSupplier;
 	
-	private List<Supplier> suppliers;
+	private List<Supplier> suppliers = new ArrayList<Supplier>();
 	
-	private String orderType;
+	private String orderType = "Type is not selected";
 	
     private List<Article> articleList = new ArrayList<Article>();
 
-	public IArticleService getArticleService() {
+    public void handleOrderTypeChange(){
+        msg = new FacesMessage("order type is changed");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+    }
+    
+    public void handleSupplierChange(){
+    	String supName = "";
+    	if (selectedSupplier == null){
+    		supName = "null";
+    	}
+    	else{
+    		supName = selectedSupplier.getName();
+    	}
+        FacesMessage msg = new FacesMessage("supplier is "+supName);  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+       if(selectedSupplier !=null)  
+            articleList = articleService.getArticlesBySupplier(selectedSupplier);  
+        else  
+			articleList.clear();
+			Article newOne = new Article();
+			newOne.setName("Supplier is STILL not selected"+articleList.size());
+			articleList.add(newOne);
+    }
+    
+    public IArticleService getArticleService() {
 		return articleService;
 	}
 
@@ -55,7 +88,8 @@ public class SupplierOrderManagedBean{
 	}
 
 	public List<Supplier> getSuppliers() {
-		return supplierService.getAll();
+		suppliers = supplierService.getAll();
+		return suppliers;
 	}
 
 	public void setSuppliers(List<Supplier> suppliers) {
@@ -63,7 +97,7 @@ public class SupplierOrderManagedBean{
 	}
 
 	public Supplier getSelectedSupplier() {
-		return selectedSupplier;
+		return selectedSupplier;//new Supplier("Some test supplier");//
 	}
 
 	public void setSelectedSupplier(Supplier selectedSupplier) {
@@ -71,16 +105,26 @@ public class SupplierOrderManagedBean{
 	}
 
 	public List<Article> getArticleList() {
-		if (selectedSupplier == null) {
-			articleList.clear();
-		}
-		else {
-			articleList = articleService.getArticlesBySupplier(selectedSupplier);
-		}
+
+//		String supName = "";
+//		if (selectedSupplier == null) {
+//			//articleList.clear();
+//			Article newOne = new Article();
+//			newOne.setName("Supplier is not selected1"+articleList.size());
+//			articleList.add(newOne);
+//		}
+//		else {
+//			supName = selectedSupplier.getName();
+//			articleList = articleService.getArticlesBySupplier(selectedSupplier);
+//		}
+//        FacesMessage msg = new FacesMessage("get Article list"+supName);  
+//        
+//        FacesContext.getCurrentInstance().addMessage(null, msg);  
 		return articleList;
 	}
 
 	public void setArticleList(List<Article> articleList) {
 		this.articleList = articleList;
 	}
+
 }
