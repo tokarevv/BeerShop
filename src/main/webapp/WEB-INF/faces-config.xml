@@ -35,10 +35,4 @@
         
     </navigation-rule>  
     
-    <converter>
-    	<converter-id>supplierConverter</converter-id>
-   		<converter-class>ss.bshop.faces.converters.SupplierConverter</converter-class>
-	</converter>
-    
-    
 </faces-config>

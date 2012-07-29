@@ -11,99 +11,75 @@
 		<ui:define name="content">
 			<h:form>
 			
-        <h:outputLabel for="name" value="Name:" style="font-weight:bold"/>  
-          
-        <p:inputText id="name" value="#{supplierOrderMB.firstname}" />  
-          
-        <p:commandButton value="Submit" update="display1"/>  
-  
-        <h:outputText value="#{supplierOrderMB.firstname}" id="display1" />  			
-				<br></br>
-				<br></br>
-			
-       <h:outputLabel for="name1" value="Name:" style="font-weight:bold"/>  
-          
-        <p:inputText id="name1" value="#{supplierOrderMB.firstname1}" />  
-          
-        <p:commandButton value="Submit" update="display2"/>  
-  
-        <h:outputText value="#{supplierOrderMB.firstname1}" id="display2" />  			
-				<br></br>
-				<br></br>
-			
-				<h:outputText value="Type: " />
-				  
-				<p:selectOneMenu value="#{supplierOrderMB.orderType}">
+				<p:growl id="msgs" showDetail="true" />
+				
+				<h:outputText value="#{supplierOrderMB.orderType}" id="title" />
+
+				<p:separator/>  
+
+				<h:outputText value="Type: "  style="font-weight:bold" />
+
+				<p:selectOneMenu value="#{supplierOrderMB.orderType}" >
+					<f:selectItem itemLabel="Select type" itemValue="" />
 					<f:selectItem itemLabel="order" itemValue="order" />
 					<f:selectItem itemLabel="return" itemValue="return" />
+					<p:ajax update="title,msgs"
+						listener="#{supplierOrderMB.handleOrderTypeChange}" />
 				</p:selectOneMenu>
 
 				<br></br>
-				<br></br>
 
-				<h:outputText value="Supplier:" />
-				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"  converter="supplierConverter"
-					effect="fade" var="s" style="width:160px">
+				<h:outputText value="Supplier:"  style="font-weight:bold" />
+				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
+					effect="fade" converter="#{supplierConverter}">
 					<f:selectItem itemLabel="Select One" itemValue="" />
 					<f:selectItems value="#{supplierOrderMB.suppliers}" var="supplier"
 						itemLabel="#{supplier.name}" itemValue="#{supplier}" />
-
-					<p:column>  
-               			 #{s.name} (#{s.id})
-          			</p:column>
+					<p:ajax update="display,articles"
+						listener="#{supplierOrderMB.handleSupplierChange}" />
 				</p:selectOneMenu>
-				
-        		<p:commandButton value="Submit" update="articles"/>  
-        		<p:commandButton value="Submit" update="display"/> 
-        		<h:outputText value="#{supplierOrderMB.selectedSupplier.name}" id="display" /> 
- 
-				<br></br>
 
+				<h:outputText value="#{supplierOrderMB.selectedSupplier.name}"
+					id="display" />
+
+				<p:separator/>  
+				
 				<h:outputText value="Articles: "></h:outputText>
-                <p:dataTable id="articles" var="article"
-                             value="#{supplierOrderMB.articleList}"
-                             paginator="true"
-                             rows="10"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="10,20,50"
-                             emptyMessage="No data "
-                             editable="true"
-                             scrollable="true"
-                             liveScroll="true"
-                             paginatorAlwaysVisible="true"
-                             paginatorPosition="bottom"
-                        >
-                    <p:column headerText=" ID " width="25">
-                        <h:outputText value="#{article.id}"/>
-                    </p:column>
-                    
-                    <p:column  headerText=" Name "  width="150"
-                               sortBy="#{article.name}">
-                        <h:outputText value="#{article.name}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Supplier"  width="150">
-                        <h:outputText value="#{article.supplier.getName()}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Quantity"  width="30">
-                        <h:outputText value="#{article.quantity}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Unit"  width="20">
-                        <h:outputText value="#{article.unit}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="Price"  width="20">
-                        <h:outputText value="#{article.price}"/>
-                    </p:column>
-                    
-                    <p:column  headerText="SalePrice"  width="30">
-                        <h:outputText value="#{article.price*1.3}"/>
-                    </p:column>
-                    
-                    
-                </p:dataTable>
+				<p:dataTable id="articles" var="article"
+					value="#{supplierOrderMB.articleList}" paginator="true" rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" emptyMessage="No data "
+					editable="true" scrollable="true" liveScroll="true"
+					paginatorAlwaysVisible="true" paginatorPosition="bottom">
+					<p:column headerText=" ID " width="25">
+						<h:outputText value="#{article.id}" />
+					</p:column>
+
+					<p:column headerText=" Name " width="150" sortBy="#{article.name}">
+						<h:outputText value="#{article.name}" />
+					</p:column>
+
+					<p:column headerText="Supplier" width="150">
+						<h:outputText value="#{article.supplier.getName()}" />
+					</p:column>
+
+					<p:column headerText="Quantity" width="30">
+						<h:outputText value="#{article.quantity}" />
+					</p:column>
+
+					<p:column headerText="Unit" width="20">
+						<h:outputText value="#{article.unit}" />
+					</p:column>
+
+					<p:column headerText="Price" width="20">
+						<h:outputText value="#{article.price}" />
+					</p:column>
+
+					<p:column headerText="SalePrice" width="30">
+						<h:outputText value="#{article.price*1.3}" />
+					</p:column>
+
+				</p:dataTable>
 			</h:form>
 		</ui:define>
 	</ui:composition>

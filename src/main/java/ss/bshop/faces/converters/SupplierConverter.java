@@ -1,21 +1,28 @@
 package ss.bshop.faces.converters;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import ss.bshop.domain.Supplier;
 import ss.bshop.service.ISupplierService;
 
+
+@ManagedBean
+@RequestScoped
 public class SupplierConverter implements Converter {
 
-	@ManagedProperty(value = "#{supplierService}")
+	@ManagedProperty(value="#{supplierService}")
 	ISupplierService supplierService;
 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
+    	//facesContext.addMessage(null, new FacesMessage("Converter - getAsObject"));
         if (submittedValue.trim().equals("")) {
             return null;
         } else {
@@ -31,7 +38,8 @@ public class SupplierConverter implements Converter {
 
     }
 
-    public String getAsString(FacesContext facesContext, UIComponent component, Object value) {
+	public String getAsString(FacesContext facesContext, UIComponent component, Object value) {
+    	//facesContext.addMessage(null, new FacesMessage("Converter - getAsString"));
         if (value == null || value.equals("")) {
             return "";
         } else {
@@ -39,19 +47,12 @@ public class SupplierConverter implements Converter {
         }
     }
 	
-	
-//	@Override
-//	public Object getAsObject(FacesContext context, UIComponent component,
-//			String value) {
-//		//return supplierService.get(Long.parseLong(value));
-//		//return supplierService.get((long) 4);
-//		return supplierService.getAll().get(0);
-//	}
-//
-//	@Override
-//	public String getAsString(FacesContext context, UIComponent component,
-//			Object value) {
-//		return new Long(4).toString();//((Supplier) value).getId().toString(); // --> convert to a unique
-//														// string.
-//	}
+    public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
+	}
+
 }
