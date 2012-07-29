@@ -19,13 +19,12 @@
 <!--****************************** North content *********************************-->
             <p:layoutUnit id="north" position="north" size="95">  
                 <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
-                    <a href="./../../index.xhtml">BShop</a> 
+                    <a href="./../../empty.xhtml">BShop</a> 
                     <p:menubar styleClass="pageHeaderMenue" >
 
                                 <p:menuitem  value="Articles"  url="sv_articles.xhtml"/>
                                 <p:menuitem  value="Outlet"    url="sv_outlets.xhtml"/>
                                 <p:menuitem  value="Salesreps" url="sv_salesrep.xhtml"/>
-
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>  
@@ -63,7 +62,7 @@
                 </p:column>
 
                 <p:column  headerText="Supplier"  width="120">
-                    <h:outputText value="#{article.supplier.name}"/>
+                    <h:outputText value="#{article.supplier.getName()}"/>
                 </p:column>
 
                 <p:column  headerText="Qnty"  width="40">
@@ -84,7 +83,7 @@
                             <h:outputText value="#{article.percent}" />  
                         </f:facet>  
                         <f:facet name="input">  
-                            <p:inputText value="#{article.percent}" style="width:15 0%"/>  
+                            <p:inputText value="#{article.percent}" style="width:150%"/>  
                         </f:facet>  
                     </p:cellEditor>  
                 </p:column>

@@ -31,8 +31,8 @@ public class Outlet {
 	@Column
 	private String svidNumber;
 
-    @Column
-    private String comment;
+        @Column
+        private String comment;
 
 	@Column
 	private String sertificateNumber;
@@ -51,7 +51,13 @@ public class Outlet {
 	private String groupp;
 	
 	@Column
-	private byte discount;
+	private Integer discount;
+        
+        @Column
+        private Double latitude;
+        
+        @Column
+        private Double longitude;
 
 	public Long getId() {
 		return id;
@@ -157,21 +163,39 @@ public class Outlet {
 		this.salesRep = salesRep;
 	}
 
-	public String getGroup() {
-		return groupp;
-	}
+        public String getGroupp() {
+            return groupp;
+        }
 
-	public void setGroup(String group) {
-		this.groupp = group;
-	}
+        public void setGroupp(String groupp) {
+            this.groupp = groupp;
+        }
 
-	public byte getDiscount() {
-		return discount;
-	}
+        public Integer getDiscount() {
+            return discount;
+        }
 
-	public void setDiscount(byte discount) {
-		this.discount = discount;
-	}
+        public void setDiscount(Integer discount) {
+            this.discount = discount;
+        }
+
+        public Double getLatitude() {
+            return latitude;
+        }
+
+        public void setLatitude(Double latitude) {
+            this.latitude = latitude;
+        }
+
+        public Double getLongitude() {
+            return longitude;
+        }
+
+        public void setLongitude(Double longitude) {
+            this.longitude = longitude;
+        }
+
+	
 
 	@Override
 	public int hashCode() {
