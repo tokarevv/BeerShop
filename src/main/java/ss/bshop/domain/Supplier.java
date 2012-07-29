@@ -143,6 +143,7 @@ public class Supplier implements Serializable {
 		result = prime * result + ((address == null) ? 0 : address.hashCode());
 		result = prime * result + ((comment == null) ? 0 : comment.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
+//		result = prime * result + ((goods == null) ? 0 : goods.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((phone == null) ? 0 : phone.hashCode());
@@ -185,6 +186,11 @@ public class Supplier implements Serializable {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
+//		if (goods == null) {
+//			if (other.goods != null)
+//				return false;
+//		} else if (!goods.equals(other.goods))
+//			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;

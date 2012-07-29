@@ -25,16 +25,21 @@
 	<context:component-scan base-package="ss.bshop.service" />
 	<context:component-scan base-package="ss.bshop.mobile" />
 	
-
-	<!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
-	<tx:annotation-driven transaction-manager="transactionManager" />
-
 	<!-- Менеджер транзакций -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>	
+	
+	<!-- Настраивает управление транзакциями с помощью аннотации @Transactional -->
+	<tx:annotation-driven transaction-manager="transactionManager" />
 
+	<!-- Менеджер транзакций -->
+	<bean id="SupplierConverter"
+		class="ss.bshop.faces.converters.SupplierConverter">
+		<property name="supplierService" ref="supplierService" />
+	</bean>	
+	
 	<!-- Настройки фабрики сессий Хибернейта -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
