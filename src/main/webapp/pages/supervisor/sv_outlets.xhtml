@@ -19,13 +19,12 @@
 <!--****************************** North content *********************************-->
             <p:layoutUnit id="north" position="north" size="95">  
                 <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
-                    <a href="./../../index.xhtml">BShop</a> 
+                    <a href="./../../empty.xhtml">BShop</a> 
                     <p:menubar styleClass="pageHeaderMenue" >
 
                                 <p:menuitem  value="Articles"  url="sv_articles.xhtml"/>
                                 <p:menuitem  value="Outlet"    url="sv_outlets.xhtml"/>
                                 <p:menuitem  value="Salesreps" url="sv_salesrep.xhtml"/>
-
                     </p:menubar>
                 </h:form>
             </p:layoutUnit>  
@@ -39,52 +38,38 @@
           <h:form id="form">  
 
             <p:growl id="messages" showDetail="true"/>  
-            <p:dataTable id="articles" var="article"
-                            value="#{articleMB.model}"
+            <p:dataTable id="outlets" var="outlet"
+                            value="#{outletMB.model}"
                             editable="true"
                             emptyMessage="No data "
                     >
 
                 <f:facet name="header">  
-                    Articles 
+                    Outlets 
                 </f:facet> 
-
-                <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 
+                
+                <p:ajax event="rowEdit" listener="#{outletMB.editRow}" 
                         update=":form:messages" /> 
-                 
 
-                <p:column headerText=" ID " width="20">
-                    <h:outputText value="#{article.id}"/>
+                <p:column headerText="Name" style="width:200px">
+                    <h:outputText value="#{outlet.name}"/>
                 </p:column>
 
-                <p:column  headerText=" Name "  width="120"
-                            sortBy="#{article.name}">
-                    <h:outputText value="#{article.name}"/>
+                <p:column  headerText="Date of Reg"  style="width:150px">
+                    <h:outputText value="#{outlet.registerDate}"/>
                 </p:column>
 
-                <p:column  headerText="Supplier"  width="120">
-                    <h:outputText value="#{article.supplier.name}"/>
+                <p:column  headerText="Scale of proc"  style="width:40px">
+                    <h:outputText value="     "/>
                 </p:column>
 
-                <p:column  headerText="Qnty"  width="40">
-                    <h:outputText value="#{article.quantity}"/>
-                </p:column>
-
-                <p:column  headerText="Unit"  width="30">
-                    <h:outputText value="#{article.unit}"/>
-                </p:column>
-
-                <p:column  headerText="Price"  style="width:40px">
-                    <h:outputText value="#{article.price}"/>
-                </p:column>
-
-                <p:column headerText="%" style="width:40px">  
+                <p:column headerText="Discount" style="width:80px">  
                     <p:cellEditor>  
                         <f:facet name="output">  
-                            <h:outputText value="#{article.percent}" />  
+                            <h:outputText value="#{outlet.discount}" />  
                         </f:facet>  
                         <f:facet name="input">  
-                            <p:inputText value="#{article.percent}" style="width:15 0%"/>  
+                            <p:inputText value="#{outlet.discount}" style="width:150%"/>  
                         </f:facet>  
                     </p:cellEditor>  
                 </p:column>
@@ -93,8 +78,16 @@
                     <p:rowEditor />  
                 </p:column>
 
-                <p:column  headerText="SalePrice"  width="40">
-                    <h:outputText value="#{article.price*1.3*article.percent/100}"/>
+                <p:column  headerText="Adress"  style="width:100px">
+                    <h:outputText value="#{outlet.address}"/>
+                </p:column>
+
+                <p:column  headerText="Group"  style="width:40px">
+                    <h:outputText value="#{outlet.groupp}"/>
+                </p:column>
+                             
+                <p:column  headerText="SalesRep"  style="width:150px">
+                    <h:outputText value="#{outlet.salesRep.user.fullname}"/>
                 </p:column>
 
             </p:dataTable>

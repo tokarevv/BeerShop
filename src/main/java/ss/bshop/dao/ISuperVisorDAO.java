@@ -1,10 +1,11 @@
 package ss.bshop.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import ss.bshop.domain.SuperVisor;
 
-public interface ISuperVisorDAO {
+public interface ISuperVisorDAO extends Serializable{
 	public void addSuperVisor(SuperVisor superVisor);
 	public void updateSuperVisor(SuperVisor superVisor);
 	public void removeSuperVisor(Long id);
