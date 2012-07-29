@@ -1,9 +1,10 @@
 package ss.bshop.dao;
+import java.io.Serializable;
 import java.util.List;
 
 import ss.bshop.domain.Supplier;
 
-public interface ISupplierDAO {
+public interface ISupplierDAO extends Serializable{
 	
 	public void add(Supplier supplier);
 

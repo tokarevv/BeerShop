@@ -14,6 +14,10 @@ import ss.bshop.domain.Manager;
 @Repository
 public class ManagerDAO implements IManagerDAO {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	private SessionFactory sessionFactory;
 	
