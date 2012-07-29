@@ -4,102 +4,114 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:body>
 	<ui:composition template="base.xhtml">
 		<ui:define name="content">
 			<h:form>
+				<h:panelGroup id="blockGroup" layout="block" styleClass="blockable"
+					style="margin-right: 40px;">
 
-				<p:growl id="msgs" showDetail="true" />
+					<p:growl id="growl" />
 
-				<h:outputText value="#{supplierOrderMB.orderType}" id="title"
-					style="font-weight:bold" />
+					<h:outputText value="#{supplierOrderMB.orderType}" id="title"
+						style="font-weight:bold" />
 
-				<p:separator />
-				<h:panelGrid columns="3" cellpadding="5">
+					<p:separator />
+					<h:panelGrid columns="3" cellpadding="5">
 
-					<h:outputText value="Type: " style="font-weight:bold" />
+						<h:outputText value="Type: " style="font-weight:bold" />
 
-					<p:selectOneMenu value="#{supplierOrderMB.orderType}">
-						<f:selectItem itemLabel="Select type" itemValue="" />
-						<f:selectItem itemLabel="order" itemValue="order" />
-						<f:selectItem itemLabel="return" itemValue="return" />
-						<p:ajax update="title" />
-					</p:selectOneMenu>
+						<p:selectOneMenu value="#{supplierOrderMB.orderType}">
+							<f:selectItem itemLabel="Select type" itemValue="" />
+							<f:selectItem itemLabel="order" itemValue="order" />
+							<f:selectItem itemLabel="return" itemValue="return" />
+							<p:ajax update="title" />
+						</p:selectOneMenu>
 
-					<br></br>
+						<br></br>
 
-					<h:outputText value="Supplier:" style="font-weight:bold" />
-					<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
-						effect="fade" converter="#{supplierConverter}">
-						<f:selectItem itemLabel="Select One" itemValue="" />
-						<f:selectItems value="#{supplierOrderMB.suppliers}" var="supplier"
-							itemLabel="#{supplier.name}" itemValue="#{supplier}" />
-						<p:ajax update="display,articles"
-							listener="#{supplierOrderMB.handleSupplierChange}" />
-					</p:selectOneMenu>
+						<h:outputText value="Supplier:" style="font-weight:bold" />
+						<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
+							effect="fade" converter="#{supplierConverter}">
+							<f:selectItem itemLabel="Select One" itemValue="" />
+							<f:selectItems value="#{supplierOrderMB.suppliers}"
+								var="supplier" itemLabel="#{supplier.name}"
+								itemValue="#{supplier}" />
+							<p:ajax update="display,articles"
+								listener="#{supplierOrderMB.handleSupplierChange}" />
+						</p:selectOneMenu>
 
-					<h:outputText value="#{supplierOrderMB.selectedSupplier}"
-						id="display" />
-				</h:panelGrid>
-				
-        <h:outputLabel for="comment" value="Сomment:" style="font-weight:bold"/>  
-          
-        <p:inputText id="comment" value="#{supplierOrderMB.comment}" />  
-				
-				<p:separator />
+						<h:outputText value="#{supplierOrderMB.selectedSupplier}"
+							id="display" />
+						<h:outputLabel for="comment" value="Сomment:"
+							style="font-weight:bold" />
 
-				<h:outputText value="Articles: "></h:outputText>
-				<p:dataTable id="articles" var="orderLine"
-					value="#{supplierOrderMB.orderLineList}" paginator="true" rows="10"
-					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="10,20,50" emptyMessage="No data "
-					editable="true" scrollable="true" liveScroll="true"
-					paginatorAlwaysVisible="true" paginatorPosition="bottom">
-					<p:ajax event="rowEdit" update="@all"
-						listener="#{supplierOrderMB.editRow}" />
-
-					<p:column width="80">
-						<p:rowEditor />
-					</p:column>
-
-					<p:column headerText=" ID " width="40">
-						<h:outputText value="#{orderLine.article.id}" />
-					</p:column>
-
-					<p:column headerText=" Name " width="200"
-						sortBy="#{orderLine.article.name}">
-						<h:outputText value="#{orderLine.article.name}" />
-					</p:column>
-
-					<p:column headerText="Quantity" width="70">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{orderLine.amount}" />
-							</f:facet>
-							<f:facet name="input">
-								<h:inputText value="#{orderLine.amount}" />
-							</f:facet>
-						</p:cellEditor>
-					</p:column>
-
-					<p:column headerText="Price" width="70">
-						<h:outputText value="#{orderLine.price}" />
-					</p:column>
-
-				</p:dataTable>
-
-				<p:commandButton value="Save order" update="info" actionListener="#{supplierOrderMB.placeOrder}" icon="ui-icon-disk"
-					oncomplete="dlg.show()" />
-
-				<p:dialog header="Selected Values" modal="true" showEffect="fade"
-					hideEffect="fade" widgetVar="dlg">
-					<h:panelGrid columns="1" id="info">
-						<h:outputText value="saved"/>
+						<p:inputText id="comment" value="#{supplierOrderMB.comment}" />
 					</h:panelGrid>
-				</p:dialog>
 
+
+					<p:separator />
+
+					<h:outputText value="Articles: "></h:outputText>
+					<p:dataTable id="articles" var="orderLine"
+						value="#{supplierOrderMB.orderLineList}" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,20,50" emptyMessage="No data "
+						editable="true" scrollable="true" liveScroll="true"
+						paginatorAlwaysVisible="true" paginatorPosition="bottom">
+						<p:ajax event="rowEdit" update="@all"
+							listener="#{supplierOrderMB.editRow}" />
+
+						<p:column width="80">
+							<p:rowEditor />
+						</p:column>
+
+						<p:column headerText=" ID " width="40">
+							<h:outputText value="#{orderLine.article.id}" />
+						</p:column>
+
+						<p:column headerText=" Name " width="200"
+							sortBy="#{orderLine.article.name}">
+							<h:outputText value="#{orderLine.article.name}" />
+						</p:column>
+
+						<p:column headerText="Quantity" width="70">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{orderLine.amount}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:inputText value="#{orderLine.amount}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Price" width="70">
+							<h:outputText value="#{orderLine.price}" />
+						</p:column>
+
+					</p:dataTable>
+
+					<p:commandButton value="Save order" update="growl"
+						actionListener="#{supplierOrderMB.placeOrder}" icon="ui-icon-disk"
+						onstart="blockUIWidget1.block()"
+						oncomplete="blockUIWidget1.unblock()" />
+
+				</h:panelGroup>
+				
+				<pe:blockUI target="blockGroup" widgetVar="blockUIWidget1">
+					<h:panelGrid columns="2">
+						<h:graphicImage library="images" name="ajax-loader1.gif"
+							style="margin-right: 12px; vertical-align: middle;" />
+						<h:outputText value="Saving order..."
+							style="white-space: nowrap;" />
+					</h:panelGrid>
+				</pe:blockUI>
+				
 			</h:form>
 		</ui:define>
 	</ui:composition>

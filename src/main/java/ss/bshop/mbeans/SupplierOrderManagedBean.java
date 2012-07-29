@@ -9,6 +9,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Article;
@@ -56,6 +58,8 @@ public class SupplierOrderManagedBean implements Serializable{
     private String comment;
     
     public String placeOrder(){
+    	//FacesContext.getCurrentInstance().setProcessingEvents(true);
+    	
     	SupplierOrder order = new SupplierOrder();
     	order.setComment(comment);
     	//order.setManager(manager); ???????????????
@@ -70,7 +74,7 @@ public class SupplierOrderManagedBean implements Serializable{
     			supplierOrderStructureService.add(row);
     		}
     	}
-		return "removal";
+    	return "pages/manager/base.xhtml?faces-redirect=true";
     	
     }
     

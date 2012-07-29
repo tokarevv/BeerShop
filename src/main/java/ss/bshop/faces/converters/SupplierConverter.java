@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import ss.bshop.domain.Supplier;
 import ss.bshop.service.ISupplierService;
 
