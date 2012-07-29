@@ -30,6 +30,35 @@ public class SupplierManagedBean  implements Serializable{
 	
 	@ManagedProperty(value = "#{SupplierDataModel}")
     private SupplierDataModel model;
+	
+	@PostConstruct
+    protected void postConstruct() {
+		supplierList = new ArrayList<Supplier>();
+    	supplierList.addAll(getSupplierService().getAll()); 
+    	model = new SupplierDataModel(supplierList);
+    }  
+        
+    public void editRow(RowEditEvent event) {
+       Supplier rowItem = (Supplier) event.getObject();
+       getSupplierService().update(rowItem); 
+       selected=null;
+    }
+    
+    public String createNew() {
+    	Supplier supplier=new Supplier();
+    	supplier.setName("default");
+    	supplierList.add(supplier);
+    	getSupplierService().add(supplier);  	
+        return "";
+    }
+
+     public String delete() {
+     	if(selected!=null){
+     		getSupplierService().remove(selected.getId());
+     		supplierList.remove(selected);
+     	}
+     	return "";
+     }
    
 	
 	public SupplierDataModel getModel() {
@@ -64,43 +93,5 @@ public class SupplierManagedBean  implements Serializable{
 		this.supplierList = supplierList;
 	}
 	
-	@PostConstruct
-    protected void postConstruct() {
-        getData();
-        updateModel();
-    }  
-    
-    private void getData() {
-    	supplierList = new ArrayList<Supplier>();
-    	supplierList.addAll(getSupplierService().getAll()); 
-    }
-    
-    private void updateModel() {
-        model = new SupplierDataModel(supplierList);
-        selected=null;
-    }
-    
-    public void editRow(RowEditEvent event) {
-        Supplier rowItem = (Supplier) event.getObject();
-        if(rowItem.getId()==0) {getSupplierService().add(rowItem);}
-        {getSupplierService().update(rowItem); }
-        getData();
-        updateModel();
-    }
-    
-    public String createNew() {
-    	supplierList.add(new Supplier());
-    	getData();
-        updateModel();
-        return "";
-    }
-
-     public String delete() {
-     	if(selected!=null){
-     		getSupplierService().remove(selected.getId());
-        	    getData();
-             updateModel();
-     	}
-     	return "";
-     }
+	
    }
