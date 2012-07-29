@@ -22,3 +22,7 @@
 .pageHeaderForm td {
 	border: none;
 }
+
+.Table {
+	display:inline-block;	
+}

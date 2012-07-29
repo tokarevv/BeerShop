@@ -51,11 +51,16 @@ public class OutletManagedBean implements Serializable {
  
     @PostConstruct
     protected void postConstruct() {
+
         mapModel = new DefaultMapModel();  
-        getData();
-        updateModel();
+
+    	outletList = new ArrayList<Outlet>();
+        outletList.addAll(getOutletService().getAll());
+        model = new OutletDataModel(outletList);
+
     }  
     
+
     private void getData() {
         outletList = new ArrayList<Outlet>();
         outletList.addAll(getOutletService().getAll()); 
@@ -67,9 +72,10 @@ public class OutletManagedBean implements Serializable {
     }
     
     public String createNew() {
-       outletList.add(new Outlet());
-       getData();
-       updateModel();
+       Outlet outlet=new Outlet();
+       outlet.setName("default");
+       outletList.add(outlet);
+       getOutletService().add(outlet);
        return "";
    }
     
@@ -98,9 +104,9 @@ public class OutletManagedBean implements Serializable {
      	}
      	return "";
     }
-    
-    
-    public void editRow(RowEditEvent event) {
+         
+     public void editRow(RowEditEvent event) {
+
     	Outlet rowItem = (Outlet) event.getObject();
         getOutletService().update(rowItem);
         
@@ -160,7 +166,6 @@ public class OutletManagedBean implements Serializable {
     public void setSelected(Outlet selected) {
         this.selected = selected;
     }
-
 
     public MapModel getMapModel() {
         return mapModel;
