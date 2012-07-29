@@ -14,7 +14,9 @@ import javax.faces.context.FacesContext;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Outlet;
+import ss.bshop.domain.SalesRep;
 import ss.bshop.service.IOutletService;
+import ss.bshop.service.ISalesRepService;
 
 /**
  * Outlet Managed Bean
@@ -24,15 +26,20 @@ import ss.bshop.service.IOutletService;
 @RequestScoped
 public class OutletManagedBean implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @ManagedProperty(value = "#{outletService}")
-    IOutletService outletService;
+    private IOutletService outletService;
+    
+    @ManagedProperty(value = "#{salesRepService}")
+    private ISalesRepService salesRepService;
 
-    List<Outlet> outletList = new ArrayList<Outlet>();
+    private List<Outlet> outletList = new ArrayList<Outlet>();
+    private List<SalesRep> srlst = new ArrayList<SalesRep>();
+    
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
-    Outlet selected;
+    private Outlet selected;
     private FacesMessage msg;
 
  
@@ -52,7 +59,32 @@ public class OutletManagedBean implements Serializable {
         selected=null;
     }
     
-     public void editRow(RowEditEvent event) {
+    public String createNew() {
+       outletList.add(new Outlet());
+       getData();
+       updateModel();
+       return "";
+   }
+    
+   public String moreDetail(){
+       return "outlet_detail";
+   }
+
+    public String delete() {
+        
+        if(selected!=null){
+            getOutletService().remove(selected.getId());
+            outletList.remove(selected);
+            selected = null;
+
+            msg = new FacesMessage("Outlet Deleted","");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+     	}
+     	return "";
+    }
+    
+    
+    public void editRow(RowEditEvent event) {
     	Outlet rowItem = (Outlet) event.getObject();
         getOutletService().update(rowItem);
         
@@ -64,7 +96,6 @@ public class OutletManagedBean implements Serializable {
         return outletList;
     }
 
-    // 
     public OutletDataModel getModel() {
         return model;
     }
@@ -75,13 +106,13 @@ public class OutletManagedBean implements Serializable {
 
      public IOutletService getOutletService() {
 		return outletService;
-	}
+    }
 
-	public void setOutletService(IOutletService outletService) {
-		this.outletService = outletService;
-	}
+    public void setOutletService(IOutletService outletService) {
+            this.outletService = outletService;
+    }
 
-	public void setoutletList(List<Outlet> outletList) {
+    public void setoutletList(List<Outlet> outletList) {
         this.outletList = outletList;
     }
 
@@ -94,20 +125,24 @@ public class OutletManagedBean implements Serializable {
         this.selected = selected;
     }
 
-   public String createNew() {
-       outletList.add(new Outlet());
-       getData();
-       updateModel();
-       return "";
-   }
+   
 
-    public String delete() {
-    	if(selected!=null){
-            getOutletService().remove(selected.getId());
-       	    getData();
-            updateModel();
-    	}
-    	return "";
+    public List<SalesRep> getSrlst() {
+        return getSalesRepService().getAll();
     }
+
+    public void setSrlst(List<SalesRep> srlst) {
+        this.srlst = srlst;
+    }
+
+    public ISalesRepService getSalesRepService() {
+        return salesRepService;
+    }
+
+    public void setSalesRepService(ISalesRepService salesRepService) {
+        this.salesRepService = salesRepService;
+    }
+    
+    
     
  }

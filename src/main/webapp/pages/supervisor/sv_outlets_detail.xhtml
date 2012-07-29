@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Bshop. Supervisor</title>
+    </h:head>
+
+    <h:body>
+
+        <p:layout fullPage="true">  
+<!--****************************** North content *********************************-->
+            <p:layoutUnit id="north" position="north" size="95">  
+                <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
+                    <a href="./../../empty.xhtml">BShop</a> 
+                    <p:menubar styleClass="pageHeaderMenue" >
+
+                                <p:menuitem  value="Articles"  url="sv_articles.xhtml"/>
+                                <p:menuitem  value="Outlet"    url="sv_outlets.xhtml"/>
+                                <p:menuitem  value="Salesreps" url="sv_salesrep.xhtml"/>
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>  
+<!--****************************** West content *********************************-->
+            <p:layoutUnit position="west" size="200"  resizable="true" collapsible="true">  
+                
+            </p:layoutUnit>  
+            
+<!--****************************** Centr content *********************************-->
+        <p:layoutUnit position="center">  
+          <h:form id="form">  
+
+            <p:growl id="messages" showDetail="true"/>  
+            
+            <p:tabView id="tabView">  
+
+                <p:tab id="tab1" title="Outlet Detail">  
+                    <h:panelGrid columns="2" cellpadding="10"> 
+                        <h:outputText id="name" value="Name: #{outletMB.selected.name}"/> <br/>
+                        <h:outputText id="date" value="Date of regestration: #{outletMB.selected.registerDate}"/> <br/>
+                        <h:outputText id="sumorder" value="Order sum(mock): 1000"/> <br/>
+                        <h:outputText id="sumavg" value="Avg sum (month): 100"/> <br/>
+                        <h:outputText id="debit" value="Debit sum : 500"/> <br/>
+                        <h:outputLabel for="spinner" value="Discount :" style="size: 20px"/> <br/>
+                        <p:spinner    id="spinner" value="#{outletMB.selected.discount}" size="1"/> <br/> 
+                        <h:outputText value="Response SalesRep (Dlbclick): "/>  
+                        <p:inplace id="selectableInplace" label="#{outletMB.selected.salesRep.user.fullname}" effectSpeed="fast" event="dblclick">  
+                            <h:selectOneMenu  value="#{outletMB.srlst}">  
+                                <f:selectItem itemLabel="" itemValue="Istanbul" />  
+/>  
+                            </h:selectOneMenu>  
+                        </p:inplace> 
+
+                    </h:panelGrid>  
+                </p:tab>  
+
+                <p:tab id="tab2" title="Order History">  
+                    <h:panelGrid columns="2" cellpadding="10">  
+                        <p:graphicImage id="tab2Img" value="/images/godfather/godfather2.jpg" />  
+                        <h:outputText id="tab2Text" value="Francis Ford Coppola's legendary continuation and sequel to his landmark 1972 film, The_Godfather, parallels the young Vito Corleone's rise with his son Michael's spiritual fall, deepening The_Godfather's depiction of the dark side of the American dream.  
+                        In the early 1900s, the child Vito flees his Sicilian village for America after the local Mafia kills his family. Vito struggles to make a living, legally or illegally, for his wife and growing brood in Little Italy,  
+                        killing the local Black Hand Fanucci after he demands his customary cut of the tyro's business. With Fanucci gone, Vito's communal stature grows."/>  
+                    </h:panelGrid>  
+                </p:tab>                    
+            </p:tabView>  
+          </h:form>  
+        </p:layoutUnit>  
+
+        </p:layout>  
+    </h:body>
+
+</html>
