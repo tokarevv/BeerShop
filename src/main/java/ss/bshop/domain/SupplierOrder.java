@@ -1,11 +1,18 @@
 package ss.bshop.domain;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.*;
-
-import org.hibernate.annotations.GenerationTime;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 @Entity
@@ -17,7 +24,6 @@ public class SupplierOrder {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
 	private Long id;
 	
 	@Column
@@ -32,6 +38,9 @@ public class SupplierOrder {
 	
 	@Column
 	private String orderDoneDate;
+	
+	@OneToOne(optional=false, cascade=CascadeType.ALL)
+	private Supplier supplier;
 	
 	@Column
 	private String comment;
@@ -57,12 +66,6 @@ public class SupplierOrder {
 		this.id = id;
 	}
 	
-//	public List<SupOrderStructure> getOrderstruct() {
-//		return orderstruct;
-//	}
-//	public void setOrderstruct(List<SupOrderStructure> orderstruct) {
-//		this.orderstruct = orderstruct;
-//	}
 	public Date getOrderDate() {
 		return orderDate;
 	}
@@ -95,6 +98,13 @@ public class SupplierOrder {
 		this.manager = manager;
 	}
 	
+	public Supplier getSupplier() {
+		return supplier;
+	}
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -106,9 +116,9 @@ public class SupplierOrder {
 				+ ((orderDate == null) ? 0 : orderDate.hashCode());
 		result = prime * result
 				+ ((orderDoneDate == null) ? 0 : orderDoneDate.hashCode());
-//		result = prime * result
-//				+ ((orderstruct == null) ? 0 : orderstruct.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result
+				+ ((supplier == null) ? 0 : supplier.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -146,15 +156,15 @@ public class SupplierOrder {
 				return false;
 		} else if (!orderDoneDate.equals(other.orderDoneDate))
 			return false;
-//		if (orderstruct == null) {
-//			if (other.orderstruct != null)
-//				return false;
-//		} else if (!orderstruct.equals(other.orderstruct))
-//			return false;
 		if (status == null) {
 			if (other.status != null)
 				return false;
 		} else if (!status.equals(other.status))
+			return false;
+		if (supplier == null) {
+			if (other.supplier != null)
+				return false;
+		} else if (!supplier.equals(other.supplier))
 			return false;
 		if (type == null) {
 			if (other.type != null)

@@ -53,4 +53,13 @@
         </navigation-case>
     
     </navigation-rule>  
+                
+    <navigation-rule>
+        <from-view-id>/pages/manager/recept.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>suplOrder</from-outcome>
+                <to-view-id>/pages/manager/suplOrder.xhtml</to-view-id>
+        </navigation-case>
+    
+    </navigation-rule>  
 </faces-config>
