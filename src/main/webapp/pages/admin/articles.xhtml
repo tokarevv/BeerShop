@@ -126,6 +126,21 @@
                         </p:cellEditor>
                     </p:column>
                     
+					<p:column  headerText="Supplier" width="300"
+						id="supplier">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
+									<f:selectItems value="#{articleMB.suppliers}" var="supplier"
+										itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>   
+                
                     <p:column sortBy="#{article.comment}"
                               headerText=" comment "
                               width="175">

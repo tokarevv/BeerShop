@@ -12,7 +12,6 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +20,9 @@ import javax.faces.bean.SessionScoped;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Article;
+import ss.bshop.domain.Supplier;
 import ss.bshop.service.IArticleService;
+import ss.bshop.service.ISupplierService;
 
 
 @ManagedBean(name="articleMB")
@@ -32,8 +33,12 @@ public class ArticleManagedBean implements Serializable{
     private List<Article> articleList;
     private Article selected;
     private FacesMessage msg;
+	private List<Supplier> suppliers;
    
-    @ManagedProperty(value = "#{articleService}")
+	@ManagedProperty(value="#{supplierService}")
+	ISupplierService supplierService;
+
+	@ManagedProperty(value = "#{articleService}")
     private IArticleService articleService;
 
     @ManagedProperty(value = "#{ArticleDataModel}")
@@ -50,9 +55,13 @@ public class ArticleManagedBean implements Serializable{
         
         //Wired List With Data Model Table
         model = new ArticleDataModel(articleList);
-    }  
+        
+        // Init list of suppliers
+        suppliers = new ArrayList<Supplier>();
+        suppliers = supplierService.getAll();
+   }  
     
-    public String createNew() {
+	public String createNew() {
     	Article tmp = new Article("<edit>");
         getArticleService().add(tmp);
         articleList.add(tmp);
@@ -87,7 +96,15 @@ public class ArticleManagedBean implements Serializable{
 
      // ****************************  Getters and setters
      
-     public ArticleDataModel getModel() {
+	public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
+	}
+
+	public ArticleDataModel getModel() {
         return model;
     }
 
@@ -114,5 +131,13 @@ public class ArticleManagedBean implements Serializable{
 
     public void setSelected(Article selected) {
             this.selected = selected;
-    } 
+    }
+
+	public List<Supplier> getSuppliers() {
+		return suppliers;
+	}
+
+	public void setSuppliers(List<Supplier> suppliers) {
+		this.suppliers = suppliers;
+	} 
 }
