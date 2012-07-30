@@ -3,6 +3,8 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -46,6 +48,8 @@ public class OutletManagedBean implements Serializable {
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
     private Outlet selected;
+    private Outlet current;
+    
     private FacesMessage msg;
 
  
@@ -60,17 +64,6 @@ public class OutletManagedBean implements Serializable {
 
     }  
     
-
-    private void getData() {
-        outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll()); 
-    }
-    
-    private void updateModel() {
-        model = new OutletDataModel(outletList);
-        selected=null;
-    }
-    
     public String createNew() {
        Outlet outlet=new Outlet();
        outlet.setName("default");
@@ -81,13 +74,20 @@ public class OutletManagedBean implements Serializable {
     
    public String moreDetail(){
        String res = "";
-       if(selected!=null){ 
-           // mapModel = new DefaultMapModel();
-            if(selected.getLatitude()!=selected.getLongitude()){
-                curCoord = new LatLng(selected.getLatitude(),selected.getLongitude());
-                mapModel.addOverlay(new Marker(curCoord, selected.getName()));
+       if(selected!=null ){ 
+            try {
+                // mapModel = new DefaultMapModel();
+                 current = selected.clone();
+                 if(current.getLatitude()!=current.getLongitude()){
+                 curCoord = new LatLng(current.getLatitude(),current.getLongitude());
+                 mapModel.addOverlay(new Marker(curCoord, current.getName()));
             }
             res = "outlet_detail";
+            } catch (CloneNotSupportedException ex) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!Trouble");
+                Logger.getLogger(OutletManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
        }
        return res;
    }
@@ -114,12 +114,13 @@ public class OutletManagedBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg); 
     }
     
-    public void editSelected() {
+    public String editSelected() {
 
-        getOutletService().update(selected);
+        getOutletService().update(current);
         
-        msg = new FacesMessage("Outlet Edited", selected.getName());   
+        msg = new FacesMessage("Outlet Edited", current.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
+        return "";
     }
     
     public void addMarker(ActionEvent actionEvent) {
@@ -189,6 +190,14 @@ public class OutletManagedBean implements Serializable {
 
     public void setLng(double lng) {
         this.lng = lng;
+    }
+
+    public Outlet getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Outlet current) {
+        this.current = current;
     }
 
     

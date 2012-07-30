@@ -44,16 +44,21 @@
                             emptyMessage="No data "
                             selection="#{outletMB.selected}"
                             selectionMode="single"
+                            widgetVar="outletsTable"
                     >
 
                 <f:facet name="header">  
-                    Outlets 
-                </f:facet> 
+                    Outlets
+       
+                </f:facet>  
                 
                 <p:ajax event="rowEdit" listener="#{outletMB.editRow}" 
                         update=":form:messages" /> 
 
-                <p:column headerText="Name" style="width:200px">
+                <p:column headerText="Name" style="width:200px"
+                          filterBy="#{outlet.name}"   
+                          footerText="contains"  
+                          filterMatchMode="contains">  
                     <h:outputText value="#{outlet.name}"/>
                 </p:column>
 
