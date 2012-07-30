@@ -59,18 +59,7 @@ public class OutletManagedBean implements Serializable {
         model = new OutletDataModel(outletList);
 
     }  
-    
-
-    private void getData() {
-        outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll()); 
-    }
-    
-    private void updateModel() {
-        model = new OutletDataModel(outletList);
-        selected=null;
-    }
-    
+        
     public String createNew() {
        Outlet outlet=new Outlet();
        outlet.setName("default");
