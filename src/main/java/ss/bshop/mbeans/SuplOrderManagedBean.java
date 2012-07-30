@@ -3,6 +3,8 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -10,6 +12,8 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.Marker;
 
 import ss.bshop.domain.SupplierOrder;
 import ss.bshop.service.ISupplierOrderService;
@@ -27,6 +31,7 @@ public class SuplOrderManagedBean  implements Serializable{
 	@ManagedProperty(value="#{supplierOrderService}")
 	ISupplierOrderService supplierOrderService;
 	SupplierOrder selected;
+	SupplierOrder current;
 	List<SupplierOrder> supplierOrderList;
 	
 	@ManagedProperty(value = "#{SuplOrderDataModel}")
@@ -59,6 +64,15 @@ public class SuplOrderManagedBean  implements Serializable{
      		supplierOrderList.remove(selected);
      	}
      	return "";
+     }
+     
+     public String moreDetail(){
+         String res = "";
+         if(selected!=null ){ 
+          res = "suplOrder";
+                          
+         }
+         return res;
      }
    
 	
