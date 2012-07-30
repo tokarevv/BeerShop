@@ -35,5 +35,13 @@
  
         
     </navigation-rule>  
+
+    <navigation-rule>
+        <from-view-id>/pages/supervisor/sv_outlets.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outlet_detail</from-outcome>
+                <to-view-id>/pages/supervisor/sv_outlets_detail.xhtml</to-view-id>
+        </navigation-case>
     
+    </navigation-rule>  
 </faces-config>

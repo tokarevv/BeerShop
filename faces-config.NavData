@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scene Scope="Faces Configuration Only" version="2">
     <Scope Scope="Faces Configuration Only">
-        <Node id="pages/manager/user.xhtml" x="661" y="162" zoom="true"/>
-        <Node id="pages/manager/removal.xhtml" x="483" y="126" zoom="true"/>
+        <Node id="pages/manager/user.xhtml" x="662" y="162" zoom="false"/>
+        <Node id="pages/manager/removal.xhtml" x="382" y="123" zoom="true"/>
         <Node id="*" x="594" y="497" zoom="false"/>
-        <Node id="pages/manager/recept.xhtml" x="987" y="158" zoom="true"/>
-        <Node id="pages/manager/order.xhtml" x="324" y="161" zoom="true"/>
+        <Node id="pages/supervisor/sv_outlets.xhtml" x="24" y="146" zoom="true"/>
+        <Node id="pages/supervisor/sv_outlets_detail.xhtml" x="-5" y="31" zoom="true"/>
+        <Node id="pages/manager/recept.xhtml" x="983" y="182" zoom="true"/>
+        <Node id="pages/manager/order.xhtml" x="229" y="194" zoom="true"/>
     </Scope>
     <Scope Scope="Project">
         <Node id="pages/admin/templates/header.xhtml" x="334" y="625" zoom="true"/>
