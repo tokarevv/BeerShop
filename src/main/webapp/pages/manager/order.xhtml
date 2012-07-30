@@ -41,7 +41,9 @@
 								var="supplier" itemLabel="#{supplier.name}"
 								itemValue="#{supplier}" />
 							<p:ajax update="display,articles"
-								listener="#{supplierOrderMB.handleSupplierChange}" />
+								listener="#{supplierOrderMB.handleSupplierChange}" 
+       							onstart="blockUIWidget2.block()"
+        						oncomplete="blockUIWidget2.unblock()" />
 						</p:selectOneMenu>
 
 						<h:outputText value="#{supplierOrderMB.selectedSupplier}"
@@ -57,8 +59,12 @@
 
 					<h:outputText value="Articles: "></h:outputText>
 					<p:dataTable id="articles" var="orderLine"
-						value="#{supplierOrderMB.orderLineList}"
-						editable="true" scrollable="true" liveScroll="true">
+						value="#{supplierOrderMB.orderLineList}" paginator="true"
+						rows="10"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,20,50" emptyMessage="No data "
+						editable="true" scrollable="true" liveScroll="true"
+						paginatorAlwaysVisible="true" paginatorPosition="bottom">
 						<p:ajax event="rowEdit" update="@all"
 							listener="#{supplierOrderMB.editRow}" />
 
@@ -70,12 +76,12 @@
 							<h:outputText value="#{orderLine.article.id}" />
 						</p:column>
 
-						<p:column headerText=" Name "
+						<p:column headerText=" Name " width="200"
 							sortBy="#{orderLine.article.name}" filterBy="#{orderLine.article.name}">
 							<h:outputText value="#{orderLine.article.name}" />
 						</p:column>
 
-						<p:column headerText=" Barcode "
+						<p:column headerText=" Barcode " width="200"
 							sortBy="#{orderLine.article.barcode}" filterBy="#{orderLine.article.barcode}">
 							<h:outputText value="#{orderLine.article.barcode}" />
 						</p:column>
@@ -109,6 +115,15 @@
 						<h:graphicImage library="images" name="ajax-loader1.gif"
 							style="margin-right: 12px; vertical-align: middle;" />
 						<h:outputText value="Saving order..."
+							style="white-space: nowrap;" />
+					</h:panelGrid>
+				</pe:blockUI>
+
+				<pe:blockUI target="blockGroup" widgetVar="blockUIWidget2">
+					<h:panelGrid columns="2">
+						<h:graphicImage library="images" name="ajax-loader1.gif"
+							style="margin-right: 12px; vertical-align: middle;" />
+						<h:outputText value="Loading articles..."
 							style="white-space: nowrap;" />
 					</h:panelGrid>
 				</pe:blockUI>
