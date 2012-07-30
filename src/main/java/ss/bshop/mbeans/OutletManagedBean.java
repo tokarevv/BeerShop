@@ -38,12 +38,16 @@ public class OutletManagedBean implements Serializable {
     @ManagedProperty(value = "#{outletService}")
     private IOutletService outletService;
     
+    @ManagedProperty(value = "#{salesRepService}")
+    private ISalesRepService salesRepService;
+    
     private MapModel mapModel;
     private LatLng curCoord; 
     private double lat;  
     private double lng;  
 
     private List<Outlet> outletList = new ArrayList<Outlet>();
+    private List<SalesRep> salesReps = new ArrayList<SalesRep>();
     
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
@@ -61,6 +65,7 @@ public class OutletManagedBean implements Serializable {
     	outletList = new ArrayList<Outlet>();
         outletList.addAll(getOutletService().getAll());
         model = new OutletDataModel(outletList);
+        salesReps = salesRepService.getAll();
 
     }  
     
@@ -199,6 +204,22 @@ public class OutletManagedBean implements Serializable {
     public void setCurrent(Outlet current) {
         this.current = current;
     }
+
+	public ISalesRepService getSalesRepService() {
+		return salesRepService;
+	}
+
+	public void setSalesRepService(ISalesRepService salesRepService) {
+		this.salesRepService = salesRepService;
+	}
+
+	public List<SalesRep> getSalesReps() {
+		return salesReps;
+	}
+
+	public void setSalesReps(List<SalesRep> salesReps) {
+		this.salesReps = salesReps;
+	}
 
     
     
