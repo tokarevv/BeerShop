@@ -57,12 +57,8 @@
 
 					<h:outputText value="Articles: "></h:outputText>
 					<p:dataTable id="articles" var="orderLine"
-						value="#{supplierOrderMB.orderLineList}" paginator="true"
-						rows="10"
-						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-						rowsPerPageTemplate="10,20,50" emptyMessage="No data "
-						editable="true" scrollable="true" liveScroll="true"
-						paginatorAlwaysVisible="true" paginatorPosition="bottom">
+						value="#{supplierOrderMB.orderLineList}"
+						editable="true" scrollable="true" liveScroll="true">
 						<p:ajax event="rowEdit" update="@all"
 							listener="#{supplierOrderMB.editRow}" />
 
@@ -74,9 +70,14 @@
 							<h:outputText value="#{orderLine.article.id}" />
 						</p:column>
 
-						<p:column headerText=" Name " width="200"
-							sortBy="#{orderLine.article.name}">
+						<p:column headerText=" Name "
+							sortBy="#{orderLine.article.name}" filterBy="#{orderLine.article.name}">
 							<h:outputText value="#{orderLine.article.name}" />
+						</p:column>
+
+						<p:column headerText=" Barcode "
+							sortBy="#{orderLine.article.barcode}" filterBy="#{orderLine.article.barcode}">
+							<h:outputText value="#{orderLine.article.barcode}" />
 						</p:column>
 
 						<p:column headerText="Quantity" width="70">
@@ -97,7 +98,7 @@
 					</p:dataTable>
 
 					<p:commandButton value="Save order" update="growl"
-						actionListener="#{supplierOrderMB.placeOrder}" icon="ui-icon-disk"
+						action="#{supplierOrderMB.placeOrder}" icon="ui-icon-disk"
 						onstart="blockUIWidget1.block()"
 						oncomplete="blockUIWidget1.unblock()" />
 

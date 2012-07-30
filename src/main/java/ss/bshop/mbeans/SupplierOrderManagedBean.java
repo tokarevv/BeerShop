@@ -8,9 +8,7 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-
+import javax.faces.bean.ViewScoped;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Article;
@@ -23,7 +21,7 @@ import ss.bshop.service.ISupplierOrderStructureService;
 import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierOrderMB")
-@SessionScoped
+@ViewScoped
 public class SupplierOrderManagedBean implements Serializable{
 
 	/**
@@ -74,7 +72,7 @@ public class SupplierOrderManagedBean implements Serializable{
     			supplierOrderStructureService.add(row);
     		}
     	}
-    	return "pages/manager/base.xhtml?faces-redirect=true";
+    	return "base_manager";
     	
     }
     
