@@ -46,10 +46,11 @@
                             selectionMode="single"
                             widgetVar="outletsTable"
                     >
-
-                <f:facet name="header">  
-                    Outlets
-       
+                <f:facet name="header">
+                    <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />  
+                    </p:outputPanel>  
                 </f:facet>  
                 
                 <p:ajax event="rowEdit" listener="#{outletMB.editRow}" 
@@ -57,20 +58,23 @@
 
                 <p:column headerText="Name" style="width:200px"
                           filterBy="#{outlet.name}"   
-                          footerText="contains"  
-                          filterMatchMode="contains">  
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;">  
                     <h:outputText value="#{outlet.name}"/>
                 </p:column>
 
-                <p:column  headerText="Date of Reg"  style="width:80px">
+                <p:column  headerText="Date of Reg"  style="width:80px"
+                           filterBy="#{outlet.registerDate}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
                     <h:outputText value="#{outlet.registerDate}" />
                 </p:column>
 
-                <p:column  headerText="ScOfProc"  style="width:40px">
-                    <h:outputText value="     "/>
-                </p:column>
 
-                <p:column headerText="Discount" style="width:80px">  
+                <p:column headerText="Discount" style="width:80px"
+                          filterBy="#{outlet.discount}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"> 
                     <p:cellEditor>  
                         <f:facet name="output">  
                             <h:outputText value="#{outlet.discount}" />  
@@ -85,15 +89,24 @@
                     <p:rowEditor />  
                 </p:column>
 
-                <p:column  headerText="Adress"  style="width:100px">
+                <p:column  headerText="Adress"  style="width:100px"
+                           filterBy="#{outlet.address}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
                     <h:outputText value="#{outlet.address}"/>
                 </p:column>
 
-                <p:column  headerText="Group"  style="width:80px">
+                <p:column  headerText="Group"  style="width:80px"
+                           filterBy="#{outlet.groupp}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
                     <h:outputText value="#{outlet.groupp}"/>
                 </p:column>
                              
-                <p:column  headerText="SalesRep"  style="width:100px">
+                <p:column  headerText="SalesRep"  style="width:100px"
+                           filterBy="#{outlet.salesRep.user.fullname}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
                     <h:outputText value="#{outlet.salesRep.user.fullname}"/>
                 </p:column>
 

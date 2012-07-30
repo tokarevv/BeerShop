@@ -30,6 +30,7 @@ public class GenereateObjectHelper {
 		SupplierOrder order = new SupplierOrder();
 		order.setOrderDate(new Date());
 		order.setStatus(true);
+		order.setSupplier(getNewSupplier());
 		return order;
 	}
 
