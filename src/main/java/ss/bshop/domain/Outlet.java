@@ -309,6 +309,28 @@ public class Outlet {
 			return false;
 		return true;
 	}
+
+    public Outlet clone() throws CloneNotSupportedException {
+        Outlet o = new Outlet();
+            o.setAddress(address);
+            o.setComment(comment);
+            o.setContractNumber(contractNumber);
+            o.setDiscount(discount);
+            o.setEmail(email);
+            o.setGroupp(groupp);
+            o.setLatitude(latitude);
+            o.setINN(INN);
+            o.setId(id);
+            o.setName(name);
+            o.setOKPO(OKPO);
+            o.setPhone(phone);
+            o.setRegisterDate(registerDate);
+            o.setSalesRep(salesRep);
+            o.setSertificateNumber(sertificateNumber);
+            o.setSvidNumber(svidNumber);
+            o.setLongitude(longitude);
+        return o;
+    }
 	
 	
 	
