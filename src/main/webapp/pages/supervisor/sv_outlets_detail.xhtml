@@ -55,12 +55,15 @@
                             <p:spinner    id="spinner" value="#{outletMB.current.discount}" size="1"/> <br/> <br/> 
                             <h:outputText value="Response SalesRep : "/>  
                             <p:inplace id="selectableInplace" label="(Dblclick)   #{outletMB.current.salesRep.user.fullname}      " effectSpeed="fast" event="dblclick">  
-                                <h:selectOneMenu  >  
-                                    <f:selectItem itemLabel="Vasia" itemValue="Vasia" />  
-                                    <f:selectItem itemLabel="Bob Morgan" itemValue="Bob Morgan" />  
-                                    <f:selectItem itemLabel="Dude M." itemValue="Dude M." /> 
-                                    <f:selectItem itemLabel="Bood" itemValue="Vasia" />  
-                                </h:selectOneMenu>  
+ 					
+ 								<p:selectOneMenu value="#{outletMB.current.salesRep}"
+									effect="fade" converter="#{salesRepConverter}">
+									<f:selectItem itemLabel="Select One" itemValue="" />
+									<f:selectItems value="#{outletMB.salesReps}"
+										var="salesRep" itemLabel="#{salesRep.user.fullname}"
+										itemValue="#{salesRep}" />
+								</p:selectOneMenu>
+								
                             </p:inplace> 
                             <br/><br/>
                             <div class="buttonLeft" style="float: left;">
