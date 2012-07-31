@@ -1,6 +1,7 @@
 package ss.bshop.domain;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -48,9 +50,15 @@ public class SupplierOrder {
 	@Column
 	private Boolean status; // dispatched/not-dispatched
 	
-//	@OneToMany
-//	private List<SupOrderStructure> orderstruct;
+	@OneToMany
+	private List<SupOrderStructure> orderstruct;
 	 	 		
+	public List<SupOrderStructure> getOrderstruct() {
+		return orderstruct;
+	}
+	public void setOrderstruct(List<SupOrderStructure> orderstruct) {
+		this.orderstruct = orderstruct;
+	}
 	//getters and setters
 	public String getType() {
 		return type;
@@ -116,6 +124,8 @@ public class SupplierOrder {
 				+ ((orderDate == null) ? 0 : orderDate.hashCode());
 		result = prime * result
 				+ ((orderDoneDate == null) ? 0 : orderDoneDate.hashCode());
+		result = prime * result
+				+ ((orderstruct == null) ? 0 : orderstruct.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result
 				+ ((supplier == null) ? 0 : supplier.hashCode());
@@ -155,6 +165,11 @@ public class SupplierOrder {
 			if (other.orderDoneDate != null)
 				return false;
 		} else if (!orderDoneDate.equals(other.orderDoneDate))
+			return false;
+		if (orderstruct == null) {
+			if (other.orderstruct != null)
+				return false;
+		} else if (!orderstruct.equals(other.orderstruct))
 			return false;
 		if (status == null) {
 			if (other.status != null)

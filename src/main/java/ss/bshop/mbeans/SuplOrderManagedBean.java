@@ -3,24 +3,22 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
-import org.primefaces.model.map.LatLng;
-import org.primefaces.model.map.Marker;
 
+import ss.bshop.domain.SupOrderStructure;
 import ss.bshop.domain.SupplierOrder;
 import ss.bshop.service.ISupplierOrderService;
+import ss.bshop.service.ISupplierOrderStructureService;
 
 
 @ManagedBean(name="suplOrderMB")
-@RequestScoped
+@SessionScoped
 public class SuplOrderManagedBean  implements Serializable{
 
 	/**
@@ -30,9 +28,13 @@ public class SuplOrderManagedBean  implements Serializable{
 	
 	@ManagedProperty(value="#{supplierOrderService}")
 	ISupplierOrderService supplierOrderService;
-	SupplierOrder selected;
 	SupplierOrder current;
+	
+	SupplierOrder selected;
+	
 	List<SupplierOrder> supplierOrderList;
+	
+	
 	
 	@ManagedProperty(value = "#{SuplOrderDataModel}")
     private SuplOrderDataModel model;
@@ -68,10 +70,9 @@ public class SuplOrderManagedBean  implements Serializable{
      
      public String moreDetail(){
          String res = "";
-//         if(selected!=null ){ 
-          res = "suplOrder";
-                          
-//         }
+         if(selected!=null ){ 
+          res = "suplOrder";                        
+         }
          return res;
      }
    
@@ -108,8 +109,57 @@ public class SuplOrderManagedBean  implements Serializable{
 		this.supplierOrderList = supplierOrderList;
 	}
 
+	//-----------------------------
+
+
+	@ManagedProperty(value="#{supplierOrderStructService}")
+	ISupplierOrderStructureService supplierOrderStructService;
+
+	SupOrderStructure selectedStruct;
 	
+	List<SupOrderStructure> supplierOrderStructList;
+	
+//	@ManagedProperty(value = "#{SuplOrderStructDataModel}")
+//    private SuplOrderStructDataModel strucrModel;
+	
+	
+//	public SuplOrderStructDataModel getStrucrModel() {
+//		 supplierOrderStructList = selected.getOrderstruct();
+//		strucrModel = new SuplOrderStructDataModel(supplierOrderStructList);
+//		return strucrModel;
+//	}
+//
+//	public void setStrucrModel(SuplOrderStructDataModel strucrModel) {
+//		this.strucrModel = strucrModel;
+//	}
+
+	public ISupplierOrderStructureService getSupplierOrderStructService() {
+		return supplierOrderStructService;
+	}
+
+	public void setSupplierOrderStructService(
+			ISupplierOrderStructureService supplierOrderStructService) {
+		this.supplierOrderStructService = supplierOrderStructService;
+	}
+
+	public SupOrderStructure getSelectedStruct() {
+		return selectedStruct;
+	}
+
+	public void setSelectedStruct(SupOrderStructure selectedStruct) {
+		this.selectedStruct = selectedStruct;
+	}
+
+	public List<SupOrderStructure> getSupplierOrderStructList() {
+		return supplierOrderStructList;
+	}
+
+	public void setSupplierOrderStructList(
+			List<SupOrderStructure> supplierOrderStructList) {
+		this.supplierOrderStructList = supplierOrderStructList;
+	}
 
 	
+		
 	
    }
