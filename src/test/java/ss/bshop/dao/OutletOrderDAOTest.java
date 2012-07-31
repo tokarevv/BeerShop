@@ -27,15 +27,18 @@ public class OutletOrderDAOTest {
 
 	@Test
 	public void testSaveAndRead() {
-		OutletOrder order = new OutletOrder();
+		OutletOrder order = GenereateObjectHelper.getNewOutletOrder();
+
 		outletOrderDAO.add(order);
+		List<OutletOrder> orderList = outletOrderDAO.getAll();
+		Assert.assertEquals(order, orderList.get(orderList.size() - 1));
 		OutletOrder read = outletOrderDAO.get(order.getId());
 		Assert.assertEquals(order, read);
 	}
 
 	@Test
 	public void testUpdateAndRead() {
-		OutletOrder order = new OutletOrder();
+		OutletOrder order = GenereateObjectHelper.getNewOutletOrder();
 		outletOrderDAO.add(order);
 		order.setPayment(123.45);
 		outletOrderDAO.update(order);
@@ -46,10 +49,7 @@ public class OutletOrderDAOTest {
 	@Test
 	public void testSaveAndGetAll() {
 		List<OutletOrder> orderList = new ArrayList<OutletOrder>();
-		OutletOrder order = new OutletOrder();
-		outletOrderDAO.add(order);
-		orderList.add(order);
-		order = new OutletOrder();
+		OutletOrder order = GenereateObjectHelper.getNewOutletOrder();
 		outletOrderDAO.add(order);
 		orderList.add(order);
 		List<OutletOrder> read = outletOrderDAO.getAll();
@@ -58,7 +58,7 @@ public class OutletOrderDAOTest {
 
 	@Test
 	public void testSaveAndDelete() {
-		OutletOrder order = new OutletOrder();
+		OutletOrder order = GenereateObjectHelper.getNewOutletOrder();
 		outletOrderDAO.add(order);
 		outletOrderDAO.remove(order.getId());
 		List<OutletOrder> orderList = outletOrderDAO.getAll();
