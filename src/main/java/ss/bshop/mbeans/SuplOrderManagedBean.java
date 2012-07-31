@@ -68,10 +68,10 @@ public class SuplOrderManagedBean  implements Serializable{
      
      public String moreDetail(){
          String res = "";
-         if(selected!=null ){ 
+//         if(selected!=null ){ 
           res = "suplOrder";
                           
-         }
+//         }
          return res;
      }
    

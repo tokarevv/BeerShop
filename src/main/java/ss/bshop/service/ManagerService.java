@@ -13,6 +13,10 @@ import ss.bshop.domain.Manager;
 @Transactional(readOnly = true)
 public class ManagerService implements IManagerService{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Autowired
 	private IManagerDAO managerDAO;
 	
