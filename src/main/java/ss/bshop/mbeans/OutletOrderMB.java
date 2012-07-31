@@ -1,5 +1,6 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.OutletOrderDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import ss.bshop.service.IOutletOrderService;
 
 @ManagedBean(name="outletOrderMB")
 @RequestScoped
-public class OutletOrderManagedBean  implements Serializable{
+public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@ManagedProperty(value="#{outletOrderService}")

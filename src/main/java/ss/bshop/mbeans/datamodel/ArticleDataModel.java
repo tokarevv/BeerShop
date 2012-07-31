@@ -1,4 +1,4 @@
-package ss.bshop.mbeans;
+package ss.bshop.mbeans.datamodel;
 
 import org.primefaces.model.SelectableDataModel;
 import javax.faces.model.ListDataModel;

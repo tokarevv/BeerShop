@@ -1,5 +1,6 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.SupplierDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +17,7 @@ import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierMB")
 @RequestScoped
-public class SupplierManagedBean  implements Serializable{
+public class SupplierMB  implements Serializable{
 
 	/**
 	 * 

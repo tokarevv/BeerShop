@@ -5,6 +5,7 @@ package ss.bshop.mbeans;
  *
  * @author nick
  */
+import ss.bshop.mbeans.datamodel.ArticleDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="articleMB")
 @SessionScoped
-public class ArticleManagedBean implements Serializable{
+public class ArticleMB implements Serializable{
 
     private static final long serialVersionUID = 1L;
     private List<Article> articleList;
@@ -139,5 +140,6 @@ public class ArticleManagedBean implements Serializable{
 
 	public void setSuppliers(List<Supplier> suppliers) {
 		this.suppliers = suppliers;
-	} 
+	}
+        
 }

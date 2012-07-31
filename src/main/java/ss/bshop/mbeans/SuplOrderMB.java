@@ -1,5 +1,6 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.SuplOrderDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ import ss.bshop.service.ISupplierOrderStructureService;
 
 @ManagedBean(name="suplOrderMB")
 @SessionScoped
-public class SuplOrderManagedBean  implements Serializable{
+public class SuplOrderMB  implements Serializable{
 
 	/**
 	 * 

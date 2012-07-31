@@ -1,4 +1,4 @@
-package ss.bshop.mbeans;
+package ss.bshop.mbeans.datamodel;
 
 import java.util.List;
 

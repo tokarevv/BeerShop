@@ -1,5 +1,7 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.OutletDataModel;
+import ss.bshop.mbeans.datamodel.SalesRepDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +35,7 @@ import ss.bshop.service.ISalesRepService;
  */
 @ManagedBean(name = "outletMB")
 @ViewScoped
-public class OutletManagedBean implements Serializable {
+public class OutletMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
 
@@ -53,8 +55,11 @@ public class OutletManagedBean implements Serializable {
     
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
+    
+    @ManagedProperty(value = "#{SalesRepDataModel}")
+    private SalesRepDataModel modelsr;
+    
     private Outlet selected;
-    private SalesRep selectedSalesRep;
     private Outlet current;
     
     private FacesMessage msg;
@@ -68,12 +73,14 @@ public class OutletManagedBean implements Serializable {
     	outletList = new ArrayList<Outlet>();
         outletList.addAll(outletService.getAll());
         model = new OutletDataModel(outletList);
+        modelsr = new SalesRepDataModel(salesRepService.getAll());
+        
         salesReps = salesRepService.getAll();
 
     }  
     
     public void onSelectSR(){
-        outletList = outletService.getBySalesRep(selectedSalesRep);
+        //outletList = outletService.getBySalesRep(selectedSalesRep);
     }
     
     public String createNew() {
@@ -96,7 +103,7 @@ public class OutletManagedBean implements Serializable {
                 }
             res = "outlet_detail";
             } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(OutletManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(OutletMB.class.getName()).log(Level.SEVERE, null, ex);
             }
             
        }
@@ -233,12 +240,12 @@ public class OutletManagedBean implements Serializable {
 		this.salesReps = salesReps;
 	}
 
-    public SalesRep getSelectedSalesRep() {
-        return selectedSalesRep;
+    public SalesRepDataModel getModelsr() {
+        return modelsr;
     }
 
-    public void setSelectedSalesRep(SalesRep selectedSalesRep) {
-        this.selectedSalesRep = selectedSalesRep;
+    public void setModelsr(SalesRepDataModel modelsr) {
+        this.modelsr = modelsr;
     }
 
     
