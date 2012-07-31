@@ -8,6 +8,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
         <link href="./../../WEB-INF/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./../../WEB-INF/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <title>Bshop. Supervisor</title>
@@ -34,13 +35,30 @@
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
-        <p:layoutUnit position="center">  
+        <p:layoutUnit position="center">
+<h:form>  
+  
+               <p:growl id="messages" showDetail="true" />  
+           <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
+                                style="width:600px;height:400px;"  
+                                model="#{outletMB.mapModel}" 
+                                onPointClick="handlePointClick(event);"
+                                widgetVar="map" 
+                                disabledDoubleClickZoom="true"
+                                >
+                <p:ajax event="markerDrag" listener="#{mapBean.onMarkerDrag}" update="messages" />  
+           </p:gmap>
+           </h:form> 
 
-           <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"   
-                            style="width:600px;height:400px" />
-        </p:layoutUnit>  
+                             
+ 
+
+            </p:layoutUnit>  
 
         </p:layout>  
     </h:body>
+                        
+
+        
 
 </html>

@@ -21,7 +21,6 @@
                 <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
                     <a href="./../../empty.xhtml">BShop</a> 
                     <p:menubar styleClass="pageHeaderMenue" >
-
                                 <p:menuitem  value="Articles"  url="sv_articles.xhtml"/>
                                 <p:menuitem  value="Outlet"    url="sv_outlets.xhtml"/>
                                 <p:menuitem  value="Salesreps" url="sv_salesrep.xhtml"/>
@@ -47,6 +46,7 @@
                             widgetVar="outletsTable"
                     >
                 <f:facet name="header">
+                    Outlets
                     <p:outputPanel style="float:right">  
                         <h:outputText value="Search all fields:"  />  
                         <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />  
@@ -71,7 +71,7 @@
                 </p:column>
 
 
-                <p:column headerText="Discount" style="width:80px"
+                <p:column headerText="Discount,%" style="width:50px; text-align: right"
                           filterBy="#{outlet.discount}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"> 
