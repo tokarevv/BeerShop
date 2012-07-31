@@ -60,20 +60,25 @@ public class UserManagedBean implements Serializable {
         
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        if(rowItem.getId()==null) {
-        	getUserService().addUser(rowItem);
-        	userList.add(rowItem);
-        	}
-        else{
-        	getUserService().updateUser(rowItem); 
-        	}
         
-        addRoles(rowItem);
-       
-    }
+        String post =rowItem.getPost();
+             
+        	updateRelatedTables(rowItem, post);
+        	getUserService().updateUser(rowItem); 
+           	addRoles(rowItem,post);
+       }
      
-     private void addRoles(User rowItem){
-    	 if(rowItem.getPost().equals("supervisor")) {
+     public void updateRelatedTables(User rowItem, String post){
+    	// if (!rowItem.getPost().equals(post) ){
+    		 delFromRelatedTables(rowItem); 
+    	// }
+    	 
+     }
+     
+     private void addRoles(User rowItem, String post){
+    //	 if (!(post.equals(rowItem.getPost()))){
+    	
+    		 if(rowItem.getPost().equals("supervisor")) {
       	   SuperVisor supervisor=new SuperVisor();
       	   supervisor.setUser(rowItem);
       		 getSuppervisorService().add(supervisor);
@@ -88,68 +93,10 @@ public class UserManagedBean implements Serializable {
       	   salesRep.setUser(rowItem);
       	   getSalesRepService().add(salesRep);
       	   } 
+    	 //}
      }
 
-    public ISuperVisorService getSuppervisorService() {
-		return suppervisorService;
-	}
-
-	public void setSuppervisorService(ISuperVisorService suppervisorService) {
-		this.suppervisorService = suppervisorService;
-	}
-
-	
-
-	public IManagerService getManagerService() {
-		return managerService;
-	}
-
-	public void setManagerService(IManagerService managerService) {
-		this.managerService = managerService;
-	}
-
-	public ISalesRepService getSalesRepService() {
-		return salesRepService;
-	}
-
-	public void setSalesRepService(ISalesRepService salesRepService) {
-		this.salesRepService = salesRepService;
-	}
-
-	public List<User> getUserList() {
-        return userList;
-    }
-
-     public UserDataModel getModel() {
-        return model;
-    }
-    
-    public void setModel(UserDataModel model) {
-        this.model = model;
-    }
-
-    public IUserService getUserService() {
-        return userService;
-    }
-
-
-    public void setUserService(IUserService userService) {
-        this.userService = userService;
-    }
-
-
-    public void setUserList(List<User> userList) {
-        this.userList = userList;
-    }
-
-
-    public User getSelected() {
-        return selected;
-    }
-
-    public void setSelected(User selected) {
-        this.selected = selected;
-    }
+   
 
    public String createNew() {
 	   User user=new User();
@@ -158,11 +105,37 @@ public class UserManagedBean implements Serializable {
        userList.add(user);
        return "";
    }
+   
+   public void delFromRelatedTables(User user){
+	 
+	   if(user.getPost().equals("manager"))  {
+		   List<Manager> list=getManagerService().getAll();
+		   for(Manager manager: list) {
+			   if (manager.getUser().equals(user))
+			   getManagerService().remove(manager.getId());
+			   }
+	   }
+       else if (user.getPost().equals("supervisor")){
+    	   List<SuperVisor> list=getSuppervisorService().getAll();
+		   for(SuperVisor supervisor: list) {
+			   if (supervisor.getUser().equals(user))
+				   getSuppervisorService().remove(supervisor.getId());
+			   }  
+       }
+       else if (user.getPost().equals("sales rep")){
+    	   List<SalesRep> list=getSalesRepService().getAll();
+		   for(SalesRep salesRep: list) {
+			   if (salesRep.getUser().equals(user))
+				   getSalesRepService().remove(salesRep.getId());
+			   }  
+       } 
+   }
 
     public String delete() {
     	if(selected!=null){
+    		delFromRelatedTables(selected);
             getUserService().deleteUser(selected);
-            userList.remove(selected);
+            userList.remove(selected);                      	
             selected = null;
     	}
     	return "";
@@ -173,5 +146,66 @@ public class UserManagedBean implements Serializable {
         String[] posts = {"none","admin","supervisor","manager","sales rep"};
         return posts;
     }
+	
+	 public ISuperVisorService getSuppervisorService() {
+			return suppervisorService;
+		}
+
+		public void setSuppervisorService(ISuperVisorService suppervisorService) {
+			this.suppervisorService = suppervisorService;
+		}
+
+		
+
+		public IManagerService getManagerService() {
+			return managerService;
+		}
+
+		public void setManagerService(IManagerService managerService) {
+			this.managerService = managerService;
+		}
+
+		public ISalesRepService getSalesRepService() {
+			return salesRepService;
+		}
+
+		public void setSalesRepService(ISalesRepService salesRepService) {
+			this.salesRepService = salesRepService;
+		}
+
+		public List<User> getUserList() {
+	        return userList;
+	    }
+
+	     public UserDataModel getModel() {
+	        return model;
+	    }
+	    
+	    public void setModel(UserDataModel model) {
+	        this.model = model;
+	    }
+
+	    public IUserService getUserService() {
+	        return userService;
+	    }
+
+
+	    public void setUserService(IUserService userService) {
+	        this.userService = userService;
+	    }
+
+
+	    public void setUserList(List<User> userList) {
+	        this.userList = userList;
+	    }
+
+
+	    public User getSelected() {
+	        return selected;
+	    }
+
+	    public void setSelected(User selected) {
+	        this.selected = selected;
+	    }
     
  }

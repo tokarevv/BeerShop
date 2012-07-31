@@ -1,6 +1,10 @@
 .pageHeaderMenue{
     height: 150px;
 }
+.panelColumns{
+    text-align: right;
+    width: 600px;
+}
 #top {
     position: relative;
     background-color: #036fab;

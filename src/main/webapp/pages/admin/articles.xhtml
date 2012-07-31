@@ -10,9 +10,7 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
-                <p:growl id="messages" showDetail="true"/>  
-                
-                <h:outputText value="Articles : "></h:outputText>
+                            
                 <p:dataTable id="article" var="article"
                              value="#{articleMB.model}"
                              paginator="true"
@@ -22,18 +20,18 @@
                              emptyMessage="No data "
                              editable="true"
                              selection="#{articleMB.selected}"
-                             selectionMode="single"
-                             scrollable="true"
-                             liveScroll="true"
-                             paginatorAlwaysVisible="false"
-                             paginatorPosition="bottom"
+                             selectionMode="single" 
+                           	 paginatorAlwaysVisible="false" 
+							paginatorPosition="bottom"
                         >
-
+ 	<f:facet name="header">  
+                    Articles 
+                </f:facet> 
                     <p:ajax event="rowEdit"
                             update="@all"
                             listener="#{articleMB.onEdit}"/>
 
-                    <p:column width="80">
+                    <p:column width="40">
                         <p:rowEditor/>
                     </p:column>
                     
@@ -91,7 +89,7 @@
                     
                      <p:column sortBy="#{article.quantity}"
                               headerText=" quantity "
-                              width="150">
+                              width="100">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.quantity}"/>
@@ -104,7 +102,7 @@
                     
                      <p:column sortBy="#{article.unit}"
                               headerText=" unit "
-                              width="150">
+                              width="100">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.unit}"/>
@@ -128,9 +126,24 @@
                         </p:cellEditor>
                     </p:column>
                     
+					<p:column  headerText="Supplier" width="300"
+						id="supplier">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
+									<f:selectItems value="#{articleMB.suppliers}" var="supplier"
+										itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>   
+                
                     <p:column sortBy="#{article.comment}"
                               headerText=" comment "
-                              width="150">
+                              width="175">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.comment}"/>

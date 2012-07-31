@@ -3,6 +3,8 @@ package ss.bshop.mbeans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -10,11 +12,18 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.model.map.DefaultMapModel;
+import org.primefaces.model.map.LatLng;
+import org.primefaces.model.map.MapModel;
+import org.primefaces.model.map.Marker;
 
 import ss.bshop.domain.Outlet;
+import ss.bshop.domain.SalesRep;
 import ss.bshop.service.IOutletService;
+import ss.bshop.service.ISalesRepService;
 
 /**
  * Outlet Managed Bean
@@ -24,47 +33,118 @@ import ss.bshop.service.IOutletService;
 @RequestScoped
 public class OutletManagedBean implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @ManagedProperty(value = "#{outletService}")
-    IOutletService outletService;
+    private IOutletService outletService;
+    
+    @ManagedProperty(value = "#{salesRepService}")
+    private ISalesRepService salesRepService;
+    
+    private MapModel mapModel;
+    private LatLng curCoord; 
+    private double lat;  
+    private double lng;  
 
-    List<Outlet> outletList = new ArrayList<Outlet>();
+    private List<Outlet> outletList = new ArrayList<Outlet>();
+    private List<SalesRep> salesReps = new ArrayList<SalesRep>();
+    
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
-    Outlet selected;
+    private Outlet selected;
+    private Outlet current;
+    
     private FacesMessage msg;
 
  
     @PostConstruct
     protected void postConstruct() {
-        getData();
-        updateModel();
+
+        mapModel = new DefaultMapModel();  
+
+    	outletList = new ArrayList<Outlet>();
+        outletList.addAll(getOutletService().getAll());
+        model = new OutletDataModel(outletList);
+        salesReps = salesRepService.getAll();
+
     }  
     
-    private void getData() {
-        outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll()); 
-    }
+    public String createNew() {
+       Outlet outlet=new Outlet();
+       outlet.setName("default");
+       outletList.add(outlet);
+       getOutletService().add(outlet);
+       return "";
+   }
     
-    private void updateModel() {
-        model = new OutletDataModel(outletList);
-        selected=null;
+   public String moreDetail(){
+       String res = "";
+       if(selected!=null ){ 
+            try {
+                // mapModel = new DefaultMapModel();
+                 current = selected.clone();
+                 if(current.getLatitude()!=current.getLongitude()){
+                 curCoord = new LatLng(current.getLatitude(),current.getLongitude());
+                 mapModel.addOverlay(new Marker(curCoord, current.getName()));
+            }
+            res = "outlet_detail";
+            } catch (CloneNotSupportedException ex) {
+                System.out.println("!!!!!!!!!!!!!!!!!!!Trouble");
+                Logger.getLogger(OutletManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+       }
+       return res;
+   }
+
+    public String delete() {
+        
+        if(selected!=null){
+            getOutletService().remove(selected.getId());
+            outletList.remove(selected);
+            selected = null;
+
+            msg = new FacesMessage("Outlet Deleted","");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+     	}
+     	return "";
     }
-    
+         
      public void editRow(RowEditEvent event) {
+
     	Outlet rowItem = (Outlet) event.getObject();
         getOutletService().update(rowItem);
         
-        msg = new FacesMessage("Article Edited", rowItem.getName());   
+        msg = new FacesMessage("Outlet Edited", rowItem.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
     }
+    
+    public String editSelected() {
+
+        getOutletService().update(current);
+        
+        msg = new FacesMessage("Outlet Edited", current.getName());   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+        return "";
+    }
+    
+    public void addMarker(ActionEvent actionEvent) {
+        if(selected.getLatitude()!=selected.getLongitude()){
+            Marker marker = new Marker(new LatLng(lat, lng), selected.getName());  
+            mapModel.addOverlay(marker); 
+            selected.setLatitude(lat);
+            selected.setLongitude(lng);
+
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng);  
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+        }
+    }  
+
 
     public List<Outlet> getoutletList() {
         return outletList;
     }
 
-    // 
     public OutletDataModel getModel() {
         return model;
     }
@@ -75,16 +155,15 @@ public class OutletManagedBean implements Serializable {
 
      public IOutletService getOutletService() {
 		return outletService;
-	}
-
-	public void setOutletService(IOutletService outletService) {
-		this.outletService = outletService;
-	}
-
-	public void setoutletList(List<Outlet> outletList) {
-        this.outletList = outletList;
     }
 
+    public void setOutletService(IOutletService outletService) {
+            this.outletService = outletService;
+    }
+
+    public void setoutletList(List<Outlet> outletList) {
+        this.outletList = outletList;
+    }
 
     public Outlet getSelected() {
         return selected;
@@ -94,20 +173,54 @@ public class OutletManagedBean implements Serializable {
         this.selected = selected;
     }
 
-   public String createNew() {
-       outletList.add(new Outlet());
-       getData();
-       updateModel();
-       return "";
-   }
-
-    public String delete() {
-    	if(selected!=null){
-            getOutletService().remove(selected.getId());
-       	    getData();
-            updateModel();
-    	}
-    	return "";
+    public MapModel getMapModel() {
+        return mapModel;
     }
+
+    public void setMapModel(MapModel mapModel) {
+        this.mapModel = mapModel;
+    }
+
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
+    public double getLng() {
+        return lng;
+    }
+
+    public void setLng(double lng) {
+        this.lng = lng;
+    }
+
+    public Outlet getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(Outlet current) {
+        this.current = current;
+    }
+
+	public ISalesRepService getSalesRepService() {
+		return salesRepService;
+	}
+
+	public void setSalesRepService(ISalesRepService salesRepService) {
+		this.salesRepService = salesRepService;
+	}
+
+	public List<SalesRep> getSalesReps() {
+		return salesReps;
+	}
+
+	public void setSalesReps(List<SalesRep> salesReps) {
+		this.salesReps = salesReps;
+	}
+
+    
     
  }

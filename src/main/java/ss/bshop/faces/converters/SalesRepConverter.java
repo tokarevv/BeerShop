@@ -9,17 +9,17 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
-import ss.bshop.domain.Supplier;
-import ss.bshop.service.ISupplierService;
+import ss.bshop.domain.SalesRep;
+import ss.bshop.service.ISalesRepService;
 
 
 @ManagedBean
 @RequestScoped
-public class SupplierConverter implements Converter {
+public class SalesRepConverter implements Converter {
 
-	@ManagedProperty(value="#{supplierService}")
-	ISupplierService supplierService;
-
+    @ManagedProperty(value = "#{salesRepService}")
+    private ISalesRepService salesRepService;
+ 
     public Object getAsObject(FacesContext facesContext, UIComponent component, String submittedValue) {
     	//facesContext.addMessage(null, new FacesMessage("Converter - getAsObject"));
         if (submittedValue.trim().equals("")) {
@@ -28,7 +28,7 @@ public class SupplierConverter implements Converter {
             try {
                 Long id = Long.parseLong(submittedValue);
                 
-                return supplierService.get(id);
+                return salesRepService.get(id);
 
             } catch(NumberFormatException exception) {
                 throw new ConverterException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Conversion Error", "Not a valid supplier"));
@@ -42,16 +42,17 @@ public class SupplierConverter implements Converter {
         if (value == null || value.equals("")) {
             return "";
         } else {
-            return String.valueOf(((Supplier) value).getId());
+            return String.valueOf(((SalesRep) value).getId());
         }
     }
-	
-    public ISupplierService getSupplierService() {
-		return supplierService;
+
+	public ISalesRepService getSalesRepService() {
+		return salesRepService;
 	}
 
-	public void setSupplierService(ISupplierService supplierService) {
-		this.supplierService = supplierService;
+	public void setSalesRepService(ISalesRepService salesRepService) {
+		this.salesRepService = salesRepService;
 	}
+	
 
 }
