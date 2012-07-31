@@ -11,6 +11,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
@@ -31,7 +32,7 @@ import ss.bshop.service.ISalesRepService;
   * @author Vera
  */
 @ManagedBean(name = "outletMB")
-@RequestScoped
+@ViewScoped
 public class OutletManagedBean implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -53,6 +54,7 @@ public class OutletManagedBean implements Serializable {
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
     private Outlet selected;
+    private SalesRep selectedSalesRep;
     private Outlet current;
     
     private FacesMessage msg;
@@ -64,11 +66,15 @@ public class OutletManagedBean implements Serializable {
         mapModel = new DefaultMapModel();  
 
     	outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll());
+        outletList.addAll(outletService.getAll());
         model = new OutletDataModel(outletList);
         salesReps = salesRepService.getAll();
 
     }  
+    
+    public void onSelectSR(){
+        outletList = outletService.getBySalesRep(selectedSalesRep);
+    }
     
     public String createNew() {
        Outlet outlet=new Outlet();
@@ -226,6 +232,14 @@ public class OutletManagedBean implements Serializable {
 	public void setSalesReps(List<SalesRep> salesReps) {
 		this.salesReps = salesReps;
 	}
+
+    public SalesRep getSelectedSalesRep() {
+        return selectedSalesRep;
+    }
+
+    public void setSelectedSalesRep(SalesRep selectedSalesRep) {
+        this.selectedSalesRep = selectedSalesRep;
+    }
 
     
     

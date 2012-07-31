@@ -30,15 +30,31 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" header="Фильтр" resizable="true" collapsible="true">  
+            <p:layoutUnit position="west" size="200" resizable="true" collapsible="true">  
+
+            <p:dataTable id="salesreps" var="sreps"
+                            value="#{outletMB.salesReps}"
+                            selection="#{outletMB.selectedSalesRep}"
+                            selectionMode="single"
+                            emptyMessage="No data "
+                            
+                    >
+
+                <p:column headerText=" Name " style="width: 50px"
+                          filterBy="#{sreps.user.fullname}"   
+                          filterMatchMode="contains">
+                    <h:outputText value="#{sreps.user.fullname}"/>
+                </p:column>
                 
+            </p:dataTable>
+                     
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">
-<h:form>  
+        <h:form>  
   
-               <p:growl id="messages" showDetail="true" />  
+               
            <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
                                 style="width:600px;height:400px;"  
                                 model="#{outletMB.mapModel}" 
@@ -46,7 +62,6 @@
                                 widgetVar="map" 
                                 disabledDoubleClickZoom="true"
                                 >
-                <p:ajax event="markerDrag" listener="#{mapBean.onMarkerDrag}" update="messages" />  
            </p:gmap>
            </h:form> 
 
