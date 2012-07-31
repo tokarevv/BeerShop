@@ -22,7 +22,9 @@ public class OutletOrderManagedBean  implements Serializable{
 	
 	@ManagedProperty(value="#{outletOrderService}")
 	IOutletOrderService outletOrderService;
+	
 	OutletOrder selected;
+	
 	List<OutletOrder> outletOrderList;
 	
 	@ManagedProperty(value = "#{OutletOrderDataModel}")
