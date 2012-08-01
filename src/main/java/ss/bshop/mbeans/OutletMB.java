@@ -1,5 +1,7 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.OutletDataModel;
+import ss.bshop.mbeans.datamodel.SalesRepDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,10 +13,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -30,8 +34,8 @@ import ss.bshop.service.ISalesRepService;
   * @author Vera
  */
 @ManagedBean(name = "outletMB")
-@RequestScoped
-public class OutletManagedBean implements Serializable {
+@ViewScoped
+public class OutletMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
 
@@ -51,6 +55,10 @@ public class OutletManagedBean implements Serializable {
     
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
+    
+    @ManagedProperty(value = "#{SalesRepDataModel}")
+    private SalesRepDataModel modelsr;
+    
     private Outlet selected;
     private Outlet current;
     
@@ -63,11 +71,17 @@ public class OutletManagedBean implements Serializable {
         mapModel = new DefaultMapModel();  
 
     	outletList = new ArrayList<Outlet>();
-        outletList.addAll(getOutletService().getAll());
+        outletList.addAll(outletService.getAll());
         model = new OutletDataModel(outletList);
+        modelsr = new SalesRepDataModel(salesRepService.getAll());
+        
         salesReps = salesRepService.getAll();
 
     }  
+    
+    public void onSelectSR(){
+        //outletList = outletService.getBySalesRep(selectedSalesRep);
+    }
     
     public String createNew() {
        Outlet outlet=new Outlet();
@@ -84,13 +98,12 @@ public class OutletManagedBean implements Serializable {
                 // mapModel = new DefaultMapModel();
                  current = selected.clone();
                  if(current.getLatitude()!=current.getLongitude()){
-                 curCoord = new LatLng(current.getLatitude(),current.getLongitude());
-                 mapModel.addOverlay(new Marker(curCoord, current.getName()));
-            }
+                    curCoord = new LatLng(current.getLatitude(),current.getLongitude());
+                    mapModel.addOverlay(new Marker(curCoord, current.getName()));
+                }
             res = "outlet_detail";
             } catch (CloneNotSupportedException ex) {
-                System.out.println("!!!!!!!!!!!!!!!!!!!Trouble");
-                Logger.getLogger(OutletManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(OutletMB.class.getName()).log(Level.SEVERE, null, ex);
             }
             
        }
@@ -129,17 +142,23 @@ public class OutletManagedBean implements Serializable {
     }
     
     public void addMarker(ActionEvent actionEvent) {
-        if(selected.getLatitude()!=selected.getLongitude()){
-            Marker marker = new Marker(new LatLng(lat, lng), selected.getName());  
-            mapModel.addOverlay(marker); 
+        System.out.println("!!!!!!!!!!!!!tryAddMarker");
+        if(selected.getLatitude()==null){
+//            Marker marker = new Marker(new LatLng(lat, lng), selected.getName());
+//            marker.setDraggable(true);
+//            mapModel.addOverlay(marker); 
             selected.setLatitude(lat);
             selected.setLongitude(lng);
 
-            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Added", "Lat:" + lat + ", Lng:" + lng);  
-            FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }  
-
+    public void onMarkerDrag(MarkerDragEvent event) {  
+        Marker marker = event.getMarker();  
+        LatLng lt = marker.getLatlng();
+         
+        selected.setLatitude(lt.getLat());
+        selected.setLongitude(lt.getLng());
+    }  
 
     public List<Outlet> getoutletList() {
         return outletList;
@@ -220,6 +239,14 @@ public class OutletManagedBean implements Serializable {
 	public void setSalesReps(List<SalesRep> salesReps) {
 		this.salesReps = salesReps;
 	}
+
+    public SalesRepDataModel getModelsr() {
+        return modelsr;
+    }
+
+    public void setModelsr(SalesRepDataModel modelsr) {
+        this.modelsr = modelsr;
+    }
 
     
     

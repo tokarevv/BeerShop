@@ -1,5 +1,6 @@
 package ss.bshop.mbeans;
 
+import ss.bshop.mbeans.datamodel.UserDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import ss.bshop.service.IUserService;
  */
 @ManagedBean(name = "userMB")
 @SessionScoped
-public class UserManagedBean implements Serializable {
+public class UserMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
 

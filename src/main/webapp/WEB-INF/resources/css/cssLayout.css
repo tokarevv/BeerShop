@@ -1,9 +1,14 @@
 .pageHeaderMenue{
     height: 150px;
 }
+
+.col1{
+    width: 500px;
+}
+
 .panelColumns{
     text-align: right;
-    width: 600px;
+   
 }
 #top {
     position: relative;

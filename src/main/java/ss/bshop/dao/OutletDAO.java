@@ -4,12 +4,16 @@
  */
 package ss.bshop.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.Payment;
+import ss.bshop.domain.SalesRep;
 
 /**
  *
@@ -49,6 +53,17 @@ public class OutletDAO implements IOutletDAO{
     @Override
     public void update(Outlet t) {
         sessionFactory.getCurrentSession().update(t);
+    }
+
+    @Override
+    public List<Outlet> getBySalesRep(SalesRep salesRep) {
+        List<Outlet> res = new ArrayList<Outlet>();
+        Query q = sessionFactory.getCurrentSession().createQuery("from Outlet where SalesRep_id = :SalesRep_id");
+        q.setParameter("SalesRep_id", salesRep.getId());
+        res = q.list();
+
+        return res;
+
     }
     
 }

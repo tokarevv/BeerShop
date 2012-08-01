@@ -22,7 +22,7 @@ import ss.bshop.service.ISupplierService;
 
 @ManagedBean(name="supplierOrderMB")
 @ViewScoped
-public class SupplierOrderManagedBean implements Serializable{
+public class SupplierOrderMB implements Serializable{
 
 	/**
 	 * 

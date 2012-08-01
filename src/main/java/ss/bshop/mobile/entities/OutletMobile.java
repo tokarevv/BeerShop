@@ -1,13 +1,23 @@
 package ss.bshop.mobile.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 import ss.bshop.domain.Outlet;
 
+@Entity(name = "outlets")
 public class OutletMobile {
 
+	@Id
 	private Long id;
+	@Column
 	private String name;
+	@Column
 	private String address;
+	@Column
 	private String phone;
+	@Column
 	private Integer discount;
 	public Long getId() {
 		return id;

@@ -1,9 +1,6 @@
-package ss.bshop.mbeans;
+package ss.bshop.mbeans.datamodel;
 
 import org.primefaces.model.SelectableDataModel;
-
-import ss.bshop.domain.User;
-
 import javax.faces.model.ListDataModel;
 import java.util.List;
 import ss.bshop.domain.Article;

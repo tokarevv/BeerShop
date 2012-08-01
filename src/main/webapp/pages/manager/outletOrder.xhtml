@@ -12,9 +12,9 @@
 			<h:form>
 
 				<p:dataTable id="order" var="order" value="#{suplOrderMB.model}"
-					paginator="true" rows="5"
+					paginator="true" rows="8"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-					rowsPerPageTemplate="5,10,20,50" emptyMessage="No data "
+					rowsPerPageTemplate="10,20,50" emptyMessage="No data "
 					editable="false" selection="#{suplOrderMB.selected}"
 					selectionMode="single" scrollable="true" liveScroll="true"
 					paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -22,6 +22,10 @@
                     Orders from order 
                 </f:facet>
 			
+					<p:column headerText="Unit" width="30">
+						<h:outputText value="#{article.unit}" />
+					</p:column>
+
 					<p:column headerText=" Type " width="170">
 						<h:outputText value="#{order.type}" />
 					</p:column>
@@ -51,7 +55,7 @@
 
 				<div class="buttonLeft" style="float: left;">
 					<p:commandButton value="Submit"
-						action="#{suplOrderMB.moreDetail}" ajax="false"
+						actionListener="#{suplOrderMB.createNew}" ajax="false"
 						update="@all" />
 
 

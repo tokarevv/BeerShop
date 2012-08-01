@@ -42,7 +42,17 @@
                 <from-outcome>outlet_detail</from-outcome>
                 <to-view-id>/pages/supervisor/sv_outlets_detail.xhtml</to-view-id>
         </navigation-case>
+        
     
+    </navigation-rule>  
+    
+    <navigation-rule>
+    <from-view-id>/pages/supervisor/sv_outlets_detail.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outlet_detail_back</from-outcome>
+                <to-view-id>/pages/supervisor/sv_outlets.xhtml</to-view-id>
+        </navigation-case>
+        
     </navigation-rule>  
     
     <navigation-rule>
@@ -60,6 +70,14 @@
                 <from-outcome>suplOrder</from-outcome>
                 <to-view-id>/pages/manager/suplOrder.xhtml</to-view-id>
         </navigation-case>
-    
     </navigation-rule>  
+    
+     <navigation-rule>
+        <from-view-id>/pages/manager/removal.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>suplOrder</from-outcome>
+                <to-view-id>/pages/manager/outletOrder.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
 </faces-config>

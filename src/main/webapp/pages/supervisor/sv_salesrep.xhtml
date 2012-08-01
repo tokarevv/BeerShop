@@ -8,6 +8,7 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript" ></script>
         <link href="./../../WEB-INF/resources/css/default.css" rel="stylesheet" type="text/css" />
         <link href="./../../WEB-INF/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
         <title>Bshop. Supervisor</title>
@@ -29,18 +30,50 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" header="Фильтр" resizable="true" collapsible="true">  
+            <p:layoutUnit position="west" size="200" resizable="true" collapsible="true">  
+
+            <p:dataTable id="salesreps" var="sreps"
+                            value="#{salesRepMB.modelsr}"
+                            selection="#{salesRepMB.selected}"
+                            selectionMode="single"
+                            emptyMessage="No data "
+                            
+                    >
+
+                <p:column headerText=" Name " style="width: 50px"
+                          filterBy="#{sreps.user.fullname}"   
+                          filterMatchMode="contains">
+                    <h:outputText value="#{sreps.user.fullname}"/>
+                </p:column>
                 
+            </p:dataTable>
+                     
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
-        <p:layoutUnit position="center">  
+        <p:layoutUnit position="center">
+        <h:form>  
+  
+               
+           <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
+                                style="width:600px;height:400px;"  
+                                model="#{outletMB.mapModel}" 
+                                onPointClick="handlePointClick(event);"
+                                widgetVar="map" 
+                                disabledDoubleClickZoom="true"
+                                >
+           </p:gmap>
+           </h:form> 
 
-           <p:gmap center="41.381542, 2.122893" zoom="15" type="HYBRID"   
-                            style="width:600px;height:400px" />
-        </p:layoutUnit>  
+                             
+ 
+
+            </p:layoutUnit>  
 
         </p:layout>  
     </h:body>
+                        
+
+        
 
 </html>
