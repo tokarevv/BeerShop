@@ -1,3 +1,7 @@
+.ui-widget-content { 
+   background-images: url(beer1.jpg);
+}
+
 .pageHeaderText {
 	padding: 1px;	
 	display:inline-block;

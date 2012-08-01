@@ -24,7 +24,7 @@
 	<!-- Настройки бина dataSource будем хранить в отдельном файле -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
-		p:location="classpath:jdbc_MySQL_local.properties" />
+		p:location="classpath:jdbc_MySQL_global.properties" />
 
 	<!-- Непосредственно бин dataSource -->
 	<bean id="dataSource"
