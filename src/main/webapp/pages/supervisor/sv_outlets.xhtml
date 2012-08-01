@@ -37,9 +37,8 @@
           <h:form id="form">  
 
             <p:growl id="messages" showDetail="true"/>  
-            <p:dataTable id="outlets" var="outlet" 
+            <p:dataTable id="outlets" var="outlet"
                             value="#{outletMB.model}"
-                            editable="true"
                             emptyMessage="No data "
                             selection="#{outletMB.selected}"
                             selectionMode="single"
@@ -91,25 +90,16 @@
                         <h:outputText value="Discount,%" />  
                     </f:facet> 
                     <h:outputText value="#{outlet.discount}" />
-                    <p:cellEditor>  
-                        <f:facet name="output">  
-                            <h:outputText value="#{outlet.discount}" />  
-                        </f:facet> 
-                        
-                        <f:facet name="input">  
-                            <p:inputText value="#{outlet.discount}" style="width:150%"/>  
-                        </f:facet>  
-                    </p:cellEditor>  
+                
                 </p:column>
                 
-                <p:column  headerText="*" style="width:20px">  
-                    <p:rowEditor />  
-                </p:column>
-
                 <p:column  headerText="Adress"  style="width:100px"
                            filterBy="#{outlet.address}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Adress" />  
+                    </f:facet> 
                     <h:outputText value="#{outlet.address}"/>
                 </p:column>
 
@@ -117,6 +107,9 @@
                            filterBy="#{outlet.groupp}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Group" />  
+                    </f:facet> 
                     <h:outputText value="#{outlet.groupp}"/>
                 </p:column>
                              
@@ -124,6 +117,9 @@
                            filterBy="#{outlet.salesRep.user.fullname}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="SalesRep" />  
+                    </f:facet> 
                     <h:outputText value="#{outlet.salesRep.user.fullname}"/>
                 </p:column>
 
