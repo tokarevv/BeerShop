@@ -36,7 +36,7 @@
 						<p:rowEditor />
 					</p:column>
 
-					<p:column  headerText=" Login " width="300">
+					<p:column  headerText=" Login " width="295">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.login}" />
@@ -71,6 +71,11 @@
 								</h:selectOneMenu>
 							</f:facet>
 						</p:cellEditor>
+					</p:column>
+					
+					<p:column  headerText="Password" width="300"
+						id="password">
+						<h:outputText value="#{user.password}" disabled="true" />
 					</p:column>
 
 				</p:dataTable>

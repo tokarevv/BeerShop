@@ -1,5 +1,7 @@
 package ss.bshop.domain;
 
+import java.util.UUID;
+
 import javax.persistence.*;
 
 @Entity
@@ -50,6 +52,7 @@ public class User {
     }
 
     public String getPassword() {
+    	password= UUID.randomUUID().toString();
         return password;
     }
 

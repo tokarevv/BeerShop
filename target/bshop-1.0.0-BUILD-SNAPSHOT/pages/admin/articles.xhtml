@@ -1,0 +1,178 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+    <ui:composition template="/pages/admin/templates/base.xhtml">
+        <ui:define name="content">
+            <h:form>
+                            
+                <p:dataTable id="article" var="article"
+                             value="#{articleMB.model}"
+                             paginator="true"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50"
+                             emptyMessage="No data "
+                             editable="true"
+                             selection="#{articleMB.selected}"
+                             selectionMode="single" 
+                           	 paginatorAlwaysVisible="false" 
+							paginatorPosition="bottom"
+                        >
+ 	<f:facet name="header">  
+                    Articles 
+                </f:facet> 
+                    <p:ajax event="rowEdit"
+                            update="@all"
+                            listener="#{articleMB.onEdit}"/>
+
+                    <p:column width="40">
+                        <p:rowEditor/>
+                    </p:column>
+                    
+                    <p:column sortBy="#{article.name}"
+                              headerText=" Name "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.name}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                     </p:column>
+                     
+                    <p:column sortBy="#{article.type}"
+                              headerText=" type "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.type}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.type}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.price}"
+                              headerText=" price "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.price}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.price}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.percent}"
+                              headerText=" percent "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.percent}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.percent}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.quantity}"
+                              headerText=" quantity "
+                              width="100">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.quantity}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.quantity}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.unit}"
+                              headerText=" unit "
+                              width="100">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.unit}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.unit}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column sortBy="#{article.barcode}"
+                              headerText=" barcode "
+                              width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.barcode}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.barcode}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+					<p:column  headerText="Supplier" width="300"
+						id="supplier">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
+									<f:selectItems value="#{articleMB.suppliers}" var="supplier"
+										itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>   
+                
+                    <p:column sortBy="#{article.comment}"
+                              headerText=" comment "
+                              width="175">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.comment}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.comment}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+            
+                   
+                </p:dataTable>
+                <br/>
+                <div class="buttonLeft" style="float: left;">
+                    <p:commandButton value="New"
+                                     actionListener="#{articleMB.createNew}"
+                                     ajax="false"
+                                     update="@all" />
+                     <p:commandButton value="Delete"
+                                     actionListener="#{articleMB.delete}"
+                                     ajax="true"
+                                     update="@all"/>
+
+                 </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
