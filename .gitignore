@@ -30,6 +30,7 @@ SCCS
 _$*
 .settings
 .classpath
+.project
 .projecttarget
 target
 /bin
