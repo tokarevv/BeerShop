@@ -10,6 +10,7 @@
     <ui:composition template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
             <h:form>
+                <p:growl id="messages" showDetail="true"/>  
                             
                 <p:dataTable id="article" var="article"
                              value="#{articleMB.model}"
@@ -24,7 +25,7 @@
                            	 paginatorAlwaysVisible="false" 
 							paginatorPosition="bottom"
                         >
- 	<f:facet name="header">  
+                <f:facet name="header">  
                     Articles 
                 </f:facet> 
                     <p:ajax event="rowEdit"
@@ -165,7 +166,7 @@
                                      update="@all" />
                      <p:commandButton value="Delete"
                                      actionListener="#{articleMB.delete}"
-                                     ajax="true"
+                                     ajax="false"
                                      update="@all"/>
 
                  </div>

@@ -34,12 +34,12 @@ public class ArticleMB implements Serializable{
     private List<Article> articleList;
     private Article selected;
     private FacesMessage msg;
-	private List<Supplier> suppliers;
-   
-	@ManagedProperty(value="#{supplierService}")
-	ISupplierService supplierService;
+    private List<Supplier> suppliers;
 
-	@ManagedProperty(value = "#{articleService}")
+    @ManagedProperty(value="#{supplierService}")
+    ISupplierService supplierService;
+
+    @ManagedProperty(value = "#{articleService}")
     private IArticleService articleService;
 
     @ManagedProperty(value = "#{ArticleDataModel}")
@@ -62,11 +62,11 @@ public class ArticleMB implements Serializable{
         suppliers = supplierService.getAll();
    }  
     
-	public String createNew() {
-    	Article tmp = new Article("<edit>");
+    public String createNew() {
+        Article tmp = new Article("<edit>");
         getArticleService().add(tmp);
         articleList.add(tmp);
-        
+
         msg = new FacesMessage("Article Added", "Edit, please");  
         FacesContext.getCurrentInstance().addMessage(null, msg);  
 

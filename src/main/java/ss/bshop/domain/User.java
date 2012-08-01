@@ -23,11 +23,7 @@ public class User {
     @Column
     private String post="none";
 
-    public User() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public String getFullname() {
+    public String getFullname() {
         return fullname;
     }
 
@@ -51,8 +47,7 @@ public class User {
         this.login = login;
     }
 
-    public String getPassword() {
-    	password= UUID.randomUUID().toString();
+    public String getPassword() {  	
         return password;
     }
 

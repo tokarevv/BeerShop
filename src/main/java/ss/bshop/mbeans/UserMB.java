@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -46,10 +48,13 @@ public class UserMB implements Serializable {
     @ManagedProperty(value = "#{salesRepService}")
     ISalesRepService salesRepService;
     
-    List<User> userList = new ArrayList<User>();
+    private List<User> userList = new ArrayList<User>();
+    
     @ManagedProperty(value = "#{UserDataModel}")
     private UserDataModel model;
-    User selected;
+    
+    private User selected;
+    private FacesMessage msg;
 
  
     @PostConstruct
@@ -64,9 +69,9 @@ public class UserMB implements Serializable {
         
         String post =rowItem.getPost();
              
-        	updateRelatedTables(rowItem, post);
-        	getUserService().updateUser(rowItem); 
-           	addRoles(rowItem,post);
+        updateRelatedTables(rowItem, post);
+        getUserService().updateUser(rowItem); 
+        addRoles(rowItem,post);
        }
      
      public void updateRelatedTables(User rowItem, String post){
@@ -100,11 +105,15 @@ public class UserMB implements Serializable {
    
 
    public String createNew() {
-	   User user=new User();
-	   user.setLogin("default");
-	   getUserService().addUser(user);
-       userList.add(user);
-       return "";
+        User user=new User();
+        user.setLogin("default");
+        getUserService().addUser(user);
+        userList.add(user);
+        
+        msg = new FacesMessage("User Added", "Edit, please");  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+        
+        return "";
    }
    
    public void delFromRelatedTables(User user){
@@ -134,10 +143,13 @@ public class UserMB implements Serializable {
 
     public String delete() {
     	if(selected!=null){
-    		delFromRelatedTables(selected);
+    		//delFromRelatedTables(selected);
             getUserService().deleteUser(selected);
             userList.remove(selected);                      	
             selected = null;
+            
+            msg = new FacesMessage("User Deleted","");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
     	}
     	return "";
     }
@@ -200,13 +212,15 @@ public class UserMB implements Serializable {
 	        this.userList = userList;
 	    }
 
+    public User getSelected() {
+        return selected;
+    }
 
-	    public User getSelected() {
-	        return selected;
-	    }
+    public void setSelected(User selected) {
+        this.selected = selected;
+    }
 
-	    public void setSelected(User selected) {
-	        this.selected = selected;
-	    }
+
+            
     
  }

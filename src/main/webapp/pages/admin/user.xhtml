@@ -10,6 +10,7 @@
 	<ui:composition template="/pages/admin/templates/base.xhtml">
 		<ui:define name="content">
 			<h:form id="form">
+                            <p:growl id="messages" showDetail="true"/> 
 			
 				<p:dataTable id="users" var="user" value="#{userMB.model}"
 					paginator="true" 
@@ -25,8 +26,8 @@
 					paginatorPosition="bottom">
 	
 				<f:facet name="header">  
-                    Users 
-                </f:facet> 
+                                    Users 
+                                </f:facet> 
 
 					<p:ajax event="rowEdit"
 						update="@all"

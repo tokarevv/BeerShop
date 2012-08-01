@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="3.524" errors="0" skipped="0" tests="2" name="ss.bshop.mobile.ConverterTest">
+<testsuite failures="0" time="0.023" errors="0" skipped="0" tests="2" name="ss.bshop.mobile.ConverterTest">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-6-openjdk-i386/jre/lib/i386"/>
@@ -60,6 +60,6 @@
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="1.754" classname="ss.bshop.mobile.ConverterTest" name="testConvertEmptyMobileVisitToVisit"/>
-  <testcase time="1.767" classname="ss.bshop.mobile.ConverterTest" name="testConvertFullMobileVisitToVisit"/>
+  <testcase time="0.017" classname="ss.bshop.mobile.ConverterTest" name="testConvertEmptyMobileVisitToVisit"/>
+  <testcase time="0.002" classname="ss.bshop.mobile.ConverterTest" name="testConvertFullMobileVisitToVisit"/>
 </testsuite>
