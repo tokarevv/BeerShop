@@ -37,7 +37,7 @@
           <h:form id="form">  
 
             <p:growl id="messages" showDetail="true"/>  
-            <p:dataTable id="outlets" var="outlet" styleClass="dataTable"
+            <p:dataTable id="outlets" var="outlet" 
                             value="#{outletMB.model}"
                             editable="true"
                             emptyMessage="No data "
@@ -62,29 +62,40 @@
                 <p:ajax event="rowEdit" listener="#{outletMB.editRow}" 
                         update=":form:messages" /> 
 
-                <p:column id="name" headerText="Name" style="width:200px"
+                <p:column id="name" style="width:200px"
                           filterBy="#{outlet.name}"   
                           filterMatchMode="contains"
-                          filterStyle="display: none; visibility: hidden;">  
+                          filterStyle="display: none; visibility: hidden;"> 
+                    <f:facet name="header">
+                        <h:outputText value="Name" />  
+                    </f:facet> 
                     <h:outputText value="#{outlet.name}"/>
                 </p:column>
 
-                <p:column  headerText="Date of Reg"  style="width:80px"
+                <p:column  style="width:80px"
                            filterBy="#{outlet.registerDate}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Date of Reg" />  
+                    </f:facet> 
                     <h:outputText value="#{outlet.registerDate}" />
                 </p:column>
 
 
-                <p:column headerText="Discount,%" style="width:50px; text-align: right"
+                <p:column style="width:50px; text-align: right"
                           filterBy="#{outlet.discount}"   
                           filterMatchMode="contains"
-                          filterStyle="display: none; visibility: hidden;"> 
+                          filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Discount,%" />  
+                    </f:facet> 
+                    <h:outputText value="#{outlet.discount}" />
                     <p:cellEditor>  
                         <f:facet name="output">  
                             <h:outputText value="#{outlet.discount}" />  
-                        </f:facet>  
+                        </f:facet> 
+                        
                         <f:facet name="input">  
                             <p:inputText value="#{outlet.discount}" style="width:150%"/>  
                         </f:facet>  
@@ -123,10 +134,12 @@
                                      action="#{outletMB.moreDetail}"
                                      ajax="false"
                                      update="@all" />
-                    <h:commandLink>  
-                        <p:graphicImage value="/images/pdf.png" />  
-                        <p:dataExporter type="pdf" target="outlets" fileName="outler"/>  
-                    </h:commandLink> 
+                    <h:commandButton value="Export as PDF" ajax="false" >
+                        <p:dataExporter type="pdf" target="outlets" fileName="outlets"
+                                        excludeColumns="3"/>
+
+                    </h:commandButton>
+
                     
                     
             </div>
