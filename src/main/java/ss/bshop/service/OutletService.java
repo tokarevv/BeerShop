@@ -90,8 +90,8 @@ public class OutletService implements IOutletService {
 		return outletDAO.get(id);
 	}
 
-    @Override
-    public List<Outlet> getBySalesRep(SalesRep salesRep) {
-        return outletDAO.getBySalesRep(salesRep);
-    }
+        @Override
+        public List<Outlet> getBySalesRep(SalesRep salesRep) {
+            return outletDAO.getBySalesRep(salesRep);
+        }
 }

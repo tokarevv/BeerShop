@@ -16,6 +16,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 
 import org.primefaces.event.RowEditEvent;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.event.map.MarkerDragEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -39,19 +40,23 @@ public class SalesRepMB implements Serializable {
     
     @ManagedProperty(value = "#{salesRepService}")
     private ISalesRepService salesRepService;
+    
+    @ManagedProperty(value = "#{outletService}")
+    private IOutletService outletService;
 
     @ManagedProperty(value = "#{SalesRepDataModel}")
     private SalesRepDataModel modelsr;
     
     private SalesRep selected;
+    private List<Outlet> outletList;
  
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
     }  
     
-    public void onSelectSR(){
-        //outletList = outletService.getBySalesRep(selectedSalesRep);
+    public void onRowSelect(SelectEvent event){
+        outletList = outletService.getBySalesRep(selected);
     }
     
     //************************************* setters and getters
@@ -72,6 +77,14 @@ public class SalesRepMB implements Serializable {
         this.salesRepService = salesRepService;
     }
 
+    public IOutletService getOutletService() {
+        return outletService;
+    }
+
+    public void setOutletService(IOutletService outletService) {
+        this.outletService = outletService;
+    }
+    
     public SalesRep getSelected() {
         return selected;
     }

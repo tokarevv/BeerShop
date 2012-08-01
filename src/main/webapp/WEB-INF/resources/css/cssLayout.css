@@ -1,3 +1,13 @@
+@media print {
+     .dataTable {
+         border: 5px;
+         margin: 1px;
+         padding: 5px;
+         background: none;
+         color: black;
+     }
+ }
+
 .pageHeaderMenue{
     height: 150px;
 }

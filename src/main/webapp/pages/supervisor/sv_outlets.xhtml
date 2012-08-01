@@ -9,7 +9,7 @@
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link href="./../../WEB-INF/resources/css/default.css" rel="stylesheet" type="text/css" />
-        <link href="./../../WEB-INF/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <link href="./../../WEB-INF/resources/css/cssLayout.css" rel="stylesheet" type="text/css" media="print" />
         <title>Bshop. Supervisor</title>
     </h:head>
 
@@ -37,7 +37,7 @@
           <h:form id="form">  
 
             <p:growl id="messages" showDetail="true"/>  
-            <p:dataTable id="outlets" var="outlet"
+            <p:dataTable id="outlets" var="outlet" styleClass="dataTable"
                             value="#{outletMB.model}"
                             editable="true"
                             emptyMessage="No data "
@@ -50,13 +50,19 @@
                     <p:outputPanel style="float:right">  
                         <h:outputText value="Search all fields:"  />  
                         <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />  
-                    </p:outputPanel>  
+                        
+                        <h:commandButton value="Print" type="button" icon="ui-icon-print">  
+                            <p:printer target="outlets" />  
+                        </h:commandButton> 
+
+                    </p:outputPanel> 
+                    
                 </f:facet>  
                 
                 <p:ajax event="rowEdit" listener="#{outletMB.editRow}" 
                         update=":form:messages" /> 
 
-                <p:column headerText="Name" style="width:200px"
+                <p:column id="name" headerText="Name" style="width:200px"
                           filterBy="#{outlet.name}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">  
@@ -117,6 +123,12 @@
                                      action="#{outletMB.moreDetail}"
                                      ajax="false"
                                      update="@all" />
+                    <h:commandLink>  
+                        <p:graphicImage value="/images/pdf.png" />  
+                        <p:dataExporter type="pdf" target="outlets" fileName="outler"/>  
+                    </h:commandLink> 
+                    
+                    
             </div>
           </h:form>  
         </p:layoutUnit>  
