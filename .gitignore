@@ -30,9 +30,14 @@ SCCS
 _$*
 .settings
 .classpath
+<<<<<<< HEAD
 .project
 .projecttarget
 target
 /bin
 test.db.properties
 /test.db.properties
+=======
+.projecttarget
+target
+>>>>>>> 07f683e95bbc3616653d6f83429ef4acb6b3ff6f

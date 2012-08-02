@@ -30,7 +30,8 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" resizable="true" collapsible="true">  
+<p:layoutUnit position="west" size="200" resizable="true" collapsible="true">  
+<h:form id="form">            
 
             <p:dataTable id="salesreps" var="sreps"
                             value="#{salesRepMB.modelsr}"
@@ -40,6 +41,9 @@
                             
                     >
 
+                <p:ajax event="rowSelect" listener="#{salesRepMB.onRowSelect}"
+                        />
+                
                 <p:column headerText=" Name " style="width: 50px"
                           filterBy="#{sreps.user.fullname}"   
                           filterMatchMode="contains">
@@ -47,14 +51,16 @@
                 </p:column>
                 
             </p:dataTable>
-                     
+                  <h:outputText id="name2" value="Name : #{sreps.user.fullname}"/>
+                  
+                  </h:form> 
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">
-        <h:form>  
+ 
   
-               
+            <h:outputText id="name" value="Name : #{salesRepMB.selected.user.fullname}"/>
            <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
                                 style="width:600px;height:400px;"  
                                 model="#{outletMB.mapModel}" 
@@ -63,7 +69,7 @@
                                 disabledDoubleClickZoom="true"
                                 >
            </p:gmap>
-           </h:form> 
+
 
                              
  

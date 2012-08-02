@@ -6,10 +6,15 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core">
 
+<h:head>
+        <h:outputStylesheet name="css/screen.css"/>
+    </h:head>
 <h:body>
+
 	<ui:composition template="/pages/admin/templates/base.xhtml">
 		<ui:define name="content">
 			<h:form id="form">
+                            <p:growl id="messages" showDetail="true"/> 
 			
 				<p:dataTable id="users" var="user" value="#{userMB.model}"
 					paginator="true" 
@@ -25,8 +30,8 @@
 					paginatorPosition="bottom">
 	
 				<f:facet name="header">  
-                    Users 
-                </f:facet> 
+                                    Users 
+                                </f:facet> 
 
 					<p:ajax event="rowEdit"
 						update="@all"
@@ -36,7 +41,7 @@
 						<p:rowEditor />
 					</p:column>
 
-					<p:column  headerText=" Login " width="300">
+					<p:column  headerText=" Login " width="295">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.login}" />
@@ -71,6 +76,11 @@
 								</h:selectOneMenu>
 							</f:facet>
 						</p:cellEditor>
+					</p:column>
+					
+					<p:column  headerText="Password" width="300"
+						id="password">
+						<h:outputText value="#{user.password}" disabled="true" />
 					</p:column>
 
 				</p:dataTable>

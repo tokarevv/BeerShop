@@ -8,6 +8,7 @@
     		/WEB-INF/spring/security.xml
 		</param-value>
     </context-param>
+    
     <!-- Создаёт контейнер Spring, разделяемый всеми сервлетами и фильтрами -->
     <listener>
         <listener-class>

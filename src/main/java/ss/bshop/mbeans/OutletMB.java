@@ -42,9 +42,6 @@ public class OutletMB implements Serializable {
     @ManagedProperty(value = "#{outletService}")
     private IOutletService outletService;
     
-    @ManagedProperty(value = "#{salesRepService}")
-    private ISalesRepService salesRepService;
-    
     private MapModel mapModel;
     private LatLng curCoord; 
     private double lat;  
@@ -73,23 +70,42 @@ public class OutletMB implements Serializable {
     	outletList = new ArrayList<Outlet>();
         outletList.addAll(outletService.getAll());
         model = new OutletDataModel(outletList);
-        modelsr = new SalesRepDataModel(salesRepService.getAll());
-        
-        salesReps = salesRepService.getAll();
 
     }  
-    
-    public void onSelectSR(){
-        //outletList = outletService.getBySalesRep(selectedSalesRep);
-    }
-    
-    public String createNew() {
-       Outlet outlet=new Outlet();
-       outlet.setName("default");
-       outletList.add(outlet);
-       getOutletService().add(outlet);
-       return "";
-   }
+//public void postProcessXLS(Object document) {  
+//    HSSFWorkbook wb = (HSSFWorkbook) document;  
+//    HSSFSheet sheet = wb.getSheetAt(0);  
+//    HSSFRow header = sheet.getRow(0);  
+//      
+//    HSSFCellStyle cellStyle = wb.createCellStyle();    
+//    cellStyle.setFillForegroundColor(HSSFColor.GREEN.index);  
+//    cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);  
+//      
+//    for(int i=0; i < header.getPhysicalNumberOfCells();i++) {  
+//        HSSFCell cell = header.getCell(i);  
+//          
+//        cell.setCellStyle(cellStyle);  
+//    }  
+//}  
+//  
+//public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {  
+//    Document pdf = (Document) document;  
+//    pdf.open();  
+//    pdf.setPageSize(PageSize.A4);  
+//  
+//    ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();  
+//    String logo = servletContext.getRealPath("") + File.separator + "images" + File.separator + "prime_logo.png";  
+//  
+//    pdf.add(Image.getInstance(logo));  
+//}  
+//    
+//    public String createNew() {
+//       Outlet outlet=new Outlet();
+//       outlet.setName("default");
+//       outletList.add(outlet);
+//       getOutletService().add(outlet);
+//       return "";
+//   }
     
    public String moreDetail(){
        String res = "";
@@ -223,14 +239,6 @@ public class OutletMB implements Serializable {
     public void setCurrent(Outlet current) {
         this.current = current;
     }
-
-	public ISalesRepService getSalesRepService() {
-		return salesRepService;
-	}
-
-	public void setSalesRepService(ISalesRepService salesRepService) {
-		this.salesRepService = salesRepService;
-	}
 
 	public List<SalesRep> getSalesReps() {
 		return salesReps;
