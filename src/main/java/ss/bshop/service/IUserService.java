@@ -2,6 +2,9 @@ package ss.bshop.service;
 
 import java.util.List;
 
+import ss.bshop.domain.Manager;
+import ss.bshop.domain.SalesRep;
+import ss.bshop.domain.SuperVisor;
 import ss.bshop.domain.User;
 
 
@@ -50,4 +53,8 @@ public interface IUserService {
 	 * @return List - User list
 	 */
 	public List<User> getUsers();
+	
+	public Manager managerByUserId(Long id);
+	public SuperVisor supervisorByUserId(Long id);
+	public SalesRep salesrepByUserId(Long id);
 }

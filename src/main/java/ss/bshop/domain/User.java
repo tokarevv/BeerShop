@@ -114,4 +114,12 @@ public class User {
 			return false;
 		return true;
 	}
+	
+	public User clone() throws CloneNotSupportedException {
+        User u = new User();
+           u.setPost(post);
+        return u;
+    }
+	
+	
 }

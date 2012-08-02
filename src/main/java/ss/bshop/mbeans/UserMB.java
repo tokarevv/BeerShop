@@ -66,40 +66,43 @@ public class UserMB implements Serializable {
         
      public void editRow(RowEditEvent event) {
         User rowItem = (User) event.getObject();
-        
-        String post =rowItem.getPost();
-             
-        updateRelatedTables(rowItem, post);
         getUserService().updateUser(rowItem); 
-        addRoles(rowItem,post);
-       }
-     
-     public void updateRelatedTables(User rowItem, String post){
-    	// if (!rowItem.getPost().equals(post) ){
-    		 delFromRelatedTables(rowItem); 
-    	// }
-    	 
+        addRoles(rowItem);    	 
      }
      
-     private void addRoles(User rowItem, String post){
-    //	 if (!(post.equals(rowItem.getPost()))){
-    	
-    		 if(rowItem.getPost().equals("supervisor")) {
-      	   SuperVisor supervisor=new SuperVisor();
-      	   supervisor.setUser(rowItem);
+     private void addRoles(User rowItem){
+   	    if(("supervisor").equals(rowItem.getPost())) {
+    		SuperVisor supervis=getUserService().supervisorByUserId(rowItem.getId());
+    		if(supervis!=null){
+    			getSuppervisorService().remove(rowItem.getId());
+    			}
+    		SuperVisor supervisor=new SuperVisor();
+    		supervisor.setUser(rowItem);
       		 getSuppervisorService().add(supervisor);
+      		 	
       		 }
-         else if (rowItem.getPost().equals("manager")){ 
-      	   Manager manager=new Manager();
-      	   manager.setUser(rowItem);
-      	   getManagerService().add(manager);
-      	   }
-         else if (rowItem.getPost().equals("sales rep")){ 
+    
+         else if (("manager").equals(rowItem.getPost())){ 
+        	 Manager man=getUserService().managerByUserId(rowItem.getId());
+     		if(man!=null){
+     			getManagerService().remove(man.getId());
+     			}
+     			Manager manager=new Manager();
+           	   manager.setUser(rowItem);
+           	   getManagerService().add(manager);
+     		
+      	  }
+    
+         else if (("sales rep").equals(rowItem.getPost())){ 
+        	 SalesRep sales=getUserService().salesrepByUserId(rowItem.getId());
+      		if(sales!=null){
+      			getSalesRepService().remove(sales.getId());
+      			}
       	   SalesRep salesRep=new SalesRep();
       	   salesRep.setUser(rowItem);
       	   getSalesRepService().add(salesRep);
-      	   } 
-    	 //}
+      	   
+    	 }
      }
 
    
@@ -118,24 +121,24 @@ public class UserMB implements Serializable {
    
    public void delFromRelatedTables(User user){
 	 
-	   if(user.getPost().equals("manager"))  {
+	   if(("manager").equals(user.getPost()))  {
 		   List<Manager> list=getManagerService().getAll();
 		   for(Manager manager: list) {
-			   if (manager.getUser().equals(user))
+			   if (user.equals(manager.getUser()))
 			   getManagerService().remove(manager.getId());
 			   }
 	   }
-       else if (user.getPost().equals("supervisor")){
+       else if (("supervisor").equals(user.getPost())){
     	   List<SuperVisor> list=getSuppervisorService().getAll();
 		   for(SuperVisor supervisor: list) {
-			   if (supervisor.getUser().equals(user))
+			   if (user.equals(supervisor.getUser()))
 				   getSuppervisorService().remove(supervisor.getId());
 			   }  
        }
-       else if (user.getPost().equals("sales rep")){
+       else if (("sales rep").equals(user.getPost())){
     	   List<SalesRep> list=getSalesRepService().getAll();
 		   for(SalesRep salesRep: list) {
-			   if (salesRep.getUser().equals(user))
+			   if (user.equals(salesRep.getUser()))
 				   getSalesRepService().remove(salesRep.getId());
 			   }  
        } 
@@ -143,7 +146,7 @@ public class UserMB implements Serializable {
 
     public String delete() {
     	if(selected!=null){
-    		//delFromRelatedTables(selected);
+    		delFromRelatedTables(selected);
             getUserService().deleteUser(selected);
             userList.remove(selected);                      	
             selected = null;
