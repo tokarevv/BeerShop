@@ -84,7 +84,7 @@
                             <h:outputText value="#{article.percent}" />  
                         </f:facet>  
                         <f:facet name="input">  
-                            <p:inputText value="#{article.percent}" style="width:15 0%"/>  
+                            <p:inputText value="#{article.percent}" style="width:150%"/>  
                         </f:facet>  
                     </p:cellEditor>  
                 </p:column>
@@ -98,6 +98,12 @@
                 </p:column>
 
             </p:dataTable>
+            <h:commandButton value="Export as XLS" ajax="false" >
+                        <p:dataExporter type="xls" target="articles" fileName="articles"
+                                         postProcessor="#{outletMB.postProcessXLS}">
+                                        
+                        </p:dataExporter>
+            </h:commandButton>
           </h:form>  
         </p:layoutUnit>  
 

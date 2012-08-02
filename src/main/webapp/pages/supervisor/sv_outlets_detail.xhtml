@@ -30,7 +30,7 @@
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
 <p:layoutUnit position="west" size="200"  resizable="true" collapsible="true" style="text-align: center">  
-                <br/><br/><br/><br/><br/><h5>Your</h5><h5> Ad </h5><h5> Could </h5> <h5> Be </h5><h5> Here :)</h5>
+                <br/><br/><br/><br/><br/><h4>Your <br/> Ad <br/>Could  <br/>Be  <br/>Here :)</h4>
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
@@ -38,19 +38,19 @@
 
                     <p:panelGrid columns="3"  > 
                         <f:facet name="header">  
-                            <h:outputText id="name" value="Name: #{outletMB.current.name}"/> 
+                            <h:outputText id="name" value="Name: #{outletMB.selected.name}"/> 
                         </f:facet> 
                         <p:column  styleClass="col1" colspan="2">
-                            <h:outputText id="cnum" value="Contract Number: #{outletMB.current.contractNumber}"/> <br/><br/>
-                            <h:outputText id="date" value="Date of regestration: #{outletMB.current.registerDate}"/> <br/><br/>
+                            <h:outputText id="cnum" value="Contract Number: #{outletMB.selected.contractNumber}"/> <br/><br/>
+                            <h:outputText id="date" value="Date of regestration: #{outletMB.selected.registerDate}"/> <br/><br/>
                             <h:outputText id="sumorder" value="Order sum: 1000"/> <br/><br/>
                             <h:outputText id="sumavg" value="Avg sum (month): 100"/> <br/> <br/>
                             <h:outputText id="debit" value="Debit sum : 500"/> <br/><br/>
                             <h:outputLabel for="spinner" value="Discount :  " /> 
-                            <p:spinner    id="spinner" value="#{outletMB.current.discount}" size="1"/> <br/> <br/> 
+                            <p:spinner    id="spinner" value="#{outletMB.selected.discount}" size="1"/> <br/> <br/> 
                             <h:outputLabel for="selectableInplace" value="Response SalesRep : " />
-                            <p:inplace id="selectableInplace" label="(Dblclick)   #{outletMB.current.salesRep.user.fullname}      " effectSpeed="fast" event="dblclick">  
-                                <p:selectOneMenu value="#{outletMB.current.salesRep}"
+                            <p:inplace id="selectableInplace" label="(Dblclick)   #{outletMB.selected.salesRep.user.fullname}      " effectSpeed="fast" event="dblclick">  
+                                <p:selectOneMenu value="#{outletMB.selected.salesRep}"
                                         effect="fade" converter="#{salesRepConverter}"
                                         style="alignment-baseline: central">
                                         <f:selectItem itemLabel="Select One" itemValue="" />
@@ -60,9 +60,9 @@
                             </p:selectOneMenu>
                             </p:inplace> 
                             <br/><br/>
-                            <h:outputText id="phone" value="Contact phone: #{outletMB.current.phone}"/> <br/><br/>
+                            <h:outputText id="phone" value="Contact phone: #{outletMB.selected.phone}"/> <br/><br/>
                             <h:outputText id="comment" value="Comment :"/> <br/>
-                            <p:inputTextarea value="#{outletMB.current.phone}" rows="4" cols="30" autoResize="false"/>  
+                            <p:inputTextarea value="#{outletMB.selected.phone}" rows="4" cols="30" autoResize="false"/>  
                             
                             <div class="buttonLeft" style="float: left;">
                                 <p:commandButton value="Save"                                              
@@ -87,13 +87,13 @@
                                         disabledDoubleClickZoom="true"
                                         >
                                 </p:gmap>
-                                <h:outputText id="Address" value="Address: #{outletMB.current.address}"/> <br/><br/>
+                                <h:outputText id="Address" value="Address: #{outletMB.selected.address}"/> <br/><br/>
                                 
                                 <p:dialog widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
                                 <h:form prependId="false">  
 
                                         <h:panelGrid columns="2">  
-                                            <h:outputText    id="title" value="#{outletMB.current.name}" />  
+                                            <h:outputText    id="title" value="#{outletMB.selected.name}" />  
 
                                             <f:facet name="footer">  
                                                 <p:commandButton value="Add"   
