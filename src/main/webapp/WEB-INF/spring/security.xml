@@ -18,8 +18,14 @@ http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 		      from User where login=?" 
  
 		   authorities-by-username-query="
-		      select login, 'ROLE_USER' from User u 
-		      where login =?  " 
+		   select login, role 
+		   from(
+		      select login login, 'ROLE_USER' role from User u 
+		      
+		      union all
+		      
+		      select login, post from User u ) b
+		   where login =?" 
 		/>
 	   </authentication-provider>
 	</authentication-manager>

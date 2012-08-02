@@ -37,21 +37,40 @@ public class AuthorisationMB implements Serializable {
     
 
     public String onSubmit(){
-        msg = new FacesMessage("Article Added", "Edit, please");  
-        FacesContext.getCurrentInstance().addMessage(null, msg);  
    	
+        String str = "You'll be redirected to: ";
+    	String role = "";
+        
     	SecurityContext securityContext = SecurityContextHolder.getContext();
     	Authentication auth = securityContext.getAuthentication();
     	for(GrantedAuthority ga : auth.getAuthorities()){
-    		ga.getAuthority();
+    		role = ga.getAuthority();
+    		if(role.equals("ROLE_USER")){
+    			continue;
+    		}
+    		else if(!isKnown(role)){
+    			role = "";
+    		}
+    		str += role;
     	}
    	
-		return "";
+    	msg = new FacesMessage("Redirect", str);  
+        FacesContext.getCurrentInstance().addMessage(null, msg);  
+ 		return role;
     	
     }
     
     
-    //getters and setters
+    private boolean isKnown(String role) {
+    	boolean res = false;
+    	if (role.equals("admin")||role.equals("supervisor")||role.equals("manager")){
+    		res = true;
+    	}
+		return res;
+	}
+
+
+	//getters and setters
 	public IUserService getUserService() {
 		return userService;
 	}

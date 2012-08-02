@@ -80,4 +80,20 @@
         </navigation-case>
     </navigation-rule>
 
+     <navigation-rule>
+        <from-view-id>/empty.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>manager</from-outcome>
+                <to-view-id>/pages/manager/base.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+                <from-outcome>admin</from-outcome>
+                <to-view-id>/pages/admin/startadmin.xhtml</to-view-id>
+        </navigation-case>
+                <navigation-case>
+                <from-outcome>supervisor</from-outcome>
+                <to-view-id>/pages/supervisor/sv_articles.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule>
+
 </faces-config>
