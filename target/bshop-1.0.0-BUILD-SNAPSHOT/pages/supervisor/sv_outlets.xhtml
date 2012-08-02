@@ -39,6 +39,7 @@
             <p:growl id="messages" showDetail="true"/>  
             <p:dataTable id="outlets" var="outlet"
                             value="#{outletMB.model}"
+                            editable="true"
                             emptyMessage="No data "
                             selection="#{outletMB.selected}"
                             selectionMode="single"
@@ -53,7 +54,14 @@
                         <h:commandButton value="Print" type="button" icon="ui-icon-print">  
                             <p:printer target="outlets" />  
                         </h:commandButton> 
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/xls3.png" style="vertical-align: bottom"/>  
+                            <p:dataExporter type="xls" target="outlets" fileName="outlets"
+                                            excludeColumns="3" 
+                                            postProcessor="#{outletMB.postProcessXLS}">
 
+                            </p:dataExporter>
+                        </h:commandLink>
                     </p:outputPanel> 
                     
                 </f:facet>  
@@ -71,7 +79,7 @@
                     <h:outputText value="#{outlet.name}"/>
                 </p:column>
 
-                <p:column  style="width:80px"
+                <p:column  id="dateR" style="width:80px"
                            filterBy="#{outlet.registerDate}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
@@ -81,18 +89,26 @@
                     <h:outputText value="#{outlet.registerDate}" />
                 </p:column>
 
-
                 <p:column style="width:50px; text-align: right"
                           filterBy="#{outlet.discount}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">
-                    <f:facet name="header">
-                        <h:outputText value="Discount,%" />  
-                    </f:facet> 
-                    <h:outputText value="#{outlet.discount}" />
+                    
+                    <p:cellEditor>  
+                        <f:facet name="output" >  
+                            <h:outputText value="#{outlet.discount}" />  
+                        </f:facet> 
                 
+                        <f:facet name="input">  
+                            <p:inputText value="#{outlet.discount}" style="width:150%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
                 </p:column>
                 
+                <p:column  headerText="*" style="width:20px">  
+                    <p:rowEditor />  
+                </p:column>
+
                 <p:column  headerText="Adress"  style="width:100px"
                            filterBy="#{outlet.address}"   
                            filterMatchMode="contains"
@@ -130,11 +146,7 @@
                                      action="#{outletMB.moreDetail}"
                                      ajax="false"
                                      update="@all" />
-                    <h:commandButton value="Export as PDF" ajax="false" >
-                        <p:dataExporter type="pdf" target="outlets" fileName="outlets"
-                                        excludeColumns="3"/>
-
-                    </h:commandButton>
+                    
 
                     
                     
