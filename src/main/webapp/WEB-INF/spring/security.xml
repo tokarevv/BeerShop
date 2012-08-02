@@ -5,37 +5,25 @@ http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
-	<http access-denied-page="/error403.jsp">
-		<intercept-url pattern="/index*" access="ROLE_USER,ROLE_ANONYMOUS" />
-		<intercept-url pattern="/manager*" access="ROLE_USER" />
-		<intercept-url pattern="/delete/*" access="ROLE_ADMIN" />
-		<form-login login-page="/login.jsp" default-target-url="/index"
-			authentication-failure-url="/login.jsp?error=true" /><logout
-            logout-success-url="/index"
-            logout-url="/logout" />
-
-        <anonymous
-            granted-authority="ROLE_ANONYMOUS"
-            username="guest" />
-
-        <remember-me />
-    </http>
-
-    <authentication-manager>
-
-        <authentication-provider>
-
-            <jdbc-user-service
-                authorities-by-username-query="
-		      select u.login, u.fullname from User u 
-		      where u.role_id = ur.id and u.login =?  "
-                data-source-ref="dataSource"
-                users-by-username-query="
-		      select login,password, enabled
-		      from User where login=?" />
-        </authentication-provider>
-    </authentication-manager>
-
-    <global-method-security pre-post-annotations="enabled" />
-
+	<http auto-config="true">
+	  <intercept-url pattern="/*" access="ROLE_USER, ROLE_MANAGER, ROLE_SUPERVISOR" />
+	</http>
+	
+         <authentication-manager>
+	   <authentication-provider>
+		<jdbc-user-service data-source-ref="dataSource"
+ 
+		   users-by-username-query="
+		      select login, password, true
+		      from User where login=?" 
+ 
+		   authorities-by-username-query="
+		      select login, 'ROLE_USER' from User u 
+		      where login =?  " 
+		/>
+	   </authentication-provider>
+	</authentication-manager>
+	
+	<global-method-security pre-post-annotations="enabled" />
+         
 </beans:beans>
