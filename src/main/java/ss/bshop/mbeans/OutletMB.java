@@ -4,6 +4,7 @@ import ss.bshop.mbeans.datamodel.OutletDataModel;
 import ss.bshop.mbeans.datamodel.SalesRepDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,10 +13,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
 import org.primefaces.event.RowEditEvent;
 import org.primefaces.event.map.MarkerDragEvent;
@@ -27,14 +31,13 @@ import org.primefaces.model.map.Marker;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.SalesRep;
 import ss.bshop.service.IOutletService;
-import ss.bshop.service.ISalesRepService;
 
 /**
  * Outlet Managed Bean
   * @author Vera
  */
 @ManagedBean(name = "outletMB")
-@ViewScoped
+@SessionScoped
 public class OutletMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -72,40 +75,47 @@ public class OutletMB implements Serializable {
         model = new OutletDataModel(outletList);
 
     }  
-//public void postProcessXLS(Object document) {  
-//    HSSFWorkbook wb = (HSSFWorkbook) document;  
-//    HSSFSheet sheet = wb.getSheetAt(0);  
-//    HSSFRow header = sheet.getRow(0);  
-//      
-//    HSSFCellStyle cellStyle = wb.createCellStyle();    
-//    cellStyle.setFillForegroundColor(HSSFColor.GREEN.index);  
-//    cellStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);  
-//      
-//    for(int i=0; i < header.getPhysicalNumberOfCells();i++) {  
-//        HSSFCell cell = header.getCell(i);  
-//          
-//        cell.setCellStyle(cellStyle);  
-//    }  
-//}  
-//  
-//public void preProcessPDF(Object document) throws IOException, BadElementException, DocumentException {  
-//    Document pdf = (Document) document;  
-//    pdf.open();  
-//    pdf.setPageSize(PageSize.A4);  
-//  
-//    ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();  
-//    String logo = servletContext.getRealPath("") + File.separator + "images" + File.separator + "prime_logo.png";  
-//  
-//    pdf.add(Image.getInstance(logo));  
-//}  
-//    
-//    public String createNew() {
-//       Outlet outlet=new Outlet();
-//       outlet.setName("default");
-//       outletList.add(outlet);
-//       getOutletService().add(outlet);
-//       return "";
-//   }
+   
+    public void postProcessXLS(Object document) {
+        HSSFWorkbook wb = (HSSFWorkbook)document;
+        HSSFSheet sheet = wb.getSheetAt(0);
+
+        Iterator<Row> rit = sheet.rowIterator();
+
+        if( rit.hasNext() ) {
+            rit.next(); // Skip header row
+        }
+
+        while( rit.hasNext() ) {
+            HSSFRow row = (HSSFRow) rit.next();
+
+            Iterator<Cell> cit = row.cellIterator();
+
+            while( cit.hasNext() ) {
+                HSSFCell cell = (HSSFCell) cit.next();
+
+                if( cell.getCellType() == HSSFCell.CELL_TYPE_STRING ) {
+                    String content = cell.getRichStringCellValue().toString();
+
+                    int index = content.indexOf( "org.primefaces.component.celleditor" );
+
+                    if( index != -1 ) {
+                        content = content.substring( 0, index );
+                        cell.setCellValue( new HSSFRichTextString( content ) );
+                    }
+                }
+            }
+        }
+    }
+  
+    
+    public String createNew() {
+       Outlet outlet=new Outlet();
+       outlet.setName("default");
+       outletList.add(outlet);
+       getOutletService().add(outlet);
+       return "";
+   }
     
    public String moreDetail(){
        String res = "";
