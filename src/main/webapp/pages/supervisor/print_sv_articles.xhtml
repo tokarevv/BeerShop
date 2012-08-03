@@ -30,8 +30,29 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" header="Filter" resizable="true" collapsible="true">  
-                
+            <p:layoutUnit position="west" size="100" header="Printer" collapsible="true">  
+                <p:effect type="pulsate" event="load" delay="500">
+                    <f:param name="times" value="2" />
+                </p:effect>
+                <h:form id="printform">
+                    <p:outputPanel>  
+                            <br/> <br/>
+                            <h:commandLink>  
+                                <p:graphicImage value="./../../resources/image/printer50.png"/>  
+                                <p:printer target=":form:articles" />  
+                            </h:commandLink> 
+                            <br/> <br/>
+                            <h:commandLink>  
+                                <p:graphicImage value="./../../resources/image/xls50.png" />  
+                                <p:dataExporter type="xls" target=":form:articles" fileName="articles"/>
+                            </h:commandLink>
+                            <br/> <br/>
+                            <h:commandLink>  
+                                <p:graphicImage value="./../../resources/image/pdf50.png" />  
+                                <p:dataExporter type="pdf" target=":form:articles" fileName="articles"/>
+                            </h:commandLink>
+                    </p:outputPanel>
+                </h:form>
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
@@ -48,16 +69,6 @@
 
                 <f:facet name="header">
                     Articles
-                    <p:outputPanel style="float:right">  
-                        <h:outputText value="Search all fields:"  />  
-                        <p:inputText id="globalFilter" onkeyup="articlesTable.filter()" style="width:150px" />  
-                        
-                        <h:commandButton value="Print" type="button" 
-                                         onclick="javascript: location.href='print_sv_articles.xhtml;'"/>  
-
-                        
-                    </p:outputPanel> 
-                    
                 </f:facet>  
 
                 <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 

@@ -28,7 +28,12 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" header="Printer" resizable="true" collapsible="true"> 
+<p:layoutUnit position="west" size="100" 
+              header="Printer" collapsible="true"> 
+                <p:effect type="pulsate" event="load" delay="500">
+                    <f:param name="times" value="2" />
+                </p:effect>
+
                 <h:form id="printform">
 
                     <p:outputPanel>  
