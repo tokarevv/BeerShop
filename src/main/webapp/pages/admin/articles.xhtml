@@ -44,11 +44,13 @@
                                 <h:outputText value="#{article.name}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{article.name}"/>
+                                <h:inputText id="edname" value="#{article.name}" required="true">
+                                    <p:ajax event="blur" update="msgFirstname" />
+                                </h:inputText>
                             </f:facet>
                         </p:cellEditor>
+                        <p:message for="edname" id="msgFirstname" display="icon" />
                      </p:column>
-                     
                     <p:column sortBy="#{article.type}"
                               headerText=" type "
                               width="150">
@@ -127,20 +129,20 @@
                         </p:cellEditor>
                     </p:column>
                     
-					<p:column  headerText="Supplier" width="300"
-						id="supplier">
-						<p:cellEditor>
-							<f:facet name="output">
-								<h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
-							</f:facet>
-							<f:facet name="input">
-								<h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
-									<f:selectItems value="#{articleMB.suppliers}" var="supplier"
-										itemLabel="#{supplier.name}" itemValue="#{supplier}" />
-								</h:selectOneMenu>
-							</f:facet>
-						</p:cellEditor>
-					</p:column>   
+                    <p:column  headerText="Supplier" width="300"
+                    id="supplier">
+                    <p:cellEditor>
+                            <f:facet name="output">
+                                    <h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
+                            </f:facet>
+                            <f:facet name="input">
+                                    <h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
+                                            <f:selectItems value="#{articleMB.suppliers}" var="supplier"
+                                                    itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+                                    </h:selectOneMenu>
+                            </f:facet>
+                    </p:cellEditor>
+                    </p:column>   
                 
                     <p:column sortBy="#{article.comment}"
                               headerText=" comment "
