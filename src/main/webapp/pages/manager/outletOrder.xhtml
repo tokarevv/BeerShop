@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="base.xhtml">
+		<ui:define name="content">
+			<h:form>
+
+				<p:dataTable id="order" var="order" value="#{suplOrderMB.model}"
+					paginator="true" rows="8"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" emptyMessage="No data "
+					editable="false" selection="#{suplOrderMB.selected}"
+					selectionMode="single" scrollable="true" liveScroll="true"
+					paginatorAlwaysVisible="false" paginatorPosition="bottom">
+					<f:facet name="header">  
+                    Orders from order 
+                </f:facet>
+			
+					<p:column headerText="Unit" width="30">
+						<h:outputText value="#{article.unit}" />
+					</p:column>
+
+					<p:column headerText=" Type " width="170">
+						<h:outputText value="#{order.type}" />
+					</p:column>
+
+					<p:column headerText=" Manager " width="170">
+						<h:outputText value="#{order.manager}" />
+					</p:column>
+
+					<p:column headerText=" Order Date " width="160">
+						<h:outputText value="#{order.orderDate}" />
+					</p:column>
+
+					<p:column headerText=" Order Complete " width="160">
+						<h:outputText value="#{order.orderDoneDate}" />
+					</p:column>
+
+					<p:column headerText=" Status " width="160">
+						<h:outputText value="#{order.status}" />
+					</p:column>
+
+					<p:column headerText=" Comment " width="160">
+						<h:outputText value="#{order.comment}" />
+					</p:column>
+
+				</p:dataTable>
+				<br />
+
+				<div class="buttonLeft" style="float: left;">
+					<p:commandButton value="Submit"
+						actionListener="#{suplOrderMB.createNew}" ajax="false"
+						update="@all" />
+
+
+				</div>
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

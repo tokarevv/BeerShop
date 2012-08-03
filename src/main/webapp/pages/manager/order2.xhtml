@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+	<ui:composition template="base.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h:outputText value="Type: " />
+				
+				<p:selectOneMenu value="#{supplierOrderMB.orderType}">
+					<f:selectItem itemLabel="order" itemValue="order" />
+					<f:selectItem itemLabel="return" itemValue="return" />
+				</p:selectOneMenu>
+
+				<br></br>
+				<br></br>
+				<h:outputText value="Supplier:" />
+				<p:selectOneMenu value="#{supplierOrderMB.selectedSupplier}"
+					effect="fade" var="s" style="width:160px">
+					<f:selectItem itemLabel="Select One" itemValue="" />
+					<f:selectItems value="#{supplierOrderMB.suppliers}" var="supplier"
+						itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+
+					<p:column>  
+               			 #{s.name} (#{s.id})
+          			</p:column>
+				</p:selectOneMenu>
+				
+
+				<br></br>
+
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

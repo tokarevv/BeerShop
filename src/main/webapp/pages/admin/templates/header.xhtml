@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+        >
+<body>
+<ui:composition>
+   
+  		<h:form id="commonHeaderForm" styleClass="pageHeaderForm"  >
+  		 <a href="/BShopMaster/empty.xhtml">BShop</a> 
+   	 	 <p:menubar styleClass="pageHeaderMenue" >
+   		
+   		 <p:menuitem value="Users" url="/pages/admin/user.xhtml"/>
+         <p:menuitem  value="Suppliers" url="/pages/admin/suppliers.xhtml"/>
+         <p:menuitem  value="Outlets" url="/pages/admin/outlets.xhtml"/>
+         <p:menuitem  value="Articles" url="/pages/admin/articles.xhtml"/>
+     
+    </p:menubar>
+    
+    </h:form>
+       
+</ui:composition>
+</body>
+</html>

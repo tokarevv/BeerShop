@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+        xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+    http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+        version="2.0">
+
+    <!-- JSF and Spring are integrated -->
+    <application>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+    </application>
+
+    <!-- configuration of navigation rules -->
+    <navigation-rule>
+        <from-view-id>*</from-view-id>
+        <navigation-case>
+            <from-outcome>order</from-outcome>
+            <to-view-id>/pages/manager/order.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>users</from-outcome>
+            <to-view-id>/pages/manager/user.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>recept</from-outcome>
+            <to-view-id>/pages/manager/recept.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>removal</from-outcome>
+            <to-view-id>/pages/manager/removal.xhtml</to-view-id>
+        </navigation-case>
+ 
+        
+    </navigation-rule>  
+
+    <navigation-rule>
+        <from-view-id>/pages/supervisor/sv_outlets.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outlet_detail</from-outcome>
+                <to-view-id>/pages/supervisor/sv_outlets_detail.xhtml</to-view-id>
+        </navigation-case>
+        
+    
+    </navigation-rule>  
+    
+    <navigation-rule>
+    <from-view-id>/pages/supervisor/sv_outlets_detail.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outlet_detail_back</from-outcome>
+                <to-view-id>/pages/supervisor/sv_outlets.xhtml</to-view-id>
+        </navigation-case>
+        
+    </navigation-rule>  
+    
+    <navigation-rule>
+        <from-view-id>/pages/manager/order.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>base_manager</from-outcome>
+                <to-view-id>/pages/manager/base.xhtml</to-view-id>
+        </navigation-case>
+    
+    </navigation-rule>  
+                
+    <navigation-rule>
+        <from-view-id>/pages/manager/recept.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>suplOrder</from-outcome>
+                <to-view-id>/pages/manager/suplOrder.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>  
+    
+     <navigation-rule>
+        <from-view-id>/pages/manager/removal.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>suplOrder</from-outcome>
+                <to-view-id>/pages/manager/outletOrder.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+     <navigation-rule>
+        <from-view-id>/empty.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>manager</from-outcome>
+                <to-view-id>/pages/manager/base.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+                <from-outcome>admin</from-outcome>
+                <to-view-id>/pages/admin/startadmin.xhtml</to-view-id>
+        </navigation-case>
+                <navigation-case>
+                <from-outcome>supervisor</from-outcome>
+                <to-view-id>/pages/supervisor/sv_articles.xhtml</to-view-id>
+        </navigation-case>
+     </navigation-rule>
+
+</faces-config>

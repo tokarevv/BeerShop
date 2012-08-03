@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+        <h:outputStylesheet name="css/screen.css"/>
+    </h:head>
+<h:body>
+
+	<ui:composition template="/pages/admin/templates/base.xhtml">
+		<ui:define name="content">
+			<h:form id="form">
+                            <p:growl id="messages" showDetail="true"/> 
+			
+				<p:dataTable id="users" var="user" value="#{userMB.model}"
+					paginator="true" 
+					rows="10"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,20,50" 
+					emptyMessage="No data "
+					editable="true" 
+					selection="#{userMB.selected}"
+					selectionMode="single" 
+					scrollable="true" liveScroll="true"
+					paginatorAlwaysVisible="false" 
+					paginatorPosition="bottom">
+	
+				<f:facet name="header">  
+                                    Users 
+                                </f:facet> 
+
+					<p:ajax event="rowEdit"
+						update="@all"
+						listener="#{userMB.editRow}" />
+
+					<p:column width="40">
+						<p:rowEditor />
+					</p:column>
+
+					<p:column  headerText=" Login " width="295">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{user.login}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:inputText value="#{user.login}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column headerText=" Name " width="300">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{user.fullname}" />
+							</f:facet>
+							<f:facet name="input">
+								<h:inputText value="#{user.fullname}" />
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+
+					<p:column  headerText="Post" width="300"
+						id="post">
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{user.post}" disabled="true" />
+							</f:facet>
+							<f:facet name="input">
+								<h:selectOneMenu value="#{user.post}">
+									<f:selectItems value="#{userMB.posts}" var="post"
+										itemLabel="#{post}" itemValue="#{post}" />
+								</h:selectOneMenu>
+							</f:facet>
+						</p:cellEditor>
+					</p:column>
+					
+					<p:column  headerText="Password" width="300"
+						id="password">
+						<h:outputText value="#{user.password}" disabled="true" />
+					</p:column>
+
+				</p:dataTable>
+				<br />
+				<div class="buttonLeft" style="float: left;">
+					<p:commandButton value="New" actionListener="#{userMB.createNew}"
+						ajax="false" update="@all" />
+					<p:commandButton value="Delete" actionListener="#{userMB.delete}"
+						ajax="false" update="@all" />
+
+				</div>
+
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>
