@@ -45,6 +45,12 @@
         <param-name>javax.faces.CONFIG_FILES</param-name>
         <param-value>/WEB-INF/newfaces-config1.xml</param-value>
     </context-param>
+    <!-- Mobile service servlet -->
+    <servlet>
+        <servlet-name>Mobile servlet</servlet-name>
+        <servlet-class>ss.bshop.mobile.MobileService</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
