@@ -30,15 +30,35 @@
                 </h:form>
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
-            <p:layoutUnit position="west" size="200" header="Filter" resizable="true" collapsible="true">  
+            <p:layoutUnit position="west" size="100" header="Printer" collapsible="true">  
                 
+                <h:form id="printform">
+                    <p:outputPanel> 
+                        <p:effect type="pulsate" event="load" delay="500">
+                            <f:param name="times" value="2" />
+                        </p:effect>
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/printer50.png"/>  
+                            <p:printer target=":form:articles" />  
+                        </h:commandLink> 
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/xls50.png" />  
+                            <p:dataExporter type="xls" target=":form:articles" fileName="articles"/>
+                        </h:commandLink>
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/pdf50.png" />  
+                            <p:dataExporter type="pdf" target=":form:articles" fileName="articles"/>
+                        </h:commandLink>
+                    </p:outputPanel>
+                </h:form>
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">  
           <h:form id="form">  
-
-            <p:growl id="messages" showDetail="true"/>  
             <p:dataTable id="articles" var="article"
                             value="#{articleMB.model}"
                             editable="true"
@@ -48,49 +68,46 @@
 
                 <f:facet name="header">
                     Articles
-                    <p:outputPanel style="float:right">  
-                        <h:outputText value="Search all fields:"  />  
-                        <p:inputText id="globalFilter" onkeyup="articlesTable.filter()" style="width:150px" />  
-                        
-                        <h:commandButton value="Print" type="button" 
-                                         onclick="javascript: location.href='print_sv_articles.xhtml;'"/>  
-
-                        
-                    </p:outputPanel> 
-                    
                 </f:facet>  
 
-                <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 
-                        update=":form:messages" /> 
-                 
-
-                <p:column headerText=" ID " style="width:30px"
+                <p:column style="width:30px"
                           filterBy="#{article.id}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="ID" />  
+                    </f:facet> 
                     <h:outputText value="#{article.id}"/>
                 </p:column>
 
-                <p:column  headerText=" Name "  width="120"
+                <p:column  width="120"
                            sortBy="#{article.name}"
                            filterBy="#{article.name}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Name" />  
+                    </f:facet> 
                     <h:outputText value="#{article.name}"/>
                 </p:column>
 
                 <p:column  headerText="Supplier"  width="120"
                            filterBy="#{article.supplier.name}"   
                            filterMatchMode="contains"
-                           filterStyle="display: none; visibility: hidden;">                                                      
-
+                           filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Supplier" />  
+                    </f:facet> 
                     <h:outputText value="#{article.supplier.name}"/>
                 </p:column>
 
-                <p:column  headerText="Qnty"  style="width:20px"
+                <p:column  style="width:20px"
                            filterBy="#{article.quantity}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Qnty" />  
+                    </f:facet> 
                     <h:outputText value="#{article.quantity}"/>
                 </p:column>
 
@@ -98,6 +115,9 @@
                            filterBy="#{article.unit}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Unit" />  
+                    </f:facet>
                     <h:outputText value="#{article.unit}"/>
                 </p:column>
 
@@ -105,31 +125,29 @@
                            filterBy="#{article.price}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                        <h:outputText value="Price" />  
+                    </f:facet>
                     <h:outputText value="#{article.price}"/>
                 </p:column>
 
-                <p:column headerText="%" style="width:40px"
+                <p:column style="width:40px"
                           filterBy="#{article.percent}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">
-                    <p:cellEditor>  
-                        <f:facet name="output">  
-                            <h:outputText value="#{article.percent}" />  
-                        </f:facet>  
-                        <f:facet name="input">  
-                            <p:inputText value="#{article.percent}" style="width:150%"/>  
-                        </f:facet>  
-                    </p:cellEditor>  
-                </p:column>
-                
-                <p:column  headerText="*" style="width:20px">  
-                    <p:rowEditor />  
+                     <f:facet name="header">
+                         <h:outputText value="%" />  
+                     </f:facet>
+                     <h:outputText value="#{article.percent}" />  
                 </p:column>
 
-                <p:column  headerText="SPrc"  style="width:20px"
+                <p:column  style="width:20px"
                            filterBy="#{article.price*(article.percent/100+1)}"   
                            filterMatchMode="contains"
                            filterStyle="display: none; visibility: hidden;">
+                    <f:facet name="header">
+                         <h:outputText value="SPrc" />  
+                     </f:facet>
                     <h:outputText value="#{article.price*(article.percent/100+1)}">
                         <f:convertNumber pattern="#,###,##0.00"/>
                     </h:outputText>
