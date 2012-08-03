@@ -51,17 +51,10 @@
                         <h:outputText value="Search all fields:"  />  
                         <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />  
                         
-                        <h:commandButton value="Print" type="button" icon="ui-icon-print">  
-                            <p:printer target="outlets" />  
-                        </h:commandButton> 
-                        <h:commandLink>  
-                            <p:graphicImage value="./../../resources/image/xls3.png" style="vertical-align: bottom"/>  
-                            <p:dataExporter type="xls" target="outlets" fileName="outlets"
-                                            excludeColumns="3" 
-                                            postProcessor="#{outletMB.postProcessXLS}">
+                        <h:commandButton value="Print" type="button" 
+                                         onclick="javascript: location.href='sv_outlets_print.xhtml;'"/>  
 
-                            </p:dataExporter>
-                        </h:commandLink>
+                        
                     </p:outputPanel> 
                     
                 </f:facet>  
@@ -93,7 +86,9 @@
                           filterBy="#{outlet.discount}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">
-                    
+                    <f:facet name="header">
+                        <h:outputText value="Discount,%" />  
+                    </f:facet> 
                     <p:cellEditor>  
                         <f:facet name="output" >  
                             <h:outputText value="#{outlet.discount}" />  
