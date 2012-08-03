@@ -30,13 +30,9 @@
 <!--****************************** West content *********************************-->
 <p:layoutUnit position="west" size="100" 
               header="Printer" collapsible="true"> 
-                <p:effect type="pulsate" event="load" delay="500">
-                    <f:param name="times" value="2" />
-                </p:effect>
-
                 <h:form id="printform">
-
-                    <p:outputPanel>  
+                    <p:outputPanel> 
+                        <p:effect type="slide" event="load" delay="500"/>
                         <br/> <br/>
                         <h:commandLink>  
                             <p:graphicImage value="./../../resources/image/printer50.png" style="vertical-align: bottom"/>  
@@ -61,9 +57,6 @@
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">  
           <h:form id="form">  
-
-            <p:growl id="messages" showDetail="true"/>
-            
             <p:dataTable id="outlets" var="outlet"
                             value="#{outletMB.model}"
                             editable="true"

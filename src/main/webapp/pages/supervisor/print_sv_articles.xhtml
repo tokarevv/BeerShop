@@ -31,26 +31,27 @@
             </p:layoutUnit>  
 <!--****************************** West content *********************************-->
             <p:layoutUnit position="west" size="100" header="Printer" collapsible="true">  
-                <p:effect type="pulsate" event="load" delay="500">
-                    <f:param name="times" value="2" />
-                </p:effect>
+                
                 <h:form id="printform">
-                    <p:outputPanel>  
-                            <br/> <br/>
-                            <h:commandLink>  
-                                <p:graphicImage value="./../../resources/image/printer50.png"/>  
-                                <p:printer target=":form:articles" />  
-                            </h:commandLink> 
-                            <br/> <br/>
-                            <h:commandLink>  
-                                <p:graphicImage value="./../../resources/image/xls50.png" />  
-                                <p:dataExporter type="xls" target=":form:articles" fileName="articles"/>
-                            </h:commandLink>
-                            <br/> <br/>
-                            <h:commandLink>  
-                                <p:graphicImage value="./../../resources/image/pdf50.png" />  
-                                <p:dataExporter type="pdf" target=":form:articles" fileName="articles"/>
-                            </h:commandLink>
+                    <p:outputPanel> 
+                        <p:effect type="pulsate" event="load" delay="500">
+                            <f:param name="times" value="2" />
+                        </p:effect>
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/printer50.png"/>  
+                            <p:printer target=":form:articles" />  
+                        </h:commandLink> 
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/xls50.png" />  
+                            <p:dataExporter type="xls" target=":form:articles" fileName="articles"/>
+                        </h:commandLink>
+                        <br/> <br/>
+                        <h:commandLink>  
+                            <p:graphicImage value="./../../resources/image/pdf50.png" />  
+                            <p:dataExporter type="pdf" target=":form:articles" fileName="articles"/>
+                        </h:commandLink>
                     </p:outputPanel>
                 </h:form>
             </p:layoutUnit>  
@@ -58,8 +59,6 @@
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">  
           <h:form id="form">  
-
-            <p:growl id="messages" showDetail="true"/>  
             <p:dataTable id="articles" var="article"
                             value="#{articleMB.model}"
                             editable="true"
