@@ -160,7 +160,7 @@ public class OutletMB implements Serializable {
     
     public String editSelected() {
 
-        getOutletService().update(current);
+        //getOutletService().update(current);
         
         msg = new FacesMessage("Outlet Edited", current.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 

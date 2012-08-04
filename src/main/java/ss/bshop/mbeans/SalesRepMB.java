@@ -50,16 +50,21 @@ public class SalesRepMB implements Serializable {
     
     private SalesRep selected;
     private List<Outlet> outletList;
+    private List<SalesRep> salesReps;
  
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
         mapModel = new DefaultMapModel();
+        salesReps = salesRepService.getAll();
     }  
     
     public void onRowSelect(SelectEvent event){
+
         mapModel = new DefaultMapModel();
         outletList = outletService.getBySalesRep(selected);
+
+        setOutletList(outletService.getBySalesRep(selected));
 
     }
     
@@ -97,6 +102,7 @@ public class SalesRepMB implements Serializable {
         this.selected = selected;
     }
 
+
     public MapModel getMapModel() {
         return mapModel;
     }
@@ -105,6 +111,20 @@ public class SalesRepMB implements Serializable {
         this.mapModel = mapModel;
     }
 
-    
+    public List<SalesRep> getSalesReps() {
+            return salesReps;
+    }
+
+    public void setSalesReps(List<SalesRep> salesReps) {
+            this.salesReps = salesReps;
+    }
+
+    public List<Outlet> getOutletList() {
+            return outletList;
+    }
+
+    public void setOutletList(List<Outlet> outletList) {
+            this.outletList = outletList;
+    }   
     
  }
