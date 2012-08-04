@@ -57,9 +57,8 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Mobile servlet</servlet-name>
-        <url-pattern>/mobile/</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
-    
     
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -69,7 +68,7 @@
         <filter-name>springSecurityFilterChain</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
-    
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>

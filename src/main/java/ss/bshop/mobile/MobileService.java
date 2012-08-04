@@ -26,7 +26,7 @@ import ss.bshop.service.IOutletService;
 import ss.bshop.service.IVisitService;
 
 @Controller
-@RequestMapping("/mobile/*")
+@RequestMapping(value = "/mobile")
 public class MobileService {
 
 	@Autowired
@@ -40,21 +40,20 @@ public class MobileService {
 	@Autowired
 	private Converters converters;
 
-	@RequestMapping(value = "/mobile/helloservice", method = RequestMethod.POST,
-			consumes = "text/plain")
-	public @ResponseBody String helloService(@RequestBody String name) {
-		String answer = "Hello, " + name + "!";
+	@RequestMapping(value = "helloservice", method = RequestMethod.GET)
+	public @ResponseBody String helloService() {
+		String answer = "Hello there!";
 		return answer;
 	}
 
-	@RequestMapping(value = "/mobile/addvisit", method = RequestMethod.POST, 
-			consumes = "application/json") 
+	@RequestMapping(value = "addvisit",
+			method = RequestMethod.POST, consumes = "application/json") 
 	public void addOrder(@RequestBody VisitMobile mobileVisit) {
 		Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
 		visitService.add(visit);
 	}
 
-	@RequestMapping(value = "/mobile/getoutlets/(salesRepLogin)",
+	@RequestMapping(value = "getoutlets/(salesRepLogin)",
 			method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody List<OutletMobile> getOutlets(
 			@PathVariable String salesRepLogin) {
@@ -67,7 +66,8 @@ public class MobileService {
 		return mobileForToday;
 	}
 
-	@RequestMapping(value = "/mobile/getgoods", produces = "application/json")
+	@RequestMapping(value = "getgoods", method = RequestMethod.GET,
+			produces = "application/json")
 	public @ResponseBody List<ArticleMobile> getGoods() {
 		List<Article> articles = articleService.getArticles();
 		List<ArticleMobile> mobileArticles = new ArrayList<ArticleMobile>();
