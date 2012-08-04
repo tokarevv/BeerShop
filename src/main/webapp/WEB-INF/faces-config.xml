@@ -73,12 +73,30 @@
     </navigation-rule>  
     
      <navigation-rule>
+        <from-view-id>/pages/admin/outlets.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outletValidation</from-outcome>
+                <to-view-id>/pages/admin/outleValidation.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+    
+    <navigation-rule>
+        <from-view-id>/pages/admin/outleValidation.xhtml</from-view-id>
+        <navigation-case>
+                <from-outcome>outlets</from-outcome>
+                <to-view-id>/pages/admin/outlets.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule> 
+    
+     <navigation-rule>
         <from-view-id>/pages/manager/removal.xhtml</from-view-id>
         <navigation-case>
                 <from-outcome>suplOrder</from-outcome>
                 <to-view-id>/pages/manager/outletOrder.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    
+    
 
      <navigation-rule>
         <from-view-id>/empty.xhtml</from-view-id>
@@ -86,6 +104,7 @@
                 <from-outcome>manager</from-outcome>
                 <to-view-id>/pages/manager/base.xhtml</to-view-id>
         </navigation-case>
+       
         <navigation-case>
                 <from-outcome>admin</from-outcome>
                 <to-view-id>/pages/admin/startadmin.xhtml</to-view-id>

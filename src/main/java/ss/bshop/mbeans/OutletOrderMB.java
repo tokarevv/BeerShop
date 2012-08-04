@@ -13,6 +13,7 @@ import javax.faces.bean.RequestScoped;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.OutletOrder;
+import ss.bshop.domain.Visit;
 import ss.bshop.service.IOutletOrderService;
 
 
@@ -21,7 +22,7 @@ import ss.bshop.service.IOutletOrderService;
 public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="#{outletOrderService}")
+	@ManagedProperty(value="#{OutletOredrService}")
 	IOutletOrderService outletOrderService;
 	
 	OutletOrder selected;
@@ -46,7 +47,8 @@ public class OutletOrderMB  implements Serializable{
     
     public String createNew() {
     	OutletOrder order=new OutletOrder();
-    	//order.setName("default");
+    	//Visit visit=new Visit();
+    	//order.setVisit(visit);
     	outletOrderList.add(order);
     	getOutletOrderService().add(order);  	
         return "";
@@ -69,6 +71,7 @@ public class OutletOrderMB  implements Serializable{
          return res;
      }
 
+	
 	public IOutletOrderService getOutletOrderService() {
 		return outletOrderService;
 	}

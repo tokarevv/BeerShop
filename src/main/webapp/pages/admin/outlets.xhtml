@@ -24,22 +24,29 @@
                              liveScroll="true"
                              paginatorAlwaysVisible="false"
                              paginatorPosition="bottom"
-                        >
-                         <f:facet name="header">  
+                              widgetVar="outletsTable">
+
+                <f:facet name="header">  
                     Outlets 
+                    <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />                                           
+                    </p:outputPanel> 
                 </f:facet> 
 
                     <p:ajax event="rowEdit"
                             update="@all"
                             listener="#{outletMB.editRow}"/>
 
-                    <p:column width="40">
+                    <p:column  style="width:40px">
                         <p:rowEditor/>
                     </p:column>
 
-                    <p:column sortBy="#{outlet.name}"
-                              headerText=" Name "
-                              width="100">
+                    <p:column filterBy="#{outlet.name}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" Name ">                              
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.name}"/>
@@ -50,9 +57,11 @@
                         </p:cellEditor>
                     </p:column>
                                  
-                    <p:column sortBy="#{outlet.address}"
-                              headerText=" Adress "
-                              width="130">
+                    <p:column filterBy="#{outlet.address}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" Adress ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.address}"/>
@@ -63,9 +72,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column sortBy="#{outlet.email}"
-                              headerText=" Email "
-                              width="150">
+                    <p:column filterBy="#{outlet.email}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" Email ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.email}"/>
@@ -76,9 +87,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{outlet.OKPO}"
-                              headerText=" OKPO "
-                              width="150">
+                     <p:column filterBy="#{outlet.OKPO}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" OKPO " >
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.OKPO}"/>
@@ -89,9 +102,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{outlet.INN}"
-                              headerText=" INN "
-                              width="150">
+                     <p:column filterBy="#{outlet.INN}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" INN ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.INN}"/>
@@ -102,9 +117,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{outlet.svidNumber}"
-                              headerText=" svidNumber "
-                              width="150">
+                     <p:column filterBy="#{outlet.svidNumber}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" svidNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.svidNumber}"/>
@@ -116,9 +133,11 @@
                     </p:column>
                     
                                          
-                       <p:column sortBy="#{outlet.sertificateNumber}"
-                              headerText=" sertificateNumber "
-                              width="150">
+                       <p:column filterBy="#{outlet.sertificateNumber}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" sertificateNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.sertificateNumber}"/>
@@ -129,9 +148,11 @@
                         </p:cellEditor>
                     </p:column>
                      
- 					<p:column sortBy="#{outlet.contractNumber}"
-                              headerText=" contractNumber "
-                              width="150">
+ 					<p:column filterBy="#{outlet.contractNumber}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" contractNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.contractNumber}"/>
@@ -142,9 +163,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column sortBy="#{outlet.comment}"
-                              headerText=" comment "
-                              width="150">
+                    <p:column filterBy="#{outlet.comment}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" comment ">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{outlet.comment}"/>
@@ -159,11 +182,15 @@
                 <br/>
                 <div class="buttonLeft" style="float: left;">
                     <p:commandButton value="New"
-                                     actionListener="#{outletMB.createNew}"
+                                     actionListener="#{outletMB.New}"
                                      ajax="false"
                                      update="@all" />
                      <p:commandButton value="Delete"
                                      actionListener="#{outletMB.delete}"
+                                     update="@all"/>
+                     <p:commandButton value="Modify"
+                     				 ajax="false"
+                                     action="#{outletMB.modify}"
                                      update="@all"/>
 
                  </div>

@@ -16,7 +16,7 @@ import ss.bshop.domain.Supplier;
 @ContextConfiguration("/test-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
-public class SupplierDAOTest {
+public class SupplierServiceTest {
 
     @Autowired
     private ISupplierService service;
