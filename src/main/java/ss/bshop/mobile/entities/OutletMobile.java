@@ -49,13 +49,5 @@ public class OutletMobile {
 	public void setDiscount(Integer discount) {
 		this.discount = discount;
 	}
-	public static OutletMobile fromOutlet(Outlet outlet) {
-		OutletMobile om = new OutletMobile();
-		om.setId(outlet.getId());
-		om.setName(outlet.getName());
-		om.setAddress(outlet.getAddress());
-		om.setPhone(outlet.getPhone());
-		om.setDiscount(outlet.getDiscount());
-		return om;
-	}
+
 }
