@@ -1,11 +1,15 @@
 package ss.bshop.mbeans;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
 import org.springframework.security.core.Authentication;
@@ -13,6 +17,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import ss.bshop.domain.User;
+import ss.bshop.mbeans.datamodel.UserDataModel;
 import ss.bshop.service.IUserService;
 
 
@@ -35,6 +41,14 @@ public class AuthorisationMB implements Serializable {
     private String name;
     private String password;
     
+    @PostConstruct
+    protected void postConstruct() throws IOException {
+    	
+    	ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+	    externalContext.redirect("/pages/admin/startadmin.xhtml");//onSubmit()+".xhtml"
+   	
+    }  
 
     public String onSubmit(){
    	
