@@ -35,28 +35,31 @@
             
 <!--****************************** Centr content *********************************-->
     <p:layoutUnit id="center" position="center">
-
+            <p:growl id="messages" showDetail="true"/>  
                     <p:panelGrid columns="3"  > 
                         <f:facet name="header">  
                             <h:outputText id="name" value="Name: #{outletMB.selected.name}"/> 
                         </f:facet> 
                         <p:column  styleClass="col1" colspan="2">
+                                        <h:form>
+
                             <h:outputText id="cnum" value="Contract Number: #{outletMB.selected.contractNumber}"/> <br/><br/>
                             <h:outputText id="date" value="Date of regestration: #{outletMB.selected.registerDate}"/> <br/><br/>
                             <h:outputText id="sumorder" value="Order sum: 1000"/> <br/><br/>
                             <h:outputText id="sumavg" value="Avg sum (month): 100"/> <br/> <br/>
                             <h:outputText id="debit" value="Debit sum : 500"/> <br/><br/>
                             <h:outputLabel for="spinner" value="Discount :  " /> 
+                            
                             <p:spinner    id="spinner" value="#{outletMB.selected.discount}" size="1"/> <br/> <br/> 
                             <h:outputLabel for="selectableInplace" value="Response SalesRep : " />
                             <p:inplace id="selectableInplace" label="(Dblclick)   #{outletMB.selected.salesRep.user.fullname}      " effectSpeed="fast" event="dblclick">  
-                                <p:selectOneMenu value="#{outletMB.selected.salesRep}"
-                                        effect="fade" converter="#{salesRepConverter}"
-                                        style="alignment-baseline: central">
-                                        <f:selectItem itemLabel="Select One" itemValue="" />
-                                        <f:selectItems value="#{outletMB.salesReps}"
-                                                var="salesRep" itemLabel="#{salesRep.user.fullname}"
-                                                itemValue="#{salesRep}" />
+                            <p:selectOneMenu value="#{outletMB.selected.salesRep}"
+                                    effect="fade" converter="#{salesRepConverter}"
+                                    style="alignment-baseline: central">
+                                    <f:selectItem itemLabel="Select One" itemValue="" />
+                                    <f:selectItems value="#{salesRepMB.salesReps}"
+                                            var="salesRep" itemLabel="#{salesRep.user.fullname}"
+                                            itemValue="#{salesRep}" />
                             </p:selectOneMenu>
                             </p:inplace> 
                             <br/><br/>
@@ -67,13 +70,15 @@
                             <div class="buttonLeft" style="float: left;">
                                 <p:commandButton value="Save"                                              
                                                 action="#{outletMB.editSelected}"
-                                                ajax="true"
-                                                update="@all" />
+                                                onclick="javascript:location.href='sv_outlets.xhtml'"
+                                                />
+
                                 <p:commandButton value="Cancel"   
                                                  onclick="javascript:history.back(0);"
                                                  
                                              />
                             </div>
+                                        </h:form>
                         </p:column >
                         
                         <p:column headerText="Map" styleClass="panelColumns" >

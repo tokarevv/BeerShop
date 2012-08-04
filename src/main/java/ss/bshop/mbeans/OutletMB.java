@@ -34,10 +34,10 @@ import ss.bshop.service.IOutletService;
 
 /**
  * Outlet Managed Bean
-  * @author Vera
+  * @author Nick
  */
 @ManagedBean(name = "outletMB")
-@ViewScoped
+@SessionScoped
 public class OutletMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -48,7 +48,7 @@ public class OutletMB implements Serializable {
     private MapModel mapModel;
     private LatLng curCoord; 
     private double lat;  
-    private double lng;  
+    private double lng;
 
     private List<Outlet> outletList = new ArrayList<Outlet>();
     private List<SalesRep> salesReps = new ArrayList<SalesRep>();
@@ -60,7 +60,6 @@ public class OutletMB implements Serializable {
     private SalesRepDataModel modelsr;
     
     private Outlet selected;
-    private Outlet current;
     
     private FacesMessage msg;
 
@@ -87,17 +86,12 @@ public class OutletMB implements Serializable {
    public String moreDetail(){
        String res = "";
        if(selected!=null ){ 
-            try {
-                // mapModel = new DefaultMapModel();
-                 current = selected.clone();
-                 if(current.getLatitude()!=current.getLongitude()){
-                    curCoord = new LatLng(current.getLatitude(),current.getLongitude());
-                    mapModel.addOverlay(new Marker(curCoord, current.getName()));
+                 mapModel = new DefaultMapModel();
+                 if(selected.getLatitude()!=selected.getLongitude()){
+                    curCoord = new LatLng(selected.getLatitude(),selected.getLongitude());
+                    mapModel.addOverlay(new Marker(curCoord, selected.getName()));
                 }
             res = "outlet_detail";
-            } catch (CloneNotSupportedException ex) {
-                Logger.getLogger(OutletMB.class.getName()).log(Level.SEVERE, null, ex);
-            }
             
        }
        return res;
@@ -127,19 +121,19 @@ public class OutletMB implements Serializable {
     
     public String editSelected() {
 
-        //getOutletService().update(current);
+        getOutletService().update(selected);
         
-        msg = new FacesMessage("Outlet Edited", current.getName());   
+        msg = new FacesMessage("Outlet Edited", selected.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         return "";
     }
     
     public void addMarker(ActionEvent actionEvent) {
-        System.out.println("!!!!!!!!!!!!!tryAddMarker");
+
         if(selected.getLatitude()==null){
-//            Marker marker = new Marker(new LatLng(lat, lng), selected.getName());
-//            marker.setDraggable(true);
-//            mapModel.addOverlay(marker); 
+            Marker marker = new Marker(new LatLng(lat, lng), selected.getName());
+            marker.setDraggable(true);
+            mapModel.addOverlay(marker); 
             selected.setLatitude(lat);
             selected.setLongitude(lng);
 
@@ -153,6 +147,7 @@ public class OutletMB implements Serializable {
         selected.setLongitude(lt.getLng());
     }  
 
+    // setters and getters
     public List<Outlet> getoutletList() {
         return outletList;
     }
@@ -209,21 +204,7 @@ public class OutletMB implements Serializable {
         this.lng = lng;
     }
 
-    public Outlet getCurrent() {
-        return current;
-    }
-
-    public void setCurrent(Outlet current) {
-        this.current = current;
-    }
-
-	public List<SalesRep> getSalesReps() {
-		return salesReps;
-	}
-
-	public void setSalesReps(List<SalesRep> salesReps) {
-		this.salesReps = salesReps;
-	}
+	
 
     public SalesRepDataModel getModelsr() {
         return modelsr;
@@ -232,7 +213,5 @@ public class OutletMB implements Serializable {
     public void setModelsr(SalesRepDataModel modelsr) {
         this.modelsr = modelsr;
     }
-
-    
-    
+       
  }

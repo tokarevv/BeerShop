@@ -41,6 +41,8 @@ public class SalesRepMB implements Serializable {
     private static final long serialVersionUID = 1L;
     private MapModel mapModel;
     
+    private SalesRep selected;
+    
     @ManagedProperty(value = "#{salesRepService}")
     private ISalesRepService salesRepService;
     
@@ -50,7 +52,6 @@ public class SalesRepMB implements Serializable {
     @ManagedProperty(value = "#{SalesRepDataModel}")
     private SalesRepDataModel modelsr;
     
-    private SalesRep selected;
     private List<Outlet> outletList;
     private List<SalesRep> salesReps;
     private List<Marker> lstMarkers;
@@ -60,12 +61,8 @@ public class SalesRepMB implements Serializable {
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
-//        mapModel = new DefaultMapModel();
         salesReps = salesRepService.getAll();
         
-//        for(SalesRep slr: salesReps){
-//            lstmap.put(slr, lstCoord);
-//        }
     }  
     
     public void onRowSelect(SelectEvent event){
@@ -144,5 +141,5 @@ public class SalesRepMB implements Serializable {
     public void setOutletList(List<Outlet> outletList) {
             this.outletList = outletList;
     }   
-    
+
  }
