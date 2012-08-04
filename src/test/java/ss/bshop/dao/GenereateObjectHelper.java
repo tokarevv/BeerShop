@@ -4,9 +4,11 @@ import java.util.Date;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
 import ss.bshop.domain.OutletOrder;
+import ss.bshop.domain.SalesRep;
 import ss.bshop.domain.SupOrderStructure;
 import ss.bshop.domain.Supplier;
 import ss.bshop.domain.SupplierOrder;
+import ss.bshop.domain.User;
 import ss.bshop.domain.Visit;
 
 public class GenereateObjectHelper {
@@ -54,6 +56,20 @@ public class GenereateObjectHelper {
 	public static Outlet getNewOutlet() {
 		Outlet res = new Outlet();
 		res.setName("Outlet"+getRandomInt());
+		return res;
+	}
+
+	public static SalesRep getNewSalesRep() {
+		SalesRep res = new SalesRep();
+		res.setUser(getNewUser());
+		return res;
+	}
+
+	public static User getNewUser() {
+		User res = new User();
+		res.setFullname("VasyaPupkigs");
+		res.setLogin("vvv");
+		res.setPost("srs");
 		return res;
 	}
 

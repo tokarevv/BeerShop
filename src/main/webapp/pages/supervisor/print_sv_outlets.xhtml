@@ -32,7 +32,9 @@
               header="Printer" collapsible="true"> 
                 <h:form id="printform">
                     <p:outputPanel> 
-                        <p:effect type="slide" event="load" delay="500"/>
+                        <p:effect type="pulsate" event="load" delay="500">
+                            <f:param name="times" value="2" />
+                        </p:effect>
                         <br/> <br/>
                         <h:commandLink>  
                             <p:graphicImage value="./../../resources/image/printer50.png" style="vertical-align: bottom"/>  
