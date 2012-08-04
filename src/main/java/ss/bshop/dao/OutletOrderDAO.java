@@ -8,7 +8,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ss.bshop.domain.Outlet;
 import ss.bshop.domain.OutletOrder;
 
 /**
@@ -31,7 +30,8 @@ public class OutletOrderDAO implements IOutletOrder{
         return (OutletOrder) sessionFactory.getCurrentSession().get(OutletOrder.class, id);
     }
 
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public List<OutletOrder> getAll() {
         return sessionFactory.getCurrentSession().createQuery("from OutletOrder")
 			.list();

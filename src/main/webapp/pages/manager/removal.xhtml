@@ -11,39 +11,32 @@
 		<ui:define name="content">
 			<h:form>
 
-				<p:dataTable id="order" var="order" value="#{suplOrderMB.model}"
+				<p:dataTable id="order" var="order" value="#{outletOrderMB.model}"
 					paginator="true" rows="5"
 					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 					rowsPerPageTemplate="5,10,20,50" emptyMessage="No data "
-					editable="false" selection="#{suplOrderMB.selected}"
+					editable="false" selection="#{outletOrderMB.selected}"
 					selectionMode="single" scrollable="true" liveScroll="true"
 					paginatorAlwaysVisible="false" paginatorPosition="bottom">
+					
 					<f:facet name="header">  
-                    Orders from order 
+                    Orders for outlets 
                 </f:facet>
-			
-					<p:column headerText=" Type " width="170">
+
+					<p:column headerText=" Type " style="width:250px">
 						<h:outputText value="#{order.type}" />
 					</p:column>
 
-					<p:column headerText=" Manager " width="170">
-						<h:outputText value="#{order.manager}" />
+					<p:column headerText=" Manager " style="width:350px">
+						<h:outputText value="#{order.discount}" />
 					</p:column>
 
-					<p:column headerText=" Order Date " width="160">
-						<h:outputText value="#{order.orderDate}" />
+					<p:column headerText=" Order Date " style="width:350px">
+						<h:outputText value="#{order.payment}" />
 					</p:column>
 
-					<p:column headerText=" Order Complete " width="160">
-						<h:outputText value="#{order.orderDoneDate}" />
-					</p:column>
-
-					<p:column headerText=" Status " width="160">
-						<h:outputText value="#{order.status}" />
-					</p:column>
-
-					<p:column headerText=" Comment " width="160">
-						<h:outputText value="#{order.comment}" />
+					<p:column headerText=" Order Complete " style="width:350px">
+						<h:outputText value="#{order.visit}" />
 					</p:column>
 
 				</p:dataTable>
@@ -51,7 +44,7 @@
 
 				<div class="buttonLeft" style="float: left;">
 					<p:commandButton value="Submit"
-						action="#{suplOrderMB.moreDetail}" ajax="false"
+						action="#{outletOrderMB.moreDetail}" ajax="false"
 						update="@all" />
 
 
