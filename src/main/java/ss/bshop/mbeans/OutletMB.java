@@ -250,13 +250,37 @@ public class OutletMB implements Serializable {
 	private String contractNumber;
     
     public String modify() {
-      //  Outlet outlet= getSelected();
-      //  getOutletService().update(outlet);
-        return "outletValidation";
+    	Outlet outlet= getSelected();
+        setName(outlet.getName());
+        setAdress(outlet.getAddress());
+        setPhone(outlet.getPhone());
+        setEmail(outlet.getEmail());
+        setOKPO(outlet.getOKPO());
+        setINN(outlet.getINN());
+        setSvidNumber(outlet.getSvidNumber());
+        setComment(outlet.getComment());
+        setSertificateNumber(outlet.getSertificateNumber());
+        setContractNumber(outlet.getContractNumber());
+     return "outletValidation";
+     }
+       
+    public String save() {
+    	Outlet outlet;
+    	if(selected==null){
+    	outlet=new Outlet();
+    	setFields(outlet);
+    	getOutletService().add(outlet);
+    	}
+    	else {
+    	outlet= getSelected();
+    	setFields(outlet);
+    	getOutletService().update(outlet);
+    	}
+    	selected=null;
+        return "outlets";
     }
     
-    public String save() {
-    	Outlet outlet=new Outlet();
+    private void setFields(Outlet outlet){
     	outlet.setName(name);
     	outlet.setAddress(adress);
     	outlet.setPhone(phone);
@@ -267,8 +291,10 @@ public class OutletMB implements Serializable {
     	outlet.setComment(comment);
     	outlet.setSertificateNumber(sertificateNumber);
     	outlet.setContractNumber(contractNumber);
-    	getOutletService().add(outlet);
-        return "outlets";
+    }
+    
+    public String New() {
+        return "outletValidation";
     }
 
     // getters and setters for validation
