@@ -57,14 +57,5 @@ public class ArticleMobile {
 	public void setUnit(String unit) {
 		this.unit = unit;
 	}
-	public static ArticleMobile fromArticle(Article article) {
-		ArticleMobile am = new ArticleMobile();
-		am.setId(article.getId());
-		am.setName(article.getName());
-		am.setType(article.getType());
-		am.setPrice(article.getPrice());
-		am.setQty(article.getQuantity());
-		am.setUnit(article.getUnit());
-		return am;
-	}
+
 }

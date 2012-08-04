@@ -6,6 +6,7 @@ package ss.bshop.mobile;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,6 +40,7 @@ public class MobileService {
 	private IVisitService visitService;
 	@Autowired
 	private Converters converters;
+	private Logger logger = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "helloservice", method = RequestMethod.GET)
 	public @ResponseBody String helloService() {
@@ -53,7 +55,7 @@ public class MobileService {
 		visitService.add(visit);
 	}
 
-	@RequestMapping(value = "getoutlets/(salesRepLogin)",
+	@RequestMapping(value = "getoutlets/{salesRepLogin}",
 			method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody List<OutletMobile> getOutlets(
 			@PathVariable String salesRepLogin) {
@@ -61,7 +63,13 @@ public class MobileService {
 				.getForSalesRepToday(salesRepLogin);
 		List<OutletMobile> mobileForToday = new ArrayList<OutletMobile>();
 		for (Outlet outlet : forToday) {
-			mobileForToday.add(OutletMobile.fromOutlet(outlet));
+			OutletMobile om = new OutletMobile();
+			om.setId(outlet.getId());
+			om.setName(outlet.getName());
+			om.setAddress(outlet.getAddress());
+			om.setPhone(outlet.getPhone());
+			om.setDiscount(outlet.getDiscount());
+			mobileForToday.add(om);
 		}
 		return mobileForToday;
 	}
@@ -71,8 +79,19 @@ public class MobileService {
 	public @ResponseBody List<ArticleMobile> getGoods() {
 		List<Article> articles = articleService.getArticles();
 		List<ArticleMobile> mobileArticles = new ArrayList<ArticleMobile>();
-		for(Article article : articles) {
-			mobileArticles.add(ArticleMobile.fromArticle(article));
+		try {
+			for(Article article : articles) {
+				ArticleMobile am = new ArticleMobile();
+				am.setId(article.getId());
+				am.setName(article.getName());
+				am.setType(article.getType());
+				am.setPrice(article.getPrice());
+				am.setQty(article.getQuantity());
+				am.setUnit(article.getUnit());
+				mobileArticles.add(am);
+			}
+		} catch (NullPointerException npe) {
+			logger.info("Null objects in list");
 		}
 		return mobileArticles;
 	}
