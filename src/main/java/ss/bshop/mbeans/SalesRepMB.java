@@ -30,13 +30,14 @@ import ss.bshop.service.ISalesRepService;
 
 /**
  * Outlet Managed Bean
-  * @author Vera
+  * @author Nick
  */
 @ManagedBean(name = "salesRepMB")
 @ViewScoped
 public class SalesRepMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
+    private MapModel mapModel;
     
     @ManagedProperty(value = "#{salesRepService}")
     private ISalesRepService salesRepService;
@@ -53,10 +54,13 @@ public class SalesRepMB implements Serializable {
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
+        mapModel = new DefaultMapModel();
     }  
     
     public void onRowSelect(SelectEvent event){
+        mapModel = new DefaultMapModel();
         outletList = outletService.getBySalesRep(selected);
+
     }
     
     //************************************* setters and getters
@@ -91,6 +95,14 @@ public class SalesRepMB implements Serializable {
 
     public void setSelected(SalesRep selected) {
         this.selected = selected;
+    }
+
+    public MapModel getMapModel() {
+        return mapModel;
+    }
+
+    public void setMapModel(MapModel mapModel) {
+        this.mapModel = mapModel;
     }
 
     

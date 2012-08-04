@@ -42,7 +42,7 @@
                     >
 
                 <p:ajax event="rowSelect" listener="#{salesRepMB.onRowSelect}"
-                        />
+                        update=":form2:name,:form2:phone"/>
                 
                 <p:column headerText=" Name " style="width: 50px"
                           filterBy="#{sreps.user.fullname}"   
@@ -51,26 +51,28 @@
                 </p:column>
                 
             </p:dataTable>
-                  <h:outputText id="name2" value="Name : #{sreps.user.fullname}"/>
                   
                   </h:form> 
             </p:layoutUnit>  
             
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">
- 
-  
-            <h:outputText id="name" value="Name : #{salesRepMB.selected.user.fullname}"/>
-           <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
-                                style="width:600px;height:400px;"  
-                                model="#{outletMB.mapModel}" 
-                                onPointClick="handlePointClick(event);"
-                                widgetVar="map" 
-                                disabledDoubleClickZoom="true"
-                                >
-           </p:gmap>
+            <h:form id="form2">
+                <br/><br/>
+                <h:outputText id="name" value="Name : #{salesRepMB.selected.user.fullname}"/>
+                <br/><br/>
+                <h:outputText id="phone" value="Phone : #{salesRepMB.selected.phone}"/>
+                <br/><br/>
+                    <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
+                                            style="width:600px;height:400px;"  
+                                            model="#{outletMB.mapModel}" 
+                                            onPointClick="handlePointClick(event);"
+                                            widgetVar="map" 
+                                            disabledDoubleClickZoom="true"
+                                            >
+                    </p:gmap>
 
-
+            </h:form>
                              
  
 
