@@ -5,172 +5,188 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
-      
-      <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link href="./../../WEB-INF/resources/css/screen.css" rel="stylesheet" type="text/css" />
-      </h:head>
 
-<h:body  >
-
-    <ui:composition template="/pages/admin/templates/base.xhtml">
+<h:body>
+    <ui:composition  template="/pages/admin/templates/base.xhtml">
         <ui:define name="content">
-            <h:form>
-               
-                <p:dataTable id="supplier" var="supplier"
-                             value="#{supplierMB.model}"
+            <h:form  styleClass="Table">
+               <p:dataTable id="outlet" var="outlet"
+                             value="#{outletMB.model}"
                              paginator="true"
                              rows="10"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="10,20,50"
                              emptyMessage="No data "
                              editable="true"
-                             selection="#{supplierMB.selected}"
+                             selection="#{outletMB.selected}"
                              selectionMode="single"
                              scrollable="true"
                              liveScroll="true"
                              paginatorAlwaysVisible="false"
                              paginatorPosition="bottom"
-                             widgetVar="supplTable">
-                             
-				 <f:facet name="header">  
-                    Suppliers 
+                              widgetVar="outletsTable">
+
+                <f:facet name="header">  
+                    Outlets 
                     <p:outputPanel style="float:right">  
                         <h:outputText value="Search all fields:"  />  
-                        <p:inputText id="globalFilter" onkeyup="supplTable.filter()" style="width:150px" />                                           
+                        <p:inputText id="globalFilter" onkeyup="outletsTable.filter()" style="width:150px" />                                           
                     </p:outputPanel> 
                 </f:facet> 
+
                     <p:ajax event="rowEdit"
                             update="@all"
-                            listener="#{supplierMB.editRow}"/>
+                            listener="#{outletMB.editRow}"/>
 
-                    <p:column width="40">
+                    <p:column  style="width:40px">
                         <p:rowEditor/>
                     </p:column>
-                    
-                    <p:column filterBy="#{supplier.name}"   
+
+                    <p:column filterBy="#{outlet.name}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px"
-                              headerText=" Name "
-                              width="170">
+                               style="width:150px"
+                              headerText=" Name ">                              
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.name}"/>
+                                <h:outputText value="#{outlet.name}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.name}"/>
+                                <h:inputText value="#{outlet.name}"/>
                             </f:facet>
                         </p:cellEditor>
-                     </p:column>
-                     
-                    <p:column filterBy="#{supplier.address}"   
+                    </p:column>
+                                 
+                    <p:column filterBy="#{outlet.address}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px"
+                               style="width:150px"
                               headerText=" Adress ">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.address}"/>
+                                <h:outputText value="#{outlet.address}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.address}"/>
+                                <h:inputText value="#{outlet.address}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column 
-                              headerText=" Phone "
-                              filterBy="#{supplier.phone}"   
+                    <p:column filterBy="#{outlet.email}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px">
+                               style="width:150px"
+                              headerText=" Email ">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.phone}"/>
+                                <h:outputText value="#{outlet.email}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.phone}"/>
+                                <h:inputText value="#{outlet.email}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column 
-                              headerText=" Email "
-                              filterBy="#{supplier.email}"   
+                     <p:column filterBy="#{outlet.OKPO}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:180px">
+                               style="width:150px"
+                              headerText=" OKPO " >
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.email}"/>
+                                <h:outputText value="#{outlet.OKPO}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.email}"/>
+                                <h:inputText value="#{outlet.OKPO}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column 
-                              headerText=" OKPO "
-                             filterBy="#{supplier.OKPO}"   
+                     <p:column filterBy="#{outlet.INN}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px">
+                               style="width:150px"
+                              headerText=" INN ">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.OKPO}"/>
+                                <h:outputText value="#{outlet.INN}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.OKPO}"/>
+                                <h:inputText value="#{outlet.INN}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column 
-                              headerText=" INN "
-                               filterBy="#{supplier.INN}"   
+                     <p:column filterBy="#{outlet.svidNumber}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px">
+                               style="width:150px"
+                              headerText=" svidNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.INN}"/>
+                                <h:outputText value="#{outlet.svidNumber}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.INN}"/>
+                                <h:inputText value="#{outlet.svidNumber}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column 
-                              headerText=" svidNumber "
-                              filterBy="#{supplier.svidNumber}"   
+                                         
+                       <p:column filterBy="#{outlet.sertificateNumber}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:170px">
+                               style="width:150px"
+                              headerText=" sertificateNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
-                                <h:outputText value="#{supplier.svidNumber}"/>
+                                <h:outputText value="#{outlet.sertificateNumber}"/>
                             </f:facet>
                             <f:facet name="input">
-                                <h:inputText value="#{supplier.svidNumber}"/>
+                                <h:inputText value="#{outlet.sertificateNumber}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                     
+ 					<p:column filterBy="#{outlet.contractNumber}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" contractNumber ">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.contractNumber}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.contractNumber}"/>
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
                     
-            
-                   
+                    <p:column filterBy="#{outlet.comment}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
+                              headerText=" comment ">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{outlet.comment}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{outlet.comment}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
                 </p:dataTable>
                 <br/>
                 <div class="buttonLeft" style="float: left;">
                     <p:commandButton value="New"
-                                     actionListener="#{supplierMB.createNew}"
+                                     actionListener="#{outletMB.createNew}"
                                      ajax="false"
                                      update="@all" />
                      <p:commandButton value="Delete"
-                                     actionListener="#{supplierMB.delete}"
-                                     ajax="false"
+                                     actionListener="#{outletMB.delete}"
                                      update="@all"/>
 
                  </div>

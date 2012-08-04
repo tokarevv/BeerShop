@@ -17,6 +17,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.persistence.Column;
+
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -233,6 +235,123 @@ public class OutletMB implements Serializable {
         this.modelsr = modelsr;
     }
 
+    
+    //-----------в разработке. Валидация
+    
+    private String name;
+	private String adress;
+	private String phone;
+	private String email;
+	private String OKPO;
+	private String INN;
+	private String svidNumber;
+	private String comment;
+	private String sertificateNumber;
+	private String contractNumber;
+    
+    public String modify() {
+      //  Outlet outlet= getSelected();
+      //  getOutletService().update(outlet);
+        return "outletValidation";
+    }
+    
+    public String save() {
+    	Outlet outlet=new Outlet();
+    	outlet.setName(name);
+    	outlet.setAddress(adress);
+    	outlet.setPhone(phone);
+    	outlet.setEmail(email);
+    	outlet.setOKPO(OKPO);
+    	outlet.setINN(INN);
+    	outlet.setSvidNumber(svidNumber);
+    	outlet.setComment(comment);
+    	outlet.setSertificateNumber(sertificateNumber);
+    	outlet.setContractNumber(contractNumber);
+    	getOutletService().add(outlet);
+        return "outlets";
+    }
+
+    // getters and setters for validation
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	
+	public String getAdress() {
+		return adress;
+	}
+
+	public void setAdress(String adress) {
+		this.adress = adress;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getOKPO() {
+		return OKPO;
+	}
+
+	public void setOKPO(String oKPO) {
+		OKPO = oKPO;
+	}
+
+	public String getINN() {
+		return INN;
+	}
+
+	public void setINN(String iNN) {
+		INN = iNN;
+	}
+
+	public String getSvidNumber() {
+		return svidNumber;
+	}
+
+	public void setSvidNumber(String svidNumber) {
+		this.svidNumber = svidNumber;
+	}
+
+	public String getComment() {
+		return comment;
+	}
+
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+
+	public String getSertificateNumber() {
+		return sertificateNumber;
+	}
+
+	public void setSertificateNumber(String sertificateNumber) {
+		this.sertificateNumber = sertificateNumber;
+	}
+
+	public String getContractNumber() {
+		return contractNumber;
+	}
+
+	public void setContractNumber(String contractNumber) {
+		this.contractNumber = contractNumber;
+	}
     
     
  }

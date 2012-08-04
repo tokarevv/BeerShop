@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package ss.bshop.mbeans;
 
 import javax.faces.component.UIComponent;
