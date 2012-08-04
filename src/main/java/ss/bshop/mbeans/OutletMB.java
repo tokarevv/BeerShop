@@ -37,7 +37,7 @@ import ss.bshop.service.IOutletService;
   * @author Vera
  */
 @ManagedBean(name = "outletMB")
-@SessionScoped
+@ViewScoped
 public class OutletMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
@@ -75,39 +75,6 @@ public class OutletMB implements Serializable {
         model = new OutletDataModel(outletList);
 
     }  
-   
-    public void postProcessXLS(Object document) {
-        HSSFWorkbook wb = (HSSFWorkbook)document;
-        HSSFSheet sheet = wb.getSheetAt(0);
-
-        Iterator<Row> rit = sheet.rowIterator();
-
-        if( rit.hasNext() ) {
-            rit.next(); // Skip header row
-        }
-
-        while( rit.hasNext() ) {
-            HSSFRow row = (HSSFRow) rit.next();
-
-            Iterator<Cell> cit = row.cellIterator();
-
-            while( cit.hasNext() ) {
-                HSSFCell cell = (HSSFCell) cit.next();
-
-                if( cell.getCellType() == HSSFCell.CELL_TYPE_STRING ) {
-                    String content = cell.getRichStringCellValue().toString();
-
-                    int index = content.indexOf( "org.primefaces.component.celleditor" );
-
-                    if( index != -1 ) {
-                        content = content.substring( 0, index );
-                        cell.setCellValue( new HSSFRichTextString( content ) );
-                    }
-                }
-            }
-        }
-    }
-  
     
     public String createNew() {
        Outlet outlet=new Outlet();

@@ -42,7 +42,7 @@
                     >
 
                 <p:ajax event="rowSelect" listener="#{salesRepMB.onRowSelect}"
-                        update=":form2:name,:form2:phone"/>
+                        update=":form2:name,:form2:phone, :form2:map"/>
                 
                 <p:column headerText=" Name " style="width: 50px"
                           filterBy="#{sreps.user.fullname}"   
@@ -58,14 +58,15 @@
 <!--****************************** Centr content *********************************-->
         <p:layoutUnit position="center">
             <h:form id="form2">
+                <p:growl id="messages" showDetail="true"/>  
                 <br/><br/>
                 <h:outputText id="name" value="Name : #{salesRepMB.selected.user.fullname}"/>
                 <br/><br/>
                 <h:outputText id="phone" value="Phone : #{salesRepMB.selected.phone}"/>
                 <br/><br/>
-                    <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
+                <p:gmap id="map" center="48.461881, 35.045528" zoom="13" type="HYBRID"   
                                             style="width:600px;height:400px;"  
-                                            model="#{outletMB.mapModel}" 
+                                            model="#{salesRepMB.mapModel}" 
                                             onPointClick="handlePointClick(event);"
                                             widgetVar="map" 
                                             disabledDoubleClickZoom="true"

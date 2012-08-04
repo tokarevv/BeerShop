@@ -3,7 +3,9 @@ package ss.bshop.mbeans;
 import ss.bshop.mbeans.datamodel.SalesRepDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -51,20 +53,36 @@ public class SalesRepMB implements Serializable {
     private SalesRep selected;
     private List<Outlet> outletList;
     private List<SalesRep> salesReps;
+    private List<Marker> lstMarkers;
+    private Map<SalesRep,List<LatLng>> lstmap;
+    private FacesMessage msg;
  
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
-        mapModel = new DefaultMapModel();
+//        mapModel = new DefaultMapModel();
         salesReps = salesRepService.getAll();
+        
+//        for(SalesRep slr: salesReps){
+//            lstmap.put(slr, lstCoord);
+//        }
     }  
     
     public void onRowSelect(SelectEvent event){
-
+        String s="";
         mapModel = new DefaultMapModel();
+        
         outletList = outletService.getBySalesRep(selected);
+        for(Outlet outlet: outletList){
+            setOutletList(outletService.getBySalesRep(selected));
 
-        setOutletList(outletService.getBySalesRep(selected));
+            LatLng coord = new LatLng(outlet.getLatitude(),outlet.getLongitude());
+            
+            mapModel.addOverlay(new Marker(coord));
+            s+=coord+";\r\n";
+        }
+         msg = new FacesMessage("Coords", s);   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
 
     }
     
