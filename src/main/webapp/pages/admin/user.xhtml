@@ -27,22 +27,33 @@
 					selectionMode="single" 
 					scrollable="true" liveScroll="true"
 					paginatorAlwaysVisible="false" 
-					paginatorPosition="bottom">
+					paginatorPosition="bottom"
+					 widgetVar="userTable">
+					
 	
 				<f:facet name="header">  
                                     Users 
+                                     <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="userTable.filter()" style="width:150px" />  
+                                                
+                    </p:outputPanel> 
                                 </f:facet> 
 
 					<p:ajax event="rowEdit"
 						update="@all"
 						listener="#{userMB.editRow}" />
 
-					<p:column width="40">
+					<p:column style="width:40px">
 						<p:rowEditor />
 					</p:column>
 
-					<p:column  headerText=" Login " width="295">
-						<p:cellEditor>
+					<p:column 
+						filterBy="#{user.login}" 
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+					 headerText=" Login "  style="width:250px">
+					 		<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.login}" />
 							</f:facet>
@@ -52,7 +63,11 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column headerText=" Name " width="300">
+					<p:column 
+					filterBy="#{user.fullname}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+					headerText=" Name " style="width:350px">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.fullname}" />
@@ -63,7 +78,11 @@
 						</p:cellEditor>
 					</p:column>
 
-					<p:column  headerText="Post" width="300"
+					<p:column  
+					filterBy="#{user.post}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+					headerText="Post" style="width:350px"
 						id="post">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -78,7 +97,11 @@
 						</p:cellEditor>
 					</p:column>
 					
-					<p:column  headerText="Password" width="300"
+					<p:column  
+					filterBy="#{user.password}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+					headerText="Password" style="width:350px"
 						id="password">
 						<h:outputText value="#{user.password}" disabled="true" />
 					</p:column>

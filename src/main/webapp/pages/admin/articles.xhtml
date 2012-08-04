@@ -24,9 +24,16 @@
                              selectionMode="single" 
                            	 paginatorAlwaysVisible="false" 
 							paginatorPosition="bottom"
+							 widgetVar="articlesTable"
                         >
+                        
                 <f:facet name="header">  
                     Articles 
+                    <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="articlesTable.filter()" style="width:150px" />  
+                                                
+                    </p:outputPanel> 
                 </f:facet> 
                     <p:ajax event="rowEdit"
                             update="@all"
@@ -36,9 +43,12 @@
                         <p:rowEditor/>
                     </p:column>
                     
-                    <p:column sortBy="#{article.name}"
+                    <p:column  filterBy="#{article.name}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               style="width:150px"
                               headerText=" Name "
-                              width="150">
+                             >
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.name}"/>
@@ -51,9 +61,12 @@
                         </p:cellEditor>
                         <p:message for="edname" id="msgFirstname" display="icon" />
                      </p:column>
-                    <p:column sortBy="#{article.type}"
+                     
+                    <p:column filterBy="#{article.type}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" type "
-                              width="150">
+                            style="width:100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.type}"/>
@@ -64,9 +77,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{article.price}"
+                     <p:column  filterBy="#{article.price}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" price "
-                              width="150">
+                             style="width:100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.price}"/>
@@ -77,9 +92,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{article.percent}"
+                     <p:column  filterBy="#{article.percent}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" percent "
-                              width="150">
+                             style="width:100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.percent}"/>
@@ -90,9 +107,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{article.quantity}"
+                     <p:column filterBy="#{article.quantity}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" quantity "
-                              width="100">
+                             style="width:100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.quantity}"/>
@@ -103,9 +122,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{article.unit}"
+                     <p:column filterBy="#{article.unit}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" unit "
-                              width="100">
+                            style="width:100px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.unit}"/>
@@ -116,9 +137,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                     <p:column sortBy="#{article.barcode}"
+                     <p:column  filterBy="#{article.barcode}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
                               headerText=" barcode "
-                              width="150">
+                             style="width:150px">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.barcode}"/>
@@ -129,7 +152,11 @@
                         </p:cellEditor>
                     </p:column>
                     
-                    <p:column  headerText="Supplier" width="300"
+                    <p:column  headerText="Supplier" 
+                    filterBy="#{article.supplier}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                    style="width:250px"
                     id="supplier">
                     <p:cellEditor>
                             <f:facet name="output">
@@ -143,10 +170,11 @@
                             </f:facet>
                     </p:cellEditor>
                     </p:column>   
-                
-                    <p:column sortBy="#{article.comment}"
-                              headerText=" comment "
-                              width="175">
+              
+                <p:column  headerText="Comment" style="width:175px"
+                              filterBy="#{article.comment}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.comment}"/>
@@ -156,10 +184,7 @@
                             </f:facet>
                         </p:cellEditor>
                     </p:column>
-                    
-            
-                   
-                </p:dataTable>
+                 </p:dataTable>
                 <br/>
                 <div class="buttonLeft" style="float: left;">
                     <p:commandButton value="New"
