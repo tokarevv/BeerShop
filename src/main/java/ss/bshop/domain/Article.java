@@ -43,7 +43,6 @@ public class Article implements Serializable{
 
     //constructors
     public Article() {
-        percent = 100;
     }
     
     public Article(String name) {

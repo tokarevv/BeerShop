@@ -3,7 +3,9 @@ package ss.bshop.mbeans;
 import ss.bshop.mbeans.datamodel.SalesRepDataModel;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,13 +32,14 @@ import ss.bshop.service.ISalesRepService;
 
 /**
  * Outlet Managed Bean
-  * @author Vera
+  * @author Nick
  */
 @ManagedBean(name = "salesRepMB")
 @ViewScoped
 public class SalesRepMB implements Serializable {
 	
     private static final long serialVersionUID = 1L;
+    private MapModel mapModel;
     
     @ManagedProperty(value = "#{salesRepService}")
     private ISalesRepService salesRepService;
@@ -50,15 +53,37 @@ public class SalesRepMB implements Serializable {
     private SalesRep selected;
     private List<Outlet> outletList;
     private List<SalesRep> salesReps;
+    private List<Marker> lstMarkers;
+    private Map<SalesRep,List<LatLng>> lstmap;
+    private FacesMessage msg;
  
     @PostConstruct
     protected void postConstruct() {
         modelsr = new SalesRepDataModel(salesRepService.getAll());
+//        mapModel = new DefaultMapModel();
         salesReps = salesRepService.getAll();
+        
+//        for(SalesRep slr: salesReps){
+//            lstmap.put(slr, lstCoord);
+//        }
     }  
     
     public void onRowSelect(SelectEvent event){
-        setOutletList(outletService.getBySalesRep(selected));
+        String s="";
+        mapModel = new DefaultMapModel();
+        
+        outletList = outletService.getBySalesRep(selected);
+        for(Outlet outlet: outletList){
+            setOutletList(outletService.getBySalesRep(selected));
+
+            LatLng coord = new LatLng(outlet.getLatitude(),outlet.getLongitude());
+            
+            mapModel.addOverlay(new Marker(coord));
+            s+=coord+";\r\n";
+        }
+         msg = new FacesMessage("Coords", s);   
+        FacesContext.getCurrentInstance().addMessage(null, msg); 
+
     }
     
     //************************************* setters and getters
@@ -95,22 +120,29 @@ public class SalesRepMB implements Serializable {
         this.selected = selected;
     }
 
-	public List<SalesRep> getSalesReps() {
-		return salesReps;
-	}
 
-	public void setSalesReps(List<SalesRep> salesReps) {
-		this.salesReps = salesReps;
-	}
+    public MapModel getMapModel() {
+        return mapModel;
+    }
 
-	public List<Outlet> getOutletList() {
-		return outletList;
-	}
+    public void setMapModel(MapModel mapModel) {
+        this.mapModel = mapModel;
+    }
 
-	public void setOutletList(List<Outlet> outletList) {
-		this.outletList = outletList;
-	}
+    public List<SalesRep> getSalesReps() {
+            return salesReps;
+    }
 
-    
+    public void setSalesReps(List<SalesRep> salesReps) {
+            this.salesReps = salesReps;
+    }
+
+    public List<Outlet> getOutletList() {
+            return outletList;
+    }
+
+    public void setOutletList(List<Outlet> outletList) {
+            this.outletList = outletList;
+    }   
     
  }
