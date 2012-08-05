@@ -112,7 +112,9 @@ public class OutletMB implements Serializable {
                     lat =  selected.getLatitude();
                     lng = selected.getLongitude();
                     curCoord = new LatLng(lat,lng);
-                    mapModel.addOverlay(new Marker(curCoord, selected.getName()));
+                    Marker marker = new Marker(curCoord, selected.getName());
+                    marker.setDraggable(true);
+                    mapModel.addOverlay(marker);
                 }
             res = "outlet_detail";
             

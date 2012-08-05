@@ -81,7 +81,8 @@
                         </p:column >
                         
                         <p:column headerText="Map" styleClass="panelColumns" >
-    
+                            <h:form>
+                                 <p:growl id="mess" showDetail="true"/> 
                                 <p:gmap center="48.461881, 35.045528" zoom="13" type="HYBRID"   
                                         style="width:600px;height:400px;"  
                                         model="#{outletMB.mapModel}" 
@@ -89,7 +90,9 @@
                                         widgetVar="map" 
                                         disabledDoubleClickZoom="true"
                                         >
+                                    <p:ajax event="markerDrag" listener="#{outletMB.onMarkerDrag}" update="mess" />
                                 </p:gmap>
+                            </h:form>
                                 <h:outputText id="Address" value="Address: #{outletMB.selected.address}"/> <br/><br/>
                                 
                                 <p:dialog widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
