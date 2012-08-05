@@ -126,6 +126,7 @@ public class OutletMB implements Serializable {
 
         getOutletService().update(selected);
         selected = null;
+        lat = lng = 0;
         
         msg = new FacesMessage("Outlet Edited", selected.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
