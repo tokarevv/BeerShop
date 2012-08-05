@@ -82,8 +82,20 @@ public class OutletMB implements Serializable {
        getOutletService().add(outlet);
        return "";
    }
-         
-         
+
+    public String delete() {
+        
+        if(selected!=null){
+            getOutletService().remove(selected.getId());
+            outletList.remove(selected);
+            selected = null;
+
+            msg = new FacesMessage("Outlet Deleted","");   
+            FacesContext.getCurrentInstance().addMessage(null, msg);
+     	}
+     	return "";
+    }
+        
      public void editRow(RowEditEvent event) {
 
     	Outlet rowItem = (Outlet) event.getObject();
@@ -230,7 +242,7 @@ public class OutletMB implements Serializable {
     	selected=null;
         return "outlets";
     }
-       
+
     public String New() {
       	selected=new Outlet();
       	selected.setName("");
@@ -245,6 +257,7 @@ public class OutletMB implements Serializable {
       	selected.setContractNumber("");
       	getOutletService().add(selected);
         return "outletValidation";
-    } 
+
+    }
     
  }
