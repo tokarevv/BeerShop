@@ -1,5 +1,6 @@
 package ss.bshop.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,10 +16,10 @@ public class OutletOrderStructure {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private OutletOrder outletOrder;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Article article;	
 
 	@Column

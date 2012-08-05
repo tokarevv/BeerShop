@@ -30,8 +30,38 @@ import ss.bshop.service.IVisitService;
 @RequestMapping("/mobile")
 public class MobileService {
 
-	@Autowired
-	private IOutletOrder outletOrderDAO;
+	public IOutletService getOutletService() {
+		return outletService;
+	}
+
+	public void setOutletService(IOutletService outletService) {
+		this.outletService = outletService;
+	}
+
+	public IArticleService getArticleService() {
+		return articleService;
+	}
+
+	public void setArticleService(IArticleService articleService) {
+		this.articleService = articleService;
+	}
+
+	public IVisitService getVisitService() {
+		return visitService;
+	}
+
+	public void setVisitService(IVisitService visitService) {
+		this.visitService = visitService;
+	}
+
+	public Converters getConverters() {
+		return converters;
+	}
+
+	public void setConverters(Converters converters) {
+		this.converters = converters;
+	}
+
 	@Autowired
 	private IOutletService outletService;
 	@Autowired
@@ -40,6 +70,7 @@ public class MobileService {
 	private IVisitService visitService;
 	@Autowired
 	private Converters converters;
+
 	private Logger logger = Logger.getLogger(this.getClass());
 
 	@RequestMapping(value = "helloservice", method = RequestMethod.GET)
@@ -50,9 +81,10 @@ public class MobileService {
 
 	@RequestMapping(value = "addvisit",
 			method = RequestMethod.POST, consumes = "application/json") 
-	public void addOrder(@RequestBody VisitMobile mobileVisit) {
+	public Void addOrder(@RequestBody VisitMobile mobileVisit) {
 		Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
 		visitService.add(visit);
+		return null;
 	}
 
 	@RequestMapping(value = "getoutlets/{salesRepLogin}",
@@ -60,7 +92,7 @@ public class MobileService {
 	public @ResponseBody List<OutletMobile> getOutlets(
 			@PathVariable String salesRepLogin) {
 		List<Outlet> forToday = outletService
-				.getForSalesRepToday(salesRepLogin);
+				.getForSalesRep(salesRepLogin);
 		List<OutletMobile> mobileForToday = new ArrayList<OutletMobile>();
 		for (Outlet outlet : forToday) {
 			OutletMobile om = new OutletMobile();
@@ -77,6 +109,7 @@ public class MobileService {
 	@RequestMapping(value = "getgoods", method = RequestMethod.GET,
 			produces = "application/json")
 	public @ResponseBody List<ArticleMobile> getGoods() {
+		logger.debug("Article service: " + articleService);
 		List<Article> articles = articleService.getArticles();
 		List<ArticleMobile> mobileArticles = new ArrayList<ArticleMobile>();
 		try {

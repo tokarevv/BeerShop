@@ -22,10 +22,10 @@ public class Visit {
 	@Column
 	private double lng;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Outlet outlet;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private OutletOrder order;
 	
 	public Date getTime() {
