@@ -35,13 +35,13 @@
             
 <!--****************************** Centr content *********************************-->
     <p:layoutUnit id="center" position="center">
-            <p:growl id="messages" showDetail="true"/>  
                     <p:panelGrid columns="3"  > 
                         <f:facet name="header">  
                             <h:outputText id="name" value="Name: #{outletMB.selected.name}"/> 
                         </f:facet> 
                         <p:column  styleClass="col1" colspan="2">
-                                        <h:form>
+                            <h:form id="formData">
+                            <p:growl id="messages" showDetail="true"/>  
 
                             <h:outputText id="cnum" value="Contract Number: #{outletMB.selected.contractNumber}"/> <br/><br/>
                             <h:outputText id="date" value="Date of regestration: #{outletMB.selected.registerDate}"/> <br/><br/>
@@ -49,13 +49,12 @@
                             <h:outputText id="sumavg" value="Avg sum (month): 100"/> <br/> <br/>
                             <h:outputText id="debit" value="Debit sum : 500"/> <br/><br/>
                             <h:outputLabel for="spinner" value="Discount :  " /> 
-                            
                             <p:spinner    id="spinner" value="#{outletMB.selected.discount}" size="1"/> <br/> <br/> 
                             <h:outputLabel for="selectableInplace" value="Response SalesRep : " />
                             <p:inplace id="selectableInplace" label="(Dblclick)   #{outletMB.selected.salesRep.user.fullname}      " effectSpeed="fast" event="dblclick">  
                             <p:selectOneMenu value="#{outletMB.selected.salesRep}"
                                     effect="fade" converter="#{salesRepConverter}"
-                                    style="alignment-baseline: central">
+                                    >
                                     <f:selectItem itemLabel="Select One" itemValue="" />
                                     <f:selectItems value="#{salesRepMB.salesReps}"
                                             var="salesRep" itemLabel="#{salesRep.user.fullname}"
@@ -94,24 +93,24 @@
                                 <h:outputText id="Address" value="Address: #{outletMB.selected.address}"/> <br/><br/>
                                 
                                 <p:dialog widgetVar="dlg" effect="FADE" effectDuration="0.5" close="false" fixedCenter="true">  
-                                <h:form prependId="false">  
-
+                                    <h:form prependId="false">  
                                         <h:panelGrid columns="2">  
-                                            <h:outputText    id="title" value="#{outletMB.selected.name}" />  
+                                            <h:outputLabel for="title" value="Title:" />  
+                                            <p:inputText id="title" value="#{outletMB.selected.name}" />  
 
                                             <f:facet name="footer">  
                                                 <p:commandButton value="Add"   
                                                         actionListener="#{outletMB.addMarker}"   
+                                                        update=":formData:messages"   
                                                         oncomplete="markerAddComplete()"/>  
                                                 <p:commandButton value="Cancel" onclick="return cancel()"/>  
                                             </f:facet>  
                                         </h:panelGrid>  
 
-                                    <h:inputHidden id="lat" value="#{mapBean.lat}" />  
-                                    <h:inputHidden id="lng" value="#{mapBean.lng}" />  
-                                </h:form>  
-                            </p:dialog>  
- 
+                                        <h:inputHidden id="lat" value="#{outletMB.lat}" />  
+                                        <h:inputHidden id="lng" value="#{outletMB.lng}" />  
+                                    </h:form>  
+                                </p:dialog>  
                             
                         </p:column>
                     </p:panelGrid>  
@@ -124,7 +123,16 @@
     </h:body>
     
       <script type="text/javascript">  
-        var currentMarker = null;  
+        
+        var currentMarker = null;    
+        
+        if(document.getElementById('lat').value>0){
+            currentMarker = new google.maps.Marker({  
+                    position:new google.maps.LatLng(document.getElementById('lat').value, 
+                                                    document.getElementById('lng').value) 
+            });
+        }
+        
 
         function handlePointClick(event) {  
             if(currentMarker == null) {  

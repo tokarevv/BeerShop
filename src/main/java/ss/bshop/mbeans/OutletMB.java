@@ -53,7 +53,6 @@ public class OutletMB implements Serializable {
     private double lng;
 
     private List<Outlet> outletList = new ArrayList<Outlet>();
-    private List<SalesRep> salesReps = new ArrayList<SalesRep>();
     
     @ManagedProperty(value = "#{OutletDataModel}")
     private OutletDataModel model;
@@ -69,8 +68,6 @@ public class OutletMB implements Serializable {
     @PostConstruct
     protected void postConstruct() {
 
-        mapModel = new DefaultMapModel();  
-
     	outletList = new ArrayList<Outlet>();
         outletList.addAll(outletService.getAll());
         model = new OutletDataModel(outletList);
@@ -85,20 +82,6 @@ public class OutletMB implements Serializable {
        return "";
    }
     
-   public String moreDetail(){
-       String res = "";
-       if(selected!=null ){ 
-                 mapModel = new DefaultMapModel();
-                 if(selected.getLatitude()!=selected.getLongitude()){
-                    curCoord = new LatLng(selected.getLatitude(),selected.getLongitude());
-                    mapModel.addOverlay(new Marker(curCoord, selected.getName()));
-                }
-            res = "outlet_detail";
-            
-       }
-       return res;
-   }
-
     public String delete() {
         
         if(selected!=null){
@@ -120,10 +103,27 @@ public class OutletMB implements Serializable {
         msg = new FacesMessage("Outlet Edited", rowItem.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
     }
+     
+    public String moreDetail(){
+       String res = "";
+       if(selected!=null ){ 
+                 mapModel = new DefaultMapModel();
+                 if(selected.getLatitude()!=selected.getLongitude()){
+                    lat =  selected.getLatitude();
+                    lng = selected.getLongitude();
+                    curCoord = new LatLng(lat,lng);
+                    mapModel.addOverlay(new Marker(curCoord, selected.getName()));
+                }
+            res = "outlet_detail";
+            
+       }
+       return res;
+   } 
     
     public String editSelected() {
 
         getOutletService().update(selected);
+        selected = null;
         
         msg = new FacesMessage("Outlet Edited", selected.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
@@ -206,7 +206,7 @@ public class OutletMB implements Serializable {
         this.lng = lng;
     }
 
-	
+    
 
     public SalesRepDataModel getModelsr() {
         return modelsr;
