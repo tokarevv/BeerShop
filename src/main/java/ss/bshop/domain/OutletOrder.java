@@ -30,7 +30,7 @@ public class OutletOrder {
 	private Visit visit; 
 	
 	@Column
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<OutletOrderStructure> structure;
 
 	public Long getId() {

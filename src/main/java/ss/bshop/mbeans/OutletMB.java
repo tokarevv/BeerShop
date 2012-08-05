@@ -36,7 +36,7 @@ import ss.bshop.service.IOutletService;
 
 /**
  * Outlet Managed Bean
-  * @author Nick
+  * @author Vera
  */
 @ManagedBean(name = "outletMB")
 @SessionScoped
@@ -50,7 +50,7 @@ public class OutletMB implements Serializable {
     private MapModel mapModel;
     private LatLng curCoord; 
     private double lat;  
-    private double lng;
+    private double lng;  
 
     private List<Outlet> outletList = new ArrayList<Outlet>();
     
@@ -61,6 +61,7 @@ public class OutletMB implements Serializable {
     private SalesRepDataModel modelsr;
     
     private Outlet selected;
+    private Outlet current;
     
     private FacesMessage msg;
 
@@ -81,19 +82,7 @@ public class OutletMB implements Serializable {
        getOutletService().add(outlet);
        return "";
    }
-    
-    public String delete() {
-        
-        if(selected!=null){
-            getOutletService().remove(selected.getId());
-            outletList.remove(selected);
-            selected = null;
-
-            msg = new FacesMessage("Outlet Deleted","");   
-            FacesContext.getCurrentInstance().addMessage(null, msg);
-     	}
-     	return "";
-    }
+         
          
      public void editRow(RowEditEvent event) {
 
@@ -127,8 +116,8 @@ public class OutletMB implements Serializable {
         getOutletService().update(selected);
         selected = null;
         lat = lng = 0;
-        
-        msg = new FacesMessage("Outlet Edited", selected.getName());   
+      
+        msg = new FacesMessage("Outlet Edited", current.getName());   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
         return "";
     }
@@ -152,7 +141,6 @@ public class OutletMB implements Serializable {
         selected.setLongitude(lt.getLng());
     }  
 
-    // setters and getters
     public List<Outlet> getoutletList() {
         return outletList;
     }
@@ -209,8 +197,6 @@ public class OutletMB implements Serializable {
         this.lng = lng;
     }
 
-    
-
     public SalesRepDataModel getModelsr() {
         return modelsr;
     }
@@ -218,146 +204,47 @@ public class OutletMB implements Serializable {
     public void setModelsr(SalesRepDataModel modelsr) {
         this.modelsr = modelsr;
     }
-
-        private String name;
-	private String adress;
-	private String phone;
-	private String email;
-	private String OKPO;
-	private String INN;
-	private String svidNumber;
-	private String comment;
-	private String sertificateNumber;
-	private String contractNumber;
     
     public String modify() {
-    	Outlet outlet= getSelected();
-        setName(outlet.getName());
-        setAdress(outlet.getAddress());
-        setPhone(outlet.getPhone());
-        setEmail(outlet.getEmail());
-        setOKPO(outlet.getOKPO());
-        setINN(outlet.getINN());
-        setSvidNumber(outlet.getSvidNumber());
-        setComment(outlet.getComment());
-        setSertificateNumber(outlet.getSertificateNumber());
-        setContractNumber(outlet.getContractNumber());
+//    	Outlet outlet= getSelected();
+//        setName(outlet.getName());
+//        setAdress(outlet.getAddress());
+//        setPhone(outlet.getPhone());
+//        setEmail(outlet.getEmail());
+//        setOKPO(outlet.getOKPO());
+//        setINN(outlet.getINN());
+//        setSvidNumber(outlet.getSvidNumber());
+//        setComment(outlet.getComment());
+//        setSertificateNumber(outlet.getSertificateNumber());
+//        setContractNumber(outlet.getContractNumber());
      return "outletValidation";
      }
        
     public String save() {
-    	Outlet outlet;
-    	if(selected==null){
-    	outlet=new Outlet();
-    	setFields(outlet);
-    	getOutletService().add(outlet);
+    	 	if(selected==null){
+    	return "";
     	}
     	else {
-    	outlet= getSelected();
-    	setFields(outlet);
-    	getOutletService().update(outlet);
+    	getOutletService().update(selected);
     	}
     	selected=null;
         return "outlets";
     }
-    
-    private void setFields(Outlet outlet){
-    	outlet.setName(name);
-    	outlet.setAddress(adress);
-    	outlet.setPhone(phone);
-    	outlet.setEmail(email);
-    	outlet.setOKPO(OKPO);
-    	outlet.setINN(INN);
-    	outlet.setSvidNumber(svidNumber);
-    	outlet.setComment(comment);
-    	outlet.setSertificateNumber(sertificateNumber);
-    	outlet.setContractNumber(contractNumber);
-    }
-    
+       
     public String New() {
+      	selected=new Outlet();
+      	selected.setName("");
+      	selected.setAddress("");
+      	selected.setPhone("");
+      	selected.setEmail("");
+      	selected.setOKPO("");
+      	selected.setINN("");
+      	selected.setSvidNumber("");
+      	selected.setComment("");
+      	selected.setSertificateNumber("");
+      	selected.setContractNumber("");
+      	getOutletService().add(selected);
         return "outletValidation";
-    }
-
-        // getters and setters for validation
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	
-	public String getAdress() {
-		return adress;
-	}
-
-	public void setAdress(String adress) {
-		this.adress = adress;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getOKPO() {
-		return OKPO;
-	}
-
-	public void setOKPO(String oKPO) {
-		OKPO = oKPO;
-	}
-
-	public String getINN() {
-		return INN;
-	}
-
-	public void setINN(String iNN) {
-		INN = iNN;
-	}
-
-	public String getSvidNumber() {
-		return svidNumber;
-	}
-
-	public void setSvidNumber(String svidNumber) {
-		this.svidNumber = svidNumber;
-	}
-
-	public String getComment() {
-		return comment;
-	}
-
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
-
-	public String getSertificateNumber() {
-		return sertificateNumber;
-	}
-
-	public void setSertificateNumber(String sertificateNumber) {
-		this.sertificateNumber = sertificateNumber;
-	}
-
-	public String getContractNumber() {
-		return contractNumber;
-	}
-
-	public void setContractNumber(String contractNumber) {
-		this.contractNumber = contractNumber;
-	}
-
+    } 
+    
  }

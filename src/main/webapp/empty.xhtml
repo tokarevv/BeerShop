@@ -8,10 +8,11 @@
 <h:body>
 	<ui:composition template="/WEB-INF/templates/base.xhtml">
 		<ui:define name="content">
+		<h:form>
 			<p:growl id="growl" showDetail="true" />
 			<p:commandButton value="Redirect me to my page" update="growl"
 				action="#{authMB.onSubmit}" />
-
+		</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>
