@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
 
@@ -18,7 +19,7 @@ import ss.bshop.service.IOutletOrderService;
 
 
 @ManagedBean(name="outletOrderMB")
-@RequestScoped
+@SessionScoped
 public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
