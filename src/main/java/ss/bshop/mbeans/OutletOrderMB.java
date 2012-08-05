@@ -8,13 +8,10 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 
 import org.primefaces.event.RowEditEvent;
-
 import ss.bshop.domain.OutletOrder;
-import ss.bshop.domain.Visit;
 import ss.bshop.service.IOutletOrderService;
 
 
@@ -23,12 +20,12 @@ import ss.bshop.service.IOutletOrderService;
 public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="#{OutletOredrService}")
-	IOutletOrderService outletOrderService;
+	@ManagedProperty(value="#{OutletOrderService}")
+	private	IOutletOrderService outletOrderService;
 	
-	OutletOrder selected;
+	private OutletOrder selected;
 	
-	List<OutletOrder> outletOrderList;
+	private List<OutletOrder> outletOrderList;
 	
 	@ManagedProperty(value = "#{OutletOrderDataModel}")
     private OutletOrderDataModel model;
@@ -72,7 +69,7 @@ public class OutletOrderMB  implements Serializable{
          return res;
      }
 
-	
+
 	public IOutletOrderService getOutletOrderService() {
 		return outletOrderService;
 	}
