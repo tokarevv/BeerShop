@@ -218,29 +218,28 @@ public class OutletMB implements Serializable {
     }
     
     public String modify() {
-//    	Outlet outlet= getSelected();
-//        setName(outlet.getName());
-//        setAdress(outlet.getAddress());
-//        setPhone(outlet.getPhone());
-//        setEmail(outlet.getEmail());
-//        setOKPO(outlet.getOKPO());
-//        setINN(outlet.getINN());
-//        setSvidNumber(outlet.getSvidNumber());
-//        setComment(outlet.getComment());
-//        setSertificateNumber(outlet.getSertificateNumber());
-//        setContractNumber(outlet.getContractNumber());
      return "outletValidation";
      }
        
     public String save() {
-    	 	if(selected==null){
+    	if(selected==null){
     	return "";
     	}
     	else {
-    	getOutletService().update(selected);
+    		if( selected.getName().equals("")||
+    		selected.getAddress().equals("")||
+    		selected.getEmail().equals("")||
+    		selected.getContractNumber().equals("") ){
+    			
+    			msg = new FacesMessage("Fill all fieldes marked with *", selected.getName());   
+    	        FacesContext.getCurrentInstance().addMessage(null, msg); 
+    		}
+    		else
+    		getOutletService().update(selected);
+    		selected=null;
+            return "outlets";
     	}
-    	selected=null;
-        return "outlets";
+    	
     }
 
     public String New() {

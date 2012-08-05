@@ -17,13 +17,13 @@
            
         <h:outputLabel for="name" value="Name: *" />  
             <p:inputText id="name" value="#{outletMB.selected.name}" 
-            label="Adress" required="true"/> 
+            label="Adress" required="true" maxlength="20"/> 
             <p:message for="name" display="icon"/>  
   
         <h:outputLabel for="adress" value="Adress: *" />  
           	<p:inputText id="adress" value="#{outletMB.selected.address}" 
-            label="Adress" required="true">                       
-                <f:validateLength minimum="2" />  
+            label="Adress" required="true" maxlength="30">                       
+                <f:validateLength minimum="5" />  
                 <p:ajax update="msgAdress" event="keyup" />  
             </p:inputText>  
             <p:message for="adress" id="msgAdress" display="icon"/> 
@@ -31,25 +31,24 @@
        <h:outputLabel for="phone" value="Phone: *" />  
           	<p:inputMask id="phone" value="#{outletMB.selected.phone}" 
             label="Phone" required="true" mask="(999) 999-9999">                       
-                <f:validateLength minimum="2" />  
-                
+                <f:validateLength minimum="2" />              
                 <p:ajax update="msgPhone" event="keyup" />  
             </p:inputMask>  
             <p:message for="phone" id="msgPhone" display="icon"/>
-            
-       <h:outputLabel for="email" value="e-mail: *" />  
-          	<p:inputMask id="email" value="#{outletMB.selected.email}" maxlength="20"
-            label="email" required="true"  mask="a*@a*.A*">                       
-                <f:validateLength minimum="2" />  
-                <p:ajax update="msgEmail" event="keyup" />  
-            </p:inputMask>  
-          <p:message for="email" id="msgEmail" display="icon"/>
+       
+        <h:outputLabel for="email" value="Email: *" />     
+     <h:inputText id="email" value="#{outletMB.selected.email}" maxlength="20"
+          required="true" label="Email" 
+          validatorMessage="#{outletMB.selected.email} is not valid">
+    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+	</h:inputText>
+	<p:message for="email" />
+          
             
        <h:outputLabel for="OKPO" value="OKPO:" />  
           	<p:inputMask id="OKPO" value="#{outletMB.selected.OKPO}" 
-            label="OKPO" required="true" mask="999999999999">                       
-                <f:validateLength minimum="2" />  
-                <p:ajax update="msgOKPO" event="keyup" />  
+            label="OKPO" mask="999999999999">                       
+               <p:ajax update="msgOKPO" event="keyup" />  
             </p:inputMask>  
             <p:message for="OKPO" id="msgOKPO" display="icon"/>
             
