@@ -27,7 +27,7 @@ import ss.bshop.service.IOutletService;
 import ss.bshop.service.IVisitService;
 
 @Controller
-@RequestMapping(value = "/mobile")
+@RequestMapping("/mobile")
 public class MobileService {
 
 	@Autowired
