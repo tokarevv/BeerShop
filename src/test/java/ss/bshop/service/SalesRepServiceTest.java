@@ -23,17 +23,17 @@ public class SalesRepServiceTest {
     private ISalesRepService service;
 
     @Test
-	public void testSave() throws Exception {
-		SalesRep sRep = GenereateObjectHelper.getNewSalesRep();
+    public void testSave() throws Exception {
+            SalesRep sRep = GenereateObjectHelper.getNewSalesRep();
 
-		//System.out.println(sres);
-		service.add(sRep);
-		List<SalesRep> list = service.getAll();
+            //System.out.println(sres);
+            service.add(sRep);
+            List<SalesRep> list = service.getAll();
 
-		Assert.assertEquals(sRep, list.get(list.size() - 1));
-		Assert.assertEquals(sRep.getUser().getLogin(),
-				list.get(list.size() - 1).getUser().getLogin());
-	}
+            Assert.assertEquals(sRep, list.get(list.size() - 1));
+            Assert.assertEquals(sRep.getUser().getLogin(),
+                            list.get(list.size() - 1).getUser().getLogin());
+    }
  
     @Test
 	public void testGet() throws Exception {

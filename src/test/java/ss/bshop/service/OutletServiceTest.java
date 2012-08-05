@@ -56,14 +56,14 @@ public class OutletServiceTest {
     @Test
 	public void testGetBySalesRep() throws Exception {
     	
-    	SalesRep salesRep  = new SalesRep();
-    	User u = new User();
-    	u.setLogin("s");
-    	u.setFullname("dsf");
-    	u.setPassword("dsf");
-    	u.setPost("manager");
-    	salesRep.setUser(u);
-    	sRDao.addSalesRep(salesRep);
+            SalesRep salesRep  = new SalesRep();
+            User u = new User();
+            u.setLogin("s");
+            u.setFullname("dsf");
+            u.setPassword("dsf");
+            u.setPost("manager");
+            salesRep.setUser(u);
+            sRDao.addSalesRep(salesRep);
     	
 
 		Outlet outlet1 = GenereateObjectHelper.getNewOutlet();

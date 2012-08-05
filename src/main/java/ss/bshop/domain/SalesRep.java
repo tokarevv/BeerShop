@@ -19,9 +19,9 @@ public class SalesRep {
         @JoinColumn(name="supervisor_id")
         private SuperVisor supervisor;
               
-		@Column//(nullable=false)
-	    @OneToMany
-	    private Set<Payment> payments = new HashSet<Payment>();
+	@Column//(nullable=false)
+        @OneToMany
+        private Set<Payment> payments = new HashSet<Payment>();
         
         @Column(nullable=false)
         @OneToMany

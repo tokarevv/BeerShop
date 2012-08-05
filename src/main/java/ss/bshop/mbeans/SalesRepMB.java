@@ -71,7 +71,6 @@ public class SalesRepMB implements Serializable {
         
         outletList = outletService.getBySalesRep(selected);
         for(Outlet outlet: outletList){
-            setOutletList(outletService.getBySalesRep(selected));
 
             LatLng coord = new LatLng(outlet.getLatitude(),outlet.getLongitude());
             
