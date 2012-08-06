@@ -58,5 +58,12 @@ public class Manager {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "" + (user != null ? user.getFullname() : "");
+	}
         
+	
+	
 }
