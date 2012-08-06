@@ -8,8 +8,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.RequestScoped;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.SupOrderStructure;
@@ -19,7 +18,7 @@ import ss.bshop.service.ISupplierOrderStructureService;
 
 
 @ManagedBean(name="suplOrderMB")
-@SessionScoped
+@RequestScoped
 public class SuplOrderMB  implements Serializable{
 
 	/**
