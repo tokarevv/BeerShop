@@ -58,7 +58,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Mobile servlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>*.mob</url-pattern>
     </servlet-mapping>
     
     <filter>

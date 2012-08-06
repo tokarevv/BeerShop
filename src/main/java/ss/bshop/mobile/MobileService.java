@@ -73,13 +73,13 @@ public class MobileService {
 
 	private Logger logger = Logger.getLogger(this.getClass());
 
-	@RequestMapping(value = "helloservice", method = RequestMethod.GET)
+	@RequestMapping(value = "helloservice.mob", method = RequestMethod.GET)
 	public @ResponseBody String helloService() {
 		String answer = "Hello there!";
 		return answer;
 	}
 
-	@RequestMapping(value = "addvisit",
+	@RequestMapping(value = "addvisit.mob",
 			method = RequestMethod.POST, consumes = "application/json") 
 	public Void addOrder(@RequestBody VisitMobile mobileVisit) {
 		Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
@@ -87,7 +87,7 @@ public class MobileService {
 		return null;
 	}
 
-	@RequestMapping(value = "getoutlets/{salesRepLogin}",
+	@RequestMapping(value = "getoutlets/{salesRepLogin}.mob",
 			method = RequestMethod.GET, produces = "application/json")
 	public @ResponseBody List<OutletMobile> getOutlets(
 			@PathVariable String salesRepLogin) {
@@ -106,7 +106,7 @@ public class MobileService {
 		return mobileForToday;
 	}
 
-	@RequestMapping(value = "getgoods", method = RequestMethod.GET,
+	@RequestMapping(value = "getgoods.mob", method = RequestMethod.GET,
 			produces = "application/json")
 	public @ResponseBody List<ArticleMobile> getGoods() {
 		logger.debug("Article service: " + articleService);
