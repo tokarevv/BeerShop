@@ -11,4 +11,5 @@ public interface IManagerDAO extends Serializable{
 	public void removeManager(Long id);
 	public Manager getManager(Long id);
 	public List<Manager> getAllManagers();
+	public Manager getByLogin(String login);
 }

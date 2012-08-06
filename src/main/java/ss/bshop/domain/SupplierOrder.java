@@ -40,8 +40,8 @@ public class SupplierOrder {
 	
 	@Column
 	private String orderDoneDate;
-	
-	@OneToOne(optional=false, cascade=CascadeType.ALL)
+
+	@ManyToOne
 	private Supplier supplier;
 	
 	@Column

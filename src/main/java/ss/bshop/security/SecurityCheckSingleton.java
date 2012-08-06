@@ -61,4 +61,11 @@ public class SecurityCheckSingleton {
 		}
 		return roles;
 	}
+	
+	public String getLogin() {
+		Authentication authentication = SecurityContextHolder.getContext()
+				.getAuthentication();
+		return authentication.getName();
+	}
+	
 }

@@ -5,6 +5,7 @@ package ss.bshop.dao;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -53,5 +54,20 @@ public class ManagerDAO implements IManagerDAO {
 		List<Manager> managers = sessionFactory.getCurrentSession().
 				createQuery("from Manager").list();
 		return managers;
+	}
+
+	@Override
+	public Manager getByLogin(String login) {
+		Manager res = null;
+//		List<Article> res = new ArrayList<Article>();	
+		Query q = sessionFactory.getCurrentSession().createQuery("from Manager where user in (from User where login = :login)");
+		q.setParameter("login", login);
+		List<Manager> list = q.list();	
+		
+		if (list.size()>0){
+			res = list.get(0);
+		}
+		
+		return res;
 	}
 }
