@@ -80,11 +80,17 @@ public class MobileService {
 	}
 
 	@RequestMapping(value = "addvisit.mob",
-			method = RequestMethod.POST, consumes = "application/json") 
-	public Void addOrder(@RequestBody VisitMobile mobileVisit) {
-		Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
-		visitService.add(visit);
-		return null;
+			method = RequestMethod.POST, consumes = "application/json",
+			produces = "text/plain") 
+	public @ResponseBody String addOrder(@RequestBody VisitMobile mobileVisit) {
+		String response = "OK";
+		try {
+			Visit visit = converters.convertMobileVisitToVisit(mobileVisit);
+			visitService.add(visit);
+		} catch (Exception e) {
+			response = e.getMessage();
+		}
+		return response;
 	}
 
 	@RequestMapping(value = "getoutlets/{salesRepLogin}.mob",
@@ -128,4 +134,5 @@ public class MobileService {
 		}
 		return mobileArticles;
 	}
+
 }

@@ -6,6 +6,7 @@ package ss.bshop.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,9 +24,9 @@ public class OutletService implements IOutletService {
 	private IOutletDAO outletDAO;
 	@Autowired
 	private ISalesRepService salesRepService;
-	
 	@Autowired
 	private IAppointmentService appointmentService;
+	Logger logger = Logger.getLogger(getClass());
 
 	@Override
 	public List<Outlet> getAll() {
@@ -37,9 +38,15 @@ public class OutletService implements IOutletService {
 		SalesRep salesRep = salesRepService.getSalesRepForLogin(salesRepLogin);
 		List<Outlet> all = outletDAO.getAll();
 		List<Outlet> forSalesRep = new ArrayList<Outlet>();
+		logger.debug("All outlets: " + all);
+		logger.debug("Sales rep: " + salesRep);
 		for (Outlet outlet : all) {
-			if (outlet.getSalesRep().equals(salesRep)) {
-				forSalesRep.add(outlet);
+			try {
+				if (outlet.getSalesRep().equals(salesRep)) {
+					forSalesRep.add(outlet);
+				}
+			} catch (NullPointerException npe) {
+				logger.warn("Null element in list");
 			}
 		}
 		return forSalesRep;
