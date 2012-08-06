@@ -86,7 +86,7 @@ public class Visit {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		temp = Double.doubleToLongBits(lng);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((order == null) ? 0 : order.hashCode());
+//		result = prime * result + ((order == null) ? 0 : order.hashCode());
 		result = prime * result + ((outlet == null) ? 0 : outlet.hashCode());
 		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		return result;

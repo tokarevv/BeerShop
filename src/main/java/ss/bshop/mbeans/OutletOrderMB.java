@@ -20,14 +20,14 @@ import ss.bshop.service.IOutletOrderService;
 public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="#{OutletOrderService}")
+	@ManagedProperty(value="#{outletOrderService}")
 	private	IOutletOrderService outletOrderService;
 	
 	private OutletOrder selected;
 	
 	private List<OutletOrder> outletOrderList;
 	
-	@ManagedProperty(value = "#{OutletOrderDataModel}")
+	@ManagedProperty(value = "#{outletOrderDataModel}")
     private OutletOrderDataModel model;
 	
 	@PostConstruct
