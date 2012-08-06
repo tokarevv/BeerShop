@@ -46,7 +46,7 @@
                     <p:column  filterBy="#{article.name}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="150"
                               headerText=" Name "
                              >
                         <p:cellEditor>
@@ -66,7 +66,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" type "
-                            style="width:100px">
+                            width="100">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.type}"/>
@@ -81,7 +81,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" price "
-                             style="width:100px">
+                            width="100">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.price}"/>
@@ -96,7 +96,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" percent "
-                             style="width:100px">
+                             width="50">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.percent}"/>
@@ -111,7 +111,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" quantity "
-                             style="width:100px">
+                             width="50">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.quantity}"/>
@@ -126,7 +126,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" unit "
-                            style="width:100px">
+                           width="50">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.unit}"/>
@@ -141,7 +141,7 @@
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
                               headerText=" barcode "
-                             style="width:150px">
+                            width="150">
                         <p:cellEditor>
                             <f:facet name="output">
                                 <h:outputText value="#{article.barcode}"/>
@@ -156,7 +156,7 @@
                     filterBy="#{article.supplier}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                    style="width:250px"
+                   width="250"
                     id="supplier">
                     <p:cellEditor>
                             <f:facet name="output">
@@ -171,7 +171,7 @@
                     </p:cellEditor>
                     </p:column>   
               
-                <p:column  headerText="Comment" style="width:175px"
+                <p:column  headerText="Comment" width="175"
                               filterBy="#{article.comment}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;">

@@ -38,14 +38,11 @@
                             update="@all"
                             listener="#{outletMB.editRow}"/>
 
-                    <p:column  style="width:40px">
-                        <p:rowEditor/>
-                    </p:column>
-
+                  
                     <p:column filterBy="#{outlet.name}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                           width="100"
                               headerText=" Name ">                              
                         <p:cellEditor>
                             <f:facet name="output">
@@ -60,7 +57,7 @@
                     <p:column filterBy="#{outlet.address}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                                width="150"
                               headerText=" Adress ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -75,7 +72,7 @@
                     <p:column filterBy="#{outlet.email}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="140"
                               headerText=" Email ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -90,7 +87,7 @@
                      <p:column filterBy="#{outlet.OKPO}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="120"
                               headerText=" OKPO " >
                         <p:cellEditor>
                             <f:facet name="output">
@@ -105,7 +102,7 @@
                      <p:column filterBy="#{outlet.INN}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="100"
                               headerText=" INN ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -120,7 +117,7 @@
                      <p:column filterBy="#{outlet.svidNumber}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="100"
                               headerText=" svidNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -136,7 +133,7 @@
                        <p:column filterBy="#{outlet.sertificateNumber}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="150"
                               headerText=" sertificateNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -151,7 +148,7 @@
  					<p:column filterBy="#{outlet.contractNumber}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="150"
                               headerText=" contractNumber ">
                         <p:cellEditor>
                             <f:facet name="output">
@@ -166,7 +163,7 @@
                     <p:column filterBy="#{outlet.comment}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-                               style="width:150px"
+                               width="150"
                               headerText=" comment ">
                         <p:cellEditor>
                             <f:facet name="output">
