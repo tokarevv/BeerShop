@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link href="./../../WEB-INF/resources/css/default.css" rel="stylesheet" type="text/css" />
+        <link href="./../../WEB-INF/resources/css/cssLayout.css" rel="stylesheet" type="text/css" />
+        <title>Bshop. Supervisor</title>
+    </h:head>
+
+    <h:body>
+
+        <p:layout fullPage="true">  
+<!--****************************** North content *********************************-->
+            <p:layoutUnit id="north" position="north" size="95">  
+                <h:form id="commonHeaderForm" styleClass="pageHeaderForm" >
+                    <a href="./../../empty.xhtml">BShop</a> 
+                    <p:menubar styleClass="pageHeaderMenue" >
+
+                                <p:menuitem  value="Articles"  url="sv_articles.xhtml"/>
+                                <p:menuitem  value="Outlet"    url="sv_outlets.xhtml"/>
+                                <p:menuitem  value="Salesreps" url="sv_salesrep.xhtml"/>
+
+                    </p:menubar>
+                </h:form>
+            </p:layoutUnit>  
+<!--****************************** West content *********************************-->
+            <p:layoutUnit position="west" size="200" header="Filter" resizable="true" collapsible="true">  
+                
+            </p:layoutUnit>  
+            
+<!--****************************** Centr content *********************************-->
+        <p:layoutUnit position="center">  
+          <h:form id="form">  
+
+            <p:growl id="messages" showDetail="true"/>  
+            <p:dataTable id="articles" var="article"
+                            value="#{articleMB.model}"
+                            editable="true"
+                            emptyMessage="No data "
+                            widgetVar="articlesTable"
+                    >
+
+                <f:facet name="header">
+                    Articles
+                    <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="articlesTable.filter()" style="width:150px" />  
+                        
+                        <h:commandButton value="Print" type="button" 
+                                         onclick="javascript: location.href='print_sv_articles.xhtml;'"/>  
+
+                        
+                    </p:outputPanel> 
+                    
+                </f:facet>  
+
+                <p:ajax event="rowEdit" listener="#{articleMB.onEdit}" 
+                        update=":form:messages" /> 
+                 
+
+                <p:column headerText=" ID " style="width:30px"
+                          filterBy="#{article.id}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.id}"/>
+                </p:column>
+
+                <p:column  headerText=" Name "  width="120"
+                           sortBy="#{article.name}"
+                           filterBy="#{article.name}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.name}"/>
+                </p:column>
+
+                <p:column  headerText="Supplier"  width="120"
+                           filterBy="#{article.supplier.name}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">                                                      
+
+                    <h:outputText value="#{article.supplier.name}"/>
+                </p:column>
+
+                <p:column  headerText="Qnty"  style="width:20px"
+                           filterBy="#{article.quantity}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.quantity}"/>
+                </p:column>
+
+                <p:column  headerText="Unit"  style="width:20px"
+                           filterBy="#{article.unit}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.unit}"/>
+                </p:column>
+
+                <p:column  headerText="Price"  style="width:40px"
+                           filterBy="#{article.price}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.price}"/>
+                </p:column>
+
+                <p:column headerText="%" style="width:40px"
+                          filterBy="#{article.percent}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;">
+                    <p:cellEditor>  
+                        <f:facet name="output">  
+                            <h:outputText value="#{article.percent}" />  
+                        </f:facet>  
+                        <f:facet name="input">  
+                            <p:inputText value="#{article.percent}" style="width:150%"/>  
+                        </f:facet>  
+                    </p:cellEditor>  
+                </p:column>
+                
+                <p:column  headerText="*" style="width:20px">  
+                    <p:rowEditor />  
+                </p:column>
+
+                <p:column  headerText="SPrc"  style="width:20px"
+                           filterBy="#{article.price*(article.percent/100+1)}"   
+                           filterMatchMode="contains"
+                           filterStyle="display: none; visibility: hidden;">
+                    <h:outputText value="#{article.price*(article.percent/100+1)}">
+                        <f:convertNumber pattern="#,###,##0.00"/>
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+          </h:form>  
+        </p:layoutUnit>  
+
+        </p:layout>  
+    </h:body>
+
+</html>

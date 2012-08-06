@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+    <ui:composition template="/pages/admin/templates/base.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <p:growl id="messages" showDetail="true"/>  
+                            
+                <p:dataTable id="article" var="article"
+                             value="#{articleMB.model}"
+                             paginator="true"
+                             rows="10"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="10,20,50"
+                             emptyMessage="No data "
+                             editable="true"
+                             selection="#{articleMB.selected}"
+                             selectionMode="single" 
+                           	 paginatorAlwaysVisible="false" 
+							paginatorPosition="bottom"
+							 widgetVar="articlesTable"
+                        >
+                        
+                <f:facet name="header">  
+                    Articles 
+                    <p:outputPanel style="float:right">  
+                        <h:outputText value="Search all fields:"  />  
+                        <p:inputText id="globalFilter" onkeyup="articlesTable.filter()" style="width:150px" />  
+                                                
+                    </p:outputPanel> 
+                </f:facet> 
+                    <p:ajax event="rowEdit"
+                            update="@all"
+                            listener="#{articleMB.onEdit}"/>
+
+                    <p:column width="40">
+                        <p:rowEditor/>
+                    </p:column>
+                    
+                    <p:column  filterBy="#{article.name}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                               width="150"
+                              headerText=" Name "
+                             >
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.name}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText id="edname" value="#{article.name}" required="true">
+                                    <p:ajax event="blur" update="msgFirstname" />
+                                </h:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                        <p:message for="edname" id="msgFirstname" display="icon" />
+                     </p:column>
+                     
+                    <p:column filterBy="#{article.type}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" type "
+                            width="100">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.type}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.type}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column  filterBy="#{article.price}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" price "
+                            width="100">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.price}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.price}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column  filterBy="#{article.percent}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" percent "
+                             width="50">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.percent}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.percent}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column filterBy="#{article.quantity}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" quantity "
+                             width="50">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.quantity}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.quantity}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column filterBy="#{article.unit}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" unit "
+                           width="50">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.unit}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.unit}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                     <p:column  filterBy="#{article.barcode}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                              headerText=" barcode "
+                            width="150">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.barcode}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.barcode}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    
+                    <p:column  headerText="Supplier" 
+                    filterBy="#{article.supplier}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;"
+                   width="250"
+                    id="supplier">
+                    <p:cellEditor>
+                            <f:facet name="output">
+                                    <h:outputText value="#{article.supplier}"  itemLabel="#{supplier.name}" disabled="true" />
+                            </f:facet>
+                            <f:facet name="input">
+                                    <h:selectOneMenu value="#{article.supplier}" converter="#{supplierConverter}">
+                                            <f:selectItems value="#{articleMB.suppliers}" var="supplier"
+                                                    itemLabel="#{supplier.name}" itemValue="#{supplier}" />
+                                    </h:selectOneMenu>
+                            </f:facet>
+                    </p:cellEditor>
+                    </p:column>   
+              
+                <p:column  headerText="Comment" width="175"
+                              filterBy="#{article.comment}"   
+                          filterMatchMode="contains"
+                          filterStyle="display: none; visibility: hidden;">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{article.comment}"/>
+                            </f:facet>
+                            <f:facet name="input">
+                                <h:inputText value="#{article.comment}"/>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                 </p:dataTable>
+                <br/>
+                <div class="buttonLeft" style="float: left;">
+                    <p:commandButton value="New"
+                                     actionListener="#{articleMB.createNew}"
+                                     ajax="false"
+                                     update="@all" />
+                     <p:commandButton value="Delete"
+                                     actionListener="#{articleMB.delete}"
+                                     ajax="false"
+                                     update="@all"/>
+
+                 </div>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

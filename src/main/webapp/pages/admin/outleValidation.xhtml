@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+  <ui:composition  template="/pages/admin/templates/base.xhtml">
+        <ui:define name="header"/>       
+        <ui:define name="content"> 
+  <h:form id="form">  
+  
+        <p:messages id="msgs"/>  
+         <h:panelGrid id="display" columns="3">  
+           
+        <h:outputLabel for="name" value="Name: *" />  
+            <p:inputText id="name" value="#{outletMB.selected.name}" 
+            label="Adress" required="true" maxlength="20"/> 
+            <p:message for="name" display="icon"/>  
+  
+        <h:outputLabel for="adress" value="Adress: *" />  
+          	<p:inputText id="adress" value="#{outletMB.selected.address}" 
+            label="Adress" required="true" maxlength="30">                       
+                <f:validateLength minimum="5" />  
+                <p:ajax update="msgAdress" event="keyup" />  
+            </p:inputText>  
+            <p:message for="adress" id="msgAdress" display="icon"/> 
+            
+       <h:outputLabel for="phone" value="Phone: *" />  
+          	<p:inputMask id="phone" value="#{outletMB.selected.phone}" 
+            label="Phone" required="true" mask="(999) 999-9999">                       
+                <f:validateLength minimum="2" />              
+                <p:ajax update="msgPhone" event="keyup" />  
+            </p:inputMask>  
+            <p:message for="phone" id="msgPhone" display="icon"/>
+       
+        <h:outputLabel for="email" value="Email: *" />     
+     <h:inputText id="email" value="#{outletMB.selected.email}" maxlength="20"
+          required="true" label="Email" 
+          validatorMessage="#{outletMB.selected.email} is not valid">
+    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+	</h:inputText>
+	<p:message for="email" />
+          
+            
+       <h:outputLabel for="OKPO" value="OKPO:" />  
+          	<p:inputMask id="OKPO" value="#{outletMB.selected.OKPO}" 
+            label="OKPO" mask="999999999999">                       
+               <p:ajax update="msgOKPO" event="keyup" />  
+            </p:inputMask>  
+            <p:message for="OKPO" id="msgOKPO" display="icon"/>
+            
+       <h:outputLabel for="INN" value="INN: " />  
+          	<p:inputMask id="INN" value="#{outletMB.selected.INN}" 
+            label="INN" mask="9999999999">                                       
+            </p:inputMask>  
+           <p:message for="INN" id="msgINN" display="icon"/>
+            
+       		<h:outputText value="Number of svid:" />  
+          	<p:inputMask  value="#{outletMB.selected.svidNumber}" mask="9*"/>                       
+            <p:message for="email" id="msgsvidNumber" display="icon"/>           
+            
+      <h:outputLabel for="sertificateNumber" value="Number of sertificate:" />  
+          	<p:inputMask id="sertificateNumber" value="#{outletMB.selected.sertificateNumber}" 
+            label="Number of sertificate"  mask="9999">
+            </p:inputMask>  
+          <p:message for="email" id="msgsertificateNumber" display="icon"/>
+            
+            <h:outputLabel for="contractNumber" value="Numbrt of contract: *" />  
+          	<p:inputMask id="contractNumber" value="#{outletMB.selected.contractNumber}" 
+            label="Numbrt of contract" required="true" mask="99999">                       
+                <f:validateLength minimum="2" />  
+                <p:ajax update="msgcontractNumber" event="keyup" />  
+            </p:inputMask>  
+            <p:message for="contractNumber" id="msgcontractNumber" display="icon"/>
+            
+       <h:outputLabel for="comment" value="Comment:" />  
+          	<p:inputText id="comment" value="#{outletMB.selected.comment}" 
+            label="Comment" >  
+                <p:ajax update="msgComment" event="keyup" />  
+            </p:inputText>  
+            <p:message for="comment" id="msgComment" display="icon"/> 
+       
+       
+  		<p:commandButton value="Reset" type="reset" />
+        <p:commandButton id="btn" value="Save" 
+        update="panel" 
+        ajax="false"
+        action="#{outletMB.save}"/>  
+     </h:panelGrid> 
+     
+  
+</h:form>  
+</ui:define>
+    </ui:composition>
+</h:body>
+
+</html>
