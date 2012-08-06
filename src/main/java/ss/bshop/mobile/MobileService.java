@@ -18,12 +18,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ss.bshop.dao.IOutletOrder;
 import ss.bshop.domain.Article;
 import ss.bshop.domain.Outlet;
+import ss.bshop.domain.SalesRep;
 import ss.bshop.domain.Visit;
 import ss.bshop.mobile.entities.ArticleMobile;
 import ss.bshop.mobile.entities.OutletMobile;
 import ss.bshop.mobile.entities.VisitMobile;
 import ss.bshop.service.IArticleService;
 import ss.bshop.service.IOutletService;
+import ss.bshop.service.ISalesRepService;
 import ss.bshop.service.IVisitService;
 
 @Controller
@@ -68,6 +70,8 @@ public class MobileService {
 	private IArticleService articleService;
 	@Autowired
 	private IVisitService visitService;
+	@Autowired
+	private ISalesRepService salesRepService;
 	@Autowired
 	private Converters converters;
 
@@ -135,4 +139,19 @@ public class MobileService {
 		return mobileArticles;
 	}
 
+	@RequestMapping(value = "login.mob", method = RequestMethod.POST,
+			consumes = "text/plain", produces = "text/plain")
+	public @ResponseBody String login(@RequestBody String input) {
+		String output = "Not OK";
+		String[] data = input.split(":");
+		String login = data[0];
+		String pwd = data[1];
+		SalesRep sr = salesRepService.getSalesRepForLogin(login);
+		if (sr != null) {
+			if (sr.getUser().getPassword().equals(pwd)) {
+				output = "OK";
+			}
+		}
+		return output;
+	}
 }
