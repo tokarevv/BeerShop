@@ -52,7 +52,7 @@
 						filterBy="#{user.login}" 
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					 headerText=" Login "  width="230">
+					 headerText=" Login "  width="240">
 					 		<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.login}" />
@@ -67,7 +67,7 @@
 					filterBy="#{user.fullname}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText=" Name " width="310">
+					headerText=" Name " width="320">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.fullname}" />
@@ -82,7 +82,7 @@
 					filterBy="#{user.post}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText="Post" width="310"
+					headerText="Post" width="320"
 						id="post">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -101,7 +101,7 @@
 					filterBy="#{user.password}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText="Password" width="310"
+					headerText="Password" width="320"
 						id="password">
 						<h:outputText value="#{user.password}" disabled="true" />
 					</p:column>
