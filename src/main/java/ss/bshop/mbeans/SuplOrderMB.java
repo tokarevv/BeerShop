@@ -15,6 +15,7 @@ import ss.bshop.domain.SupOrderStructure;
 import ss.bshop.domain.SupplierOrder;
 import ss.bshop.service.ISupplierOrderService;
 import ss.bshop.service.ISupplierOrderStructureService;
+import ss.bshop.service.SupplierOrderStructureService;
 
 
 @ManagedBean(name="suplOrderMB")
@@ -28,13 +29,10 @@ public class SuplOrderMB  implements Serializable{
 	
 	@ManagedProperty(value="#{supplierOrderService}")
 	ISupplierOrderService supplierOrderService;
-	SupplierOrder current;
 	
 	SupplierOrder selected;
 	
 	List<SupplierOrder> supplierOrderList;
-	
-	
 	
 	@ManagedProperty(value = "#{SuplOrderDataModel}")
     private SuplOrderDataModel model;
@@ -71,6 +69,7 @@ public class SuplOrderMB  implements Serializable{
      public String moreDetail(){
          String res = "";
          if(selected!=null ){ 
+        uploadStructure();
           res = "suplOrder";                        
          }
          return res;
@@ -114,24 +113,18 @@ public class SuplOrderMB  implements Serializable{
 
 	@ManagedProperty(value="#{supplierOrderStructService}")
 	ISupplierOrderStructureService supplierOrderStructService;
-
-	SupOrderStructure selectedStruct;
 	
-	List<SupOrderStructure> supplierOrderStructList;
+	List<SupOrderStructure> supplierOrderStructList ;
 	
-//	@ManagedProperty(value = "#{SuplOrderStructDataModel}")
-//    private SuplOrderStructDataModel strucrModel;
-	
-	
-//	public SuplOrderStructDataModel getStrucrModel() {
-//		 supplierOrderStructList = selected.getOrderstruct();
-//		strucrModel = new SuplOrderStructDataModel(supplierOrderStructList);
-//		return strucrModel;
-//	}
-//
-//	public void setStrucrModel(SuplOrderStructDataModel strucrModel) {
-//		this.strucrModel = strucrModel;
-//	}
+	private void uploadStructure(){
+		List<SupOrderStructure> allStruct=new ArrayList<SupOrderStructure>();
+		allStruct.addAll(getSupplierOrderStructService().getAll());
+		for(SupOrderStructure structure: allStruct){
+			if(selected.equals(structure.getSupplierOrder())){
+				supplierOrderStructList.add(structure);
+			}
+		}
+	}
 
 	public ISupplierOrderStructureService getSupplierOrderStructService() {
 		return supplierOrderStructService;
@@ -140,14 +133,6 @@ public class SuplOrderMB  implements Serializable{
 	public void setSupplierOrderStructService(
 			ISupplierOrderStructureService supplierOrderStructService) {
 		this.supplierOrderStructService = supplierOrderStructService;
-	}
-
-	public SupOrderStructure getSelectedStruct() {
-		return selectedStruct;
-	}
-
-	public void setSelectedStruct(SupOrderStructure selectedStruct) {
-		this.selectedStruct = selectedStruct;
 	}
 
 	public List<SupOrderStructure> getSupplierOrderStructList() {
@@ -159,6 +144,14 @@ public class SuplOrderMB  implements Serializable{
 		this.supplierOrderStructList = supplierOrderStructList;
 	}
 
+	public String addToBase(){
+		Long id=selected.getId();
+		for(SupOrderStructure structure : getSupplierOrderStructList() ){
+		//	if()
+			
+		}
+		return "recept";
+	}
 	
 		
 	

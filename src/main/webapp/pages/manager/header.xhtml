@@ -8,21 +8,19 @@
 <body>
 	<ui:composition>
 
-
-		<h:form id="commonHeaderForm" styleClass="pageHeaderForm">
-		
-			<a>BShop</a>
-			<button href="./../../j_spring_security_logout">logout</button>
-			
-			<p:menubar styleClass="pageHeaderMenue">
+  <h:form id="commonHeaderForm" styleClass="pageHeaderForm"  >
+  	 <p:menubar styleClass="pageHeaderMenue" >
 
 				<p:menuitem value="Create Order/Return" url="/pages/manager/order.xhtml" />
 				<p:menuitem value="Input goods" url="/pages/manager/recept.xhtml" />
 				<p:menuitem value="Output goods" url="/pages/manager/removal.xhtml" />
-
+				 <p:menuitem  value="Logout" url="../../j_spring_security_logout" 
+				 icon="ui-icon-close" style="position: absolute; right: 5px;"/>
+ 
 			</p:menubar>
 
 		</h:form>
 	</ui:composition>
 </body>
 </html>
+
