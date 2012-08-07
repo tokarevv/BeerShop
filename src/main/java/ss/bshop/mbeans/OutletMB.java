@@ -230,7 +230,10 @@ public class OutletMB implements Serializable {
     		selected.getAddress().equals("")||
     		selected.getEmail().equals("")||
     		selected.getContractNumber().equals("") ){
-    			
+  			
+    			getOutletService().remove(selected.getId());
+    	      	outletList.remove(selected);
+   		   			
     			msg = new FacesMessage("Fill all fieldes marked with *", selected.getName());   
     	        FacesContext.getCurrentInstance().addMessage(null, msg); 
     		}
@@ -255,6 +258,7 @@ public class OutletMB implements Serializable {
       	selected.setSertificateNumber("");
       	selected.setContractNumber("");
       	getOutletService().add(selected);
+      	outletList.add(selected);
         return "outletValidation";
 
     }

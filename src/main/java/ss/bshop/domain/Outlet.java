@@ -54,7 +54,7 @@ public class Outlet {
         @Temporal(javax.persistence.TemporalType.DATE)
 	private Date registerDate;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private SalesRep salesRep;
 	
 	@Column

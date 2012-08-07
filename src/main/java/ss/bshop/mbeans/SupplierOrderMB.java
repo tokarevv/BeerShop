@@ -9,16 +9,22 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+
+import org.apache.log4j.Logger;
 import org.primefaces.event.RowEditEvent;
 
 import ss.bshop.domain.Article;
 import ss.bshop.domain.SupOrderStructure;
 import ss.bshop.domain.Supplier;
 import ss.bshop.domain.SupplierOrder;
+import ss.bshop.security.SecurityCheckSingleton;
 import ss.bshop.service.IArticleService;
+import ss.bshop.service.IManagerService;
 import ss.bshop.service.ISupplierOrderService;
 import ss.bshop.service.ISupplierOrderStructureService;
 import ss.bshop.service.ISupplierService;
+import ss.bshop.service.ManagerService;
 
 @ManagedBean(name="supplierOrderMB")
 @ViewScoped
@@ -42,6 +48,9 @@ public class SupplierOrderMB implements Serializable{
 	
     @ManagedProperty(value = "#{articleService}")
     IArticleService articleService;
+    
+    @ManagedProperty(value = "#{managerService}")
+    IManagerService managerService;
 	
 	private Supplier selectedSupplier;
 	
@@ -54,25 +63,39 @@ public class SupplierOrderMB implements Serializable{
     private SupOrderStructure orderLine;
     
     private String comment;
-    
+ 
     public String placeOrder(){
     	//FacesContext.getCurrentInstance().setProcessingEvents(true);
-    	
-    	SupplierOrder order = new SupplierOrder();
-    	order.setComment(comment);
-    	//order.setManager(manager); ???????????????
-    	order.setOrderDate(new Date());
-    	order.setType(orderType);
-    	order.setStatus(false);
-    	supplierOrderService.add(order);
-    	
-    	for (SupOrderStructure row : orderLineList){
-    		if (row.getAmount() > 0){
-    			row.setSupplierOrder(order);
-    			supplierOrderStructureService.add(row);
-    		}
-    	}
-    	return "base_manager";
+    	try {
+    		System.out.println("Start saving order: ");
+        	SupplierOrder order = new SupplierOrder();
+        	order.setComment(comment);
+    		order.setSupplier(selectedSupplier);
+        	order.setManager(managerService.getByLogin(SecurityCheckSingleton.getInstance().getLogin()));// ???????????????
+        	order.setOrderDate(new Date());
+        	order.setType(orderType);
+        	order.setStatus(false);
+    		System.out.println("Try to save to DB: ");
+    		supplierOrderService.add(order);
+    		System.out.println("Saved to DB. Save rows... ");
+       	
+        	for (SupOrderStructure row : orderLineList){
+        		if (row.getAmount() > 0){
+        			row.setSupplierOrder(order);
+        			supplierOrderStructureService.add(row);
+        		}
+        	}
+    		System.out.println("Saved rows... redirect.");
+    		
+    		return "base_manager";
+			
+		} catch (Exception e) {
+	    	msg = new FacesMessage("Exception", "unknown");  
+	        FacesContext.getCurrentInstance().addMessage(null, msg);  
+			e.printStackTrace();
+		}
+		 
+		return "";
     	
     }
     
@@ -183,5 +206,12 @@ public class SupplierOrderMB implements Serializable{
 		this.orderLine = orderLine;
 	}
 
+	public IManagerService getManagerService() {
+		return managerService;
+	}
+
+	public void setManagerService(IManagerService managerService) {
+		this.managerService = managerService;
+	}
 
 }

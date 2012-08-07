@@ -41,3 +41,37 @@ test.db.properties
 .projecttarget
 target
 >>>>>>> 07f683e95bbc3616653d6f83429ef4acb6b3ff6f
+<<<<<<< HEAD
+#*
+*$
+*.BAK
+*.Z
+*.bak
+*.class
+*.dylib
+*.elc
+*.ln
+*.log
+*.o
+*.obj
+*.olb
+*.old
+*.orig
+*.pyc
+*.pyo
+*.rej
+*~
+,*
+.#*
+.DS_Store
+.del-*
+.deployables
+.make.state
+.nse_depinfo
+CVS.adm
+RCS
+RCSLOG
+SCCS
+_$*
+=======
+>>>>>>> 4a8d7f828af092db043ac7539d5c310dcfa917fb

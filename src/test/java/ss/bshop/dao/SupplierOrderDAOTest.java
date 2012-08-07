@@ -24,12 +24,16 @@ public class SupplierOrderDAOTest {
     @Autowired
     private ISupplierOrderDAO dao;
 
+    @Autowired
+    private ISupplierDAO daoSup;
+
     /**
      * Method: add(Article article)
      */
     @Test
 	public void testAdd() throws Exception {
 		SupplierOrder order = GenereateObjectHelper.getNewSupplierOrder();
+		daoSup.add(order.getSupplier());
 
 		dao.add(order);
 		List<SupplierOrder> orderList = dao.getAll();
@@ -43,6 +47,7 @@ public class SupplierOrderDAOTest {
     @Test
 	public void testGetOrder() throws Exception {
 		SupplierOrder order = GenereateObjectHelper.getNewSupplierOrder();
+		daoSup.add(order.getSupplier());
 
 		dao.add(order);
 		List<SupplierOrder> orderList = dao.getAll();

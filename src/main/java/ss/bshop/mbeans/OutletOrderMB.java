@@ -8,26 +8,25 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.RequestScoped;
 import org.primefaces.event.RowEditEvent;
 import ss.bshop.domain.OutletOrder;
 import ss.bshop.service.IOutletOrderService;
 
 
 @ManagedBean(name="outletOrderMB")
-@SessionScoped
+@RequestScoped
 public class OutletOrderMB  implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
-	@ManagedProperty(value="#{OutletOrderService}")
+	@ManagedProperty(value="#{outletOrderService}")
 	private	IOutletOrderService outletOrderService;
 	
 	private OutletOrder selected;
 	
 	private List<OutletOrder> outletOrderList;
 	
-	@ManagedProperty(value = "#{OutletOrderDataModel}")
+	@ManagedProperty(value = "#{outletOrderDataModel}")
     private OutletOrderDataModel model;
 	
 	@PostConstruct

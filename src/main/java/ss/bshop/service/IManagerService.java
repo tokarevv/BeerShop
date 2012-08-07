@@ -7,4 +7,6 @@ import ss.bshop.domain.Manager;
 
 public interface IManagerService extends ICRUDGeneral<Manager, Long>,Serializable {
 
+	public Manager getByLogin(String login);
+	
 }

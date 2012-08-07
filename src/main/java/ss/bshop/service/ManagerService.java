@@ -58,4 +58,9 @@ public class ManagerService implements IManagerService{
 		managerDAO.updateManager(manager);
 	}
 
+	@Override
+	public Manager getByLogin(String login) {
+		return managerDAO.getByLogin(login);
+	}
+
 }

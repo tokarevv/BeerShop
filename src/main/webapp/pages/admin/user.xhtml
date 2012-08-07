@@ -44,7 +44,7 @@
 						update="@all"
 						listener="#{userMB.editRow}" />
 
-					<p:column style="width:40px">
+					<p:column  width="40">
 						<p:rowEditor />
 					</p:column>
 
@@ -52,7 +52,7 @@
 						filterBy="#{user.login}" 
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					 headerText=" Login "  style="width:250px">
+					 headerText=" Login "  width="230">
 					 		<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.login}" />
@@ -67,7 +67,7 @@
 					filterBy="#{user.fullname}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText=" Name " style="width:350px">
+					headerText=" Name " width="310">
 						<p:cellEditor>
 							<f:facet name="output">
 								<h:outputText value="#{user.fullname}" />
@@ -82,7 +82,7 @@
 					filterBy="#{user.post}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText="Post" style="width:350px"
+					headerText="Post" width="310"
 						id="post">
 						<p:cellEditor>
 							<f:facet name="output">
@@ -101,7 +101,7 @@
 					filterBy="#{user.password}"   
                           filterMatchMode="contains"
                           filterStyle="display: none; visibility: hidden;"
-					headerText="Password" style="width:350px"
+					headerText="Password" width="310"
 						id="password">
 						<h:outputText value="#{user.password}" disabled="true" />
 					</p:column>
