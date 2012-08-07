@@ -71,13 +71,15 @@ public class SalesRepMB implements Serializable {
         
         outletList = outletService.getBySalesRep(selected);
         for(Outlet outlet: outletList){
-
-            LatLng coord = new LatLng(outlet.getLatitude(),outlet.getLongitude());
             
-            mapModel.addOverlay(new Marker(coord));
-            s+=coord+";\r\n";
+            if(outlet.getLatitude()!=outlet.getLongitude()){
+                LatLng coord = new LatLng(outlet.getLatitude(),outlet.getLongitude());
+                mapModel.addOverlay(new Marker(coord));
+                s+=coord+";\r\n";
+            }
         }
-         msg = new FacesMessage("Coords", s);   
+        
+        msg = new FacesMessage("Coords", s);   
         FacesContext.getCurrentInstance().addMessage(null, msg); 
 
     }
