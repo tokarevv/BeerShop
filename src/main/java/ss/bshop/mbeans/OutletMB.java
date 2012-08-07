@@ -108,16 +108,16 @@ public class OutletMB implements Serializable {
     public String moreDetail(){
        String res = "";
        if(selected!=null ){ 
-                 mapModel = new DefaultMapModel();
-                 if(selected.getLatitude()!=selected.getLongitude()){
-                    lat =  selected.getLatitude();
-                    lng = selected.getLongitude();
-                    curCoord = new LatLng(lat,lng);
-                    Marker marker = new Marker(curCoord, selected.getName());
-                    marker.setDraggable(true);
-                    mapModel.addOverlay(marker);
-                }
-            res = "outlet_detail";
+                mapModel = new DefaultMapModel();
+                if(selected.getLatitude()!=selected.getLongitude()){
+                lat =  selected.getLatitude();
+                lng = selected.getLongitude();
+                curCoord = new LatLng(lat,lng);
+                Marker marker = new Marker(curCoord, selected.getName());
+                marker.setDraggable(true);
+                mapModel.addOverlay(marker);
+            }
+        res = "outlet_detail";
             
        }
        return res;
