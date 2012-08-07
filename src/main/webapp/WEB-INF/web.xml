@@ -47,7 +47,19 @@
     </servlet-mapping>
 
     <!-- Mobile service servlet -->
-     
+    <servlet>
+        <servlet-name>Mobile Connectivity Service</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>/WEB-INF/spring/mobileservlet/servlet-context.xml</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Mobile Connectivity Service</servlet-name>
+        <url-pattern>*.mob</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
