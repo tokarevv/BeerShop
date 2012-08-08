@@ -18,7 +18,8 @@
 					editable="false" selection="#{suplOrderMB.selected}"
 					selectionMode="single" scrollable="true" liveScroll="true"
 					paginatorAlwaysVisible="false" paginatorPosition="bottom">
-					<f:facet name="header">  
+				
+				<f:facet name="header">  
                     Orders from supplier
                 </f:facet>
 			
@@ -30,19 +31,19 @@
 						<h:outputText value="#{order.manager}" />
 					</p:column>
 
-					<p:column headerText=" Order Date " width="160">
+					<p:column headerText=" Order Date " width="170">
 						<h:outputText value="#{order.orderDate}" />
 					</p:column>
 
-					<p:column headerText=" Order Complete " width="160">
+					<p:column headerText=" Order Complete " width="170">
 						<h:outputText value="#{order.orderDoneDate}" />
 					</p:column>
 
-					<p:column headerText=" Status " width="160">
+					<p:column headerText=" Status " width="170">
 						<h:outputText value="#{order.status}" />
 					</p:column>
 
-					<p:column headerText=" Comment " width="160">
+					<p:column headerText=" Comment " width="180">
 						<h:outputText value="#{order.comment}" />
 					</p:column>
 

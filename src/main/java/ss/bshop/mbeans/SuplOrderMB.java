@@ -66,14 +66,14 @@ public class SuplOrderMB  implements Serializable{
      	return "";
      }
      
-     public String moreDetail(){
-         String res = "";
-         if(selected!=null ){ 
-        uploadStructure();
-          res = "suplOrder";                        
-         }
-         return res;
-     }
+//     public String moreDetail(){
+//         String res = "";
+//         if(selected!=null ){ 
+//        uploadStructure();
+//          res = "suplOrder";                        
+//         }
+//         return res;
+//     }
    
 	
 	public SuplOrderDataModel getModel() {

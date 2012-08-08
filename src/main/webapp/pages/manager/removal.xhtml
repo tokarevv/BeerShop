@@ -27,16 +27,16 @@
 						<h:outputText value="#{order.type}" />
 					</p:column>
 
-					<p:column headerText=" Manager " style="width:350px">
+					<p:column headerText=" Discount " style="width:350px">
 						<h:outputText value="#{order.discount}" />
 					</p:column>
 
-					<p:column headerText=" Order Date " style="width:350px">
+					<p:column headerText=" Payment " style="width:350px">
 						<h:outputText value="#{order.payment}" />
 					</p:column>
 
-					<p:column headerText=" Order Complete " style="width:350px">
-						<h:outputText value="#{order.visit}" />
+					<p:column headerText=" Time of visit " style="width:350px">
+						<h:outputText value="#{order.visit.time}" />
 					</p:column>
 
 				</p:dataTable>
